@@ -49,7 +49,8 @@ const Navbar = () => {
           ))}
           <Button
             onClick={() => scrollTo("planes")}
-            className="bg-primary hover:bg-secondary text-primary-foreground font-bold px-6"
+            size="lg"
+            className="bg-primary hover:bg-secondary text-primary-foreground font-bold text-lg px-10 py-6 rounded-full shadow-lg shadow-primary/30"
           >
             Comprar Plan
           </Button>
