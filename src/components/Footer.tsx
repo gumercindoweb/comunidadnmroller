@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const Footer = () => {
   return (
@@ -6,8 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div>
-            <span className="text-3xl font-black text-primary tracking-tighter">NM</span>
-            <span className="text-sm font-semibold tracking-wide ml-2">ROLLER</span>
+            <img src={logoNM} alt="NM Roller" className="h-12 mb-2" />
             <p className="text-primary-foreground/50 text-sm mt-4 leading-relaxed">
               La escuela de patinaje #1 de Argentina. Más de 3.000 alumnos confían en nosotros.
             </p>
