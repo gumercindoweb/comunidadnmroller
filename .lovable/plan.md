@@ -1,75 +1,44 @@
 
 
-# Plan: Rediseñar la sección de Horarios con Disciplinas y Alquiler
+# Plan: Rediseñar Horarios al estilo Virtus (grid semanal con cards detalladas)
 
 ## Resumen
 
-Transformar la sección actual de horarios en una sección con 3 subsecciones usando tabs: **Horarios generales**, **Disciplinas** y **Alquiler de equipo**, cada una con su propia estética visual.
+Reemplazar el diseño actual de tabs por un layout similar al de la imagen de referencia (Virtus): un grid semanal limpio donde cada día es una columna y cada clase es una card con sede, horario y badge de disciplina. Se mantiene solo una pestaña separada para Alquiler.
 
-## Estructura
+## Cambios en `src/components/HorariosSection.tsx`
 
-La sección usara `Tabs` de shadcn con 3 pestañas:
+### Estructura principal
+- Eliminar las 3 tabs. El contenido principal es el **grid semanal** visible directamente.
+- Debajo del grid, una sección separada con titulo "Alquiler de equipo" con las cards de alquiler (sin tab).
 
-1. **Horarios** - El grid actual de horarios por día (ya existente)
-2. **Disciplinas** - Cards organizadas por tipo de disciplina, cada una con color diferente
-3. **Alquiler** - Cards de sedes que ofrecen alquiler con horarios
+### Estilo de cada card de clase (inspirado en Virtus)
+Cada card dentro de la columna del día mostrara:
+1. **Sede** en bold (equivale al nombre de clase en Virtus)
+2. **Horario** formateado
+3. **Badge de disciplina** con color segun tipo (Slalom, Urbano, Skatepark, etc.) - equivale a los badges "ESSENTIAL", "PROGRESSION", "ELITE" de Virtus
 
-## Datos de las imágenes
+### Layout del grid
+- **Desktop (lg+):** 7 columnas, una por dia. Encabezado con nombre del dia en tipografia serif/bold grande (no fondo de color, solo texto como en Virtus).
+- **Mobile:** Columnas colapsadas en acordeon o stack vertical.
 
-### Disciplinas (extraídas de la imagen):
-| Sede | Disciplina | Horarios |
-|---|---|---|
-| Rosedal Palermo | Slalom | Mar y Mié 9hs, Mié 20hs, Jue 19hs |
-| Rosedal Palermo | Urbano | Sáb 10hs |
-| Villa Luro | Skatepark | Vie 20hs |
-| Parque Rivadavia | (general) | Dom 9am |
-| Rosedal Palermo | Frenadas | Mar 20hs |
-| Belgrano | Skatepark | Mié y Vie 20hs |
-| Madero | Slalom | Mar 19hs |
-| Villa Real | Urbano | Sáb 11:30hs |
-| Rosedal | Rampas | Jue 20hs |
-| Vicente López | Slalom | Sáb 9hs |
-| Madero | Urbano | Sáb 10hs |
-| Rivadavia | Frenadas | Jue 20hs |
+### Datos enriquecidos
+Fusionar los datos de `horarios` con `disciplinas` para que cada clase muestre su disciplina cuando aplique. Clases sin disciplina especifica mostraran badge "General".
 
-### Alquiler de equipo (extraídas de la imagen):
-| Sede | Horarios |
-|---|---|
-| Rosedal Palermo | Mar, Mié y Dom 9hs, Jue 19hs |
-| Villa Real | Mié 18hs, Sáb 10:30hs |
-| Puerto Madero | Mar 18hs |
-| Colegiales | Mié 18hs y Jue 19hs |
-| Plaza La Pampa | Sáb y Dom 8am |
-| Vicente López | Sáb 9hs |
-| Devoto | Mar y Vie 19hs |
+### Seccion Alquiler
+- Se muestra debajo del grid con su propio titulo, sin tabs.
+- Cards con icono dorado de MapPin, sede y horarios.
 
-## Diseño visual
-
-### Disciplinas
-- Cards con color de fondo según disciplina:
-  - **Slalom**: blanco con borde primario
-  - **Urbano**: gris (bg-muted)
-  - **Skatepark**: amarillo/dorado (amber)
-  - **Frenadas**: gris
-  - **Rampas**: amarillo/dorado
-- Cada card muestra un pin de ubicación (MapPin icon), nombre de sede, disciplina destacada en color, y horarios debajo
-- Grid de 3 columnas en desktop, 1-2 en mobile
-
-### Alquiler
-- Cards blancas con pin de ubicación dorado
-- Grid de 3 columnas, última fila centrada
-- Nota importante al pie sobre las 24hs de antelación y tarifa estándar
-
-## Archivos a modificar
+## Archivo a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/components/HorariosSection.tsx` | Reescribir completamente: agregar Tabs con 3 pestañas, datos de disciplinas y alquiler, diseño visual diferenciado por tipo |
+| `src/components/HorariosSection.tsx` | Reescribir: quitar Tabs, grid semanal estilo Virtus con cards detalladas + seccion alquiler debajo |
 
-## Detalles técnicos
+## Detalles tecnicos
 
-- Usar componente `Tabs` de shadcn/ui (ya disponible)
-- Iconos: `MapPin`, `Clock`, `Wrench` de lucide-react
-- Colores por disciplina usando clases de Tailwind (amber para Skatepark/Rampas, muted para Urbano/Frenadas, white+border para Slalom)
-- Mantener animaciones de scroll existentes
+- Encabezados de dia: texto bold grande sin fondo de color, separado por linea sutil
+- Cards: fondo blanco, rounded, shadow-sm, padding generoso
+- Badges de disciplina: rounded-full, colores segun tipo (mantener el esquema actual de colores)
+- Responsive: en mobile, cada dia como bloque vertical con titulo
 
