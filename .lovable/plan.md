@@ -1,58 +1,75 @@
 
 
-# Plan: Recrear el sitio web de Comunidad NM Roller
+# Plan: Rediseñar la sección de Horarios con Disciplinas y Alquiler
 
-He analizado el sitio en vivo en `lp.comunidadnmroller.com` y tengo toda la información necesaria para recrearlo como una landing page en React.
+## Resumen
 
-## Estructura del sitio
+Transformar la sección actual de horarios en una sección con 3 subsecciones usando tabs: **Horarios generales**, **Disciplinas** y **Alquiler de equipo**, cada una con su propia estética visual.
 
-El sitio es una landing page de una escuela de patinaje (rollers) en Buenos Aires con las siguientes secciones:
+## Estructura
 
-1. **Header/Navbar** - Logo NM Roller + links "Sedes y Horarios" y "Comprar Plan"
-2. **Hero** - Imagen de fondo con patinadores, título principal, subtítulo y CTA "Comprar Plan"
-3. **Beneficios** - 4 cards: clases ilimitadas, +18 sedes, aprende desde cero, seguro médico
-4. **Quienes pueden venir** - Lista de perfil ideal del alumno
-5. **Planes/Precios** - Tabs (Efectivo/Transferencia/Trimestral) con 3 planes cada uno: Clase Unica, Basic Fun, Black Free (destacado)
-6. **Sedes** - Grid con +15 sedes con nombre, dirección y link a Google Maps
-7. **App Turnos Web** - Sección para descargar la app de reservas
-8. **Ruta de Aprendizaje** - 4 niveles progresivos de patinaje
-9. **Equipamiento** - CTAs para pack de alquiler y kit de iniciacion
-10. **Testimonios** - Carousel con reseñas de alumnas
-11. **FAQ** - Accordion con preguntas frecuentes agrupadas
-12. **Footer** - WhatsApp chat flotante
+La sección usara `Tabs` de shadcn con 3 pestañas:
 
-## Archivos a crear/modificar
+1. **Horarios** - El grid actual de horarios por día (ya existente)
+2. **Disciplinas** - Cards organizadas por tipo de disciplina, cada una con color diferente
+3. **Alquiler** - Cards de sedes que ofrecen alquiler con horarios
 
-| Archivo | Accion |
+## Datos de las imágenes
+
+### Disciplinas (extraídas de la imagen):
+| Sede | Disciplina | Horarios |
+|---|---|---|
+| Rosedal Palermo | Slalom | Mar y Mié 9hs, Mié 20hs, Jue 19hs |
+| Rosedal Palermo | Urbano | Sáb 10hs |
+| Villa Luro | Skatepark | Vie 20hs |
+| Parque Rivadavia | (general) | Dom 9am |
+| Rosedal Palermo | Frenadas | Mar 20hs |
+| Belgrano | Skatepark | Mié y Vie 20hs |
+| Madero | Slalom | Mar 19hs |
+| Villa Real | Urbano | Sáb 11:30hs |
+| Rosedal | Rampas | Jue 20hs |
+| Vicente López | Slalom | Sáb 9hs |
+| Madero | Urbano | Sáb 10hs |
+| Rivadavia | Frenadas | Jue 20hs |
+
+### Alquiler de equipo (extraídas de la imagen):
+| Sede | Horarios |
 |---|---|
-| `src/pages/Index.tsx` | Pagina principal con todas las secciones |
-| `src/components/Navbar.tsx` | Header con logo y navegacion |
-| `src/components/Hero.tsx` | Seccion hero con background image |
-| `src/components/Benefits.tsx` | 4 tarjetas de beneficios |
-| `src/components/WhoCanCome.tsx` | Seccion "Quienes pueden venir" |
-| `src/components/PricingPlans.tsx` | Planes con tabs y cards de precios |
-| `src/components/Locations.tsx` | Grid de sedes con links a Maps |
-| `src/components/AppSection.tsx` | Seccion app Turnos Web |
-| `src/components/LearningPath.tsx` | Ruta de aprendizaje por niveles |
-| `src/components/Equipment.tsx` | Seccion equipamiento |
-| `src/components/Testimonials.tsx` | Carousel de testimonios |
-| `src/components/FAQ.tsx` | Preguntas frecuentes con accordion |
-| `src/components/WhatsAppButton.tsx` | Boton flotante de WhatsApp |
-| `src/index.css` | Paleta de colores (rojo #E31837, negro, amarillo para CTAs) |
-| `index.html` | Titulo y meta tags actualizados |
+| Rosedal Palermo | Mar, Mié y Dom 9hs, Jue 19hs |
+| Villa Real | Mié 18hs, Sáb 10:30hs |
+| Puerto Madero | Mar 18hs |
+| Colegiales | Mié 18hs y Jue 19hs |
+| Plaza La Pampa | Sáb y Dom 8am |
+| Vicente López | Sáb 9hs |
+| Devoto | Mar y Vie 19hs |
 
-## Detalles tecnicos
+## Diseño visual
 
-- **Colores**: Rojo primario (#E31837), negro, amarillo para botones CTA, blanco para fondos
-- **Imagenes**: Se usaran las URLs de las imagenes del sitio original (WordPress) ya que son publicas
-- **Links externos**: Mercado Pago (compra), Google Maps (sedes), WhatsApp, App Store/Play Store
-- **Componentes shadcn**: Tabs (planes), Accordion (FAQ), Card (beneficios/sedes/planes)
-- **Responsive**: Mobile-first, adaptado para todos los tamaños
-- **Tipografia**: Sans-serif bold para titulos, con estilo deportivo/energetico
+### Disciplinas
+- Cards con color de fondo según disciplina:
+  - **Slalom**: blanco con borde primario
+  - **Urbano**: gris (bg-muted)
+  - **Skatepark**: amarillo/dorado (amber)
+  - **Frenadas**: gris
+  - **Rampas**: amarillo/dorado
+- Cada card muestra un pin de ubicación (MapPin icon), nombre de sede, disciplina destacada en color, y horarios debajo
+- Grid de 3 columnas en desktop, 1-2 en mobile
 
-## Notas
+### Alquiler
+- Cards blancas con pin de ubicación dorado
+- Grid de 3 columnas, última fila centrada
+- Nota importante al pie sobre las 24hs de antelación y tarifa estándar
 
-- Los links de pago (Mercado Pago) se mantendran como links externos
-- El chat de WhatsApp sera un boton flotante que abre WhatsApp Web
-- Las imagenes del hero y secciones se cargan desde el CDN de WordPress del sitio original
+## Archivos a modificar
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/HorariosSection.tsx` | Reescribir completamente: agregar Tabs con 3 pestañas, datos de disciplinas y alquiler, diseño visual diferenciado por tipo |
+
+## Detalles técnicos
+
+- Usar componente `Tabs` de shadcn/ui (ya disponible)
+- Iconos: `MapPin`, `Clock`, `Wrench` de lucide-react
+- Colores por disciplina usando clases de Tailwind (amber para Skatepark/Rampas, muted para Urbano/Frenadas, white+border para Slalom)
+- Mantener animaciones de scroll existentes
 
