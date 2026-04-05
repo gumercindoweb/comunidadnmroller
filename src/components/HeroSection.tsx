@@ -1,63 +1,74 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Users, ChevronDown } from "lucide-react";
+import { Users, ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80')",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Background with gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(7,73%,30%)] via-[hsl(7,50%,20%)] to-[hsl(0,0%,8%)]" />
+      
+      {/* Decorative shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      </div>
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <Badge className="mb-6 bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm px-4 py-2 text-sm font-medium animate-fade-up">
-          <Users className="w-4 h-4 mr-2" />
-          +3.000 alumnos nos eligieron
-        </Badge>
+      <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center">
+        {/* Social proof badge */}
+        <div className="animate-fade-up mb-10">
+          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/15 rounded-full px-5 py-2.5">
+            <Users className="w-4 h-4 text-primary" />
+            <span className="text-primary-foreground/90 text-sm font-medium">
+              +3.000 alumnos nos eligieron
+            </span>
+          </div>
+        </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-primary-foreground leading-[0.9] mb-6 animate-fade-up-delay-1">
+        {/* Main heading */}
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-primary-foreground leading-[0.85] mb-8 animate-fade-up-delay-1">
           UNITE A LA
           <br />
-          <span className="text-primary">ESCUELA #1</span>
+          <span className="text-primary drop-shadow-[0_0_40px_hsl(7,73%,42%,0.4)]">
+            ESCUELA #1
+          </span>
           <br />
           DE PATINAJE
         </h1>
 
-        <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 font-medium animate-fade-up-delay-2">
-          Aprende a patinar desde cero o mejorá tu técnica en un entorno seguro, 
+        {/* Subtitle */}
+        <p className="text-base md:text-lg text-primary-foreground/60 max-w-xl mx-auto mb-12 font-normal leading-relaxed animate-fade-up-delay-2">
+          Aprende a patinar desde cero o mejorá tu técnica en un entorno seguro,
           divertido y con la mejor comunidad de Buenos Aires.
         </p>
 
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up-delay-3">
           <Button
             size="lg"
-            className="bg-primary hover:bg-secondary text-primary-foreground font-bold text-lg px-10 py-6 rounded-full shadow-lg shadow-primary/30"
-            onClick={() => document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base tracking-wide px-10 py-7 rounded-full shadow-xl shadow-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 group"
+            onClick={() =>
+              document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })
+            }
           >
             Empezá Ahora
+            <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-bold text-lg px-10 py-6 rounded-full"
-            onClick={() => document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })}
+            className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-base px-10 py-7 rounded-full backdrop-blur-sm transition-all duration-300"
+            onClick={() =>
+              document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })
+            }
           >
             Conocé Más
           </Button>
         </div>
       </div>
 
-      <button
-        onClick={() => document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 animate-bounce"
-      >
-        <ChevronDown className="w-8 h-8" />
-      </button>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
