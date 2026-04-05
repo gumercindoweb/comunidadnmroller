@@ -165,58 +165,57 @@ const PricingSection = () => {
                 ))}
               </ul>
 
-              <div className="space-y-4 border-t border-primary-foreground/10 pt-6">
-                <div className="rounded-xl bg-primary-foreground/5 p-4">
+              <div className="space-y-3 border-t border-primary-foreground/10 pt-6">
+                {/* Pago Online - compacto */}
+                <div className="rounded-xl bg-primary-foreground/10 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <CreditCard className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">Pago Online</span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-black">{plan.onlinePrice}</span>
+                    <span className="text-2xl font-black text-primary-foreground">{plan.onlinePrice}</span>
                     {plan.perClassOnline && (
-                      <span className={`text-xs ${plan.highlighted ? "text-primary-foreground/60" : "text-primary-foreground/40"}`}>
+                      <span className="text-xs text-primary-foreground/60">
                         ({plan.perClassOnline})
                       </span>
                     )}
                   </div>
                   {plan.vigencia && (
-                    <p className={`text-xs mb-2 ${plan.highlighted ? "text-primary-foreground/60" : "text-primary-foreground/40"}`}>
+                    <p className="text-xs mb-2 text-primary-foreground/60">
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary hover:bg-secondary text-primary-foreground">
+                  <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
                     Comprar Plan
                   </Button>
-                  <p className={`text-[10px] text-center mt-2 ${plan.highlighted ? "text-primary-foreground/50" : "text-primary-foreground/30"}`}>
+                  <p className="text-[10px] text-center mt-2 text-primary-foreground/50">
                     Serás redirigido a Mercado Pago
                   </p>
                 </div>
 
-                <div className="rounded-xl bg-primary-foreground/5 p-4">
+                {/* Pago en Efectivo - destacado */}
+                <div className="rounded-xl bg-primary-foreground p-4 shadow-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Banknote className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">Pago en Efectivo</span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-black">{plan.efectivoPrice}</span>
+                    <span className="text-2xl font-black text-foreground">{plan.efectivoPrice}</span>
                     {plan.perClassEfectivo && (
-                      <span className={`text-xs ${plan.highlighted ? "text-primary-foreground/60" : "text-primary-foreground/40"}`}>
+                      <span className="text-xs text-muted-foreground">
                         ({plan.perClassEfectivo})
                       </span>
                     )}
                   </div>
                   {plan.vigencia && (
-                    <p className={`text-xs mb-2 ${plan.highlighted ? "text-primary-foreground/60" : "text-primary-foreground/40"}`}>
+                    <p className="text-xs mb-2 text-muted-foreground">
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button
-                    variant="outline"
-                    className="w-full font-bold rounded-full py-5 text-sm border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
-                  >
+                  <Button className="w-full font-bold rounded-full py-5 text-sm bg-foreground text-primary-foreground hover:bg-foreground/90">
                     AGENDAR TURNO
                   </Button>
-                  <p className={`text-[10px] text-center mt-2 ${plan.highlighted ? "text-primary-foreground/50" : "text-primary-foreground/30"}`}>
+                  <p className="text-[10px] text-center mt-2 text-muted-foreground">
                     Turno para pago presencial en nuestra oficina
                   </p>
                 </div>
