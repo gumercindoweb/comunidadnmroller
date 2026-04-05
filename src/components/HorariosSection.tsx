@@ -137,7 +137,7 @@ const HorariosSection = () => {
                     </div>
                     {clase.disciplina && (
                       <span
-                        className={`inline-block mt-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${badgeStyles[clase.disciplina as DisciplinaType] || badgeStyles.General}`}
+                        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
                       >
                         {clase.disciplina}
                       </span>
@@ -173,7 +173,7 @@ const HorariosSection = () => {
                     </div>
                     {clase.disciplina && (
                       <span
-                        className={`inline-block mt-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${badgeStyles[clase.disciplina as DisciplinaType] || badgeStyles.General}`}
+                        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
                       >
                         {clase.disciplina}
                       </span>
