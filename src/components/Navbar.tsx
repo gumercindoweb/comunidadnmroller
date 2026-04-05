@@ -33,11 +33,11 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/50"
-          : "bg-transparent"
+          ? "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/30"
+          : "bg-background/70 backdrop-blur-md border-b border-border/20"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-18 px-4 lg:px-8">
+      <div className="max-w-[1600px] mx-auto flex items-center justify-between h-16 px-6 lg:px-12">
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -47,16 +47,12 @@ const Navbar = () => {
         </button>
 
         {/* Center nav links - desktop */}
-        <div className="hidden md:flex items-center gap-1 bg-foreground/5 backdrop-blur-sm rounded-full px-2 py-1.5">
+        <div className="hidden md:flex items-center gap-1 bg-muted/60 backdrop-blur-sm rounded-full px-2 py-1.5">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => scrollTo(link.id)}
-              className={`text-xs font-semibold tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-300 ${
-                scrolled
-                  ? "text-foreground/70 hover:text-foreground hover:bg-foreground/10"
-                  : "text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              }`}
+              className="text-xs font-semibold tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-300 text-foreground/60 hover:text-foreground hover:bg-foreground/10"
             >
               {link.label}
             </button>
@@ -79,9 +75,9 @@ const Navbar = () => {
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? (
-            <X className={`h-6 w-6 ${scrolled ? "text-foreground" : "text-primary-foreground"}`} />
+            <X className="h-6 w-6 text-foreground" />
           ) : (
-            <Menu className={`h-6 w-6 ${scrolled ? "text-foreground" : "text-primary-foreground"}`} />
+            <Menu className="h-6 w-6 text-foreground" />
           )}
         </button>
       </div>
