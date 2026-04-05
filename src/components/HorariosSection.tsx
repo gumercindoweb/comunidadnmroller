@@ -8,68 +8,68 @@ interface ClaseEnriquecida {
   disciplina?: string;
 }
 
-type DisciplinaType = "Slalom" | "Urbano" | "Skatepark" | "Frenadas" | "Rampas" | "General";
+type DisciplinaType = "Slalom" | "Urbano" | "Skatepark" | "Frenadas" | "Rampas" | "Primeros pasos y principiante";
 
-const badgeStyles: Record<DisciplinaType, string> = {
+const badgeStyles: Record<string, string> = {
   Slalom: "bg-primary/10 text-primary border border-primary/20",
   Urbano: "bg-muted text-muted-foreground",
   Skatepark: "bg-amber-100 text-amber-800",
   Frenadas: "bg-muted text-muted-foreground",
   Rampas: "bg-amber-100 text-amber-800",
-  General: "bg-secondary text-secondary-foreground",
+  "Primeros pasos y principiante": "bg-secondary text-secondary-foreground",
 };
 
 // ── Horarios enriquecidos con disciplina ──
 const horarios: Record<string, ClaseEnriquecida[]> = {
   Lunes: [
-    { sede: "P. Rivadavia", hora: "20:00", disciplina: "General" },
-    { sede: "Devoto", hora: "19:00", disciplina: "General" },
-    { sede: "Rosedal", hora: "09:00", disciplina: "General" },
-    { sede: "Rosedal", hora: "19:00", disciplina: "General" },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Rosedal", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Rosedal", hora: "19:00", disciplina: "Primeros pasos y principiante" },
   ],
   Martes: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "General" },
-    { sede: "Devoto", hora: "19:00", disciplina: "General" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos y principiante" },
     { sede: "Puerto Madero", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "09:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "20:00", disciplina: "Frenadas" },
   ],
   Miércoles: [
-    { sede: "Villa Real", hora: "18:30", disciplina: "General" },
-    { sede: "Villa Real", hora: "19:30", disciplina: "General" },
-    { sede: "Belgrano", hora: "19:00", disciplina: "General" },
-    { sede: "Colegiales", hora: "18:00", disciplina: "General" },
-    { sede: "Vicente López", hora: "18:30", disciplina: "General" },
+    { sede: "Villa Real", hora: "18:30", disciplina: "Primeros pasos y principiante" },
+    { sede: "Villa Real", hora: "19:30", disciplina: "Primeros pasos y principiante" },
+    { sede: "Belgrano", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Colegiales", hora: "18:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Vicente López", hora: "18:30", disciplina: "Primeros pasos y principiante" },
     { sede: "Rosedal", hora: "09:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "20:00", disciplina: "Slalom" },
   ],
   Jueves: [
-    { sede: "P. Rivadavia", hora: "09:00", disciplina: "General" },
-    { sede: "Colegiales", hora: "19:00", disciplina: "General" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Colegiales", hora: "19:00", disciplina: "Primeros pasos y principiante" },
     { sede: "Rosedal", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "20:00", disciplina: "Rampas" },
     { sede: "Rivadavia", hora: "20:00", disciplina: "Frenadas" },
   ],
   Viernes: [
-    { sede: "Devoto", hora: "19:00", disciplina: "General" },
-    { sede: "Villa Luro", hora: "19:00", disciplina: "Skatepark" },
+    { sede: "Devoto", hora: "20:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Belgrano", hora: "19:00", disciplina: "Skatepark" },
   ],
   Sábado: [
-    { sede: "Villa Real", hora: "09:30", disciplina: "General" },
-    { sede: "Plaza La Pampa", hora: "09:00", disciplina: "General" },
-    { sede: "Puerto Madero", hora: "09:00", disciplina: "General" },
+    { sede: "Villa Real", hora: "09:30", disciplina: "Primeros pasos y principiante" },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Puerto Madero", hora: "09:00", disciplina: "Primeros pasos y principiante" },
     { sede: "Vicente López", hora: "08:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "10:00", disciplina: "Urbano" },
     { sede: "Madero", hora: "10:00", disciplina: "Urbano" },
     { sede: "Villa Real", hora: "11:30", disciplina: "Urbano" },
   ],
   Domingo: [
-    { sede: "P. Rivadavia", hora: "08:00", disciplina: "General" },
-    { sede: "P. Rivadavia", hora: "09:00", disciplina: "General" },
-    { sede: "Plaza La Pampa", hora: "09:00", disciplina: "General" },
-    { sede: "Rosedal", hora: "09:00", disciplina: "General" },
-    { sede: "Rosedal", hora: "09:30", disciplina: "General" },
+    { sede: "P. Rivadavia", hora: "08:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Rosedal", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Rosedal", hora: "09:30", disciplina: "Primeros pasos y principiante" },
   ],
 };
 
