@@ -15,7 +15,7 @@ const badgeStyles: Record<string, string> = {
   Skatepark: "bg-amber-100 text-amber-800",
   Frenadas: "bg-muted text-muted-foreground",
   Rampas: "bg-amber-100 text-amber-800",
-  "Primeros pasos": "bg-secondary text-secondary-foreground",
+  "Primeros pasos y principiante": "bg-secondary text-secondary-foreground",
   "Nivel principiante": "bg-secondary text-secondary-foreground",
 };
 
