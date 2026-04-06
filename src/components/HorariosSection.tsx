@@ -24,7 +24,7 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
   Lunes: [],
   Martes: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Devoto", dummy: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos" },
     { sede: "Puerto Madero", hora: "18:00", disciplina: "Primeros pasos" },
     { sede: "Puerto Madero", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal", hora: "09:00", disciplina: "Primeros pasos" },
