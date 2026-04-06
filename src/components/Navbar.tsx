@@ -65,7 +65,7 @@ const Navbar = () => {
             onClick={() => scrollTo("planes")}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm tracking-wide uppercase px-8 py-5 rounded-full shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:scale-105"
           >
-            Comprar Plan
+            COMPRAR PLAN
           </Button>
         </div>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
               onClick={() => scrollTo("planes")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-5 rounded-full mt-2 w-full max-w-xs"
             >
-              Comprar Plan
+              COMPRAR PLAN
             </Button>
           </div>
         </div>
