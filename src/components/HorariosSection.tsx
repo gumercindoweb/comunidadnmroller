@@ -1,4 +1,5 @@
-import { Clock, MapPin, Wrench } from "lucide-react";
+import { useState } from "react";
+import { Clock, MapPin, Wrench, Package } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // ── Tipos ──
@@ -7,8 +8,6 @@ interface ClaseEnriquecida {
   hora: string;
   disciplina?: string;
 }
-
-type DisciplinaType = "Slalom" | "Urbano" | "Skatepark" | "Frenadas" | "Rampas" | "Primeros pasos y principiante";
 
 const badgeStyles: Record<string, string> = {
   Slalom: "bg-primary/10 text-primary border border-primary/20",
@@ -77,13 +76,13 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
 
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
-// ── Alquiler ──
-interface AlquilerSede {
+// ── Sedes con Alquiler + Clases ──
+interface AlquilerClaseSede {
   sede: string;
   horarios: string;
 }
 
-const alquilerSedes: AlquilerSede[] = [
+const alquilerClaseSedes: AlquilerClaseSede[] = [
   { sede: "Rosedal Palermo", horarios: "Mar, Mié y Dom 9hs · Jue 19hs" },
   { sede: "Villa Real", horarios: "Mié 18hs · Sáb 10:30hs" },
   { sede: "Puerto Madero", horarios: "Mar 18hs" },
@@ -93,14 +92,37 @@ const alquilerSedes: AlquilerSede[] = [
   { sede: "Devoto", horarios: "Mar y Vie 19hs" },
 ];
 
+type TabType = "clases" | "alquiler";
+
+// ── Componentes de cards ──
+const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm" | "md" }) => (
+  <div className="bg-card rounded-lg p-3 shadow-sm border border-border hover:shadow-md transition-shadow">
+    <p className={`font-bold text-foreground leading-tight ${size === "sm" ? "text-xs" : "text-sm"}`}>
+      {clase.sede}
+    </p>
+    <div className="flex items-center gap-1 mt-1.5">
+      <Clock className={`${size === "sm" ? "w-3 h-3" : "w-3.5 h-3.5"} text-primary shrink-0`} />
+      <p className={`text-muted-foreground ${size === "sm" ? "text-xs" : "text-sm"}`}>{clase.hora}</p>
+    </div>
+    {clase.disciplina && (
+      <span
+        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full ${size === "sm" ? "text-[8px]" : "text-[10px]"} font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
+      >
+        {clase.disciplina}
+      </span>
+    )}
+  </div>
+);
+
 const HorariosSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [activeTab, setActiveTab] = useState<TabType>("clases");
 
   return (
     <section id="horarios" className="py-24 bg-background" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Horarios</p>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground mb-4">
             Clases todos los días
@@ -110,129 +132,139 @@ const HorariosSection = () => {
           </p>
         </div>
 
-        {/* ── Grid semanal (desktop) ── */}
-        <div className="hidden lg:grid lg:grid-cols-7 gap-1 max-w-7xl mx-auto">
-          {dias.map((dia, i) => (
-            <div
-              key={dia}
-              className={`${isVisible ? "animate-fade-up" : "opacity-0"}`}
-              style={{ animationDelay: `${i * 0.05}s` }}
+        {/* ── Tabs ── */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex bg-muted rounded-xl p-1.5 gap-1">
+            <button
+              onClick={() => setActiveTab("clases")}
+              className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 ${
+                activeTab === "clases"
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              {/* Day header */}
-              <div className="border-b-2 border-primary/20 pb-2 mb-3">
-                <h3 className="font-black text-foreground text-base tracking-tight text-center">
-                  {dia}
-                </h3>
-              </div>
-
-              {/* Classes */}
-              <div className="flex flex-col gap-2">
-                {horarios[dia].map((clase, j) => (
-                  <div
-                    key={j}
-                    className="bg-card rounded-lg p-3 shadow-sm border border-border hover:shadow-md transition-shadow"
-                  >
-                    <p className="font-bold text-foreground text-xs leading-tight">{clase.sede}</p>
-                    <div className="flex items-center gap-1 mt-1.5">
-                      <Clock className="w-3 h-3 text-primary shrink-0" />
-                      <p className="text-muted-foreground text-xs">{clase.hora}</p>
-                    </div>
-                    {clase.disciplina && (
-                      <span
-                        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
-                      >
-                        {clase.disciplina}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+              📅 Todas las clases
+            </button>
+            <button
+              onClick={() => setActiveTab("alquiler")}
+              className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 flex items-center gap-2 ${
+                activeTab === "alquiler"
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Package className="w-4 h-4" />
+              Alquiler + Clases
+            </button>
+          </div>
         </div>
 
-        {/* ── Grid semanal (mobile) ── */}
-        <div className="lg:hidden flex flex-col gap-6 max-w-lg mx-auto">
-          {dias.map((dia, i) => (
-            <div
-              key={dia}
-              className={`${isVisible ? "animate-fade-up" : "opacity-0"}`}
-              style={{ animationDelay: `${i * 0.04}s` }}
-            >
-              <div className="border-b-2 border-primary/20 pb-2 mb-3">
-                <h3 className="font-black text-foreground text-lg">{dia}</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {horarios[dia].map((clase, j) => (
-                  <div
-                    key={j}
-                    className="bg-card rounded-lg p-3 shadow-sm border border-border"
-                  >
-                    <p className="font-bold text-foreground text-sm">{clase.sede}</p>
-                    <div className="flex items-center gap-1 mt-1">
-                      <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
-                      <p className="text-muted-foreground text-sm">{clase.hora}</p>
-                    </div>
-                    {clase.disciplina && (
-                      <span
-                        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
-                      >
-                        {clase.disciplina}
-                      </span>
-                    )}
+        {/* ── TAB: Todas las clases ── */}
+        {activeTab === "clases" && (
+          <>
+            {/* Desktop grid */}
+            <div className="hidden lg:grid lg:grid-cols-7 gap-1 max-w-7xl mx-auto">
+              {dias.map((dia, i) => (
+                <div
+                  key={dia}
+                  className={`${isVisible ? "animate-fade-up" : "opacity-0"}`}
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <div className="border-b-2 border-primary/20 pb-2 mb-3">
+                    <h3 className="font-black text-foreground text-base tracking-tight text-center">
+                      {dia}
+                    </h3>
                   </div>
-                ))}
-              </div>
+                  <div className="flex flex-col gap-2">
+                    {horarios[dia].map((clase, j) => (
+                      <ClaseCard key={j} clase={clase} size="sm" />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Mobile grid */}
+            <div className="lg:hidden flex flex-col gap-6 max-w-lg mx-auto">
+              {dias.map((dia, i) => (
+                <div
+                  key={dia}
+                  className={`${isVisible ? "animate-fade-up" : "opacity-0"}`}
+                  style={{ animationDelay: `${i * 0.04}s` }}
+                >
+                  <div className="border-b-2 border-primary/20 pb-2 mb-3">
+                    <h3 className="font-black text-foreground text-lg">{dia}</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {horarios[dia].map((clase, j) => (
+                      <ClaseCard key={j} clase={clase} size="md" />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* ── TAB: Alquiler + Clases ── */}
+        {activeTab === "alquiler" && (
+          <div className="max-w-5xl mx-auto">
+            {/* Highlight banner */}
+            <div className="bg-primary/5 border border-primary/15 rounded-2xl p-6 md:p-8 mb-10 text-center">
+              <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-4">
+                <Wrench className="w-4 h-4 text-primary" />
+                <span className="text-primary font-bold text-xs uppercase tracking-widest">Servicio de alquiler</span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-black tracking-tight text-foreground mb-2">
+                Sedes con alquiler de equipo + clases
+              </h3>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                Estas sedes ofrecen alquiler de rollers y protecciones para que puedas tomar clase sin necesidad de traer tu equipo.
+              </p>
+            </div>
+
+            {/* Alquiler cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {alquilerClaseSedes.map((a, i) => (
+                <div
+                  key={i}
+                  className={`rounded-xl p-5 bg-card border-2 border-primary/10 shadow-sm hover:shadow-md hover:border-primary/25 transition-all ${isVisible ? "animate-fade-up" : "opacity-0"}`}
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="bg-primary/10 rounded-full p-2.5 shrink-0">
+                      <MapPin className="w-4 h-4 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <p className="font-bold text-foreground text-sm">{a.sede}</p>
+                        <span className="bg-primary/10 text-primary text-[9px] font-bold uppercase px-2 py-0.5 rounded-full whitespace-nowrap">
+                          Alquiler
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-2">
+                        <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                        <p className="text-muted-foreground text-xs">{a.horarios}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Nota importante */}
+            <div className="mt-8 bg-muted rounded-xl p-4 max-w-2xl mx-auto text-center">
+              <p className="text-muted-foreground text-sm">
+                <strong className="text-foreground">Importante:</strong> Reservá con al menos 24hs de antelación. El alquiler tiene una tarifa estándar adicional al plan.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Disclaimer */}
         <p className="text-center text-muted-foreground text-xs mt-8">
           * Los horarios pueden cambiar sin previo aviso. Consultá nuestras redes para actualizaciones.
         </p>
-
-        {/* ── Sección Alquiler ── */}
-        <div className="mt-20 max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <Wrench className="w-5 h-5 text-primary" />
-              <p className="text-primary font-bold text-sm tracking-widest uppercase">Alquiler de equipo</p>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-black tracking-tight text-foreground">
-              ¿No tenés rollers? No hay problema
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {alquilerSedes.map((a, i) => (
-              <div
-                key={i}
-                className={`rounded-xl p-5 bg-card border border-border shadow-sm hover:shadow-md transition-shadow ${isVisible ? "animate-fade-up" : "opacity-0"}`}
-                style={{ animationDelay: `${i * 0.05}s` }}
-              >
-                <div className="flex items-start gap-3">
-                  <div className="bg-amber-100 rounded-full p-2 shrink-0">
-                    <MapPin className="w-4 h-4 text-amber-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-bold text-foreground text-sm">{a.sede}</p>
-                    <div className="flex items-center gap-1.5 mt-2">
-                      <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                      <p className="text-muted-foreground text-xs">{a.horarios}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 bg-muted rounded-xl p-4 max-w-2xl mx-auto text-center">
-            <p className="text-muted-foreground text-sm">
-              <strong className="text-foreground">Importante:</strong> Reservá con al menos 24hs de antelación. El alquiler tiene una tarifa estándar adicional al plan.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
