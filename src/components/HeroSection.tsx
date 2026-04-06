@@ -57,7 +57,7 @@ const HeroSection = () => {
           <Button
             size="lg"
             variant="outline"
-            className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-base px-10 py-7 rounded-full backdrop-blur-sm transition-all duration-300"
+            className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 hover:border-primary-foreground/60 font-semibold text-base px-10 py-7 rounded-full backdrop-blur-sm transition-all duration-300"
             onClick={() =>
               document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })
             }
