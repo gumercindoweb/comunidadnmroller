@@ -68,9 +68,11 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Villa Real", hora: "11:30", disciplina: "Urbano" },
   ],
   Domingo: [
-    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "08:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Slalom" },
     { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos y principiante" },
     { sede: "Rosedal", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Fac. Medicina", hora: "10:00", disciplina: "Primeros pasos y principiante" },
   ],
 };
 
