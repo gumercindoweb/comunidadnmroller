@@ -186,7 +186,7 @@ const PricingSection = () => {
                     </p>
                   )}
                   <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
-                    Comprar Plan
+                    COMPRAR PLAN
                   </Button>
                   <p className="text-[10px] text-center mt-2 text-primary-foreground/50">
                     Serás redirigido a Mercado Pago
