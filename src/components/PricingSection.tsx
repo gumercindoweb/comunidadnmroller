@@ -170,7 +170,7 @@ const PricingSection = () => {
                 <div className="rounded-xl bg-primary-foreground/10 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <CreditCard className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-primary">Pago Online</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary-foreground">Pago Online</span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="text-2xl font-black text-primary-foreground">{plan.onlinePrice}</span>
