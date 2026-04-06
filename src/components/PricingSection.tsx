@@ -212,7 +212,7 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button className="w-full font-bold rounded-full py-5 text-sm bg-foreground text-primary-foreground hover:bg-foreground/90">
+                  <Button className="w-full font-bold rounded-full py-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-md">
                     AGENDAR TURNO
                   </Button>
                   <p className="text-[10px] text-center mt-2 text-muted-foreground">
