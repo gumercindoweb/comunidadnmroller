@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
@@ -212,7 +217,10 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button className="w-full font-bold rounded-full py-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-md">
+                  <Button
+                    onClick={() => setCalendlyOpen(true)}
+                    className="w-full font-bold rounded-full py-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
+                  >
                     AGENDAR TURNO
                   </Button>
                   <p className="text-[10px] text-center mt-2 text-muted-foreground">
