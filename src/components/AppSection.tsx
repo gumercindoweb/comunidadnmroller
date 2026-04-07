@@ -72,7 +72,7 @@ const AppSection = () => {
               {/* Store badges */}
               <div className="flex gap-4 justify-center lg:justify-start">
                 <a
-                  href="https://play.google.com/store"
+                  href="https://play.google.com/store/apps/details?id=com.turnosweb.lite"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-foreground text-primary-foreground rounded-lg px-5 py-2.5 flex items-center gap-2 hover:opacity-90 transition-opacity"
