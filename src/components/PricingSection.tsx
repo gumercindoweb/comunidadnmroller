@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 type Period = "mensual" | "trimestral";
 
@@ -234,13 +235,41 @@ const PricingSection = () => {
         </div>
       </div>
       <Dialog open={calendlyOpen} onOpenChange={setCalendlyOpen}>
-        <DialogContent className="sm:max-w-[700px] max-h-[90vh] p-0 overflow-hidden border-border bg-background">
+        <DialogContent className="sm:max-w-[700px] max-h-[95vh] p-0 overflow-hidden border-0 bg-background rounded-2xl gap-0">
           <DialogTitle className="sr-only">Agendar turno</DialogTitle>
+          
+          {/* Header con logo y texto */}
+          <div className="flex flex-col items-center pt-6 pb-4 px-6 text-center">
+            <img src={logoNM} alt="NM Roller" className="h-16 mb-3" />
+            <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-primary mb-2" style={{ fontFamily: "'Impact', sans-serif" }}>
+              Abonas en nuestra oficina en Palermo
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+              Reservá tu turno completando todos los datos en el calendario. ⚠️ Es <strong className="text-foreground">importante</strong> que finalices la reserva hasta el <strong className="text-foreground">último paso.</strong>
+            </p>
+          </div>
+
+          {/* Calendly iframe */}
           <iframe
             src="https://calendly.com/nmroller/beneficio-pago-efectivo"
-            className="w-full h-[80vh] border-0"
+            className="w-full h-[55vh] border-0"
             title="Agendar turno - Calendly"
           />
+
+          {/* Footer bar */}
+          <div className="bg-primary px-4 py-3 text-center">
+            <p className="text-primary-foreground text-sm">
+              Si querés quedarte más tranquilo/a, podés avisarnos que ya reservaste 👉{" "}
+              <a
+                href="https://wa.me/5491123456789"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold italic underline text-primary-foreground hover:opacity-80"
+              >
+                presionando aquí
+              </a>
+            </p>
+          </div>
         </DialogContent>
       </Dialog>
     </section>
