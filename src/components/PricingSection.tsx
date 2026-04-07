@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 type Period = "mensual" | "trimestral";
 
