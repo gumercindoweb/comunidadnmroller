@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import patinadorescomunidad from "@/assets/patinadores-comunidad.png";
 
 const points = [
   "Nunca patinaste y querés aprender desde cero",
@@ -23,7 +24,7 @@ const ForWhom = () => {
             }`}
           >
             <img
-              src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
+              src={patinadorescomunidad}
               alt="Grupo de patinadores disfrutando al aire libre"
               className="w-full h-full object-cover"
               loading="lazy"
