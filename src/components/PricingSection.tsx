@@ -117,7 +117,7 @@ const PricingSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Planes</p>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-black italic tracking-tight mb-4">
             Elegí tu plan ideal
           </h2>
           <p className="text-primary-foreground/60 text-lg mb-8">
@@ -158,7 +158,7 @@ const PricingSection = () => {
                 </Badge>
               )}
 
-              <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+              <h3 className="text-xl font-bold italic mb-1">{plan.name}</h3>
               <p className={`text-sm mb-6 ${plan.highlighted ? "text-primary-foreground/70" : "text-primary-foreground/50"}`}>
                 {plan.subtitle}
               </p>
@@ -241,7 +241,7 @@ const PricingSection = () => {
           {/* Header con logo y texto */}
           <div className="flex flex-col items-center pt-6 pb-4 px-6 text-center">
             <img src={logoNM} alt="NM Roller" className="h-16 mb-3" />
-            <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-primary mb-2" style={{ fontFamily: "'Impact', sans-serif" }}>
+            <h2 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tight text-primary mb-2" style={{ fontFamily: "'Impact', sans-serif" }}>
               Abonas en nuestra oficina en Palermo
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-md">

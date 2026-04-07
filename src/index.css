@@ -98,6 +98,19 @@
 }
 
 @layer utilities {
+  /* Heading styles with italic */
+  .heading-italic {
+    @apply font-black italic tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-5xl heading-italic text-foreground;
+  }
+
+  .heading-xl {
+    @apply text-5xl sm:text-6xl md:text-8xl lg:text-9xl heading-italic text-primary-foreground;
+  }
+
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
     opacity: 0;

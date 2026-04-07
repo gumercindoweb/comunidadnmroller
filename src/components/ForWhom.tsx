@@ -35,7 +35,7 @@ const ForWhom = () => {
             <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">
               Para vos
             </p>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground mb-8">
+            <h2 className="text-3xl md:text-5xl font-black italic tracking-tight text-foreground mb-8">
               ¿Es para mí?
             </h2>
             <p className="text-muted-foreground text-lg mb-8">

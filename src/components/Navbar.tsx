@@ -52,7 +52,7 @@ const Navbar = () => {
             <button
               key={link.label}
               onClick={() => scrollTo(link.id)}
-              className="text-xs font-semibold tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-300 text-foreground/60 hover:text-foreground hover:bg-foreground/10"
+              className="text-xs font-semibold italic tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-300 text-foreground/60 hover:text-foreground hover:bg-foreground/10"
             >
               {link.label}
             </button>
@@ -94,7 +94,7 @@ const Navbar = () => {
               <button
                 key={link.label}
                 onClick={() => scrollTo(link.id)}
-                className="text-foreground/80 hover:text-foreground font-semibold text-sm tracking-widest uppercase py-2 w-full text-center rounded-lg hover:bg-muted transition-colors"
+                className="text-foreground/80 hover:text-foreground font-semibold italic text-sm tracking-widest uppercase py-2 w-full text-center rounded-lg hover:bg-muted transition-colors"
               >
                 {link.label}
               </button>

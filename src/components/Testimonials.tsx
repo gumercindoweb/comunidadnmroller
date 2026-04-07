@@ -31,7 +31,7 @@ const Testimonials = () => {
               <Star key={i} className="w-6 h-6 fill-primary text-primary" />
             ))}
           </div>
-          <p className="text-4xl md:text-5xl font-black text-foreground mb-2">4.9/5</p>
+          <p className="text-4xl md:text-5xl font-black italic text-foreground mb-2">4.9/5</p>
           <p className="text-muted-foreground text-lg">
             Valoración promedio de más de <span className="font-bold text-foreground">3.000 alumnos</span>
           </p>

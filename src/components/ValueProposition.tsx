@@ -32,7 +32,7 @@ const ValueProposition = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">¿Por qué NM?</p>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">
+          <h2 className="text-3xl md:text-5xl font-black italic tracking-tight text-foreground">
             Todo lo que necesitás para patinar
           </h2>
         </div>

@@ -26,7 +26,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main heading */}
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-primary-foreground leading-[0.85] mb-8 animate-fade-up-delay-1">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black italic tracking-tighter text-primary-foreground leading-[0.85] mb-8 animate-fade-up-delay-1">
           UNITE A LA
           <br />
           <span className="text-primary drop-shadow-[0_0_40px_hsl(7,73%,42%,0.4)]">

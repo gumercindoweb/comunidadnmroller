@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-sm tracking-wide">NAVEGACIÓN</h4>
+            <h4 className="font-bold italic mb-4 text-sm tracking-wide">NAVEGACIÓN</h4>
             <ul className="space-y-2 text-primary-foreground/60 text-sm">
               <li><button onClick={() => document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">¿Por qué NM?</button></li>
               <li><button onClick={() => document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Planes</button></li>
@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-sm tracking-wide">LEGAL</h4>
+            <h4 className="font-bold italic mb-4 text-sm tracking-wide">LEGAL</h4>
             <ul className="space-y-2 text-primary-foreground/60 text-sm">
               <li><a href="#" className="hover:text-primary transition-colors">Términos y Condiciones</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Política de Privacidad</a></li>
@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-sm tracking-wide">CONTACTO</h4>
+            <h4 className="font-bold italic mb-4 text-sm tracking-wide">CONTACTO</h4>
             <ul className="space-y-2 text-primary-foreground/60 text-sm">
               <li>info@nmroller.com</li>
               <li>Buenos Aires, Argentina</li>

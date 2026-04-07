@@ -59,7 +59,7 @@ const AppSection = () => {
                 {features.map((feat) => (
                   <div key={feat.title} className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2">
                     <feat.icon className="w-8 h-8 text-primary-foreground" strokeWidth={1.5} />
-                    <h3 className="text-sm font-black uppercase tracking-wider text-primary-foreground">
+                    <h3 className="text-sm font-black italic uppercase tracking-wider text-primary-foreground">
                       {feat.title}
                     </h3>
                     <p className="text-xs text-primary-foreground/70 italic leading-relaxed">

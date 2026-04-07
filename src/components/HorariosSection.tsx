@@ -128,7 +128,7 @@ const HorariosSection = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Horarios</p>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground mb-4">
+          <h2 className="text-3xl md:text-5xl font-black italic tracking-tight text-foreground mb-4">
             Clases todos los días
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -175,7 +175,7 @@ const HorariosSection = () => {
                   style={{ animationDelay: `${i * 0.05}s` }}
                 >
                   <div className="border-b-2 border-primary/20 pb-2 mb-3">
-                    <h3 className="font-black text-foreground text-base tracking-tight text-center">
+                    <h3 className="font-black text-foreground text-base italic tracking-tight text-center">
                       {dia}
                     </h3>
                   </div>
@@ -197,7 +197,7 @@ const HorariosSection = () => {
                   style={{ animationDelay: `${i * 0.04}s` }}
                 >
                   <div className="border-b-2 border-primary/20 pb-2 mb-3">
-                    <h3 className="font-black text-foreground text-lg">{dia}</h3>
+                    <h3 className="font-black text-foreground text-lg italic">{dia}</h3>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     {horarios[dia].map((clase, j) => (
@@ -219,7 +219,7 @@ const HorariosSection = () => {
                 <Wrench className="w-4 h-4 text-primary" />
                 <span className="text-primary font-bold text-xs uppercase tracking-widest">Servicio de alquiler</span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-black tracking-tight text-foreground mb-2">
+              <h3 className="text-2xl md:text-3xl font-black italic tracking-tight text-foreground mb-2">
                 Sedes con alquiler de equipo + clases
               </h3>
               <p className="text-muted-foreground max-w-xl mx-auto">
