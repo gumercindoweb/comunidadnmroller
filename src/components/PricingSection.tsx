@@ -233,6 +233,16 @@ const PricingSection = () => {
           ))}
         </div>
       </div>
+      <Dialog open={calendlyOpen} onOpenChange={setCalendlyOpen}>
+        <DialogContent className="sm:max-w-[700px] max-h-[90vh] p-0 overflow-hidden border-border bg-background">
+          <DialogTitle className="sr-only">Agendar turno</DialogTitle>
+          <iframe
+            src="https://calendly.com/nmroller/beneficio-pago-efectivo"
+            className="w-full h-[80vh] border-0"
+            title="Agendar turno - Calendly"
+          />
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
