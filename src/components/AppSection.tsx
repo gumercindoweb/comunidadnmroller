@@ -86,7 +86,7 @@ const AppSection = () => {
                   </div>
                 </a>
                 <a
-                  href="https://apps.apple.com"
+                  href="https://apps.apple.com/us/app/turnosweb-app/id1169566678?l=es&ls=1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-foreground text-primary-foreground rounded-lg px-5 py-2.5 flex items-center gap-2 hover:opacity-90 transition-opacity"
