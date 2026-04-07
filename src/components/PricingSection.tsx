@@ -106,6 +106,7 @@ const quarterlyPlans: Plan[] = [
 
 const PricingSection = () => {
   const [period, setPeriod] = useState<Period>("mensual");
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
   const { ref, isVisible } = useScrollAnimation();
 
   const plans = period === "mensual" ? monthlyPlans : quarterlyPlans;
