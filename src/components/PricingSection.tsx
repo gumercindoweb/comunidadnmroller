@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
@@ -101,6 +106,7 @@ const quarterlyPlans: Plan[] = [
 
 const PricingSection = () => {
   const [period, setPeriod] = useState<Period>("mensual");
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
   const { ref, isVisible } = useScrollAnimation();
 
   const plans = period === "mensual" ? monthlyPlans : quarterlyPlans;
@@ -212,7 +218,10 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button className="w-full font-bold rounded-full py-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-md">
+                  <Button
+                    onClick={() => setCalendlyOpen(true)}
+                    className="w-full font-bold rounded-full py-5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
+                  >
                     AGENDAR TURNO
                   </Button>
                   <p className="text-[10px] text-center mt-2 text-muted-foreground">
@@ -224,6 +233,16 @@ const PricingSection = () => {
           ))}
         </div>
       </div>
+      <Dialog open={calendlyOpen} onOpenChange={setCalendlyOpen}>
+        <DialogContent className="sm:max-w-[700px] max-h-[90vh] p-0 overflow-hidden border-border bg-background">
+          <DialogTitle className="sr-only">Agendar turno</DialogTitle>
+          <iframe
+            src="https://calendly.com/nmroller/beneficio-pago-efectivo"
+            className="w-full h-[80vh] border-0"
+            title="Agendar turno - Calendly"
+          />
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
