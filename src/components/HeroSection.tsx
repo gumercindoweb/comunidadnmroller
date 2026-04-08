@@ -129,7 +129,7 @@ const HeroSection = () => {
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`group bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 ${
+                  className={`group bg-card/90 backdrop-blur-md border border-border/50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 ${
                     i === 1 ? "lg:translate-y-6" : ""
                   } ${i === 2 ? "lg:-translate-y-2" : ""}`}
                 >
