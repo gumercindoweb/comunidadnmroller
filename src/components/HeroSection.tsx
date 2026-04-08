@@ -1,74 +1,158 @@
 import { Button } from "@/components/ui/button";
-import { Users, ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Calendar, Users, TrendingUp } from "lucide-react";
+
+const stats = [
+  {
+    icon: MapPin,
+    label: "Sedes activas",
+    value: "5",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+  },
+  {
+    icon: Calendar,
+    label: "Clases semanales",
+    value: "40+",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+  },
+  {
+    icon: Users,
+    label: "Alumnos activos",
+    value: "3.000+",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+  },
+  {
+    icon: TrendingUp,
+    label: "Años de experiencia",
+    value: "10+",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+  },
+];
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(7,73%,30%)] via-[hsl(7,50%,20%)] to-[hsl(0,0%,8%)]" />
-      
-      {/* Decorative shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-background pt-16">
+      {/* Subtle decorative blurs */}
+      <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/[0.06] rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-3xl" />
+      <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/[0.03] rounded-full blur-3xl" />
 
-      <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center">
-        {/* Social proof badge */}
-        <div className="animate-fade-up mb-10">
-          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/15 rounded-full px-5 py-2.5">
-            <Users className="w-4 h-4 text-primary" />
-            <span className="text-primary-foreground/90 text-sm font-medium">
-              +3.000 alumnos nos eligieron
-            </span>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left column — Text */}
+          <div className="flex flex-col items-start">
+            {/* Badge */}
+            <div className="animate-fade-up mb-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
+                  Escuela #1 de Patinaje
+                </span>
+              </div>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 animate-fade-up-delay-1">
+              Aprendé a patinar
+              <br />
+              con la mejor
+              <br />
+              <span className="text-primary">comunidad</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base md:text-lg text-muted-foreground max-w-md mb-10 leading-relaxed animate-fade-up-delay-2">
+              Desde cero o mejorá tu técnica en un entorno seguro, divertido y
+              con la mejor comunidad de Buenos Aires.
+            </p>
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up-delay-3">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-lg shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
+                onClick={() =>
+                  document
+                    .getElementById("planes")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Empezá Ahora
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-6 rounded-lg transition-all duration-200"
+                onClick={() =>
+                  document
+                    .getElementById("propuesta")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Conocé Más
+              </Button>
+            </div>
+
+            {/* Social proof */}
+            <div className="mt-12 flex items-center gap-3 animate-fade-up-delay-3">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full bg-muted border-2 border-background flex items-center justify-center"
+                  >
+                    <span className="text-[10px] font-bold text-muted-foreground">
+                      {String.fromCharCode(64 + i)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">+3.000</span>{" "}
+                alumnos nos eligieron
+              </p>
+            </div>
+          </div>
+
+          {/* Right column — Stats cards */}
+          <div className="relative animate-fade-up-delay-2">
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`group bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 ${
+                    i === 1 ? "lg:translate-y-6" : ""
+                  } ${i === 2 ? "lg:-translate-y-2" : ""}`}
+                >
+                  <div
+                    className={`w-10 h-10 ${stat.bgColor} rounded-xl flex items-center justify-center mb-4`}
+                  >
+                    <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                  </div>
+                  <p className="text-3xl font-black text-foreground mb-1 tracking-tight">
+                    {stat.value}
+                  </p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Floating accent card */}
+            <div className="absolute -bottom-4 -left-4 lg:-left-8 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-lg shadow-primary/25 animate-fade-up-delay-3">
+              <p className="text-sm font-bold">🛼 ¡Clases todos los días!</p>
+            </div>
           </div>
         </div>
-
-        {/* Main heading */}
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black italic tracking-tighter text-primary-foreground leading-[0.85] mb-8 animate-fade-up-delay-1">
-          UNITE A LA
-          <br />
-          <span className="text-primary drop-shadow-[0_0_40px_hsl(7,73%,42%,0.4)]">
-            ESCUELA #1
-          </span>
-          <br />
-          DE PATINAJE
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-base md:text-lg text-primary-foreground/60 max-w-xl mx-auto mb-12 font-normal leading-relaxed animate-fade-up-delay-2">
-          Aprende a patinar desde cero o mejorá tu técnica en un entorno seguro,
-          divertido y con la mejor comunidad de Buenos Aires.
-        </p>
-
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up-delay-3">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base tracking-wide px-10 py-7 rounded-full shadow-xl shadow-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 group"
-            onClick={() =>
-              document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Empezá Ahora
-            <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="bg-transparent border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 hover:border-primary-foreground/60 font-semibold text-base px-10 py-7 rounded-full backdrop-blur-sm transition-all duration-300"
-            onClick={() =>
-              document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Conocé Más
-          </Button>
-        </div>
       </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
