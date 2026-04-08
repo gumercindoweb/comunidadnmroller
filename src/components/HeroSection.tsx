@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Calendar, Users, TrendingUp } from "lucide-react";
+import heroBg from "@/assets/hero-bg.png";
 
 const stats = [
   {
