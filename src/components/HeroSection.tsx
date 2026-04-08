@@ -38,8 +38,8 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
       {/* Background image with blur */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover scale-110 blur-md" />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+        <img src={heroBg} alt="" className="w-full h-full object-cover scale-105 blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/50 to-background/70" />
       </div>
       {/* Subtle decorative accents */}
       <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/[0.08] rounded-full blur-3xl" />
@@ -129,7 +129,7 @@ const HeroSection = () => {
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`group bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 ${
+                  className={`group bg-card/90 backdrop-blur-md border border-border/50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 ${
                     i === 1 ? "lg:translate-y-6" : ""
                   } ${i === 2 ? "lg:-translate-y-2" : ""}`}
                 >
