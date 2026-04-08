@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Calendar, Users, TrendingUp } from "lucide-react";
-import heroBg from "@/assets/hero-bg.png";
 
 const stats = [
   {
@@ -35,15 +34,11 @@ const stats = [
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
-      {/* Background image with blur */}
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover scale-105 blur-sm" />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/50 to-background/70" />
-      </div>
-      {/* Subtle decorative accents */}
-      <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/[0.08] rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-primary/[0.05] rounded-full blur-3xl" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-background pt-16">
+      {/* Subtle decorative blurs */}
+      <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/[0.06] rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-3xl" />
+      <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/[0.03] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -129,7 +124,7 @@ const HeroSection = () => {
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`group bg-card/90 backdrop-blur-md border border-border/50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 ${
+                  className={`group bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 ${
                     i === 1 ? "lg:translate-y-6" : ""
                   } ${i === 2 ? "lg:-translate-y-2" : ""}`}
                 >
