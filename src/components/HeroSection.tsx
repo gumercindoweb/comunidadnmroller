@@ -38,8 +38,8 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
       {/* Background image with blur */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover scale-110 blur-md" />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+        <img src={heroBg} alt="" className="w-full h-full object-cover scale-105 blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/50 to-background/70" />
       </div>
       {/* Subtle decorative accents */}
       <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/[0.08] rounded-full blur-3xl" />
