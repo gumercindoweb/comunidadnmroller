@@ -1,49 +1,83 @@
 
 
-# Rediseño Hero + Navbar estilo Fillio con branding NM Roller
+# Actualizar horarios "Todas las clases" según gráficas oficiales
 
 ## Resumen
 
-Adaptar el Hero y Navbar al estilo limpio y moderno de Fillio, usando fondo claro con acentos rojos de NM Roller. Layout de dos columnas en el hero con contenido a la izquierda y un elemento visual a la derecha.
+Reemplazar el dataset `horarios` en `src/components/HorariosSection.tsx` con la grilla semanal consolidada a partir de las dos gráficas (Principiantes/Intermedio + Disciplinas). Se mantiene exactamente la misma estética visual (tabs, cards, badges, animaciones, layout 7 columnas desktop / mobile grid). **No se modifica** la pestaña "Alquiler + Clases".
 
----
+## Mapeo de disciplinas a badges existentes
 
-## Navbar — Estilo Fillio
+- "Primeros pasos y principiante" (de la primera gráfica, agrupa nivel inicial e intermedio)
+- "Slalom", "Urbano", "Frenadas", "Skatepark", "Rampas" (de la segunda gráfica)
 
-- Fondo blanco sólido (sin transparencia excesiva), borde inferior sutil
-- Logo NM Roller a la izquierda
-- Links de navegación al centro en texto normal (sin píldora/pill container), tipografía limpia, peso medium
-- Botón CTA "COMPRAR PLAN" a la derecha con fondo oscuro (foreground) y texto blanco, bordes redondeados (no full-round, más como `rounded-lg`)
-- Al hacer scroll, sombra sutil aparece
+Se mantiene el `badgeStyles` actual (incluye todas estas disciplinas).
 
-## Hero — Layout dos columnas con fondo híbrido
+## Nueva grilla por día
 
-**Estructura:**
-- Fondo blanco/claro con elementos decorativos sutiles en rojo (blurs suaves, no dominantes)
-- Dos columnas: texto alineado a la izquierda | imagen/visual a la derecha
+**Lunes**
+- P. Rivadavia 19:00 — Primeros pasos y principiante
 
-**Columna izquierda:**
-- Badge superior tipo Fillio: punto verde (adaptado a rojo NM) + texto "ESCUELA #1 DE PATINAJE"
-- Título grande, negro, peso black, sin italic — estilo editorial limpio
-- Subtítulo en gris, tipografía regular
-- Botón CTA primario "Empezá Ahora" con fondo oscuro/rojo, rounded-lg
-- Sección inferior con "Trusted by" adaptada: "+3.000 alumnos nos eligieron" con logos de sedes o íconos
+**Martes**
+- P. Rivadavia 19:00 — Primeros pasos y principiante
+- Devoto 19:00 — Primeros pasos y principiante
+- Puerto Madero 18:00 — Primeros pasos y principiante
+- Puerto Madero 19:00 — Primeros pasos y principiante
+- Rosedal Palermo 09:00 — Primeros pasos y principiante
+- Rosedal Palermo 19:00 — Primeros pasos y principiante
+- Rosedal Palermo 09:00 — Slalom
+- Madero 19:00 — Slalom
+- Rosedal Palermo 20:00 — Frenadas
 
-**Columna derecha:**
-- Composición visual con cards/tarjetas flotantes que muestren datos de NM Roller (ej: "Sedes activas: 5", "Clases semanales: 40+", "Alumnos: +3.000") con estética de dashboard similar a Fillio
-- Cards con fondo blanco, bordes suaves, sombras sutiles, acentos en rojo primario
+**Miércoles**
+- Villa Real 18:00 — Primeros pasos y principiante
+- Villa Real 19:00 — Primeros pasos y principiante
+- Belgrano 19:00 — Primeros pasos y principiante
+- Colegiales 18:00 — Primeros pasos y principiante
+- Vicente López 18:30 — Primeros pasos y principiante
+- Rosedal Palermo 09:00 — Primeros pasos y principiante
+- Rosedal Palermo 19:00 — Primeros pasos y principiante
+- Rosedal Palermo 20:00 — Slalom
+- Belgrano 20:00 — Skatepark
 
----
+**Jueves**
+- P. Rivadavia 19:00 — Primeros pasos y principiante
+- Colegiales 19:00 — Primeros pasos y principiante
+- Rosedal Palermo 19:00 — Primeros pasos y principiante
+- Rosedal Palermo 19:00 — Slalom
+- Rosedal Palermo 20:00 — Rampas
+- Rivadavia 20:00 — Frenadas
 
-## Archivos a modificar
+**Viernes**
+- Devoto 19:00 — Primeros pasos y principiante
+- Villa Luro 19:00 — Primeros pasos y principiante
+- Belgrano 19:00 — Primeros pasos y principiante
+- Villa Luro 20:00 — Skatepark
+- Belgrano 20:00 — Skatepark
 
-1. **`src/components/Navbar.tsx`** — Rediseñar al estilo Fillio (fondo blanco, links limpios, CTA oscuro)
-2. **`src/components/HeroSection.tsx`** — Layout dos columnas, fondo claro híbrido, cards decorativas, badge, tipografía editorial
+**Sábado**
+- Villa Real 10:30 — Primeros pasos y principiante
+- Plaza La Pampa 08:00 — Primeros pasos y principiante
+- Puerto Madero 09:00 — Primeros pasos y principiante
+- Vicente López 09:00 — Primeros pasos y principiante
+- Rosedal Palermo 09:00 — Primeros pasos y principiante
+- Vicente López 09:00 — Slalom
+- Rosedal Palermo 10:00 — Urbano
+- Madero 10:00 — Urbano
+- Villa Real 11:30 — Urbano
+- Rosedal Palermo 18:00 — Primeros pasos y principiante (turno tarde)
 
-## Detalles técnicos
+**Domingo**
+- P. Rivadavia 09:00 — Primeros pasos y principiante
+- Plaza La Pampa 08:00 — Primeros pasos y principiante
+- Rosedal Palermo 09:00 — Primeros pasos y principiante
+- Parque Rivadavia 09:00 — Slalom
 
-- Se mantienen los colores CSS variables existentes (`--primary`, `--foreground`, etc.)
-- Responsive: en mobile las columnas se apilan (texto arriba, visual abajo)
-- Se conservan las animaciones `fadeUp` existentes
-- Cards del hero son puramente decorativas (no funcionales)
+## Cambios técnicos
+
+- **Archivo único modificado**: `src/components/HorariosSection.tsx`
+- Reemplazar el objeto `horarios` con la nueva data
+- **Sin cambios** en: estructura JSX, tabs, `ClaseCard`, `badgeStyles`, sección Alquiler, animaciones, estilos Tailwind, `useScrollAnimation`
+- Se eliminan entradas previas no respaldadas por las gráficas (ej. "Fac. Medicina" Domingo, "Nivel principiante" suelto en Domingo)
+- Se conservan los nombres de sede tal como ya estaban en el código (ej. "P. Rivadavia", "Rosedal", "Madero") para mantener consistencia visual; "Parque Rivadavia" se agrega como sede nueva tal como aparece en la gráfica de Disciplinas
 
