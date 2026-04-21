@@ -73,7 +73,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-3 animate-fade-up-delay-3">
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-lg shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
                 onClick={() =>
                   document
                     .getElementById("planes")
