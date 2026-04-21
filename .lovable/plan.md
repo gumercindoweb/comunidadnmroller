@@ -1,83 +1,46 @@
 
 
-# Actualizar horarios "Todas las clases" según gráficas oficiales
+# Tooltips explicativos en badges de niveles y disciplinas
 
 ## Resumen
 
-Reemplazar el dataset `horarios` en `src/components/HorariosSection.tsx` con la grilla semanal consolidada a partir de las dos gráficas (Principiantes/Intermedio + Disciplinas). Se mantiene exactamente la misma estética visual (tabs, cards, badges, animaciones, layout 7 columnas desktop / mobile grid). **No se modifica** la pestaña "Alquiler + Clases".
+Al pasar el cursor (o tap en mobile) sobre los badges de disciplina/nivel dentro de las cards de la pestaña "Todas las clases", se mostrará un tooltip con una descripción breve y emocional del nivel o disciplina.
 
-## Mapeo de disciplinas a badges existentes
+## Cambios
 
-- "Primeros pasos y principiante" (de la primera gráfica, agrupa nivel inicial e intermedio)
-- "Slalom", "Urbano", "Frenadas", "Skatepark", "Rampas" (de la segunda gráfica)
+### 1. `src/components/HorariosSection.tsx`
 
-Se mantiene el `badgeStyles` actual (incluye todas estas disciplinas).
+**a) Agregar diccionario de descripciones** junto a `badgeStyles`:
 
-## Nueva grilla por día
+```ts
+const badgeDescriptions: Record<string, string> = {
+  "Primeros pasos": "Tu primer contacto con los rollers, sin presión y con acompañamiento real.",
+  "Principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
+  "Intermedio": "Más control, más fluidez… empezás a sentirte realmente patinador.",
+  "Slalom": "Técnica y flow entre conos para dominar cada movimiento.",
+  "Frenadas": "Control total: aprendé a frenar seguro y moverte con confianza.",
+  "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
+  "Rampas": "Subidas, bajadas y saltos para llevar tu nivel al siguiente paso.",
+  "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
+  // Fallback para el badge agrupado existente
+  "Primeros pasos y principiante": "Para quienes están dando sus primeros pasos o ya empezaron a soltarse en los rollers.",
+  "Nivel principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
+};
+```
 
-**Lunes**
-- P. Rivadavia 19:00 — Primeros pasos y principiante
+**b) Envolver el `<span>` del badge dentro de `ClaseCard`** con los componentes `Tooltip`, `TooltipTrigger` y `TooltipContent` de shadcn (`@/components/ui/tooltip`). El span pasa a ser `TooltipTrigger asChild` y se le agrega `cursor-help`. El `TooltipContent` muestra la descripción correspondiente con `max-w-xs text-xs`.
 
-**Martes**
-- P. Rivadavia 19:00 — Primeros pasos y principiante
-- Devoto 19:00 — Primeros pasos y principiante
-- Puerto Madero 18:00 — Primeros pasos y principiante
-- Puerto Madero 19:00 — Primeros pasos y principiante
-- Rosedal Palermo 09:00 — Primeros pasos y principiante
-- Rosedal Palermo 19:00 — Primeros pasos y principiante
-- Rosedal Palermo 09:00 — Slalom
-- Madero 19:00 — Slalom
-- Rosedal Palermo 20:00 — Frenadas
+**c) Envolver toda la sección con `TooltipProvider`** (o asegurarse de que esté ya disponible globalmente — verificar `App.tsx`; si no, importarlo localmente y envolver el `<section>`).
 
-**Miércoles**
-- Villa Real 18:00 — Primeros pasos y principiante
-- Villa Real 19:00 — Primeros pasos y principiante
-- Belgrano 19:00 — Primeros pasos y principiante
-- Colegiales 18:00 — Primeros pasos y principiante
-- Vicente López 18:30 — Primeros pasos y principiante
-- Rosedal Palermo 09:00 — Primeros pasos y principiante
-- Rosedal Palermo 19:00 — Primeros pasos y principiante
-- Rosedal Palermo 20:00 — Slalom
-- Belgrano 20:00 — Skatepark
+**d) Soporte mobile**: como Radix Tooltip no se activa con tap, se agrega además `title={descripcion}` nativo en el span como fallback accesible. (Mantenemos diseño igual; si el usuario prefiere tap-popovers en mobile, se puede iterar).
 
-**Jueves**
-- P. Rivadavia 19:00 — Primeros pasos y principiante
-- Colegiales 19:00 — Primeros pasos y principiante
-- Rosedal Palermo 19:00 — Primeros pasos y principiante
-- Rosedal Palermo 19:00 — Slalom
-- Rosedal Palermo 20:00 — Rampas
-- Rivadavia 20:00 — Frenadas
+## Archivos modificados
 
-**Viernes**
-- Devoto 19:00 — Primeros pasos y principiante
-- Villa Luro 19:00 — Primeros pasos y principiante
-- Belgrano 19:00 — Primeros pasos y principiante
-- Villa Luro 20:00 — Skatepark
-- Belgrano 20:00 — Skatepark
+- `src/components/HorariosSection.tsx` (único)
 
-**Sábado**
-- Villa Real 10:30 — Primeros pasos y principiante
-- Plaza La Pampa 08:00 — Primeros pasos y principiante
-- Puerto Madero 09:00 — Primeros pasos y principiante
-- Vicente López 09:00 — Primeros pasos y principiante
-- Rosedal Palermo 09:00 — Primeros pasos y principiante
-- Vicente López 09:00 — Slalom
-- Rosedal Palermo 10:00 — Urbano
-- Madero 10:00 — Urbano
-- Villa Real 11:30 — Urbano
-- Rosedal Palermo 18:00 — Primeros pasos y principiante (turno tarde)
+## Sin cambios
 
-**Domingo**
-- P. Rivadavia 09:00 — Primeros pasos y principiante
-- Plaza La Pampa 08:00 — Primeros pasos y principiante
-- Rosedal Palermo 09:00 — Primeros pasos y principiante
-- Parque Rivadavia 09:00 — Slalom
-
-## Cambios técnicos
-
-- **Archivo único modificado**: `src/components/HorariosSection.tsx`
-- Reemplazar el objeto `horarios` con la nueva data
-- **Sin cambios** en: estructura JSX, tabs, `ClaseCard`, `badgeStyles`, sección Alquiler, animaciones, estilos Tailwind, `useScrollAnimation`
-- Se eliminan entradas previas no respaldadas por las gráficas (ej. "Fac. Medicina" Domingo, "Nivel principiante" suelto en Domingo)
-- Se conservan los nombres de sede tal como ya estaban en el código (ej. "P. Rivadavia", "Rosedal", "Madero") para mantener consistencia visual; "Parque Rivadavia" se agrega como sede nueva tal como aparece en la gráfica de Disciplinas
+- Estética visual de badges, cards, tabs, animaciones
+- Pestaña "Alquiler + Clases"
+- Datos de horarios
 
