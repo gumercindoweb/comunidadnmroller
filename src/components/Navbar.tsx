@@ -101,7 +101,7 @@ const Navbar = () => {
             ))}
             <Button
               onClick={() => scrollTo("planes")}
-              className="bg-foreground hover:bg-foreground/90 text-background font-semibold px-6 py-5 rounded-lg mt-2 w-full"
+              className="bg-foreground hover:bg-foreground/90 text-background font-semibold px-6 py-5 rounded-full shadow-lg mt-2 w-full"
             >
               COMPRAR PLAN
             </Button>
