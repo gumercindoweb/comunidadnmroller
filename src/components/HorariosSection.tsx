@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Clock, MapPin, Wrench, Package } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 // ── Tipos ──
 interface ClaseEnriquecida {
@@ -17,6 +18,19 @@ const badgeStyles: Record<string, string> = {
   Rampas: "bg-amber-100 text-amber-800",
   "Primeros pasos y principiante": "bg-secondary text-secondary-foreground",
   "Nivel principiante": "bg-secondary text-secondary-foreground",
+};
+
+const badgeDescriptions: Record<string, string> = {
+  "Primeros pasos": "Tu primer contacto con los rollers, sin presión y con acompañamiento real.",
+  "Principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
+  "Intermedio": "Más control, más fluidez… empezás a sentirte realmente patinador.",
+  "Slalom": "Técnica y flow entre conos para dominar cada movimiento.",
+  "Frenadas": "Control total: aprendé a frenar seguro y moverte con confianza.",
+  "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
+  "Rampas": "Subidas, bajadas y saltos para llevar tu nivel al siguiente paso.",
+  "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
+  "Primeros pasos y principiante": "Para quienes están dando sus primeros pasos o ya empezaron a soltarse en los rollers.",
+  "Nivel principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
 };
 
 // ── Horarios enriquecidos con disciplina ──
@@ -112,11 +126,21 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
       <p className={`text-muted-foreground ${size === "sm" ? "text-xs" : "text-sm"}`}>{clase.hora}</p>
     </div>
     {clase.disciplina && (
-      <span
-        className={`inline-block mt-2 px-1.5 py-0.5 rounded-full ${size === "sm" ? "text-[8px]" : "text-[10px]"} font-bold uppercase tracking-wide whitespace-nowrap ${badgeStyles[clase.disciplina] || ""}`}
-      >
-        {clase.disciplina}
-      </span>
+      <Tooltip delayDuration={150}>
+        <TooltipTrigger asChild>
+          <span
+            title={badgeDescriptions[clase.disciplina] || ""}
+            className={`inline-block mt-2 px-1.5 py-0.5 rounded-full ${size === "sm" ? "text-[8px]" : "text-[10px]"} font-bold uppercase tracking-wide whitespace-nowrap cursor-help ${badgeStyles[clase.disciplina] || ""}`}
+          >
+            {clase.disciplina}
+          </span>
+        </TooltipTrigger>
+        {badgeDescriptions[clase.disciplina] && (
+          <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
+            {badgeDescriptions[clase.disciplina]}
+          </TooltipContent>
+        )}
+      </Tooltip>
     )}
   </div>
 );
