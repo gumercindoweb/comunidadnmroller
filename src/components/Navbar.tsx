@@ -63,7 +63,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           <Button
             onClick={() => scrollTo("planes")}
-            className="bg-foreground hover:bg-foreground/90 text-background font-semibold text-sm px-6 py-5 rounded-lg transition-all duration-200"
+            className="bg-foreground hover:bg-foreground/90 text-background font-semibold text-sm px-6 py-5 rounded-full shadow-lg transition-all duration-200"
           >
             COMPRAR PLAN
           </Button>
@@ -101,7 +101,7 @@ const Navbar = () => {
             ))}
             <Button
               onClick={() => scrollTo("planes")}
-              className="bg-foreground hover:bg-foreground/90 text-background font-semibold px-6 py-5 rounded-lg mt-2 w-full"
+              className="bg-foreground hover:bg-foreground/90 text-background font-semibold px-6 py-5 rounded-full shadow-lg mt-2 w-full"
             >
               COMPRAR PLAN
             </Button>
