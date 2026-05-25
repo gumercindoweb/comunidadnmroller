@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Clock, MapPin, Wrench, Package } from "lucide-react";
+import { Clock, MapPin, Wrench, Package, Map as MapIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import SedesMapa from "./SedesMapa";
 
 // ── Tipos ──
 interface ClaseEnriquecida {
