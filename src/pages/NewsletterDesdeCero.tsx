@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, ArrowLeft, Loader2 } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
-import mockup from "@/assets/newsletter-mockup.jpg";
+import mockup from "@/assets/newsletter-mockup.png";
 
 const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
