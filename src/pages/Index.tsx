@@ -17,7 +17,7 @@ const Index = () => {
       <ValueProposition />
       <ForWhom />
       <PricingSection />
-      <SedesSection />
+      
       <HorariosSection />
       <AppSection />
       <Testimonials />
