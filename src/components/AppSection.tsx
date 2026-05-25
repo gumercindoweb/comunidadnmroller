@@ -75,7 +75,7 @@ const AppSection = () => {
                   href="https://play.google.com/store/apps/details?id=com.turnosweb.lite"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-foreground text-primary-foreground rounded-full shadow-lg px-5 py-2.5 flex items-center gap-2 hover:opacity-90 transition-opacity"
+                  className="bg-background text-foreground rounded-full shadow-lg px-5 py-2.5 flex items-center gap-2 hover:opacity-90 transition-opacity"
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
                     <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 3.458L16.8 9.79l-2.302 2.302L5.864 3.458z"/>
