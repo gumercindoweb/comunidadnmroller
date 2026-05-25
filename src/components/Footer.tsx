@@ -3,7 +3,7 @@ import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground py-16">
+    <footer className="bg-card text-foreground py-16 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div>
