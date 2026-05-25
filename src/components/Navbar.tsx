@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { Menu, X } from "lucide-react";
@@ -9,6 +10,8 @@ const navLinks = [
   { label: "Horarios", id: "horarios" },
   { label: "Planes", id: "planes" },
 ];
+
+const NEWSLETTER_PATH = "/newsletter-desde-cero";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
