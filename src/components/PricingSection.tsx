@@ -113,7 +113,7 @@ const PricingSection = () => {
   const plans = period === "mensual" ? monthlyPlans : quarterlyPlans;
 
   return (
-    <section id="planes" className="py-24 bg-foreground text-primary-foreground" ref={ref}>
+    <section id="planes" className="py-24 bg-background text-foreground" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Planes</p>
