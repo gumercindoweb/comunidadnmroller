@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ValueProposition from "@/components/ValueProposition";
 import ForWhom from "@/components/ForWhom";
 import PricingSection from "@/components/PricingSection";
-
+import SedesSection from "@/components/SedesSection";
 import HorariosSection from "@/components/HorariosSection";
 import Testimonials from "@/components/Testimonials";
 import AppSection from "@/components/AppSection";
@@ -17,7 +17,7 @@ const Index = () => {
       <ValueProposition />
       <ForWhom />
       <PricingSection />
-      
+      <SedesSection />
       <HorariosSection />
       <AppSection />
       <Testimonials />
