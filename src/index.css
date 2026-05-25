@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* NM Roller Design System v1.0 — Futura Std (fallback: Jost from Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,83 +7,96 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* ===== NM Roller DS — Neutros base (operamos sobre fondo oscuro) ===== */
+    --background: 0 0% 7%;            /* #111 bg-base */
+    --foreground: 0 0% 100%;          /* #FFF text-primary */
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card: 0 0% 10%;                 /* #1A1A1A surface */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover: 0 0% 13%;              /* #222 elevated */
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 7 73% 42%;
+    /* ===== Brand · Rojo PANTONE 1795 C ===== */
+    --primary: 359 76% 47%;           /* #D01C1F */
     --primary-foreground: 0 0% 100%;
+    --brand-50: 358 79% 95%;
+    --brand-100: 358 81% 88%;
+    --brand-200: 358 82% 76%;
+    --brand-300: 358 81% 62%;
+    --brand-400: 358 73% 52%;
+    --brand-500: 359 76% 47%;
+    --brand-600: 358 77% 38%;
+    --brand-700: 4 49% 33%;
+    --brand-900: 0 71% 14%;
 
-    --secondary: 7 70% 24%;
+    /* ===== Acento · Teal PANTONE 7472 C ===== */
+    --accent: 177 45% 57%;            /* #62C3BF */
+    --accent-foreground: 0 0% 7%;
+    --teal-50: 173 31% 94%;
+    --teal-100: 174 34% 86%;
+    --teal-200: 176 38% 74%;
+    --teal-300: 177 41% 65%;
+    --teal-400: 177 45% 57%;
+    --teal-500: 177 41% 47%;
+    --teal-600: 176 41% 37%;
+    --teal-700: 173 44% 26%;
+    --teal-900: 173 59% 14%;
+
+    /* secondary = brand-dark */
+    --secondary: 4 49% 33%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 53%;     /* #888 text-secondary */
 
-    --accent: 7 70% 24%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 359 76% 47%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 7 73% 42%;
+    --border: 0 0% 16%;               /* #2A2A2A border-default */
+    --border-subtle: 0 0% 12%;
+    --border-strong: 0 0% 27%;
+    --input: 0 0% 16%;
+    --ring: 359 76% 47%;
 
-    --radius: 0.5rem;
+    --radius: 0rem;                   /* sharp edges */
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 15%;
-    --sidebar-primary: 7 73% 42%;
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.4);
+    --shadow-md: 0 4px 12px 0 hsl(0 0% 0% / 0.45);
+    --shadow-red-glow: 0 0 24px hsl(359 76% 47% / 0.45);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 359 76% 47%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 15%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 7 73% 42%;
+    --sidebar-accent: 0 0% 13%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 359 76% 47%;
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 100%;
-
-    --card: 0 0% 7%;
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 100%;
-
-    --popover: 0 0% 7%;
+    --popover: 0 0% 13%;
     --popover-foreground: 0 0% 100%;
-
-    --primary: 7 73% 42%;
+    --primary: 359 76% 47%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 7 70% 24%;
+    --secondary: 4 49% 33%;
     --secondary-foreground: 0 0% 100%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 7 70% 24%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 177 45% 57%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 359 76% 47%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 7 73% 42%;
-
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 7 73% 42%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 7 73% 42%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 359 76% 47%;
   }
 }
 
@@ -93,52 +107,38 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Jost', 'Futura Std', 'Futura', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Jost', 'Futura Std', 'Futura', system-ui, sans-serif;
   }
 }
 
 @layer utilities {
-  /* Heading styles with italic */
   .heading-italic {
-    @apply font-black italic tracking-tight;
+    @apply font-black tracking-tight;
   }
 
   .heading-lg {
-    @apply text-3xl md:text-5xl heading-italic text-foreground;
+    @apply text-3xl md:text-5xl heading-italic text-foreground uppercase;
   }
 
   .heading-xl {
-    @apply text-5xl sm:text-6xl md:text-8xl lg:text-9xl heading-italic text-primary-foreground;
+    @apply text-5xl sm:text-6xl md:text-8xl lg:text-9xl heading-italic text-primary-foreground uppercase;
   }
 
-  .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
-    opacity: 0;
+  .shadow-red-glow {
+    box-shadow: var(--shadow-red-glow);
   }
 
-  .animate-fade-up-delay-1 {
-    animation: fadeUp 0.6s ease-out 0.1s forwards;
-    opacity: 0;
-  }
-
-  .animate-fade-up-delay-2 {
-    animation: fadeUp 0.6s ease-out 0.2s forwards;
-    opacity: 0;
-  }
-
-  .animate-fade-up-delay-3 {
-    animation: fadeUp 0.6s ease-out 0.3s forwards;
-    opacity: 0;
-  }
+  .animate-fade-up { animation: fadeUp 0.6s ease-out forwards; opacity: 0; }
+  .animate-fade-up-delay-1 { animation: fadeUp 0.6s ease-out 0.1s forwards; opacity: 0; }
+  .animate-fade-up-delay-2 { animation: fadeUp 0.6s ease-out 0.2s forwards; opacity: 0; }
+  .animate-fade-up-delay-3 { animation: fadeUp 0.6s ease-out 0.3s forwards; opacity: 0; }
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }

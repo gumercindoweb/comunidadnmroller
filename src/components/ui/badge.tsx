@@ -4,14 +4,29 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center border px-3 py-1 text-xs font-bold uppercase tracking-wide-label transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+        // Plan tag: flat (radius 0), brand red
+        default:
+          "rounded-none border-transparent bg-primary text-primary-foreground hover:bg-brand-600",
+        plan:
+          "rounded-none border-transparent bg-primary text-primary-foreground",
+        secondary:
+          "rounded-none border-transparent bg-secondary text-secondary-foreground",
+        destructive:
+          "rounded-none border-transparent bg-destructive text-destructive-foreground",
+        outline:
+          "rounded-none border-border-strong text-foreground",
+        // Level pill (teal) for "Primeros pasos / Principiante / Intermedio"
+        level:
+          "rounded-pill border-transparent bg-teal-700/40 text-teal-200 hover:bg-teal-700/60",
+        // Status dot variants
+        success:
+          "rounded-pill border-transparent bg-teal-700/30 text-teal-300",
+        status:
+          "rounded-pill border-border bg-card text-foreground",
       },
     },
     defaultVariants: {
