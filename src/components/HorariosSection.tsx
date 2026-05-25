@@ -114,7 +114,7 @@ const alquilerClaseSedes: AlquilerClaseSede[] = [
   { sede: "Devoto", horarios: "Mar y Vie 19hs" },
 ];
 
-type TabType = "clases" | "alquiler";
+type TabType = "mapa" | "clases" | "alquiler";
 
 // ── Componentes de cards ──
 const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm" | "md" }) => (
