@@ -166,7 +166,18 @@ const HorariosSection = () => {
 
         {/* ── Tabs ── */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex bg-muted rounded-xl p-1.5 gap-1">
+          <div className="inline-flex bg-muted rounded-xl p-1.5 gap-1 flex-wrap justify-center">
+            <button
+              onClick={() => setActiveTab("mapa")}
+              className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 flex items-center gap-2 ${
+                activeTab === "mapa"
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <MapIcon className="w-4 h-4" />
+              Mapa interactivo
+            </button>
             <button
               onClick={() => setActiveTab("clases")}
               className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 ${
@@ -190,6 +201,9 @@ const HorariosSection = () => {
             </button>
           </div>
         </div>
+
+        {/* ── TAB: Mapa interactivo ── */}
+        {activeTab === "mapa" && <SedesMapa />}
 
         {/* ── TAB: Todas las clases ── */}
         {activeTab === "clases" && (
