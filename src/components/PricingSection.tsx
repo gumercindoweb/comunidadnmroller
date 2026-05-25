@@ -113,7 +113,7 @@ const PricingSection = () => {
   const plans = period === "mensual" ? monthlyPlans : quarterlyPlans;
 
   return (
-    <section id="planes" className="py-24 bg-foreground text-primary-foreground" ref={ref}>
+    <section id="planes" className="py-24 bg-background text-foreground" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-primary font-bold text-sm tracking-widest uppercase mb-2">Planes</p>
@@ -153,7 +153,7 @@ const PricingSection = () => {
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               {plan.badge && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-foreground text-foreground font-bold px-4 py-1">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background font-bold px-4 py-1">
                   <Star className="w-3 h-3 mr-1" /> {plan.badge}
                 </Badge>
               )}
@@ -201,13 +201,13 @@ const PricingSection = () => {
                 </div>
 
                 {/* Pago en Efectivo - destacado */}
-                <div className="rounded-xl bg-primary-foreground p-4 shadow-lg">
+                <div className="rounded-xl bg-foreground p-4 shadow-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Banknote className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">Pago en Efectivo</span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-black text-foreground">{plan.efectivoPrice}</span>
+                    <span className="text-2xl font-black text-background">{plan.efectivoPrice}</span>
                     {plan.perClassEfectivo && (
                       <span className="text-xs text-muted-foreground">
                         ({plan.perClassEfectivo})
