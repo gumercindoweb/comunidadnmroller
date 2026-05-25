@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, ArrowLeft, Loader2 } from "lucide-react";
+import { Check, ArrowLeft, Loader2, Sparkles, Zap, Star, Mail, Rocket } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import mockup from "@/assets/newsletter-mockup.png";
 
@@ -149,16 +149,82 @@ const NewsletterDesdeCero = () => {
             </div>
 
             {/* Right - mockup */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" aria-hidden />
-              <img
-                src={mockup}
-                alt="Mockup del Mapa de Aprendizaje NM Roller en un celular"
-                width={1024}
-                height={1024}
-                className="relative w-full h-auto max-w-lg mx-auto"
+            <div className="relative flex items-center justify-center min-h-[420px] sm:min-h-[520px] lg:min-h-[640px]">
+              {/* Animated glow blobs */}
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[520px] lg:w-[620px] aspect-square bg-primary/30 blur-3xl rounded-full animate-pulse-glow"
+                aria-hidden
               />
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[380px] lg:w-[460px] aspect-square bg-accent/20 blur-3xl rounded-full animate-pulse-glow"
+                style={{ animationDelay: "1.5s" }}
+                aria-hidden
+              />
+
+              {/* Rotating dashed ring */}
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[560px] lg:h-[560px] rounded-full border-2 border-dashed border-primary/40 animate-spin-slow"
+                aria-hidden
+              />
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] sm:w-[360px] sm:h-[360px] lg:w-[460px] lg:h-[460px] rounded-full border border-accent/30 animate-spin-slow"
+                style={{ animationDirection: "reverse", animationDuration: "30s" }}
+                aria-hidden
+              />
+
+              {/* Floating mockup */}
+              <div className="relative animate-float drop-shadow-[0_25px_60px_hsl(var(--primary)/0.45)]">
+                <img
+                  src={mockup}
+                  alt="Mockup del Mapa de Aprendizaje NM Roller en un celular"
+                  width={1024}
+                  height={1024}
+                  className="relative w-[260px] sm:w-[340px] lg:w-[440px] h-auto mx-auto"
+                />
+              </div>
+
+              {/* Floating decorative badges */}
+              <div className="absolute top-6 left-2 sm:left-6 lg:left-0 animate-float-slow">
+                <div className="bg-primary text-primary-foreground px-3 py-2 sm:px-4 sm:py-3 flex items-center gap-2 shadow-red-glow -rotate-6">
+                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={3} />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">+1 Tip / semana</span>
+                </div>
+              </div>
+
+              <div
+                className="absolute bottom-10 right-0 sm:right-2 lg:right-0 animate-float-slow"
+                style={{ animationDelay: "1.2s" }}
+              >
+                <div className="bg-accent text-accent-foreground px-3 py-2 sm:px-4 sm:py-3 flex items-center gap-2 shadow-md rotate-6">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={3} />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">Inbox feliz</span>
+                </div>
+              </div>
+
+              <div
+                className="absolute top-1/3 right-4 sm:right-8 lg:right-6 animate-float"
+                style={{ animationDelay: "0.6s" }}
+              >
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-foreground text-primary border-2 border-primary flex items-center justify-center rotate-12">
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+                </div>
+              </div>
+
+              <div
+                className="absolute bottom-6 left-4 sm:left-10 animate-float"
+                style={{ animationDelay: "2s" }}
+              >
+                <Sparkles className="w-7 h-7 sm:w-9 sm:h-9 text-accent" strokeWidth={2.5} />
+              </div>
+
+              <div
+                className="absolute top-1/2 left-0 sm:left-4 animate-float-slow"
+                style={{ animationDelay: "0.3s" }}
+              >
+                <Rocket className="w-6 h-6 sm:w-8 sm:h-8 text-primary -rotate-45" strokeWidth={2.5} />
+              </div>
             </div>
+
           </div>
         </section>
 
