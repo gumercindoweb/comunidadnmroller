@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, ArrowLeft, Loader2 } from "lucide-react";
+import { Check, ArrowLeft, Loader2, Sparkles, Zap, Star, Mail, Rocket } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import mockup from "@/assets/newsletter-mockup.png";
 
