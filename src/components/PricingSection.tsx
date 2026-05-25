@@ -201,13 +201,13 @@ const PricingSection = () => {
                 </div>
 
                 {/* Pago en Efectivo - destacado */}
-                <div className="rounded-xl bg-primary-foreground p-4 shadow-lg">
+                <div className="rounded-xl bg-foreground p-4 shadow-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Banknote className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">Pago en Efectivo</span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-black text-foreground">{plan.efectivoPrice}</span>
+                    <span className="text-2xl font-black text-background">{plan.efectivoPrice}</span>
                     {plan.perClassEfectivo && (
                       <span className="text-xs text-muted-foreground">
                         ({plan.perClassEfectivo})
