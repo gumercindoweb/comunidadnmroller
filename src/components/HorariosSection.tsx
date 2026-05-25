@@ -148,7 +148,7 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
 
 const HorariosSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [activeTab, setActiveTab] = useState<TabType>("clases");
+  const [activeTab, setActiveTab] = useState<TabType>("mapa");
 
   return (
     <section id="horarios" className="py-24 bg-background" ref={ref}>
