@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { Menu, X } from "lucide-react";
@@ -9,6 +10,8 @@ const navLinks = [
   { label: "Horarios", id: "horarios" },
   { label: "Planes", id: "planes" },
 ];
+
+const NEWSLETTER_PATH = "/newsletter-desde-cero";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -57,6 +60,12 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+          <Link
+            to={NEWSLETTER_PATH}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          >
+            Newsletter
+          </Link>
         </div>
 
         {/* CTA button - desktop */}
@@ -99,6 +108,13 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <Link
+              to={NEWSLETTER_PATH}
+              onClick={() => setMobileOpen(false)}
+              className="text-muted-foreground hover:text-foreground font-medium text-sm py-2.5 w-full text-left transition-colors"
+            >
+              Newsletter
+            </Link>
             <Button
               onClick={() => scrollTo("planes")}
               className="bg-foreground hover:bg-foreground/90 text-background font-semibold px-6 py-5 rounded-full shadow-lg mt-2 w-full"
