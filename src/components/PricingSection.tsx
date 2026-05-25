@@ -153,7 +153,7 @@ const PricingSection = () => {
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               {plan.badge && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-foreground text-foreground font-bold px-4 py-1">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background font-bold px-4 py-1">
                   <Star className="w-3 h-3 mr-1" /> {plan.badge}
                 </Badge>
               )}
