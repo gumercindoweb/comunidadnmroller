@@ -149,7 +149,7 @@ const NewsletterDesdeCero = () => {
             </div>
 
             {/* Right - mockup */}
-            <div className="relative flex items-center justify-center min-h-[420px] sm:min-h-[520px] lg:min-h-[640px] order-first lg:order-last">
+            <div className="relative flex items-center justify-center min-h-[420px] sm:min-h-[520px] lg:min-h-[640px]">
               {/* Animated glow blobs */}
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[520px] lg:w-[620px] aspect-square bg-primary/30 blur-3xl rounded-full animate-pulse-glow"
