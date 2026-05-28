@@ -269,9 +269,8 @@ const ClasesMasAlquiler = () => {
               </p>
             </div>
 
-            <div className="max-w-5xl mx-auto">
-              <AlquilerSedesGrid />
-            </div>
+            <AlquilerSedesGrid />
+
 
             <div className="text-center mt-10">
               <Link
