@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Package } from "lucide-react";
 
+const handleClick = () => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+};
+
+
 const BannerAlquilerHome = () => {
   return (
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
         <Link
           to="/clases-de-rollers-mas-alquiler"
+          onClick={handleClick}
           className="group block bg-primary text-primary-foreground rounded-2xl p-6 md:p-10 shadow-lg hover:shadow-xl transition-all overflow-hidden relative"
         >
+
           <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-primary-foreground/10 blur-2xl" />
           <div className="absolute -left-10 -bottom-10 w-48 h-48 rounded-full bg-primary-foreground/5 blur-2xl" />
           <div className="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
