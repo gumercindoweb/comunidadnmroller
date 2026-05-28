@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ValueProposition from "@/components/ValueProposition";
@@ -9,7 +11,20 @@ import Testimonials from "@/components/Testimonials";
 import AppSection from "@/components/AppSection";
 import Footer from "@/components/Footer";
 import BannerAlquilerHome from "@/components/alquiler/BannerAlquilerHome";
+
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      // Wait a tick for sections to render
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }, 80);
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -28,3 +43,4 @@ const Index = () => {
 };
 
 export default Index;
+

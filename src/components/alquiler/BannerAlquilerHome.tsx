@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Package } from "lucide-react";
 
+const handleClick = () => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+};
+
+
 const BannerAlquilerHome = () => {
   return (
     <section className="py-12 bg-background">
