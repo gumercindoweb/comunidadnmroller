@@ -16,6 +16,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
+import PricingAlquilerSection from "@/components/alquiler/PricingAlquilerSection";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -284,64 +285,8 @@ const ClasesMasAlquiler = () => {
           </div>
         </section>
 
-        {/* PRECIO / TARIFA */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <p className="text-primary font-bold text-sm tracking-[0.18em] uppercase mb-2">
-                Tarifa
-              </p>
-              <h2 className="text-3xl md:text-5xl font-black italic tracking-tight text-foreground">
-                Precio del alquiler
-              </h2>
-            </div>
-
-            <div className="max-w-2xl mx-auto bg-card border-2 border-primary/15 rounded-2xl p-8 md:p-10 text-center shadow-md">
-              <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-4">
-                <CalendarCheck className="w-4 h-4 text-primary" />
-                <span className="text-primary font-bold text-xs uppercase tracking-[0.15em]">
-                  Adicional al plan
-                </span>
-              </div>
-              <p className="text-3xl md:text-4xl font-black italic text-foreground mb-3">
-                Tarifa estándar por clase
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                El alquiler tiene un costo adicional al valor de tu plan o clase
-                única. Te confirmamos el monto exacto al reservar según tu sede y
-                modalidad.
-              </p>
-              <ul className="text-left max-w-md mx-auto space-y-2 mb-8">
-                {[
-                  "Se abona al momento de la clase",
-                  "Aplica a cualquier plan (clase única, mensual o trimestral)",
-                  "Cubre rollers + set completo de protecciones",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-sm text-foreground">
-                    <Check className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button
-                  onClick={() => setCalendlyOpen(true)}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.15em] text-sm px-6 py-5 rounded-full"
-                >
-                  Consultar y reservar
-                </Button>
-                <Link to="/#planes">
-                  <Button
-                    variant="outline"
-                    className="w-full sm:w-auto border-border text-foreground hover:bg-muted font-medium text-sm px-6 py-5 rounded-full"
-                  >
-                    Ver planes de clases
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* PRECIOS */}
+        <PricingAlquilerSection onReserve={() => setCalendlyOpen(true)} />
 
         {/* FAQ */}
         <section className="py-20 bg-muted">
