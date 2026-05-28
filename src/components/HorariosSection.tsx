@@ -257,7 +257,6 @@ const HorariosSection = () => {
             </div>
           </div>
         )}
-        )}
         {/* Disclaimer */}
         <p className="text-center text-muted-foreground text-xs mt-8">
           * Los horarios pueden cambiar sin previo aviso. Consultá nuestras redes para actualizaciones.
