@@ -168,7 +168,6 @@ const SedesMapa = ({
         <ul>
           {sedesList.map((sede) => (
 
-          {sedes.map((sede) => (
             <li key={sede.id}>
               <button
                 onMouseEnter={() => setHoveredId(sede.id)}
