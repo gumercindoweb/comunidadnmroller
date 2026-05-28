@@ -67,7 +67,13 @@ const loadGoogleMaps = () => {
   return mapsLoadingPromise;
 };
 
-const SedesMapa = () => {
+const SedesMapa = ({
+  sedesList = sedes,
+  sidebarTitle = "Encontrá la tuya",
+}: {
+  sedesList?: Sede[];
+  sidebarTitle?: string;
+} = {}) => {
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
@@ -76,6 +82,7 @@ const SedesMapa = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedSede, setSelectedSede] = useState<Sede | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+
 
   // load script once
   useEffect(() => {
@@ -90,7 +97,7 @@ const SedesMapa = () => {
 
     const google = window.google;
     const bounds = new google.maps.LatLngBounds();
-    sedes.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
+    sedesList.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
 
     mapRef.current = new google.maps.Map(mapDivRef.current, {
       center: bounds.getCenter(),
@@ -103,7 +110,8 @@ const SedesMapa = () => {
     });
     mapRef.current.fitBounds(bounds, 60);
 
-    sedes.forEach((sede) => {
+    sedesList.forEach((sede) => {
+
       const marker = new google.maps.Marker({
         position: { lat: sede.lat, lng: sede.lng },
         map: mapRef.current,
@@ -145,8 +153,7 @@ const SedesMapa = () => {
       mapRef.current.setZoom(14);
     }
   };
-
-  const hoveredSede = hoveredId ? sedes.find((s) => s.id === hoveredId) ?? null : null;
+  const hoveredSede = hoveredId ? sedesList.find((s) => s.id === hoveredId) ?? null : null;
 
   return (
     <div className="grid lg:grid-cols-[280px_1fr] gap-4 max-w-7xl mx-auto">
@@ -154,12 +161,13 @@ const SedesMapa = () => {
       <aside className="bg-card border border-border max-h-[560px] overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
           <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-            {sedes.length} sedes
+            {sedesList.length} sedes
           </p>
-          <h3 className="text-foreground font-black italic text-lg leading-tight">Encontrá la tuya</h3>
+          <h3 className="text-foreground font-black italic text-lg leading-tight">{sidebarTitle}</h3>
         </div>
         <ul>
-          {sedes.map((sede) => (
+          {sedesList.map((sede) => (
+
             <li key={sede.id}>
               <button
                 onMouseEnter={() => setHoveredId(sede.id)}
