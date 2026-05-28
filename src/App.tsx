@@ -19,9 +19,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/newsletter-desde-cero" element={<NewsletterDesdeCero />} />
-          <Route path="/newsletter-desde-cero" element={<NewsletterDesdeCero />} />
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
