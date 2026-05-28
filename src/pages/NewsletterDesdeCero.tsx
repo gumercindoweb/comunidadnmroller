@@ -39,7 +39,7 @@ const NewsletterDesdeCero = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("subscribe-newsletter", {
-        body: parsed.data,
+        body: { ...parsed.data, website },
       });
       if (error) throw error;
       if (data?.success) {
