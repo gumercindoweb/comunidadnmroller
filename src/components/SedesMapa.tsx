@@ -153,8 +153,7 @@ const SedesMapa = ({
       mapRef.current.setZoom(14);
     }
   };
-
-  const hoveredSede = hoveredId ? sedes.find((s) => s.id === hoveredId) ?? null : null;
+  const hoveredSede = hoveredId ? sedesList.find((s) => s.id === hoveredId) ?? null : null;
 
   return (
     <div className="grid lg:grid-cols-[280px_1fr] gap-4 max-w-7xl mx-auto">
@@ -162,11 +161,13 @@ const SedesMapa = ({
       <aside className="bg-card border border-border max-h-[560px] overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
           <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-            {sedes.length} sedes
+            {sedesList.length} sedes
           </p>
-          <h3 className="text-foreground font-black italic text-lg leading-tight">Encontrá la tuya</h3>
+          <h3 className="text-foreground font-black italic text-lg leading-tight">{sidebarTitle}</h3>
         </div>
         <ul>
+          {sedesList.map((sede) => (
+
           {sedes.map((sede) => (
             <li key={sede.id}>
               <button
