@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Clock, MapPin, Wrench, Package } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Clock, Wrench, Package, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-
+import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
 // ── Tipos ──
 interface ClaseEnriquecida {
   sede: string;
