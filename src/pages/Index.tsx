@@ -8,7 +8,7 @@ import HorariosSection from "@/components/HorariosSection";
 import Testimonials from "@/components/Testimonials";
 import AppSection from "@/components/AppSection";
 import Footer from "@/components/Footer";
-
+import BannerAlquilerHome from "@/components/alquiler/BannerAlquilerHome";
 const Index = () => {
   return (
     <div className="min-h-screen">
@@ -16,8 +16,9 @@ const Index = () => {
       <HeroSection />
       <ValueProposition />
       <ForWhom />
+      <ForWhom />
+      <BannerAlquilerHome />
       <PricingSection />
-      <SedesSection />
       <HorariosSection />
       <AppSection />
       <Testimonials />
