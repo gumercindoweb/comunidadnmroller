@@ -31,7 +31,7 @@ const Index = () => {
       <HeroSection />
       <ValueProposition />
       <ForWhom />
-      <ForWhom />
+      <SedesSection />
       <BannerAlquilerHome />
       <PricingSection />
       <HorariosSection />
