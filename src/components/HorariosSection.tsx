@@ -97,7 +97,6 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
 };
 
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-];
 
 type TabType = "clases" | "alquiler";
 
