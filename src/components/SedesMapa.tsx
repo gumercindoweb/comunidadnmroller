@@ -59,17 +59,22 @@ const loadGoogleMaps = () => {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${BROWSER_KEY}&loading=async&callback=__nmRollersInitMap${
       TRACKING_ID ? `&channel=${TRACKING_ID}` : ""
     }`;
-    script.async = true;
-    script.defer = true;
-    script.onerror = () => reject(new Error("No se pudo cargar Google Maps"));
-    document.head.appendChild(script);
-  });
-  return mapsLoadingPromise;
-};
-
-const SedesMapa = () => {
+const SedesMapa = ({
+  sedesList = sedes,
+  sidebarTitle = "Encontrá la tuya",
+}: {
+  sedesList?: Sede[];
+  sidebarTitle?: string;
+} = {}) => {
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
+  const markersRef = useRef<Map<string, any>>(new Map());
+  const [ready, setReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [selectedSede, setSelectedSede] = useState<Sede | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const markersRef = useRef<Map<string, any>>(new Map());
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
