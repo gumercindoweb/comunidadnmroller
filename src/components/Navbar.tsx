@@ -73,6 +73,8 @@ const Navbar = () => {
           >
             Newsletter
           </Link>
+        </div>
+
 
         {/* CTA button - desktop */}
         <div className="hidden md:block">
