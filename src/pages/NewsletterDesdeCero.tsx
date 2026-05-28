@@ -106,6 +106,17 @@ const NewsletterDesdeCero = () => {
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-3 max-w-xl">
+                {/* Honeypot — hidden from users, bots fill it */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                />
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Input
                     type="text"
