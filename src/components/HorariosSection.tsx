@@ -97,21 +97,6 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
 };
 
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-
-// ── Sedes con Alquiler + Clases ──
-interface AlquilerClaseSede {
-  sede: string;
-  horarios: string;
-}
-
-const alquilerClaseSedes: AlquilerClaseSede[] = [
-  { sede: "Rosedal Palermo", horarios: "Mar, Mié y Dom 9hs · Jue 19hs" },
-  { sede: "Villa Real", horarios: "Mié 18hs · Sáb 10:30hs" },
-  { sede: "Puerto Madero", horarios: "Mar 18hs" },
-  { sede: "Colegiales", horarios: "Mié 18hs · Jue 19hs" },
-  { sede: "Plaza La Pampa", horarios: "Sáb y Dom 8hs" },
-  { sede: "Vicente López", horarios: "Sáb 9hs" },
-  { sede: "Devoto", horarios: "Mar y Vie 19hs" },
 ];
 
 type TabType = "clases" | "alquiler";
@@ -256,41 +241,23 @@ const HorariosSection = () => {
             </div>
 
             {/* Alquiler cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {alquilerClaseSedes.map((a, i) => (
-                <div
-                  key={i}
-                  className={`rounded-xl p-5 bg-card border-2 border-primary/10 shadow-sm hover:shadow-md hover:border-primary/25 transition-all ${isVisible ? "animate-fade-up" : "opacity-0"}`}
-                  style={{ animationDelay: `${i * 0.05}s` }}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="bg-primary/10 rounded-full p-2.5 shrink-0">
-                      <MapPin className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-bold text-foreground text-sm">{a.sede}</p>
-                        <span className="bg-primary/10 text-primary text-[9px] font-bold uppercase px-2 py-0.5 rounded-full whitespace-nowrap">
-                          Alquiler
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                        <p className="text-muted-foreground text-xs">{a.horarios}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <AlquilerSedesGrid />
 
-            {/* Nota importante */}
-            <div className="mt-8 bg-muted rounded-xl p-4 max-w-2xl mx-auto text-center">
-              <p className="text-muted-foreground text-sm">
+            {/* Nota + CTA */}
+            <div className="mt-8 bg-muted rounded-xl p-5 max-w-2xl mx-auto text-center">
+              <p className="text-muted-foreground text-sm mb-4">
                 <strong className="text-foreground">Importante:</strong> Reservá con al menos 24hs de antelación. El alquiler tiene una tarifa estándar adicional al plan.
               </p>
+              <Link
+                to="/clases-de-rollers-mas-alquiler"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold uppercase tracking-[0.15em] text-xs px-5 py-3 rounded-full hover:gap-3 transition-all"
+              >
+                Ver página completa de Clases + Alquiler
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
+        )}
         )}
 
         {/* Disclaimer */}
