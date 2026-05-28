@@ -97,7 +97,7 @@ const SedesMapa = ({
 
     const google = window.google;
     const bounds = new google.maps.LatLngBounds();
-    sedes.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
+    sedesList.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
 
     mapRef.current = new google.maps.Map(mapDivRef.current, {
       center: bounds.getCenter(),
@@ -110,7 +110,8 @@ const SedesMapa = ({
     });
     mapRef.current.fitBounds(bounds, 60);
 
-    sedes.forEach((sede) => {
+    sedesList.forEach((sede) => {
+
       const marker = new google.maps.Marker({
         position: { lat: sede.lat, lng: sede.lng },
         map: mapRef.current,
