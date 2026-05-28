@@ -12,6 +12,7 @@ const navLinks = [
 ];
 
 const NEWSLETTER_PATH = "/newsletter-desde-cero";
+const ALQUILER_PATH = "/clases-de-rollers-mas-alquiler";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -61,12 +62,19 @@ const Navbar = () => {
             </button>
           ))}
           <Link
+            to={ALQUILER_PATH}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          >
+            Clases + Alquiler
+          </Link>
+          <Link
             to={NEWSLETTER_PATH}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Newsletter
           </Link>
         </div>
+
 
         {/* CTA button - desktop */}
         <div className="hidden md:block">
@@ -108,6 +116,13 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <Link
+              to={ALQUILER_PATH}
+              onClick={() => setMobileOpen(false)}
+              className="text-muted-foreground hover:text-foreground font-medium text-sm py-2.5 w-full text-left transition-colors"
+            >
+              Clases + Alquiler
+            </Link>
             <Link
               to={NEWSLETTER_PATH}
               onClick={() => setMobileOpen(false)}
