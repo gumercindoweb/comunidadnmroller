@@ -25,9 +25,9 @@ const benefits = [
 const NewsletterDesdeCero = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
