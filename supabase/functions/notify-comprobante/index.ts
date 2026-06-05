@@ -26,13 +26,17 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
-    const { nombre, email, telefono, plan, file_path } = parsed.data;
+    const { nombre, email, telefono, plan, file_path, origen } = parsed.data;
 
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
     const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const GR_API_KEY = Deno.env.get("GETRESPONSE_API_KEY");
-    const GR_CAMPAIGN_ID = Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES");
-    const MAKE_URL = Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_URL");
+    const GR_CAMPAIGN_ID = origen === "clases-alquiler"
+      ? Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES_ALQUILER")
+      : Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES");
+    const MAKE_URL = origen === "clases-alquiler"
+      ? Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_ALQUILER_URL")
+      : Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_URL");
 
     const admin = createClient(SUPABASE_URL, SERVICE_ROLE);
 
