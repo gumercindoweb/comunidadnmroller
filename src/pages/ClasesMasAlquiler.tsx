@@ -332,7 +332,9 @@ const ClasesMasAlquiler = () => {
             </p>
             <Button
               size="lg"
-              onClick={() => setCalendlyOpen(true)}
+              onClick={() =>
+                document.getElementById("planes-alquiler")?.scrollIntoView({ behavior: "smooth" })
+              }
               className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-bold uppercase tracking-[0.15em] text-sm px-10 py-6 rounded-full shadow-lg group"
             >
               Reservar ahora
