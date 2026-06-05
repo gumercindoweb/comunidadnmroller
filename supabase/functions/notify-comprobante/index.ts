@@ -99,6 +99,7 @@ Deno.serve(async (req) => {
               email,
               telefono,
               plan: plan ?? null,
+              origen,
               comprobante_url,
               comprobante_path: file_path,
               created_at: new Date().toISOString(),
