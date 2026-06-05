@@ -15,6 +15,7 @@ const beneficios = [
 ];
 
 const RegistroConfirmadoNewsletter = () => {
+  const [videoOpen, setVideoOpen] = useState(false);
   return (
     <>
       <Helmet>
