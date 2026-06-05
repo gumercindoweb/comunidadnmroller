@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
@@ -23,6 +23,7 @@ const benefits = [
 ];
 
 const NewsletterDesdeCero = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
@@ -51,6 +52,7 @@ const NewsletterDesdeCero = () => {
         );
         setName("");
         setEmail("");
+        navigate("/registro-confirmado-newsletter");
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }
