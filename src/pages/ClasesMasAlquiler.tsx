@@ -348,14 +348,14 @@ const ClasesMasAlquiler = () => {
         {/* Calendly modal */}
         <Dialog open={calendlyOpen} onOpenChange={setCalendlyOpen}>
           <DialogContent className="sm:max-w-[700px] max-h-[95vh] p-0 overflow-hidden border-0 bg-background rounded-2xl gap-0">
-            <DialogTitle className="sr-only">Reservar clase con alquiler</DialogTitle>
+            <DialogTitle className="sr-only">Abonar plan en oficina de Palermo</DialogTitle>
             <div className="flex flex-col items-center pt-6 pb-4 px-6 text-center">
               <img src={logoNM} alt="NM Roller" className="h-16 mb-3" />
               <h2 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tight text-primary mb-2">
-                Reservá tu clase con alquiler
+                Abonás en nuestra oficina en Palermo
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                Completá todos los datos. ⚠️ Es <strong className="text-foreground">importante</strong> que finalices la reserva hasta el <strong className="text-foreground">último paso.</strong>
+                Este turno es solo para abonar tu plan en efectivo en nuestro showroom de Palermo — <strong className="text-foreground">no es la clase de rollers</strong>. Reservá completando todos los datos. ⚠️ Es <strong className="text-foreground">importante</strong> que finalices la reserva hasta el <strong className="text-foreground">último paso</strong>.
               </p>
             </div>
             <iframe
