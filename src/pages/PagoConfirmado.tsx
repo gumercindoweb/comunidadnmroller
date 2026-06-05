@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   ArrowLeft,
-  CheckCircle2,
-  CreditCard,
+  Smartphone,
+  Mail,
+  Users,
   Upload,
-  Sparkles,
   FileCheck,
   AlertCircle,
+  Apple,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -129,8 +130,8 @@ const PagoConfirmado = () => {
         {/* Hero rojo */}
         <section className="relative bg-primary text-primary-foreground pt-10 pb-32 px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-primary-foreground/15 backdrop-blur px-4 py-1.5 rounded-full mb-6 text-xs font-bold uppercase tracking-[0.18em]">
-              <CheckCircle2 className="w-4 h-4" /> Pago en proceso
+            <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] border-2 border-[#F5B800] px-5 py-2 mb-6 text-xs md:text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(245,184,0,0.45)]">
+              <AlertCircle className="w-4 h-4 animate-pulse" strokeWidth={3} /> Pago en proceso
             </div>
             <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-6xl font-black mb-6">
               ¡Gracias por sumarte!
@@ -148,8 +149,9 @@ const PagoConfirmado = () => {
               <strong>adjuntá el comprobante</strong> de Mercado Pago. Con eso te damos
               de alta y te enviamos las instrucciones para reservar tu primera clase.
             </p>
-            <p className="font-bold text-base md:text-lg">Te esperamos. Desde cero. Con vos.</p>
+            <p className="font-bold text-base md:text-lg">Aprendé, rolleá y disfrutá.</p>
           </div>
+
 
           <svg
             className="absolute bottom-0 left-0 w-full h-16 md:h-24 text-background"
@@ -170,22 +172,66 @@ const PagoConfirmado = () => {
             <ol className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  Icon: CreditCard,
-                  title: "Pagaste por Mercado Pago",
-                  text: "Acabás de completar el pago. Guardá la captura o el PDF del comprobante.",
-                  state: "done",
+                  Icon: Smartphone,
+                  title: "Registrate en la app",
+                  state: "active" as const,
+                  body: (
+                    <>
+                      <p className="text-sm text-foreground/70 leading-relaxed mb-4">
+                        Desde <strong>Turnos Web</strong> vas a gestionar tus clases y
+                        elegir horarios. Elegí tu sistema operativo para descargar 👇
+                      </p>
+                      <div className="flex items-center gap-3">
+                        <a
+                          href="https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Descargar Turnos Web en App Store"
+                          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-foreground text-background transition-all hover:bg-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)]"
+                        >
+                          <Apple className="w-6 h-6" fill="currentColor" strokeWidth={0} />
+                        </a>
+                        <a
+                          href="https://play.google.com/store/apps/details?id=com.turnosweb.lite"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Descargar Turnos Web en Google Play"
+                          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-foreground text-background transition-all hover:bg-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)]"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="w-6 h-6"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.2-9.7L3.6 2.3zm10.7 9.1l2.7 2.8-11 6.2c-.4.2-.8.2-1.2 0l9.5-9zm5.4-2.2l-3.1 1.8-3 3 3 3 3.1 1.8c1.1.6 1.1 2.4 0 3l-1.2-.7 1.2.7c1.1-.6 1.1-2.4 0-3zM14.3 11.4L4.8 2.4c.4-.2.8-.2 1.2 0l11 6.2-2.7 2.8z" />
+                          </svg>
+                        </a>
+                      </div>
+                    </>
+                  ),
                 },
                 {
-                  Icon: Upload,
-                  title: "Adjuntá el comprobante",
-                  text: "Completá el formulario de abajo con tus datos y el archivo del comprobante.",
-                  state: "active",
+                  Icon: Mail,
+                  title: "Cargá tu comprobante",
+                  state: "active" as const,
+                  body: (
+                    <p className="text-sm text-foreground/70 leading-relaxed">
+                      💡 Una vez validado, cargaremos tu plan en sistema y{" "}
+                      <strong>recibirás una confirmación vía WhatsApp</strong>.
+                    </p>
+                  ),
                 },
                 {
-                  Icon: Sparkles,
-                  title: "Te damos de alta",
-                  text: "En menos de 24hs hábiles te escribimos con tu acceso y cómo reservar tu primera clase.",
-                  state: "next",
+                  Icon: Users,
+                  title: "Revisá tu correo",
+                  state: "next" as const,
+                  body: (
+                    <p className="text-sm text-foreground/70 leading-relaxed">
+                      Por allí te <strong>compartimos detalles de los pasos siguientes</strong>{" "}
+                      que tenés que tomar en cuenta para una mejor experiencia.
+                    </p>
+                  ),
                 },
               ].map((s, i) => (
                 <li
@@ -193,19 +239,11 @@ const PagoConfirmado = () => {
                   className={`relative border-2 p-6 transition-all ${
                     s.state === "active"
                       ? "border-primary bg-primary/5 shadow-[0_0_24px_hsl(var(--primary)/0.15)]"
-                      : s.state === "done"
-                        ? "border-foreground/20 bg-muted"
-                        : "border-foreground/10 bg-background"
+                      : "border-foreground/10 bg-background"
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className={`inline-flex items-center justify-center w-10 h-10 font-black text-lg ${
-                        s.state === "done"
-                          ? "bg-foreground/20 text-foreground"
-                          : "bg-primary text-primary-foreground"
-                      }`}
-                    >
+                    <span className="inline-flex items-center justify-center w-10 h-10 font-black text-lg bg-primary text-primary-foreground">
                       {i + 1}
                     </span>
                     <s.Icon
@@ -215,12 +253,13 @@ const PagoConfirmado = () => {
                       strokeWidth={2.5}
                     />
                   </div>
-                  <h3 className="font-display italic uppercase font-black text-lg mb-2 leading-tight">
+                  <h3 className="font-display italic uppercase font-black text-lg mb-2 leading-tight underline decoration-primary decoration-2 underline-offset-4">
                     {s.title}
                   </h3>
-                  <p className="text-sm text-foreground/70 leading-relaxed">{s.text}</p>
+                  {s.body}
                 </li>
               ))}
+
             </ol>
           </div>
         </section>
