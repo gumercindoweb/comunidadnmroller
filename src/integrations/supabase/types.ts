@@ -14,7 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      comprobantes_pago: {
+        Row: {
+          created_at: string
+          email: string
+          file_path: string
+          id: string
+          nombre: string
+          plan: string | null
+          telefono: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          file_path: string
+          id?: string
+          nombre: string
+          plan?: string | null
+          telefono: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          file_path?: string
+          id?: string
+          nombre?: string
+          plan?: string | null
+          telefono?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
