@@ -308,7 +308,7 @@ const PagoConfirmado = () => {
                     <Mail className="w-4 h-4" /> Abrir mi correo
                   </a>
                   <a
-                    href="https://wa.me/5491123456789?text=%5BLP%7CNM%7CCC%5D%20Hola!%20Mi%20nombre%20es%20%5Bindique%5D.%20Realic%C3%A9%20un%20pago.%20Adjunto%20comprobante%20y%20quiero%20que%20me%20acrediten%20el%20plan%20que%20compr%C3%A9."
+                    href="https://wa.me/5491165920600?text=%5BLP%7CNM%7CCC%5D%20Hola!%20Mi%20nombre%20es%20%5Bindique%5D.%20Realic%C3%A9%20un%20pago.%20Adjunto%20comprobante%20y%20quiero%20que%20me%20acrediten%20el%20plan%20que%20compr%C3%A9."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 bg-background border-2 border-[#25D366] text-[#25D366] font-bold uppercase tracking-[0.18em] text-xs transition-all hover:bg-[#25D366] hover:text-white"
