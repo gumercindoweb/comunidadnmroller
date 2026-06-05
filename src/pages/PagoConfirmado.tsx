@@ -35,6 +35,10 @@ const PagoConfirmado = () => {
   const planSlug = searchParams.get("plan") ?? "";
   const planLabel = PLAN_LABELS[planSlug] ?? "";
   const origen = (searchParams.get("origen") ?? "nm").trim() || "nm";
+  const isAlquiler = origen === "clases-alquiler";
+  const displayPlanLabel = planLabel
+    ? (isAlquiler ? `${planLabel} + Alquiler` : planLabel)
+    : "";
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
