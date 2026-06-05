@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NewsletterDesdeCero from "./pages/NewsletterDesdeCero.tsx";
 import RegistroConfirmadoNewsletter from "./pages/RegistroConfirmadoNewsletter.tsx";
+import PagoConfirmado from "./pages/PagoConfirmado.tsx";
 import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/newsletter-desde-cero" element={<NewsletterDesdeCero />} />
           <Route path="/registro-confirmado-newsletter" element={<RegistroConfirmadoNewsletter />} />
+          <Route path="/pago-confirmado" element={<PagoConfirmado />} />
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
