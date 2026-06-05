@@ -181,33 +181,37 @@ const PagoConfirmado = () => {
                         Desde <strong>Turnos Web</strong> vas a gestionar tus clases y
                         elegir horarios. Elegí tu sistema operativo para descargar 👇
                       </p>
-                      <div className="flex items-center gap-3">
-                        <a
-                          href="https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="Descargar Turnos Web en App Store"
-                          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-foreground text-background transition-all hover:bg-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)]"
-                        >
-                          <Apple className="w-6 h-6" fill="currentColor" strokeWidth={0} />
-                        </a>
+                      <div className="flex flex-wrap items-center gap-3">
                         <a
                           href="https://play.google.com/store/apps/details?id=com.turnosweb.lite"
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label="Descargar Turnos Web en Google Play"
-                          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-foreground text-background transition-all hover:bg-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)]"
+                          className="bg-foreground text-background rounded-full shadow-lg px-4 py-2 flex items-center gap-2 hover:opacity-90 transition-opacity"
                         >
-                          <svg
-                            viewBox="0 0 24 24"
-                            className="w-6 h-6"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.2-9.7L3.6 2.3zm10.7 9.1l2.7 2.8-11 6.2c-.4.2-.8.2-1.2 0l9.5-9zm5.4-2.2l-3.1 1.8-3 3 3 3 3.1 1.8c1.1.6 1.1 2.4 0 3l-1.2-.7 1.2.7c1.1-.6 1.1-2.4 0-3zM14.3 11.4L4.8 2.4c.4-.2.8-.2 1.2 0l11 6.2-2.7 2.8z" />
+                          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 3.458L16.8 9.79l-2.302 2.302L5.864 3.458z" />
                           </svg>
+                          <div className="text-left">
+                            <span className="text-[8px] uppercase block leading-none">Get it on</span>
+                            <span className="text-xs font-semibold leading-tight">Google Play</span>
+                          </div>
+                        </a>
+                        <a
+                          href="https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-foreground text-background rounded-full shadow-lg px-4 py-2 flex items-center gap-2 hover:opacity-90 transition-opacity"
+                        >
+                          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                          </svg>
+                          <div className="text-left">
+                            <span className="text-[8px] uppercase block leading-none">Download on the</span>
+                            <span className="text-xs font-semibold leading-tight">App Store</span>
+                          </div>
                         </a>
                       </div>
+
                     </>
                   ),
                 },
