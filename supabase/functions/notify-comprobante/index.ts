@@ -1,0 +1,128 @@
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
+import { createClient } from "npm:@supabase/supabase-js@2";
+import { z } from "npm:zod@3.23.8";
+
+const schema = z.object({
+  nombre: z.string().trim().min(1).max(120),
+  email: z.string().trim().email().max(255),
+  telefono: z.string().trim().min(3).max(40),
+  plan: z.string().trim().max(80).optional().nullable(),
+  file_path: z.string().trim().min(1).max(500),
+});
+
+const BUCKET = "comprobantes-pago";
+const SIGNED_URL_TTL = 60 * 60 * 24 * 7; // 7 días
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+
+  try {
+    const body = await req.json();
+    const parsed = schema.safeParse(body);
+    if (!parsed.success) {
+      return new Response(
+        JSON.stringify({ error: "invalid_input", details: parsed.error.flatten() }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+    const { nombre, email, telefono, plan, file_path } = parsed.data;
+
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+    const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const GR_API_KEY = Deno.env.get("GETRESPONSE_API_KEY");
+    const GR_CAMPAIGN_ID = Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES");
+    const MAKE_URL = Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_URL");
+
+    const admin = createClient(SUPABASE_URL, SERVICE_ROLE);
+
+    // 1) Signed URL del comprobante (7 días)
+    let comprobante_url: string | null = null;
+    let signedErr: string | null = null;
+    const { data: signed, error: signErr } = await admin
+      .storage
+      .from(BUCKET)
+      .createSignedUrl(file_path, SIGNED_URL_TTL);
+    if (signErr) {
+      signedErr = signErr.message;
+      console.error("signed url error", signErr);
+    } else {
+      comprobante_url = signed?.signedUrl ?? null;
+    }
+
+    // 2) GetResponse + Make en paralelo
+    const tasks: Promise<{ target: string; ok: boolean; status?: number; body?: unknown; error?: string }>[] = [];
+
+    // GetResponse
+    if (GR_API_KEY && GR_CAMPAIGN_ID) {
+      tasks.push((async () => {
+        try {
+          const res = await fetch("https://api.getresponse.com/v3/contacts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Auth-Token": `api-key ${GR_API_KEY}`,
+            },
+            body: JSON.stringify({
+              email,
+              name: nombre,
+              campaign: { campaignId: GR_CAMPAIGN_ID },
+              customFieldValues: [
+                ...(telefono ? [{ name: "telefono", value: [telefono] }] : []),
+                ...(plan ? [{ name: "plan", value: [plan] }] : []),
+              ],
+            }),
+          });
+          const text = await res.text();
+          return { target: "getresponse", ok: res.ok, status: res.status, body: text };
+        } catch (e) {
+          return { target: "getresponse", ok: false, error: (e as Error).message };
+        }
+      })());
+    } else {
+      tasks.push(Promise.resolve({ target: "getresponse", ok: false, error: "missing_secrets" }));
+    }
+
+    // Make webhook
+    if (MAKE_URL) {
+      tasks.push((async () => {
+        try {
+          const res = await fetch(MAKE_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              nombre,
+              email,
+              telefono,
+              plan: plan ?? null,
+              comprobante_url,
+              comprobante_path: file_path,
+              created_at: new Date().toISOString(),
+              source: "comunidadnmroller.lovable.app",
+            }),
+          });
+          const text = await res.text();
+          return { target: "make", ok: res.ok, status: res.status, body: text };
+        } catch (e) {
+          return { target: "make", ok: false, error: (e as Error).message };
+        }
+      })());
+    } else {
+      tasks.push(Promise.resolve({ target: "make", ok: false, error: "missing_secret" }));
+    }
+
+    const settled = await Promise.allSettled(tasks);
+    const results = settled.map((s) => s.status === "fulfilled" ? s.value : { target: "unknown", ok: false, error: String(s.reason) });
+    console.log("notify-comprobante results", JSON.stringify({ email, plan, signedErr, results }));
+
+    return new Response(
+      JSON.stringify({ ok: true, comprobante_url_generated: !!comprobante_url, results }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  } catch (e) {
+    console.error("notify-comprobante fatal", e);
+    return new Response(
+      JSON.stringify({ error: "internal_error", message: (e as Error).message }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  }
+});
