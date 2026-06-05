@@ -130,8 +130,8 @@ const PagoConfirmado = () => {
         {/* Hero rojo */}
         <section className="relative bg-primary text-primary-foreground pt-10 pb-32 px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-primary-foreground/15 backdrop-blur px-4 py-1.5 rounded-full mb-6 text-xs font-bold uppercase tracking-[0.18em]">
-              <CheckCircle2 className="w-4 h-4" /> Pago en proceso
+            <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] border-2 border-[#F5B800] px-5 py-2 mb-6 text-xs md:text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(245,184,0,0.45)]">
+              <AlertCircle className="w-4 h-4 animate-pulse" strokeWidth={3} /> Pago en proceso
             </div>
             <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-6xl font-black mb-6">
               ¡Gracias por sumarte!
@@ -149,8 +149,9 @@ const PagoConfirmado = () => {
               <strong>adjuntá el comprobante</strong> de Mercado Pago. Con eso te damos
               de alta y te enviamos las instrucciones para reservar tu primera clase.
             </p>
-            <p className="font-bold text-base md:text-lg">Te esperamos. Desde cero. Con vos.</p>
+            <p className="font-bold text-base md:text-lg">Aprendé, rolleá y disfrutá.</p>
           </div>
+
 
           <svg
             className="absolute bottom-0 left-0 w-full h-16 md:h-24 text-background"
