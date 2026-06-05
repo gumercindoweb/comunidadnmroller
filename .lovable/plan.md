@@ -1,41 +1,46 @@
-## Reutilizar /pago-confirmado para el flujo clases+alquiler
+## Objetivo
 
-Misma página, misma UX, mismos copys. Lo único que cambia es **a qué lista de GetResponse** se agrega el contacto y **a qué webhook de Make** se dispara el evento de comprobante. Se decide por un parámetro `origen` en la URL.
+En `/pago-confirmado`, diferenciar visualmente y en los registros los planes comprados desde **Clases + Alquiler** vs. los planes estándar, agregando el sufijo **" + Alquiler"** al nombre del plan.
 
-### 1. Frontend — `src/pages/PagoConfirmado.tsx`
+## Dónde se ve el cambio
 
-- Leer el query param `origen` desde `useSearchParams` (valores esperados: `nm` por defecto, `clases-alquiler` para el nuevo flujo).
-- Pasar `origen` al body del `fetch` que invoca la edge function `notify-comprobante`, junto con los campos actuales (`nombre`, `email`, `telefono`, `plan`, `file_path`).
-- Nada cambia visualmente: mismo subtítulo, mismo cuerpo, mismo bloque de WhatsApp, misma nota de "envío único".
+El texto del plan aparece en **dos lugares** de la página de confirmación (ambos se actualizan):
 
-### 2. CTAs de la página de clases+alquiler — `src/pages/ClasesMasAlquiler.tsx` y `src/components/alquiler/PricingAlquilerSection.tsx`
+1. **Hero superior** — "Plan elegido: **Clase Única**" → "Plan elegido: **Clase Única + Alquiler**"
+2. **Campo "PLAN"** del formulario de carga de comprobante — "Clase Única" → "Clase Única + Alquiler"
 
-- En los botones que llevan al usuario a subir el comprobante después de pagar online (o donde corresponda en ese flujo), enlazar a `/pago-confirmado?origen=clases-alquiler`.
-- No se modifican copys ni estilos de esos CTAs, solo el destino del link.
+Ejemplos por slug (cuando `origen=clases-alquiler`):
 
-### 3. Backend — `supabase/functions/notify-comprobante/index.ts`
+- `?plan=clase-unica` → **Clase Única + Alquiler**
+- `?plan=clase-2x1` → **Clase 2x1 + Alquiler**
+- `?plan=pack-4-clases` → **Pack 4 Clases + Alquiler**
 
-- Agregar `origen` (opcional, string) al schema de Zod.
-- Mapear `origen` → `{ campaignId, webhookUrl }`:
-  - `nm` (default): `GETRESPONSE_CAMPAIGN_ID_COMPROBANTES` + `MAKE_WEBHOOK_COMPROBANTES_URL` (comportamiento actual).
-  - `clases-alquiler`: `GETRESPONSE_CAMPAIGN_ID_COMPROBANTES_ALQUILER` + `MAKE_WEBHOOK_COMPROBANTES_ALQUILER_URL` (nuevos secrets).
-- Toda la lógica de signed URL, GetResponse y Make queda igual; solo se inyectan distintos valores según el mapping.
-- Loguear el `origen` para poder distinguir flujos en los logs.
+Los planes estándar (Basic Fun, Black Free, etc., sin `origen=clases-alquiler`) **no cambian**.
 
-### 4. Secrets a crear
+## Cambios técnicos (`src/pages/PagoConfirmado.tsx`)
 
-Después de aprobar el plan, te pido cargar como secrets:
-- `GETRESPONSE_CAMPAIGN_ID_COMPROBANTES_ALQUILER`
-- `MAKE_WEBHOOK_COMPROBANTES_ALQUILER_URL`
+1. **Agregar slugs faltantes** al diccionario `PLAN_LABELS`:
+   - `"clase-2x1": "Clase 2x1"`
+   - `"pack-4-clases": "Pack 4 Clases"`
 
-### 5. QA
+2. **Derivar `displayPlanLabel`** combinando `planLabel` con `origen`:
+   ```ts
+   const isAlquiler = origen === "clases-alquiler";
+   const displayPlanLabel = planLabel
+     ? (isAlquiler ? `${planLabel} + Alquiler` : planLabel)
+     : "";
+   ```
 
-- Probar `/pago-confirmado` sin parámetro → debe seguir mandando a la lista y webhook actuales (NM).
-- Probar `/pago-confirmado?origen=clases-alquiler` → debe ir a la lista nueva de GR y al webhook nuevo de Make.
-- Revisar logs de `notify-comprobante` para confirmar el `origen` y que ambos targets respondan OK.
+3. **Reemplazar `planLabel` por `displayPlanLabel`** en los 4 puntos donde se usa:
+   - Hero "Plan elegido: …" (≈ línea 144)
+   - Campo "PLAN" del formulario (≈ línea 394)
+   - Campo `plan` del `insert` en `comprobantes_pago` (línea 77)
+   - Campo `plan` enviado al edge function `notify-comprobante` (línea 89)
 
-### Notas
+Así el nombre diferenciado se ve en la UI **y** queda registrado en la DB y en GetResponse.
 
-- No se crea una página nueva ni se duplica la edge function — un solo lugar para mantener UX/diseño.
-- Si en el futuro los copys del flujo de clases+alquiler tienen que divergir, alcanza con condicionar por `origen` dentro del componente (no requiere refactor mayor).
-- Antes de testear con datos reales, conviene revisar también el error 400 que aparece en los últimos logs de GetResponse (`customFieldId` vacío para `telefono` y `plan`) — no es parte de este cambio, pero es bueno tenerlo en el radar.
+## Fuera de alcance
+
+- No se modifica la URL del navegador ni los links de Mercado Pago.
+- No se cambia el edge function `notify-comprobante` (recibe el string ya formateado).
+- No se toca la sección de planes estándar.
