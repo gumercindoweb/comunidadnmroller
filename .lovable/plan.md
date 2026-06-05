@@ -1,81 +1,79 @@
-# Página de confirmación de Newsletter
+## Objetivo
 
-Crear una nueva página de confirmación a la que el usuario llega tras suscribirse a la newsletter, replicando la estructura visual del screenshot adjunto pero adaptada al Design System v1.0 del sitio (rojo PANTONE 1795 #D01C1F, Futura/Jost, esquinas sharp, CTAs uppercase con tracking 0.18em y glow rojo).
+Cuando un usuario sube su comprobante en `/pago-confirmado`, además de guardarlo en la base + storage, disparar **en paralelo**:
+1. Alta como contacto en la **nueva campaña de GetResponse** (comprobantes).
+2. **Webhook a Make** con todos los datos del form + URL firmada del archivo (7 días).
 
-## Ruta
-
-- Nueva ruta: `/registro-confirmado-newsletter`
-- Registrar en `src/App.tsx` arriba del catch-all `*`.
-- Actualizar `NewsletterDesdeCero.tsx` para que tras `success` redirija con `navigate("/registro-confirmado-newsletter")` (en lugar de solo mostrar toast). Se conserva el toast.
-
-## Estructura de la página
+## Arquitectura
 
 ```text
-┌─────────────────────────────────────────┐
-│ HEADER: logo NM centrado (link a "/")    │
-├─────────────────────────────────────────┤
-│ HERO ROJO (bg primary)                   │
-│  H1: ¡YA ESTÁS EN EL CAMINO!             │
-│  (Futura italic uppercase, blanco)       │
-│  Subcopy:                                │
-│   "Acabás de dar tu primer paso de       │
-│    compromiso."                          │
-│   "A partir de ahora vas a recibir       │
-│    correos que te acompañan, motivan y   │
-│    te muestran que sí podés."            │
-│   "Te esperamos. Desde cero. Con vos."   │
-│  + curva/wave SVG inferior (transición   │
-│  suave al fondo blanco)                  │
-├─────────────────────────────────────────┤
-│ SECCIÓN "¿QUÉ VAS A RECIBIR AHORA MISMO?"│
-│  Título rojo con emoji 🎁                 │
-│  Lista vertical centrada (4 items):      │
-│   📬 Tu primer mail llegará en los        │
-│      próximos minutos.                    │
-│   🗺️ Acceso exclusivo al Mapa de         │
-│      Aprendizaje.                         │
-│   📘 Bitácora para registrar tus avances │
-│      (próximo envío).                    │
-│   🥇 Desafíos que te impulsan paso a paso│
-│  CTA pill rojo (uppercase):              │
-│   "CONOCER LA RUTA DE APRENDIZAJE"       │
-│   → ancla / placeholder ruta futura      │
-├─────────────────────────────────────────┤
-│ SECCIÓN "¿QUERÉS ADELANTAR TU PRIMER     │
-│  PASO REAL?" (bg muted/gris claro)       │
-│  Grid 2 col (texto izq, imagen der):     │
-│   - H2 rojo italic uppercase             │
-│   - Párrafo: "Vení a una clase gratuita  │
-│     antes de que llegue tu primer        │
-│     desafío. No necesitás experiencia.   │
-│     Te alquilamos el equipo.             │
-│     Te acompañamos de cero."             │
-│   - CTA pill rojo:                       │
-│     "QUIERO PROBAR UNA CLASE"            │
-│     → /clase-gratis (placeholder, link   │
-│       a `/clases-de-rollers-mas-alquiler│
-│       ` por ahora hasta crear la pág)    │
-│   - Imagen derecha: foto de grupo        │
-│     patinando (reutilizar asset          │
-│     existente del sitio si hay, sino     │
-│     placeholder)                         │
-├─────────────────────────────────────────┤
-│ Footer simple: © 2026 Comunidad NM Roller│
-└─────────────────────────────────────────┘
+Front (PagoConfirmado.tsx)
+   │
+   ├─ 1. Sube archivo a storage `comprobantes-pago`  ← ya existe
+   ├─ 2. Insert en `comprobantes_pago`               ← ya existe
+   └─ 3. invoke edge function `notify-comprobante`  ← NUEVO
+              │
+              ├─ a. Genera signed URL (7 días) del file_path
+              ├─ b. POST a GetResponse  → nueva campaña
+              └─ c. POST a webhook Make → payload completo
+              (a, b, c con Promise.allSettled → un fallo no rompe los otros)
 ```
 
-## Detalles técnicos
+Mantener la UX actual: si el upload + insert funcionan, mostramos el "¡Comprobante recibido!" inmediato. La notificación corre en background; si GetResponse o Make fallan, **el usuario no se entera** (lo logueamos en edge function logs para revisar).
 
-- Nuevo archivo: `src/pages/RegistroConfirmadoNewsletter.tsx`.
-- Usar tokens del DS (`bg-primary`, `text-primary-foreground`, `font-display italic uppercase`, esquinas sharp `rounded-none`, CTAs con `tracking-[0.18em]` y `hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]`).
-- Excepción al "sharp": los dos CTAs del mockup son **pill (rounded-full)** — los respetamos para fidelidad con el screenshot.
-- Animaciones scroll-triggered con `useScrollAnimation` (ya existe en el proyecto) en los bloques principales.
-- Wave/curva inferior del hero con SVG inline.
-- Helmet para SEO: `<title>¡Ya estás en el camino! — Comunidad NM Roller</title>`, meta description, canonical, noindex (es página post-suscripción).
-- Imagen de la sección "clase gratuita": revisar assets existentes; si no hay foto grupal, usar placeholder y marcar TODO para que el usuario suba foto real.
+## Secrets nuevos (te los pido en build mode con `add_secret`)
 
-## Fuera de alcance (próximos turnos)
+- `GETRESPONSE_CAMPAIGN_ID_COMPROBANTES` — el Campaign ID nuevo que ya tenés.
+- `MAKE_WEBHOOK_COMPROBANTES_URL` — la URL completa del webhook de Make (la copiás del módulo "Custom webhook" en Make).
 
-- Página `/clase-gratis` (el usuario la mencionó como siguiente paso).
-- Página `/ruta-de-aprendizaje` (CTA "Conocer la ruta de aprendizaje").
-- Configurar GetResponse para redirigir al confirmar el doble opt-in hacia esta URL (se hace desde el panel de GetResponse en *Confirmation message* → custom URL).
+Ya disponibles y reutilizables: `GETRESPONSE_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+
+## Edge function: `notify-comprobante`
+
+- Recibe `{ nombre, email, telefono, plan, file_path }` desde el front.
+- Valida con zod.
+- Usa `SERVICE_ROLE_KEY` para generar la signed URL privada (7 días = 604800 s) del bucket `comprobantes-pago`.
+- Lanza en paralelo (`Promise.allSettled`):
+  - **GetResponse**: `POST https://api.getresponse.com/v3/contacts` con `{ email, name, campaign: { campaignId } }` y custom fields opcionales (telefono, plan).
+  - **Make**: `POST <webhook>` con payload:
+    ```json
+    {
+      "nombre": "...",
+      "email": "...",
+      "telefono": "...",
+      "plan": "...",
+      "comprobante_url": "<signed url 7d>",
+      "comprobante_path": "...",
+      "created_at": "ISO",
+      "source": "comunidadnmroller.lovable.app"
+    }
+    ```
+- Devuelve `{ ok: true, results: { getresponse, make } }` con el estado de cada uno (útil para debug).
+- CORS headers + manejo de OPTIONS.
+
+## Cambios en el front
+
+En `src/pages/PagoConfirmado.tsx`, al final del `handleSubmit` exitoso, agregar (no bloqueante para el toast):
+
+```ts
+supabase.functions.invoke("notify-comprobante", {
+  body: { nombre, email, telefono, plan: planLabel || planSlug, file_path: path },
+}).catch((e) => console.error("notify-comprobante failed", e));
+```
+
+Marcamos "¡Comprobante recibido!" igual aunque la notificación falle (los datos ya están en la DB y storage; podés reenviar manualmente).
+
+## Verificación
+
+1. Subir un comprobante de prueba desde `/pago-confirmado?plan=basic-fun`.
+2. Confirmar:
+   - Fila nueva en tabla `comprobantes_pago`.
+   - Archivo nuevo en bucket `comprobantes-pago`.
+   - Contacto nuevo en la campaña de GetResponse de comprobantes.
+   - Ejecución nueva en el escenario de Make con la signed URL clickeable.
+3. Si algo falla, revisar logs del edge function `notify-comprobante`.
+
+## Fuera de alcance
+
+- Confirmación automática de pago vía MP IPN (eso es otro flujo).
+- Reintentos automáticos si GetResponse/Make caen (por ahora, queda en logs).
