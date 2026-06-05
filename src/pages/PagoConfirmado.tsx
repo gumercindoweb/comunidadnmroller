@@ -88,6 +88,7 @@ const PagoConfirmado = () => {
             telefono: telefono.trim(),
             plan: planLabel || planSlug || null,
             file_path: path,
+            origen,
           },
         })
         .catch((e) => console.error("notify-comprobante failed", e));
