@@ -141,7 +141,9 @@ const ClasesMasAlquiler = () => {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  onClick={() => setCalendlyOpen(true)}
+                  onClick={() =>
+                    document.getElementById("planes-alquiler")?.scrollIntoView({ behavior: "smooth" })
+                  }
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.15em] text-sm px-8 py-6 rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all group"
                 >
                   Reservar mi lugar
