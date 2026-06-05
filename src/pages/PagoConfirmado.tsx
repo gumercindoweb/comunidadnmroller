@@ -391,13 +391,13 @@ const PagoConfirmado = () => {
                   </div>
                 </div>
 
-                {planLabel && (
+                {displayPlanLabel && (
                   <div className="space-y-2">
                     <Label className="uppercase tracking-[0.12em] text-xs font-bold">
                       Plan
                     </Label>
                     <div className="h-12 px-3 flex items-center bg-muted border border-foreground/10 font-bold text-foreground">
-                      {planLabel}
+                      {displayPlanLabel}
                     </div>
                   </div>
                 )}
