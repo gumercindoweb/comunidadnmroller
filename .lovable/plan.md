@@ -1,29 +1,81 @@
-## Objetivo
-Que todos los suscriptores del formulario de newsletter del sitio caigan en la campaña de GetResponse con ID **`GbvSq`** (la que tiene la secuencia de autoresponders activos).
+# Página de confirmación de Newsletter
 
-## Estado actual
-- ✅ Edge function `subscribe-newsletter` funcionando.
-- ✅ Formulario en `/newsletter-desde-cero` enviando nombre + email.
-- ✅ Secret `GETRESPONSE_API_KEY` cargado.
-- ⚠️ Secret `GETRESPONSE_CAMPAIGN_ID` cargado pero con un valor que no es `GbvSq` → hay que actualizarlo.
+Crear una nueva página de confirmación a la que el usuario llega tras suscribirse a la newsletter, replicando la estructura visual del screenshot adjunto pero adaptada al Design System v1.0 del sitio (rojo PANTONE 1795 #D01C1F, Futura/Jost, esquinas sharp, CTAs uppercase con tracking 0.18em y glow rojo).
 
-## Pasos
+## Ruta
 
-### 1. Actualizar el secret `GETRESPONSE_CAMPAIGN_ID`
-Abrir el formulario seguro de secrets y pegar el nuevo valor: **`GbvSq`**.  
-(No se ve en el chat. Lo hacés vos en el formulario que te abro.)
+- Nueva ruta: `/registro-confirmado-newsletter`
+- Registrar en `src/App.tsx` arriba del catch-all `*`.
+- Actualizar `NewsletterDesdeCero.tsx` para que tras `success` redirija con `navigate("/registro-confirmado-newsletter")` (en lugar de solo mostrar toast). Se conserva el toast.
 
-### 2. Verificar que el secret apunte a la campaña correcta
-Llamar a `GET https://api.getresponse.com/v3/campaigns/GbvSq` desde un test rápido y confirmar que devuelve el nombre de tu campaña de newsletter. Te muestro el nombre en chat para que valides.
+## Estructura de la página
 
-### 3. Test end-to-end real
-- Suscribirse desde el formulario del sitio con un email de prueba.
-- Verificar en GetResponse → **Contacts** que el contacto aparezca en la campaña `GbvSq` con **Day of cycle = 0**.
-- Confirmar que llega el primer correo de la secuencia (si tenés *Confirmed opt-in* activado, primero llega el de confirmación y la secuencia arranca después del clic).
+```text
+┌─────────────────────────────────────────┐
+│ HEADER: logo NM centrado (link a "/")    │
+├─────────────────────────────────────────┤
+│ HERO ROJO (bg primary)                   │
+│  H1: ¡YA ESTÁS EN EL CAMINO!             │
+│  (Futura italic uppercase, blanco)       │
+│  Subcopy:                                │
+│   "Acabás de dar tu primer paso de       │
+│    compromiso."                          │
+│   "A partir de ahora vas a recibir       │
+│    correos que te acompañan, motivan y   │
+│    te muestran que sí podés."            │
+│   "Te esperamos. Desde cero. Con vos."   │
+│  + curva/wave SVG inferior (transición   │
+│  suave al fondo blanco)                  │
+├─────────────────────────────────────────┤
+│ SECCIÓN "¿QUÉ VAS A RECIBIR AHORA MISMO?"│
+│  Título rojo con emoji 🎁                 │
+│  Lista vertical centrada (4 items):      │
+│   📬 Tu primer mail llegará en los        │
+│      próximos minutos.                    │
+│   🗺️ Acceso exclusivo al Mapa de         │
+│      Aprendizaje.                         │
+│   📘 Bitácora para registrar tus avances │
+│      (próximo envío).                    │
+│   🥇 Desafíos que te impulsan paso a paso│
+│  CTA pill rojo (uppercase):              │
+│   "CONOCER LA RUTA DE APRENDIZAJE"       │
+│   → ancla / placeholder ruta futura      │
+├─────────────────────────────────────────┤
+│ SECCIÓN "¿QUERÉS ADELANTAR TU PRIMER     │
+│  PASO REAL?" (bg muted/gris claro)       │
+│  Grid 2 col (texto izq, imagen der):     │
+│   - H2 rojo italic uppercase             │
+│   - Párrafo: "Vení a una clase gratuita  │
+│     antes de que llegue tu primer        │
+│     desafío. No necesitás experiencia.   │
+│     Te alquilamos el equipo.             │
+│     Te acompañamos de cero."             │
+│   - CTA pill rojo:                       │
+│     "QUIERO PROBAR UNA CLASE"            │
+│     → /clase-gratis (placeholder, link   │
+│       a `/clases-de-rollers-mas-alquiler│
+│       ` por ahora hasta crear la pág)    │
+│   - Imagen derecha: foto de grupo        │
+│     patinando (reutilizar asset          │
+│     existente del sitio si hay, sino     │
+│     placeholder)                         │
+├─────────────────────────────────────────┤
+│ Footer simple: © 2026 Comunidad NM Roller│
+└─────────────────────────────────────────┘
+```
 
-## Qué no se toca
-- No se modifica el código del edge function ni el del formulario (ya usan `GETRESPONSE_CAMPAIGN_ID` correctamente).
-- No se crean secrets nuevos ni se cambia el flujo.
+## Detalles técnicos
 
-## Qué necesito de vos
-Confirmar el plan. Al pasar a build mode te abro el formulario para pegar `GbvSq` como nuevo valor de `GETRESPONSE_CAMPAIGN_ID`.
+- Nuevo archivo: `src/pages/RegistroConfirmadoNewsletter.tsx`.
+- Usar tokens del DS (`bg-primary`, `text-primary-foreground`, `font-display italic uppercase`, esquinas sharp `rounded-none`, CTAs con `tracking-[0.18em]` y `hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]`).
+- Excepción al "sharp": los dos CTAs del mockup son **pill (rounded-full)** — los respetamos para fidelidad con el screenshot.
+- Animaciones scroll-triggered con `useScrollAnimation` (ya existe en el proyecto) en los bloques principales.
+- Wave/curva inferior del hero con SVG inline.
+- Helmet para SEO: `<title>¡Ya estás en el camino! — Comunidad NM Roller</title>`, meta description, canonical, noindex (es página post-suscripción).
+- Imagen de la sección "clase gratuita": revisar assets existentes; si no hay foto grupal, usar placeholder y marcar TODO para que el usuario suba foto real.
+
+## Fuera de alcance (próximos turnos)
+
+- Página `/clase-gratis` (el usuario la mencionó como siguiente paso).
+- Página `/ruta-de-aprendizaje` (CTA "Conocer la ruta de aprendizaje").
+- Configurar GetResponse para redirigir al confirmar el doble opt-in hacia esta URL (se hace desde el panel de GetResponse en *Confirmation message* → custom URL).

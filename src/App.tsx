@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NewsletterDesdeCero from "./pages/NewsletterDesdeCero.tsx";
+import RegistroConfirmadoNewsletter from "./pages/RegistroConfirmadoNewsletter.tsx";
 import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -19,6 +20,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/newsletter-desde-cero" element={<NewsletterDesdeCero />} />
+          <Route path="/registro-confirmado-newsletter" element={<RegistroConfirmadoNewsletter />} />
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
