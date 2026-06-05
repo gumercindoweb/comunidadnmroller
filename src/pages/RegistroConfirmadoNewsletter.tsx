@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, Gift, Mail, Map, BookOpen, Medal } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import patinadores from "@/assets/patinadores-comunidad.png";
@@ -13,6 +15,7 @@ const beneficios = [
 ];
 
 const RegistroConfirmadoNewsletter = () => {
+  const [videoOpen, setVideoOpen] = useState(false);
   return (
     <>
       <Helmet>
@@ -80,10 +83,10 @@ const RegistroConfirmadoNewsletter = () => {
             </ul>
 
             <Button
-              asChild
+              onClick={() => setVideoOpen(true)}
               className="h-12 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.18em] text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
             >
-              <Link to="/">Conocer la ruta de aprendizaje</Link>
+              Conocer la ruta de aprendizaje
             </Button>
           </div>
         </section>
@@ -133,6 +136,23 @@ const RegistroConfirmadoNewsletter = () => {
           </p>
         </footer>
       </main>
+
+      <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
+        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-black border-primary rounded-none overflow-hidden">
+          <DialogTitle className="sr-only">Ruta de Aprendizaje NM Roller</DialogTitle>
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            {videoOpen && (
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/RZd_UWVEx74?autoplay=1&rel=0"
+                title="Ruta de Aprendizaje NM Roller"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
