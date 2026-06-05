@@ -1,48 +1,59 @@
-## Cambios en `src/pages/PagoConfirmado.tsx`
+# Ajuste del bloque "¡Comprobante recibido!" en `/pago-confirmado`
 
-### 1. Badge "Pago en proceso" (modo advertencia)
-Reemplazar el pill translúcido actual por un **badge sólido ámbar con borde + ícono pulsante**, alineado con la jerarquía de marca (rojo dominante, ámbar como señal de atención sin competir con el primary):
+Solo cambia el contenido del estado `done` en `src/pages/PagoConfirmado.tsx`. Sin cambios de lógica, formulario ni edge function.
 
-- Fondo `#F5B800` (ámbar/amarillo de marca, ya usado para CTAs secundarios), texto `#111`, borde 2px del mismo tono con leve glow.
-- Ícono `AlertCircle` con animación `animate-pulse`.
-- Sharp corners (radius 0) — coherente con DS v1.0.
-- Tamaño un poco mayor y tracking 0.18em uppercase.
+## Objetivos del nuevo copy
+1. Empujar a **revisar el correo** como paso final del onboarding.
+2. Ofrecer **WhatsApp como atajo** (sin nombrarlo como "más rápido" ni hablar de demoras).
+3. Eliminar menciones a plazos ("24hs hábiles", "menos de…").
+4. Aclarar que este onboarding es **por única vez** y que después todo se autogestiona desde la app **Turnos Web** (comprar planes, reservar, cancelar, novedades).
 
-### 2. Frase de cierre del hero
-Eliminar `Te esperamos. Desde cero. Con vos.` y poner:
+## Estructura propuesta del bloque
 
-> **Aprendé, rolleá y disfrutá.**
+```text
+[icono FileCheck]
 
-Mismo estilo bold actual.
+¡COMPROBANTE RECIBIDO!
 
-### 3. Sección "¿Cómo seguimos?" — 3 pasos reescritos
+Último paso del onboarding 👇
+Revisá tu correo en {email}: ahí te confirmamos el alta y te
+pasamos el acceso para empezar a rolear.
 
-Reemplazar los 3 items actuales por (textos según referencia adjunta):
+[ Botón primario rojo · uppercase · glow ]
+  ABRIR MI CORREO     (link: https://mail.google.com/ — _blank)
 
-| # | Título | Texto | Ícono |
-|---|---|---|---|
-| 1 | **Registrate en la app** | "Desde **Turnos Web** vas a gestionar tus clases y elegir horarios. Elegí tu sistema operativo para descargar 👇" + botones store | `Smartphone` |
-| 2 | **Cargá tu comprobante** | "💡 Una vez validado, cargaremos tu plan en sistema y **recibirás una confirmación vía WhatsApp**." | `Mail` |
-| 3 | **Revisá tu correo** | "Por allí te **compartimos detalles de los pasos siguientes** que tenés que tomar en cuenta para una mejor experiencia." | `Users` |
+— o —
 
-- **Sin** botón "Cargar comprobante" en el paso 2 (el form sigue debajo en la misma página).
-- Mantener el estilo de tarjetas existente (borde, paso activo destacado).
-- El paso 2 sigue marcado como `active` para guiar visualmente hacia el form.
+¿Querés que lo coordinemos al toque por WhatsApp?
+[ Botón secundario · borde verde WhatsApp ]
+  ESCRIBINOS POR WHATSAPP
 
-### 4. Paso 1 — botones de tiendas
-Debajo del texto del paso 1, dos botones circulares oscuros (como en la referencia) con íconos `Apple` y un ícono Google Play (lucide no tiene Play oficial → uso `Play` dentro de un círculo, o ícono SVG inline simple del triángulo de Play Store):
+────────────────────────────────────
 
-- iOS → `https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678`
-- Android → `https://play.google.com/store/apps/details?id=com.turnosweb.lite`
-- `target="_blank"`, `rel="noopener noreferrer"`, `aria-label` correcto.
-- Hover: glow rojo de marca.
+Esto es por única vez. Desde ahora, todo lo gestionás vos misma
+desde la app Turnos Web: comprás planes, reservás clases,
+cancelás turnos y te enterás de novedades.
+```
 
-### 5. Form y resto de la página
-**Sin cambios.** Se mantiene el formulario de subida del comprobante, el estado `done`, la integración con `notify-comprobante`, footer, etc.
+## Detalles de copy (final)
 
----
+- **Subtítulo destacado:** "Último paso del onboarding"
+- **Cuerpo:** "Revisá tu correo en **{email}**: ahí te confirmamos el alta y te pasamos el acceso para empezar a rolear."
+- **CTA primario:** `ABRIR MI CORREO` → `https://mail.google.com/` (target _blank)
+- **Puente sutil:** "¿Preferís que lo coordinemos al toque por WhatsApp?"
+- **CTA secundario:** `ESCRIBINOS POR WHATSAPP` → mismo `wa.me` que ya estaba
+- **Nota de cierre (más chica, separada por divider):**
+  "Esto es **por única vez**. Desde ahora gestionás todo desde la app **Turnos Web**: comprá planes, reservá clases, cancelá turnos y enterate de novedades."
 
-## Notas técnicas
-- Solo se edita `src/pages/PagoConfirmado.tsx` (presentación). No se tocan edge functions, DB ni lógica de submit.
-- Tokens semánticos (`bg-primary`, `text-foreground`, etc.) cuando corresponda; el ámbar del badge se aplica con clases directas porque es un acento puntual (puedo migrarlo a token `--warning` si preferís — decime).
-- Sharp corners se respetan; las únicas "pills" siguen siendo los badges de status (consistente con la regla de marca).
+## Detalles visuales
+
+- Mantener el card actual: `border-2 border-primary bg-background`.
+- Conservar el ícono `FileCheck` y el H3 "¡Comprobante recibido!".
+- Dos botones apilados (full-width en mobile, lado a lado en `sm:`):
+  - Primario: clases ya usadas en el form (`bg-primary` + glow rojo, uppercase tracking 0.18em, sharp).
+  - Secundario WhatsApp: `bg-background border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white` (sharp, uppercase tracking 0.18em). Icono inline SVG de WhatsApp.
+- Separador `border-t border-foreground/10` antes de la nota de autogestión.
+- Sin emojis salvo el 👇 del subtítulo (opcional, alineado con el tono ya usado en el paso 2).
+
+## Archivos
+- `src/pages/PagoConfirmado.tsx` — solo el bloque dentro de `{done ? (...) : ...}`.
