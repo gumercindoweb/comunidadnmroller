@@ -78,6 +78,19 @@ const PagoConfirmado = () => {
       });
       if (insErr) throw insErr;
 
+      // Disparar GetResponse + webhook Make (no bloqueante)
+      supabase.functions
+        .invoke("notify-comprobante", {
+          body: {
+            nombre: nombre.trim(),
+            email: email.trim(),
+            telefono: telefono.trim(),
+            plan: planLabel || planSlug || null,
+            file_path: path,
+          },
+        })
+        .catch((e) => console.error("notify-comprobante failed", e));
+
       setDone(true);
       toast({
         title: "¡Comprobante recibido!",
