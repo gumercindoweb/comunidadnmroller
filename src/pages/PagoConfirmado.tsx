@@ -291,11 +291,11 @@ const PagoConfirmado = () => {
                 </h3>
 
                 <p className="uppercase tracking-[0.18em] text-xs font-black text-foreground/70 mb-3">
-                  Último paso del onboarding 👇
+                  Último paso 👇
                 </p>
                 <p className="text-foreground/85 leading-relaxed mb-6 max-w-md mx-auto">
-                  Revisá tu correo en <strong>{email}</strong>: ahí te confirmamos
-                  el alta y te pasamos el acceso para empezar a rolear.
+                  Revisá tu correo en <strong>{email}</strong>: ahí te pasamos
+                  todo lo que tenés que saber antes de empezar a rolear.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
