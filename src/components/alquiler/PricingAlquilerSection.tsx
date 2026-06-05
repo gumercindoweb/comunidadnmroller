@@ -16,6 +16,7 @@ interface AlquilerPlan {
   highlighted?: boolean;
   badge?: string;
   ctaLabel: string;
+  mpLink: string;
 }
 
 const plans: AlquilerPlan[] = [
@@ -33,6 +34,7 @@ const plans: AlquilerPlan[] = [
     ],
     bonus: "Cupón de $10 mil para tu próximo alquiler o compra de equipo (abonando en efectivo).",
     ctaLabel: "Reservar lugar",
+    mpLink: "https://mpago.la/14BiY8N?plan=clase-unica&origen=clases-alquiler",
   },
   {
     name: "Clase 2x1",
@@ -48,6 +50,7 @@ const plans: AlquilerPlan[] = [
     ],
     bonus: "Cupón de $5 mil por persona para usar en tu próximo alquiler o compra de equipo (abonando en efectivo).",
     ctaLabel: "Reservar 2x1",
+    mpLink: "https://mpago.la/1N8BgeM?plan=clase-2x1&origen=clases-alquiler",
   },
   {
     name: "Pack 4 Clases",
@@ -67,6 +70,7 @@ const plans: AlquilerPlan[] = [
     highlighted: true,
     badge: "Mejor Opción",
     ctaLabel: "Comprar pack",
+    mpLink: "https://mpago.la/2J9ceLQ?plan=pack-4-clases&origen=clases-alquiler",
   },
 ];
 
