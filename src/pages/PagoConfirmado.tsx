@@ -143,11 +143,11 @@ const PagoConfirmado = () => {
             <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-6xl font-black mb-6">
               ¡Gracias por sumarte!
             </h1>
-            {planLabel && (
+            {displayPlanLabel && (
               <p className="font-bold text-lg md:text-xl mb-4">
                 Plan elegido:{" "}
                 <span className="underline decoration-primary-foreground/40 underline-offset-4">
-                  {planLabel}
+                  {displayPlanLabel}
                 </span>
               </p>
             )}
