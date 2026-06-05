@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, Gift, Mail, Map, BookOpen, Medal } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import patinadores from "@/assets/patinadores-comunidad.png";
