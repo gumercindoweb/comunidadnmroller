@@ -365,14 +365,14 @@ const ClasesMasAlquiler = () => {
             />
             <div className="bg-primary px-4 py-3 text-center">
               <p className="text-primary-foreground text-sm">
-                Avisanos por WhatsApp{" "}
+                Si querés quedarte más tranquilo/a, podés avisarnos que ya reservaste 👉{" "}
                 <a
-                  href="https://wa.me/5491123456789"
+                  href={`https://wa.me/5491165920600?text=${encodeURIComponent("[LP-NM-PP-Cdly] Ya agendé mi turno vía calendly, solo quiero confirmar que lo hayan recibido. Mi nombre es XXX")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold italic underline text-primary-foreground hover:opacity-80"
                 >
-                  acá
+                  presionando aquí
                 </a>
               </p>
             </div>
