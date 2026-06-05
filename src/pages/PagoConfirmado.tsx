@@ -19,6 +19,8 @@ import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const PLAN_LABELS: Record<string, string> = {
   "clase-unica": "Clase Única",
+  "clase-2x1": "Clase 2x1",
+  "pack-4-clases": "Pack 4 Clases",
   "basic-fun": "Basic Fun",
   "black-free": "Black Free",
   "basic-fun-trimestral": "Basic Fun Trimestral",
