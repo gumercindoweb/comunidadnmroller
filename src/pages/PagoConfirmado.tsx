@@ -92,7 +92,7 @@ const PagoConfirmado = () => {
             nombre: nombre.trim(),
             email: email.trim(),
             telefono: telefono.trim(),
-            plan: planLabel || planSlug || null,
+            plan: displayPlanLabel || planSlug || null,
             file_path: path,
             origen,
           },
