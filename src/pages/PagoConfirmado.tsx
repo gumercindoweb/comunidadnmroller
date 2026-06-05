@@ -32,6 +32,7 @@ const PagoConfirmado = () => {
   const [searchParams] = useSearchParams();
   const planSlug = searchParams.get("plan") ?? "";
   const planLabel = PLAN_LABELS[planSlug] ?? "";
+  const origen = (searchParams.get("origen") ?? "nm").trim() || "nm";
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
