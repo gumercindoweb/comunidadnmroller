@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   ArrowLeft,
-  CheckCircle2,
-  CreditCard,
+  Smartphone,
+  Mail,
+  Users,
   Upload,
-  Sparkles,
   FileCheck,
   AlertCircle,
+  Apple,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
