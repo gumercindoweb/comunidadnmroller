@@ -118,7 +118,7 @@ Deno.serve(async (req) => {
 
     const settled = await Promise.allSettled(tasks);
     const results = settled.map((s) => s.status === "fulfilled" ? s.value : { target: "unknown", ok: false, error: String(s.reason) });
-    console.log("notify-comprobante results", JSON.stringify({ email, plan, signedErr, results }));
+    console.log("notify-comprobante results", JSON.stringify({ email, plan, origen, signedErr, results }));
 
     return new Response(
       JSON.stringify({ ok: true, comprobante_url_generated: !!comprobante_url, results }),
