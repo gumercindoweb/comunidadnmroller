@@ -8,6 +8,7 @@ const schema = z.object({
   telefono: z.string().trim().min(3).max(40),
   plan: z.string().trim().max(80).optional().nullable(),
   file_path: z.string().trim().min(1).max(500),
+  origen: z.enum(["nm", "clases-alquiler"]).optional().default("nm"),
 });
 
 const BUCKET = "comprobantes-pago";
@@ -25,13 +26,17 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
-    const { nombre, email, telefono, plan, file_path } = parsed.data;
+    const { nombre, email, telefono, plan, file_path, origen } = parsed.data;
 
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
     const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const GR_API_KEY = Deno.env.get("GETRESPONSE_API_KEY");
-    const GR_CAMPAIGN_ID = Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES");
-    const MAKE_URL = Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_URL");
+    const GR_CAMPAIGN_ID = origen === "clases-alquiler"
+      ? Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES_ALQUILER")
+      : Deno.env.get("GETRESPONSE_CAMPAIGN_ID_COMPROBANTES");
+    const MAKE_URL = origen === "clases-alquiler"
+      ? Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_ALQUILER_URL")
+      : Deno.env.get("MAKE_WEBHOOK_COMPROBANTES_URL");
 
     const admin = createClient(SUPABASE_URL, SERVICE_ROLE);
 
@@ -94,6 +99,7 @@ Deno.serve(async (req) => {
               email,
               telefono,
               plan: plan ?? null,
+              origen,
               comprobante_url,
               comprobante_path: file_path,
               created_at: new Date().toISOString(),
@@ -112,7 +118,7 @@ Deno.serve(async (req) => {
 
     const settled = await Promise.allSettled(tasks);
     const results = settled.map((s) => s.status === "fulfilled" ? s.value : { target: "unknown", ok: false, error: String(s.reason) });
-    console.log("notify-comprobante results", JSON.stringify({ email, plan, signedErr, results }));
+    console.log("notify-comprobante results", JSON.stringify({ email, plan, origen, signedErr, results }));
 
     return new Response(
       JSON.stringify({ ok: true, comprobante_url_generated: !!comprobante_url, results }),
