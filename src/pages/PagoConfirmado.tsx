@@ -19,6 +19,8 @@ import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const PLAN_LABELS: Record<string, string> = {
   "clase-unica": "Clase Única",
+  "clase-2x1": "Clase 2x1",
+  "pack-4-clases": "Pack 4 Clases",
   "basic-fun": "Basic Fun",
   "black-free": "Black Free",
   "basic-fun-trimestral": "Basic Fun Trimestral",
@@ -33,6 +35,10 @@ const PagoConfirmado = () => {
   const planSlug = searchParams.get("plan") ?? "";
   const planLabel = PLAN_LABELS[planSlug] ?? "";
   const origen = (searchParams.get("origen") ?? "nm").trim() || "nm";
+  const isAlquiler = origen === "clases-alquiler";
+  const displayPlanLabel = planLabel
+    ? (isAlquiler ? `${planLabel} + Alquiler` : planLabel)
+    : "";
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -74,7 +80,7 @@ const PagoConfirmado = () => {
         nombre: nombre.trim(),
         email: email.trim(),
         telefono: telefono.trim(),
-        plan: planLabel || planSlug || null,
+        plan: displayPlanLabel || planSlug || null,
         file_path: path,
       });
       if (insErr) throw insErr;
@@ -86,7 +92,7 @@ const PagoConfirmado = () => {
             nombre: nombre.trim(),
             email: email.trim(),
             telefono: telefono.trim(),
-            plan: planLabel || planSlug || null,
+            plan: displayPlanLabel || planSlug || null,
             file_path: path,
             origen,
           },
@@ -137,11 +143,11 @@ const PagoConfirmado = () => {
             <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-6xl font-black mb-6">
               ¡Gracias por sumarte!
             </h1>
-            {planLabel && (
+            {displayPlanLabel && (
               <p className="font-bold text-lg md:text-xl mb-4">
                 Plan elegido:{" "}
                 <span className="underline decoration-primary-foreground/40 underline-offset-4">
-                  {planLabel}
+                  {displayPlanLabel}
                 </span>
               </p>
             )}
@@ -385,13 +391,13 @@ const PagoConfirmado = () => {
                   </div>
                 </div>
 
-                {planLabel && (
+                {displayPlanLabel && (
                   <div className="space-y-2">
                     <Label className="uppercase tracking-[0.12em] text-xs font-bold">
                       Plan
                     </Label>
                     <div className="h-12 px-3 flex items-center bg-muted border border-foreground/10 font-bold text-foreground">
-                      {planLabel}
+                      {displayPlanLabel}
                     </div>
                   </div>
                 )}
