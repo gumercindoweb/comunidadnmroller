@@ -145,8 +145,10 @@ const PricingAlquilerSection = ({ onReserve }: { onReserve: () => void }) => {
                       </span>
                     )}
                   </div>
-                  <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm mt-2">
-                    COMPRAR PLAN
+                  <Button asChild className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm mt-2">
+                    <a href={plan.mpLink} target="_blank" rel="noopener noreferrer">
+                      COMPRAR PLAN
+                    </a>
                   </Button>
                   <p className="text-[10px] text-center mt-2 text-primary-foreground/50">
                     Serás redirigido a Mercado Pago
