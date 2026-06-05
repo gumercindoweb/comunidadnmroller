@@ -8,6 +8,7 @@ const schema = z.object({
   telefono: z.string().trim().min(3).max(40),
   plan: z.string().trim().max(80).optional().nullable(),
   file_path: z.string().trim().min(1).max(500),
+  origen: z.enum(["nm", "clases-alquiler"]).optional().default("nm"),
 });
 
 const BUCKET = "comprobantes-pago";
