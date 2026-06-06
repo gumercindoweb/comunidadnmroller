@@ -235,39 +235,38 @@ const PricingSection = () => {
         </div>
       </div>
       <Dialog open={calendlyOpen} onOpenChange={setCalendlyOpen}>
-        <DialogContent className="sm:max-w-[700px] max-h-[95vh] p-0 overflow-hidden border-0 bg-background rounded-2xl gap-0">
-          <DialogTitle className="sr-only">Agendar turno</DialogTitle>
-          
-          {/* Header con logo y texto */}
-          <div className="flex flex-col items-center pt-6 pb-4 px-6 text-center">
-            <img src={logoNM} alt="NM Roller" className="h-16 mb-3" />
-            <h2 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tight text-primary mb-2" style={{ fontFamily: "'Impact', sans-serif" }}>
-              Abonas en nuestra oficina en Palermo
+        <DialogContent className="sm:max-w-[700px] max-h-[98vh] sm:max-h-[95vh] p-0 overflow-hidden border-0 bg-background rounded-2xl gap-0">
+          <DialogTitle className="sr-only">Agendá tu turno para pago presencial</DialogTitle>
+          <div className="flex flex-col items-center pt-4 pb-3 px-4 sm:pt-6 sm:pb-4 sm:px-6 text-center">
+            <img src={logoNM} alt="NM Roller" className="h-12 sm:h-16 mb-2 sm:mb-3" />
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-black italic uppercase tracking-tight text-primary mb-2 leading-tight">
+              Agendá tu turno para pago presencial
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Reservá tu turno completando todos los datos en el calendario. ⚠️ Es <strong className="text-foreground">importante</strong> que finalices la reserva hasta el <strong className="text-foreground">último paso.</strong>
-            </p>
+            <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md space-y-1.5">
+              <p>📍 Te esperamos en la oficina, a dos cuadras del Rosedal.</p>
+              <p>⚠️ <strong className="text-foreground">Importante:</strong> completá todos los pasos del calendario.</p>
+              <p>✅ Tu turno queda reservado únicamente cuando veas el mensaje: <em className="text-foreground">"Tu cita fue programada"</em></p>
+            </div>
           </div>
-
-          {/* Calendly iframe */}
           <iframe
             src="https://calendly.com/nmroller/beneficio-pago-efectivo"
-            className="w-full h-[55vh] border-0"
-            title="Agendar turno - Calendly"
+            className="w-full h-[60vh] sm:h-[55vh] border-0"
+            title="Agendá tu turno para pago presencial - Calendly"
           />
-
-          {/* Footer bar */}
-          <div className="bg-primary px-4 py-3 text-center">
-            <p className="text-primary-foreground text-sm">
-              Si querés quedarte más tranquilo/a, podés avisarnos que ya reservaste 👉{" "}
+          <div className="bg-primary px-4 py-2 sm:py-3 text-center">
+            <p className="text-primary-foreground text-xs sm:text-sm">
+              <strong className="font-bold">¿Ya reservaste?</strong>
+              <br />
+              Podés avisarnos por{" "}
               <a
-                href="https://wa.me/5491123456789"
+                href={`https://wa.me/5491165920600?text=${encodeURIComponent("[LP-NM-PP-Cdly] Ya agendé mi turno vía calendly, solo quiero confirmar que lo hayan recibido. Mi nombre es XXX")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold italic underline text-primary-foreground hover:opacity-80"
               >
-                presionando aquí
-              </a>
+                WhatsApp
+              </a>{" "}
+              para verificar que recibimos tu turno.
             </p>
           </div>
         </DialogContent>
