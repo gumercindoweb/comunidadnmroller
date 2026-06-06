@@ -58,13 +58,11 @@ const SedeDetalleDialog = ({ sede, open, onOpenChange }: Props) => {
                         <span className="text-foreground font-bold text-sm">{c.hora}</span>
                       </div>
                       <span
-                        className={`text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap ${
-                          disciplinaColor[c.disciplina] || "bg-muted text-foreground"
+                        className={`text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 leading-tight break-words ${
+                          disciplinaColor[c.disciplina] || "bg-muted text-foreground rounded-none"
                         }`}
                       >
-                        {c.disciplina === "Primeros pasos y principiante"
-                          ? "Principiante"
-                          : c.disciplina}
+                        {c.disciplina}
                       </span>
                     </div>
                   ))}
