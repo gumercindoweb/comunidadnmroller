@@ -206,10 +206,12 @@ export const sedes: Sede[] = [
 export const ordenDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 export const disciplinaColor: Record<string, string> = {
-  Slalom: "bg-primary/15 text-primary border border-primary/30",
-  Urbano: "bg-muted text-foreground border border-border",
-  Skatepark: "bg-amber-500/15 text-amber-400 border border-amber-500/30",
-  Frenadas: "bg-muted text-foreground border border-border",
-  Rampas: "bg-amber-500/15 text-amber-400 border border-amber-500/30",
-  "Primeros pasos y principiante": "bg-secondary/15 text-secondary border border-secondary/30",
+  Slalom: "rounded-none bg-primary/15 text-primary border border-primary/50",
+  Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
+  Urbano: "rounded-none bg-muted text-foreground border border-border",
+  Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
+  Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
+  "Primeros pasos": "rounded-full bg-secondary/15 text-secondary border border-secondary/40",
+  "Principiante": "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
+  "Intermedio": "rounded-full bg-secondary text-background border border-secondary",
 };
