@@ -355,7 +355,7 @@ const ClasesMasAlquiler = () => {
                 Agendá tu turno para pago presencial
               </h2>
               <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md space-y-1.5">
-                <p>📍 Te esperamos en nuestra oficina de Palermo.</p>
+                <p>📍 Te esperamos en la oficina, a dos cuadras del Rosedal.</p>
                 <p>⚠️ <strong className="text-foreground">Importante:</strong> completá todos los pasos del calendario.</p>
                 <p>✅ Tu turno queda reservado únicamente cuando veas el mensaje: <em className="text-foreground">"Tu cita fue programada"</em></p>
               </div>
