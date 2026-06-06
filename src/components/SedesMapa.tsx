@@ -276,7 +276,7 @@ const SedesMapa = ({
                         disciplinaColor[d] || "bg-muted text-foreground"
                       }`}
                     >
-                      {d === "Primeros pasos y principiante" ? "Principiante" : d}
+                      {d}
                     </span>
                   ))}
                 </div>
