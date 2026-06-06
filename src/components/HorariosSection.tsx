@@ -11,14 +11,18 @@ interface ClaseEnriquecida {
   disciplina?: string;
 }
 
+// Niveles (pill, paleta teal progresiva) y disciplinas (sharp, rojo/amber)
 const badgeStyles: Record<string, string> = {
-  Slalom: "bg-primary/10 text-primary border border-primary/20",
-  Urbano: "bg-muted text-muted-foreground",
-  Skatepark: "bg-amber-100 text-amber-800",
-  Frenadas: "bg-muted text-muted-foreground",
-  Rampas: "bg-amber-100 text-amber-800",
-  "Primeros pasos y principiante": "bg-secondary text-secondary-foreground",
-  "Nivel principiante": "bg-secondary text-secondary-foreground",
+  // Niveles
+  "Primeros pasos": "rounded-full bg-secondary/15 text-secondary border border-secondary/40",
+  "Principiante": "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
+  "Intermedio": "rounded-full bg-secondary text-background border border-secondary",
+  // Disciplinas
+  Slalom: "rounded-none bg-primary/15 text-primary border border-primary/50",
+  Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
+  Urbano: "rounded-none bg-muted text-foreground border border-border",
+  Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
+  Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
 };
 
 const badgeDescriptions: Record<string, string> = {
@@ -30,68 +34,66 @@ const badgeDescriptions: Record<string, string> = {
   "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
   "Rampas": "Subidas, bajadas y saltos para llevar tu nivel al siguiente paso.",
   "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
-  "Primeros pasos y principiante": "Para quienes están dando sus primeros pasos o ya empezaron a soltarse en los rollers.",
-  "Nivel principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
 };
 
 // ── Horarios enriquecidos con disciplina ──
 const horarios: Record<string, ClaseEnriquecida[]> = {
   Lunes: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
   ],
   Martes: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Puerto Madero", hora: "18:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Puerto Madero", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Puerto Madero", hora: "18:00", disciplina: "Primeros pasos" },
+    { sede: "Puerto Madero", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Madero", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Frenadas" },
   ],
   Miércoles: [
-    { sede: "Villa Real", hora: "18:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Villa Real", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Belgrano", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Colegiales", hora: "18:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Vicente López", hora: "18:30", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Villa Real", hora: "18:00", disciplina: "Primeros pasos" },
+    { sede: "Villa Real", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Belgrano", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Colegiales", hora: "18:00", disciplina: "Primeros pasos" },
+    { sede: "Vicente López", hora: "18:30", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
   ],
   Jueves: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Colegiales", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Colegiales", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Rampas" },
     { sede: "Rivadavia", hora: "20:00", disciplina: "Frenadas" },
   ],
   Viernes: [
-    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Villa Luro", hora: "19:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Belgrano", hora: "19:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Villa Luro", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "Belgrano", hora: "19:00", disciplina: "Principiante" },
     { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
   ],
   Sábado: [
-    { sede: "Villa Real", hora: "10:30", disciplina: "Primeros pasos y principiante" },
-    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Puerto Madero", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Vicente López", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "18:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "Villa Real", hora: "10:30", disciplina: "Primeros pasos" },
+    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos" },
+    { sede: "Puerto Madero", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Vicente López", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "18:00", disciplina: "Principiante" },
     { sede: "Vicente López", hora: "09:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: "Urbano" },
     { sede: "Madero", hora: "10:00", disciplina: "Urbano" },
     { sede: "Villa Real", hora: "11:30", disciplina: "Urbano" },
   ],
   Domingo: [
-    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos y principiante" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos y principiante" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos" },
+    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos" },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
     { sede: "Parque Rivadavia", hora: "09:00", disciplina: "Slalom" },
   ],
 };
@@ -102,7 +104,7 @@ type TabType = "clases" | "alquiler";
 
 // ── Componentes de cards ──
 const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm" | "md" }) => (
-  <div className="bg-card rounded-lg p-3 shadow-sm border border-border hover:shadow-md transition-shadow">
+  <div className="bg-card rounded-lg p-3 shadow-sm border border-border hover:shadow-md transition-shadow h-full flex flex-col">
     <p className={`font-bold text-foreground leading-tight ${size === "sm" ? "text-xs" : "text-sm"}`}>
       {clase.sede}
     </p>
@@ -115,7 +117,7 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
         <TooltipTrigger asChild>
           <span
             title={badgeDescriptions[clase.disciplina] || ""}
-            className={`inline-block mt-2 px-1.5 py-0.5 rounded-full ${size === "sm" ? "text-[8px]" : "text-[10px]"} font-bold uppercase tracking-wide whitespace-nowrap cursor-help ${badgeStyles[clase.disciplina] || ""}`}
+            className={`inline-block self-start mt-2 px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words cursor-help ${badgeStyles[clase.disciplina] || ""}`}
           >
             {clase.disciplina}
           </span>
