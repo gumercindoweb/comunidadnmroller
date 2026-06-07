@@ -8,7 +8,7 @@ const handleClick = () => {
 
 const BannerAlquilerHome = () => {
   return (
-    <section className="py-12 bg-background">
+    <section id="alquiler" className="py-12 bg-background">
       <div className="container mx-auto px-4">
         <Link
           to="/clases-de-rollers-mas-alquiler"
