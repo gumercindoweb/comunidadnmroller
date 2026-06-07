@@ -45,7 +45,7 @@ const HeroSection = () => {
           {/* Left column — Text */}
           <div className="flex flex-col items-start">
             {/* Badge */}
-            <div className="animate-fade-up mb-8">
+            <div className="animate-fade-up mb-5 sm:mb-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
@@ -55,14 +55,21 @@ const HeroSection = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 animate-fade-up-delay-1">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-4 sm:mb-6 animate-fade-up-delay-1">
               Aprendé a patinar con{" "}
-              <span className="text-primary">profes de verdad</span>, en +12
-              parques de Buenos Aires
+              <span className="text-primary">profes de verdad</span>
+              <span className="sm:hidden"> en +12 parques de BA</span>
+              <span className="hidden sm:inline">, en +12 parques de Buenos Aires</span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-base md:text-lg text-muted-foreground max-w-md mb-10 leading-relaxed animate-fade-up-delay-2">
+            {/* Subtitle — mobile */}
+            <p className="sm:hidden text-base text-muted-foreground max-w-md mb-6 leading-relaxed animate-fade-up-delay-2">
+              Clases todos los días en +12 sedes de CABA. Profes certificados,
+              seguro médico incluido. Sin contratos.
+            </p>
+
+            {/* Subtitle — desktop */}
+            <p className="hidden sm:block text-base md:text-lg text-muted-foreground max-w-md mb-10 leading-relaxed animate-fade-up-delay-2">
               Clases todos los días en +12 sedes de CABA. Profesores
               certificados, seguro médico incluido en todos los planes, sin
               contratos ni permanencia. Aprendés desde cero o avanzás de nivel
@@ -73,7 +80,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-3 animate-fade-up-delay-3">
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
                 onClick={() =>
                   document
                     .getElementById("planes")
@@ -86,7 +93,7 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-6 rounded-full transition-all duration-200"
+                className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
                 onClick={() =>
                   document
                     .getElementById("alquiler")
@@ -98,7 +105,8 @@ const HeroSection = () => {
             </div>
 
             {/* Social proof */}
-            <div className="mt-12 flex items-center gap-3 animate-fade-up-delay-3">
+            <div className="mt-12 hidden sm:flex items-center gap-3 animate-fade-up-delay-3">
+
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div
