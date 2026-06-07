@@ -1,14 +1,24 @@
-## Plan: Cambios en HeroSection de la Home
+## Plan: Optimizar Hero para Mobile
 
-### Archivo: `src/components/HeroSection.tsx`
-1. **Badge**: cambiar texto a `"ESCUELA #1 DE PATINAJE EN ARGENTINA"`.
-2. **Headline (h1)**: reemplazar por `"Aprendé a patinar con profes de verdad, en +12 parques de Buenos Aires"`.
-3. **Subtítulo (p)**: reemplazar por el texto indicado sobre clases diarias, sedes CABA, profesores certificados, seguro médico incluido, sin contratos.
-4. **Cuarta tarjeta de stats**: cambiar ícono a `ShieldCheck` (de lucide-react), valor `"Incluido"`, label `"Seguro médico"`; mantener mismo estilo visual que las demás.
-5. **CTA principal (Button)**: cambiar label a `"RESERVÁ TU PRIMERA CLASE →"`; mantener estilo y color actual.
-6. **CTA secundario (Button outline)**: cambiar label a `"EMPEZÁ SIN EQUIPO PROPIO"`; apuntar scroll a la sección de Clases + Alquiler (`#alquiler`).
+### `src/components/HeroSection.tsx`
 
-### Archivo: `src/components/alquiler/BannerAlquilerHome.tsx`
-- Agregar `id="alquiler"` al `<section>` raíz para que el CTA secundario puedo hacer scroll a esta sección.
+1. **Headline responsive:**
+   - Mobile: `Aprendé a patinar con profes de verdad en +12 parques de BA`
+   - Desktop (`sm+`): versión completa actual `…en +12 parques de Buenos Aires`
+   - Implementación: spans con `sm:hidden` / `hidden sm:inline`.
+   - Tamaño: `text-3xl sm:text-5xl md:text-6xl lg:text-7xl` (antes `text-4xl` en mobile).
+   - Margen: `mb-4 sm:mb-6`.
 
-Ningún otro archivo se modifica. Colores, tipografía, animaciones y estructura se mantienen exactamente igual.
+2. **Subtítulo simplificado:**
+   - Mobile: `Clases todos los días en +12 sedes de CABA. Profes certificados, seguro médico incluido. Sin contratos.`
+   - Desktop: texto largo actual.
+   - Implementación: dos `<p>` con `sm:hidden` / `hidden sm:block`.
+   - Margen: `mb-6 sm:mb-10`.
+
+3. **Badge**: `mb-5 sm:mb-8`.
+
+4. **CTAs**: padding vertical `py-5 sm:py-6` para ganar altura.
+
+5. **Social proof (`+3.000 alumnos`)**: `hidden sm:flex` para que ambos CTAs queden visibles en la primera vista mobile.
+
+Fuera de scope: colores, grid, columna de stats, animaciones.
