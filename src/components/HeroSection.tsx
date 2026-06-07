@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Calendar, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin, Calendar, Users, ShieldCheck } from "lucide-react";
 
 const stats = [
   {
@@ -24,9 +24,9 @@ const stats = [
     bgColor: "bg-primary/10",
   },
   {
-    icon: TrendingUp,
-    label: "Años de experiencia",
-    value: "10+",
+    icon: ShieldCheck,
+    label: "Seguro médico",
+    value: "Incluido",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
@@ -49,24 +49,24 @@ const HeroSection = () => {
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
-                  Escuela #1 de Patinaje
+                  Escuela #1 de Patinaje en Argentina
                 </span>
               </div>
             </div>
 
             {/* Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 animate-fade-up-delay-1">
-              Aprendé a patinar
-              <br />
-              con la mejor
-              <br />
-              <span className="text-primary">comunidad</span>
+              Aprendé a patinar con{" "}
+              <span className="text-primary">profes de verdad</span>, en +12
+              parques de Buenos Aires
             </h1>
 
             {/* Subtitle */}
             <p className="text-base md:text-lg text-muted-foreground max-w-md mb-10 leading-relaxed animate-fade-up-delay-2">
-              Desde cero o mejorá tu técnica en un entorno seguro, divertido y
-              con la mejor comunidad de Buenos Aires.
+              Clases todos los días en +12 sedes de CABA. Profesores
+              certificados, seguro médico incluido en todos los planes, sin
+              contratos ni permanencia. Aprendés desde cero o avanzás de nivel
+              — a tu ritmo, en el barrio que preferís.
             </p>
 
             {/* CTA */}
@@ -80,7 +80,7 @@ const HeroSection = () => {
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
               >
-                Empezá Ahora
+                Reservá tu primera clase
                 <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -89,11 +89,11 @@ const HeroSection = () => {
                 className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-6 rounded-full transition-all duration-200"
                 onClick={() =>
                   document
-                    .getElementById("propuesta")
+                    .getElementById("alquiler")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
               >
-                Conocé Más
+                Empezá sin equipo propio
               </Button>
             </div>
 
