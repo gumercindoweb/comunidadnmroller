@@ -69,10 +69,10 @@ const CountdownBanner = () => {
       </div>
 
       <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-2">
-        ⏳ Oferta limitada
+        ⏳ Cupos limitados
       </p>
       <h3 className="text-2xl font-black italic tracking-tight text-foreground mb-1">
-        Venta de pases cierra el 26 de junio
+        Venta cierra el 26 de junio o cuando se completen los cupos
       </h3>
       <p className="text-sm text-muted-foreground mb-6">
         Quedan solo:
