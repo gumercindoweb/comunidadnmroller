@@ -1,8 +1,10 @@
 import { Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import { getProximaMasterclass } from "@/data/masterclasses";
 
 const Footer = () => {
+  const proxMc = getProximaMasterclass();
   return (
     <footer className="bg-card text-foreground py-16 border-t border-border">
       <div className="container mx-auto px-4">
@@ -22,6 +24,7 @@ const Footer = () => {
               <li><button onClick={() => document.getElementById("sedes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Sedes</button></li>
               <li><Link to="/clases-de-rollers-mas-alquiler" className="hover:text-primary transition-colors">Clases + Alquiler</Link></li>
               <li><Link to="/newsletter-desde-cero" className="hover:text-primary transition-colors">Newsletter Desde Cero</Link></li>
+              <li><Link to={`/masterclass-de-patinaje/${proxMc.slug}`} className="hover:text-primary transition-colors">Masterclass de Patinaje</Link></li>
             </ul>
           </div>
 
