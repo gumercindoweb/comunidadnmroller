@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   Calendar,
   MapPin,
@@ -130,8 +131,23 @@ const MasterclassPage = () => {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+  const ogTitle = `Masterclass: ${mc.sede} — ${mc.fechaLabel}`;
+  const ogDescription = `Aprende técnicas avanzadas el ${mc.fechaLabel} a las ${mc.hora} en ${mc.sede}. Cupos limitados, venta cierra 26 de junio. Incluye 2 clases a elección + seguro médico.`;
+
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>{ogTitle} | NM Roller</title>
+        <meta name="description" content={ogDescription} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
+        <meta property="og:image" content="/og-masterclass.png" />
+        <meta property="og:url" content={`https://comunidadnmroller.com/masterclass-de-patinaje/${mc.slug}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={ogTitle} />
+        <meta name="twitter:description" content={`${mc.fechaLabel} — ${mc.sede} — Cupos limitados`} />
+        <meta name="twitter:image" content="/og-masterclass.png" />
+      </Helmet>
       <Navbar />
 
       {/* HERO */}
