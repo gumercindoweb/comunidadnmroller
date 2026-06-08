@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import {
   Calendar,
@@ -14,10 +14,18 @@ import {
   Gift,
   Route,
   ArrowRight,
+  Smartphone,
+  AlertTriangle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { getMasterclass, getProximaMasterclass } from "@/data/masterclasses";
 
 const objetivos = [
@@ -101,6 +109,7 @@ const incluye = [
 const MasterclassPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const mc = getMasterclass(slug);
+  const [modalPase, setModalPase] = useState<'general' | 'alquiler' | null>(null);
 
   useEffect(() => {
     if (mc) {
@@ -311,15 +320,14 @@ const MasterclassPage = () => {
                   Seguro médico incluido
                 </li>
               </ul>
-              <a href={mc.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full rounded-full"
-                >
-                  Comprar mi pase
-                </Button>
-              </a>
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full rounded-full"
+                onClick={() => setModalPase('general')}
+              >
+                Comprar mi pase
+              </Button>
             </div>
 
             {/* Con alquiler — destacado */}
@@ -350,14 +358,13 @@ const MasterclassPage = () => {
                   Cupos limitados — reservá con tiempo
                 </li>
               </ul>
-              <a href={mc.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <Button
-                  size="lg"
-                  className="w-full rounded-full bg-primary hover:bg-primary/90"
-                >
-                  Quiero mi pase
-                </Button>
-              </a>
+              <Button
+                size="lg"
+                className="w-full rounded-full bg-primary hover:bg-primary/90"
+                onClick={() => setModalPase('alquiler')}
+              >
+                Quiero mi pase
+              </Button>
             </div>
 
             {/* Alumnos */}
@@ -489,6 +496,119 @@ const MasterclassPage = () => {
       </section>
 
       <Footer />
+
+      {/* ── Modal "Cómo comprar" ── */}
+      <Dialog open={modalPase !== null} onOpenChange={(open) => !open && setModalPase(null)}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-black italic tracking-tight">
+              {modalPase === 'general'
+                ? '🎫 Pase General — $29.000'
+                : '🎫 Pase con Alquiler — $49.000'}
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* Advertencia: solo para pase con alquiler */}
+          {modalPase === 'alquiler' && (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-bold text-amber-300 mb-1">
+                  Paso previo obligatorio
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Este pase incluye alquiler de rollers y protecciones. Los cupos son
+                  limitados — confirmá disponibilidad <strong>antes</strong> de comprar.
+                </p>
+                <a
+                  href={mc.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-3 text-xs font-bold text-amber-300 hover:underline"
+                >
+                  Consultar disponibilidad por WhatsApp →
+                </a>
+              </div>
+            </div>
+          )}
+
+          {modalPase === 'alquiler' && (
+            <p className="text-xs text-muted-foreground font-semibold uppercase tracking-widest text-center">
+              ¿Confirmaste? Ahora seguí estos pasos
+            </p>
+          )}
+
+          {/* Pasos numerados */}
+          <ol className="space-y-4">
+            <li className="flex gap-3">
+              <span className="flex-none w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-black flex items-center justify-center">1</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Descargá la app TurnoWeb</p>
+                <div className="flex gap-2 mt-2">
+                  <a
+                    href="https://apps.apple.com/us/app/turnosweb-app/id1169566678?l=es&ls=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 border border-border rounded-lg px-3 py-1.5 text-xs font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" /> App Store
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.turnosweb.lite"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 border border-border rounded-lg px-3 py-1.5 text-xs font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" /> Google Play
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex-none w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-black flex items-center justify-center">2</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Creá tu cuenta o ingresá</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Con tu email y una contraseña. Es gratis y toma menos de un minuto.</p>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex-none w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-black flex items-center justify-center">3</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Buscá la Masterclass</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Encontrá la MasterClass{modalPase === 'alquiler' ? ' + Alquiler' : ''} en Comprar Créditos.</p>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex-none w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-black flex items-center justify-center">4</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Elegí la fecha y completá el pago</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Puedes abonar con Mercado Pago utilizando todas las tarjetas.</p>
+              </div>
+            </li>
+          </ol>
+
+          {/* Placeholder capturas / video */}
+          <div className="bg-muted rounded-lg px-4 py-3 text-center">
+            <p className="text-xs text-muted-foreground">
+              📸 Próximamente: capturas paso a paso y video tutorial
+            </p>
+          </div>
+
+          {/* Footer: dudas → WhatsApp */}
+          <p className="text-xs text-muted-foreground text-center">
+            ¿Tenés dudas?{' '}
+            <a
+              href={mc.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-semibold hover:underline"
+            >
+              Escribinos por WhatsApp →
+            </a>
+          </p>
+        </DialogContent>
+      </Dialog>
+
     </div>
   );
 };
