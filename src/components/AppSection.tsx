@@ -123,7 +123,7 @@ const AppSection = () => {
                 asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm tracking-widest uppercase px-10 py-6 rounded-full shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:scale-105"
               >
-                <a href="https://turnosweb.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://nmroller.turnosweb.com" target="_blank" rel="noopener noreferrer">
                   RESERVAR
                 </a>
               </Button>

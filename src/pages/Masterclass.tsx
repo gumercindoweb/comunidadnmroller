@@ -131,13 +131,13 @@ const MasterclassPage = () => {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const ogTitle = `Masterclass: ${mc.sede} — ${mc.fechaLabel}`;
-  const ogDescription = `Aprende técnicas avanzadas el ${mc.fechaLabel} a las ${mc.hora} en ${mc.sede}. Cupos limitados, venta cierra 26 de junio. Incluye 2 clases a elección + seguro médico.`;
+  const ogTitle = `Sumate a la Masterclass | ${mc.fechaLabel} en ${mc.sede}`;
+  const ogDescription = `Aprende técnicas avanzadas el ${mc.fechaLabel} a las ${mc.hora}. Cupos limitados, venta cierra 26 de junio. Incluye 2 clases a elección + seguro médico.`;
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{ogTitle} | NM Roller</title>
+        <title>{ogTitle}</title>
         <meta name="description" content={ogDescription} />
         <meta property="og:title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
@@ -145,34 +145,42 @@ const MasterclassPage = () => {
         <meta property="og:url" content={`https://comunidadnmroller.com/masterclass-de-patinaje/${mc.slug}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={ogTitle} />
-        <meta name="twitter:description" content={`${mc.fechaLabel} — ${mc.sede} — Cupos limitados`} />
+        <meta name="twitter:description" content={`En ${mc.sede} — Cupos limitados, venta cierra 26 de junio`} />
         <meta name="twitter:image" content="/og-masterclass.png" />
       </Helmet>
       <Navbar />
 
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-24 pb-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card" />
-        <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+      <section
+        className="relative min-h-screen sm:min-h-[90vh] flex items-center overflow-hidden pt-16 sm:pt-24 pb-12 sm:pb-16"
+        style={{
+          backgroundImage: `url('/patinadores-comunidad.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute top-10 -left-20 sm:top-20 sm:-left-32 w-48 sm:w-96 h-48 sm:h-96 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-5 -right-10 sm:right-0 w-40 sm:w-80 h-40 sm:h-80 bg-primary/5 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 w-full text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 mb-6">
-            <Calendar className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-cta text-primary">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/15 backdrop-blur-md px-4 py-1.5 mb-6">
+            <Calendar className="w-3.5 h-3.5 text-white" />
+            <span className="text-xs font-bold uppercase tracking-cta text-white">
               {mc.fechaLabel} — {mc.sede} · {mc.hora}
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] mb-6">
             Descubrí en un solo día lo que se siente{" "}
             <span className="text-primary">rollear con confianza</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
             Una oportunidad para quienes siempre tuvieron curiosidad por los
             rollers y nunca se animaron — o quieren dar el siguiente paso.{" "}
-            <span className="text-foreground font-semibold">
+            <span className="text-white font-semibold">
               No necesitás equipo propio: podés alquilar todo lo que necesitás.
             </span>
           </p>
@@ -189,8 +197,7 @@ const MasterclassPage = () => {
             <a href={mc.mapsUrl} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
-                variant="outline"
-                className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-6 rounded-full w-full"
+                className="bg-white/20 hover:bg-white/30 border border-white/40 text-white font-semibold text-base px-8 py-6 rounded-full backdrop-blur-sm transition-all duration-200 w-full"
               >
                 <MapPin className="w-4 h-4 mr-1" /> Cómo llegar
               </Button>
@@ -198,7 +205,7 @@ const MasterclassPage = () => {
           </div>
 
           {/* Datos clave */}
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          <div className="mt-8 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 max-w-3xl mx-auto">
             {[
               { icon: Calendar, label: mc.fechaLabel },
               { icon: Clock, label: mc.hora },
@@ -220,8 +227,8 @@ const MasterclassPage = () => {
       </section>
 
       {/* OBJETIVOS BAR */}
-      <section className="bg-primary text-primary-foreground py-10">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="bg-primary text-primary-foreground py-8 sm:py-10">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {objetivos.map((o) => (
             <div
               key={o}
@@ -239,7 +246,7 @@ const MasterclassPage = () => {
       </section>
 
       {/* MIEDOS */}
-      <section className="py-20 bg-background">
+      <section className="py-12 sm:py-20 bg-background">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4 text-center">
             ¿Te gustaría aprender a patinar, pero{" "}
@@ -269,7 +276,7 @@ const MasterclassPage = () => {
       </section>
 
       {/* LOGROS */}
-      <section className="py-20 bg-card border-y border-border">
+      <section className="py-12 sm:py-20 bg-card border-y border-border">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <p className="text-xs font-bold uppercase tracking-cta text-primary text-center mb-3">
             Te preguntarás
@@ -305,7 +312,7 @@ const MasterclassPage = () => {
       </section>
 
       {/* PASES */}
-      <section id="pases" className="py-20 bg-background">
+      <section id="pases" className="py-12 sm:py-20 bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3 text-center">
             Tres formas de dar tu primer paso
@@ -392,7 +399,7 @@ const MasterclassPage = () => {
             </div>
 
             {/* Alumnos */}
-            <div className="bg-card border border-border rounded-2xl p-8 flex flex-col">
+            <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col">
               <p className="text-xs font-bold uppercase tracking-cta text-muted-foreground mb-2">
                 Alumnos NM y Sportclub
               </p>
@@ -436,7 +443,7 @@ const MasterclassPage = () => {
       </section>
 
       {/* INCLUYE */}
-      <section className="py-20 bg-card border-y border-border">
+      <section className="py-12 sm:py-20 bg-card border-y border-border">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-12 text-center">
             Una experiencia pensada para que{" "}
@@ -463,7 +470,7 @@ const MasterclassPage = () => {
       </section>
 
       {/* CTA FINAL */}
-      <section className="py-20 bg-background">
+      <section className="py-12 sm:py-20 bg-background">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <p className="text-xs font-bold uppercase tracking-cta text-primary mb-3">
             Si querés avanzar más rápido

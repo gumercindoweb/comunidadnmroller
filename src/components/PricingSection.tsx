@@ -23,6 +23,8 @@ interface Plan {
   features: string[];
   highlighted?: boolean;
   badge?: string;
+  mpLink: string;
+  planSlug: string;
 }
 
 const monthlyPlans: Plan[] = [
@@ -39,6 +41,8 @@ const monthlyPlans: Plan[] = [
       "Incluye protecciones y casco (uso obligatorio)",
       "Bonificación del 100% si decidís migrar a un plan en plazo de 7 días",
     ],
+    mpLink: "https://mpago.la/1BRxARe",
+    planSlug: "clase-unica",
   },
   {
     name: "Basic Fun",
@@ -54,6 +58,8 @@ const monthlyPlans: Plan[] = [
       "Acceso a todos los niveles y disciplinas",
       "Acceso a experiencias como Salidas Urbanas y RaNMchadas",
     ],
+    mpLink: "https://mpago.la/2KfSp7m",
+    planSlug: "basic-fun",
   },
   {
     name: "Black Free",
@@ -69,6 +75,8 @@ const monthlyPlans: Plan[] = [
       "Acceso prioritario a Masterclass y eventos GRATIS",
       "Acceso a experiencias como Salidas Urbanas y RaNMchadas",
     ],
+    mpLink: "https://mpago.la/2nhedno",
+    planSlug: "black-free",
   },
 ];
 
@@ -87,6 +95,8 @@ const quarterlyPlans: Plan[] = [
       "Acceso a todos los niveles y disciplinas",
       "Acceso a experiencias como Salidas Urbanas y RaNMchadas",
     ],
+    mpLink: "https://mpago.la/1Jxs4F8",
+    planSlug: "basic-fun-trimestral",
   },
   {
     name: "Black Free",
@@ -102,6 +112,8 @@ const quarterlyPlans: Plan[] = [
       "Acceso prioritario a Masterclass y eventos GRATIS",
       "Acceso a experiencias como Salidas Urbanas y RaNMchadas",
     ],
+    mpLink: "https://mpago.la/2JUVyeb",
+    planSlug: "black-trimestral",
   },
 ];
 
@@ -192,9 +204,11 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
-                    COMPRAR PLAN
-                  </Button>
+                  <a href={plan.mpLink} target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
+                      COMPRAR PLAN
+                    </Button>
+                  </a>
                   <p className="text-[10px] text-center mt-2 text-primary-foreground/50">
                     Serás redirigido a Mercado Pago
                   </p>
