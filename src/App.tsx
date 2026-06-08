@@ -8,6 +8,7 @@ import NewsletterDesdeCero from "./pages/NewsletterDesdeCero.tsx";
 import RegistroConfirmadoNewsletter from "./pages/RegistroConfirmadoNewsletter.tsx";
 import PagoConfirmado from "./pages/PagoConfirmado.tsx";
 import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
+import Masterclass from "./pages/Masterclass.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,8 @@ const App = () => (
           <Route path="/registro-confirmado-newsletter" element={<RegistroConfirmadoNewsletter />} />
           <Route path="/pago-confirmado" element={<PagoConfirmado />} />
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
+          <Route path="/masterclass-de-patinaje" element={<Masterclass />} />
+          <Route path="/masterclass-de-patinaje/:slug" element={<Masterclass />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
