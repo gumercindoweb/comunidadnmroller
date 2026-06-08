@@ -26,6 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import CountdownBanner from "@/components/CountdownBanner";
 import { getMasterclass, getProximaMasterclass } from "@/data/masterclasses";
 
 const objetivos = [
@@ -277,6 +278,13 @@ const MasterclassPage = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* COUNTDOWN — Urgencia de venta */}
+      <section className="py-12 bg-background">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <CountdownBanner />
         </div>
       </section>
 
