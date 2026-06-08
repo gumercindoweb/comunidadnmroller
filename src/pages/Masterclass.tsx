@@ -582,7 +582,7 @@ const MasterclassPage = () => {
               <span className="flex-none w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-black flex items-center justify-center">4</span>
               <div>
                 <p className="text-sm font-semibold text-foreground">Elegí la fecha y completá el pago</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Puedes abonar con Mercado Pago utilizando todas las tarjetas.</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Podés abonar con Mercado Pago utilizando todas las tarjetas.</p>
               </div>
             </li>
           </ol>
