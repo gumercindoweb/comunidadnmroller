@@ -37,6 +37,7 @@ const SedesMapa = ({
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<globalThis.Map<string, L.Marker>>(new globalThis.Map());
+  const roRef = useRef<ResizeObserver | null>(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -68,11 +69,30 @@ const SedesMapa = ({
       const bounds = L.latLngBounds(
         sedesList.map((s) => [s.lat, s.lng] as [number, number]),
       );
-      if (sedesList.length === 1) {
-        map.setView([sedesList[0].lat, sedesList[0].lng], 14);
-      } else {
-        map.fitBounds(bounds, { padding: [60, 60] });
-      }
+
+      // Vista inicial segura (centro de Buenos Aires). El encuadre real se
+      // calcula cuando el contenedor ya tiene tamaño, vía ResizeObserver,
+      // para evitar que fitBounds se vaya al zoom máximo con ancho 0.
+      map.setView([-34.6037, -58.4], 11);
+
+      const applyView = () => {
+        map.invalidateSize();
+        if (sedesList.length === 1) {
+          map.setView([sedesList[0].lat, sedesList[0].lng], 14);
+        } else {
+          map.fitBounds(bounds, { padding: [60, 60] });
+        }
+      };
+
+      const ro = new ResizeObserver(() => {
+        const el = mapDivRef.current;
+        if (el && el.clientWidth > 0 && el.clientHeight > 0) {
+          applyView();
+          ro.disconnect();
+        }
+      });
+      ro.observe(mapDivRef.current);
+      roRef.current = ro;
 
       sedesList.forEach((sede) => {
         const marker = L.marker([sede.lat, sede.lng], {
@@ -95,6 +115,8 @@ const SedesMapa = ({
     }
 
     return () => {
+      roRef.current?.disconnect();
+      roRef.current = null;
       mapRef.current?.remove();
       mapRef.current = null;
       markersRef.current.clear();
