@@ -1,6 +1,8 @@
 import { z } from 'npm:zod@3.23.8'
 
 const ALLOWED_ORIGINS = new Set([
+  'https://comunidadnmroller.com',
+  'https://www.comunidadnmroller.com',
   'https://comunidadnmroller.lovable.app',
   'https://id-preview--dfe84f81-a50f-4e2f-9f25-cd53b5158069.lovable.app',
   'http://localhost:5173',
@@ -11,7 +13,7 @@ function buildCors(origin: string | null) {
   const allowOrigin =
     origin && (ALLOWED_ORIGINS.has(origin) || origin.endsWith('.lovable.app') || origin.endsWith('.lovableproject.com'))
       ? origin
-      : 'https://comunidadnmroller.lovable.app'
+      : 'https://comunidadnmroller.com'
   return {
     'Access-Control-Allow-Origin': allowOrigin,
     'Vary': 'Origin',
