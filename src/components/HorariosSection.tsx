@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
-import { NIVEL_UNIFICADO } from "@/data/sedes";
+import { NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
 // ── Tipos ──
 interface ClaseEnriquecida {
   sede: string;
@@ -20,8 +20,10 @@ interface ClaseEnriquecida {
   disciplina?: string;
 }
 
-// Nivel unificado (pill teal) y disciplinas técnicas (sharp, rojo/amber)
+// Niveles (pills redondeados que resaltan) y disciplinas técnicas (sharp, rojo/amber)
 const badgeStyles: Record<string, string> = {
+  [NIVEL_INICIAL]: "rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/70 font-extrabold",
+  [NIVEL_PRINCIP_INTER]: "rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/70 font-extrabold",
   [NIVEL_UNIFICADO]: "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
   Slalom: "rounded-none bg-primary/15 text-primary border border-primary/50",
   Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
@@ -31,6 +33,8 @@ const badgeStyles: Record<string, string> = {
 };
 
 const badgeDescriptions: Record<string, string> = {
+  [NIVEL_INICIAL]: "Desde cero: tu primera vez sobre rollers, sin experiencia previa.",
+  [NIVEL_PRINCIP_INTER]: "Principiante e Intermedio: ya tenés base y querés seguir mejorando.",
   [NIVEL_UNIFICADO]: "Accedés con cualquier nivel: desde cero (Inicial) hasta Principiante e Intermedio.",
   "Slalom": "Técnica y flow entre conos para dominar cada movimiento.",
   "Frenadas": "Control total: aprendé a frenar seguro y moverte con confianza.",
@@ -156,21 +160,25 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
       <p className={`text-muted-foreground ${size === "sm" ? "text-xs" : "text-sm"}`}>{clase.hora}</p>
     </div>
     {clase.disciplina && (
-      <Tooltip delayDuration={150}>
-        <TooltipTrigger asChild>
-          <span
-            title={badgeDescriptions[clase.disciplina] || ""}
-            className={`inline-block self-start mt-2 px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words cursor-help ${badgeStyles[clase.disciplina] || ""}`}
-          >
-            {clase.disciplina}
-          </span>
-        </TooltipTrigger>
-        {badgeDescriptions[clase.disciplina] && (
-          <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
-            {badgeDescriptions[clase.disciplina]}
-          </TooltipContent>
-        )}
-      </Tooltip>
+      <div className="flex flex-wrap gap-1 mt-2">
+        {expandirNivel(clase.disciplina).map((b) => (
+          <Tooltip key={b} delayDuration={150}>
+            <TooltipTrigger asChild>
+              <span
+                title={badgeDescriptions[b] || ""}
+                className={`inline-block px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words cursor-help ${badgeStyles[b] || ""}`}
+              >
+                {b}
+              </span>
+            </TooltipTrigger>
+            {badgeDescriptions[b] && (
+              <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
+                {badgeDescriptions[b]}
+              </TooltipContent>
+            )}
+          </Tooltip>
+        ))}
+      </div>
     )}
   </div>
 );
@@ -186,22 +194,26 @@ const ClaseDayCard = ({ clase }: { clase: ClaseEnriquecida }) => (
       </div>
       {/* Sede */}
       <p className="text-sm font-semibold text-muted-foreground leading-tight">{clase.sede}</p>
-      {/* Badge con tooltip */}
+      {/* Badges con tooltip */}
       {clase.disciplina && (
-        <Tooltip delayDuration={150}>
-          <TooltipTrigger asChild>
-            <span
-              className={`inline-block self-start mt-auto px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight cursor-help ${badgeStyles[clase.disciplina] || ""}`}
-            >
-              {clase.disciplina}
-            </span>
-          </TooltipTrigger>
-          {badgeDescriptions[clase.disciplina] && (
-            <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
-              {badgeDescriptions[clase.disciplina]}
-            </TooltipContent>
-          )}
-        </Tooltip>
+        <div className="flex flex-wrap gap-1.5 mt-auto">
+          {expandirNivel(clase.disciplina).map((b) => (
+            <Tooltip key={b} delayDuration={150}>
+              <TooltipTrigger asChild>
+                <span
+                  className={`inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight cursor-help ${badgeStyles[b] || ""}`}
+                >
+                  {b}
+                </span>
+              </TooltipTrigger>
+              {badgeDescriptions[b] && (
+                <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
+                  {badgeDescriptions[b]}
+                </TooltipContent>
+              )}
+            </Tooltip>
+          ))}
+        </div>
       )}
     </CardContent>
   </Card>

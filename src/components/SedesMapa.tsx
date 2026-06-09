@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapPin, Clock, ExternalLink, Loader2 } from "lucide-react";
-import { sedes, Sede, disciplinaColor, ordenDias } from "@/data/sedes";
+import { sedes, Sede, disciplinaColor, ordenDias, expandirNivel } from "@/data/sedes";
 import SedeDetalleDialog from "./SedeDetalleDialog";
 
 const markerSvg = (active: boolean) => {
@@ -253,11 +253,11 @@ const SedesMapa = ({
                 </div>
 
                 <div className="flex flex-wrap gap-1 mt-3">
-                  {Array.from(new Set(hoveredSede.clases.map((c) => c.disciplina))).map((d) => (
+                  {Array.from(new Set(hoveredSede.clases.flatMap((c) => expandirNivel(c.disciplina)))).map((d) => (
                     <span
                       key={d}
-                      className={`text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${
-                        disciplinaColor[d] || "bg-muted text-foreground"
+                      className={`text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 ${
+                        disciplinaColor[d] || "rounded-full bg-muted text-foreground"
                       }`}
                     >
                       {d}

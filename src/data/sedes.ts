@@ -19,6 +19,18 @@ export interface Sede {
 // Etiqueta unificada para los 3 niveles (según flyer Diciembre 2025)
 export const NIVEL_UNIFICADO = "Inicial · Princip. · Inter.";
 
+// Niveles separados: Inicial por un lado, Principiante + Intermedio unificados por otro
+export const NIVEL_INICIAL = "Inicial";
+export const NIVEL_PRINCIP_INTER = "Princip. · Inter.";
+
+// Expande una disciplina en los badges a mostrar.
+// Si es el nivel unificado, devuelve los dos badges de nivel separados.
+export const expandirNivel = (disciplina?: string): string[] => {
+  if (!disciplina) return [];
+  if (disciplina === NIVEL_UNIFICADO) return [NIVEL_INICIAL, NIVEL_PRINCIP_INTER];
+  return [disciplina];
+};
+
 // Coordenadas aproximadas de cada sede en CABA / GBA Norte
 export const sedes: Sede[] = [
   {
@@ -192,5 +204,8 @@ export const disciplinaColor: Record<string, string> = {
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
+  // Niveles: pills redondeados que resaltan, cada uno con su color
+  [NIVEL_INICIAL]: "rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/70 font-extrabold",
+  [NIVEL_PRINCIP_INTER]: "rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/70 font-extrabold",
   [NIVEL_UNIFICADO]: "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
 };
