@@ -16,6 +16,9 @@ export interface Sede {
   clases: ClaseSede[];
 }
 
+// Etiqueta unificada para los 3 niveles (según flyer Diciembre 2025)
+export const NIVEL_UNIFICADO = "Inicial · Princip. · Inter.";
+
 // Coordenadas aproximadas de cada sede en CABA / GBA Norte
 export const sedes: Sede[] = [
   {
@@ -28,20 +31,21 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/wsKfFUGqciPhAbup7",
     alquiler: true,
     clases: [
-      { dia: "Martes", hora: "09:00", disciplina: "Primeros pasos" },
-      { dia: "Martes", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Martes", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "09:00", disciplina: "Slalom" },
       { dia: "Martes", hora: "20:00", disciplina: "Frenadas" },
-      { dia: "Miércoles", hora: "09:00", disciplina: "Primeros pasos" },
-      { dia: "Miércoles", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Miércoles", hora: "20:00", disciplina: "Slalom" },
-      { dia: "Jueves", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Jueves", hora: "19:00", disciplina: "Slalom" },
       { dia: "Jueves", hora: "20:00", disciplina: "Rampas" },
-      { dia: "Sábado", hora: "09:00", disciplina: "Primeros pasos" },
-      { dia: "Sábado", hora: "18:00", disciplina: "Principiante" },
+      { dia: "Viernes", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Viernes", hora: "09:00", disciplina: "Slalom" },
+      { dia: "Sábado", hora: "10:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Sábado", hora: "18:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "10:00", disciplina: "Urbano" },
-      { dia: "Domingo", hora: "09:00", disciplina: "Primeros pasos" },
+      { dia: "Domingo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
   {
@@ -54,10 +58,10 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/L7ZsdAEvwSPZWbwU8",
     alquiler: true,
     clases: [
-      { dia: "Martes", hora: "18:00", disciplina: "Primeros pasos" },
-      { dia: "Martes", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Martes", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "19:00", disciplina: "Slalom" },
-      { dia: "Sábado", hora: "09:00", disciplina: "Primeros pasos" },
+      { dia: "Sábado", hora: "09:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "10:00", disciplina: "Urbano" },
     ],
   },
@@ -70,11 +74,11 @@ export const sedes: Sede[] = [
     lng: -58.4359,
     mapsUrl: "https://maps.app.goo.gl/PoyVBEq58EbUdtM59",
     clases: [
-      { dia: "Lunes", hora: "19:00", disciplina: "Primeros pasos" },
-      { dia: "Martes", hora: "19:00", disciplina: "Primeros pasos" },
-      { dia: "Jueves", hora: "19:00", disciplina: "Primeros pasos" },
-      { dia: "Jueves", hora: "20:00", disciplina: "Frenadas" },
-      { dia: "Domingo", hora: "09:00", disciplina: "Primeros pasos" },
+      { dia: "Lunes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Jueves", hora: "20:00", disciplina: "Urbano" },
+      { dia: "Domingo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Domingo", hora: "09:00", disciplina: "Slalom" },
     ],
   },
@@ -88,8 +92,7 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/spbof6ndxcJgAog56",
     alquiler: true,
     clases: [
-      { dia: "Miércoles", hora: "18:30", disciplina: "Primeros pasos" },
-      { dia: "Sábado", hora: "09:00", disciplina: "Primeros pasos" },
+      { dia: "Sábado", hora: "09:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "09:00", disciplina: "Slalom" },
     ],
   },
@@ -102,9 +105,9 @@ export const sedes: Sede[] = [
     lng: -58.4490,
     mapsUrl: "https://maps.app.goo.gl/eUhoF2YDj4VnmPbp6",
     clases: [
-      { dia: "Miércoles", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Miércoles", hora: "20:00", disciplina: "Skatepark" },
-      { dia: "Viernes", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Viernes", hora: "20:00", disciplina: "Skatepark" },
     ],
   },
@@ -117,20 +120,8 @@ export const sedes: Sede[] = [
     lng: -58.5012,
     mapsUrl: "https://maps.app.goo.gl/Q1jrrWT8Rcvr7xR58",
     clases: [
-      { dia: "Viernes", hora: "19:00", disciplina: "Primeros pasos" },
+      { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Viernes", hora: "20:00", disciplina: "Skatepark" },
-    ],
-  },
-  {
-    id: "belgrano-skatepark",
-    nombre: "Belgrano (Skatepark)",
-    direccion: "Skatepark Converse",
-    area: "CABA",
-    lat: -34.5475,
-    lng: -58.4540,
-    mapsUrl: "https://maps.app.goo.gl/6rRCVgFi3N6fEUPb8",
-    clases: [
-      { dia: "Miércoles", hora: "20:00", disciplina: "Skatepark" },
     ],
   },
   {
@@ -143,8 +134,8 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/689B4vaoSq851ZJ1A",
     alquiler: true,
     clases: [
-      { dia: "Miércoles", hora: "18:00", disciplina: "Primeros pasos" },
-      { dia: "Jueves", hora: "19:00", disciplina: "Principiante" },
+      { dia: "Miércoles", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
   {
@@ -157,8 +148,8 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/n3egc4dPJRSDRCPG7",
     alquiler: true,
     clases: [
-      { dia: "Sábado", hora: "08:00", disciplina: "Primeros pasos" },
-      { dia: "Domingo", hora: "08:00", disciplina: "Primeros pasos" },
+      { dia: "Sábado", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Domingo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
   {
@@ -171,8 +162,8 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/45fnmEEHSHPAu4gg7",
     alquiler: true,
     clases: [
-      { dia: "Martes", hora: "19:00", disciplina: "Primeros pasos" },
-      { dia: "Viernes", hora: "19:00", disciplina: "Primeros pasos" },
+      { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
   {
@@ -185,21 +176,11 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/mxt7d3g3SUkRtkms7",
     alquiler: true,
     clases: [
-      { dia: "Miércoles", hora: "18:00", disciplina: "Primeros pasos" },
-      { dia: "Miércoles", hora: "19:00", disciplina: "Principiante" },
-      { dia: "Sábado", hora: "10:30", disciplina: "Primeros pasos" },
+      { dia: "Miércoles", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Sábado", hora: "10:30", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "11:30", disciplina: "Urbano" },
     ],
-  },
-  {
-    id: "parque-las-heras",
-    nombre: "Parque Las Heras",
-    direccion: "Recoleta",
-    area: "CABA",
-    lat: -34.5862,
-    lng: -58.4019,
-    mapsUrl: "https://maps.app.goo.gl/bBQiZYm4ZnF3yxSy5",
-    clases: [],
   },
 ];
 
@@ -211,7 +192,5 @@ export const disciplinaColor: Record<string, string> = {
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
-  "Primeros pasos": "rounded-full bg-secondary/15 text-secondary border border-secondary/40",
-  "Principiante": "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
-  "Intermedio": "rounded-full bg-secondary text-background border border-secondary",
+  [NIVEL_UNIFICADO]: "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
 };

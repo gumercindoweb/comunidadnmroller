@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
+import { NIVEL_UNIFICADO } from "@/data/sedes";
 // ── Tipos ──
 interface ClaseEnriquecida {
   sede: string;
@@ -19,13 +20,9 @@ interface ClaseEnriquecida {
   disciplina?: string;
 }
 
-// Niveles (pill, paleta teal progresiva) y disciplinas (sharp, rojo/amber)
+// Nivel unificado (pill teal) y disciplinas técnicas (sharp, rojo/amber)
 const badgeStyles: Record<string, string> = {
-  // Niveles
-  "Primeros pasos": "rounded-full bg-secondary/15 text-secondary border border-secondary/40",
-  "Principiante": "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
-  "Intermedio": "rounded-full bg-secondary text-background border border-secondary",
-  // Disciplinas
+  [NIVEL_UNIFICADO]: "rounded-full bg-secondary/40 text-secondary-foreground border border-secondary/70",
   Slalom: "rounded-none bg-primary/15 text-primary border border-primary/50",
   Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
   Urbano: "rounded-none bg-muted text-foreground border border-border",
@@ -34,9 +31,7 @@ const badgeStyles: Record<string, string> = {
 };
 
 const badgeDescriptions: Record<string, string> = {
-  "Primeros pasos": "Tu primer contacto con los rollers, sin presión y con acompañamiento real.",
-  "Principiante": "Empezás a soltarte, ganar confianza y disfrutar cada avance.",
-  "Intermedio": "Más control, más fluidez… empezás a sentirte realmente patinador.",
+  [NIVEL_UNIFICADO]: "Accedés con cualquier nivel: desde cero (Inicial) hasta Principiante e Intermedio.",
   "Slalom": "Técnica y flow entre conos para dominar cada movimiento.",
   "Frenadas": "Control total: aprendé a frenar seguro y moverte con confianza.",
   "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
@@ -44,76 +39,73 @@ const badgeDescriptions: Record<string, string> = {
   "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
 };
 
-// ── Horarios enriquecidos con disciplina ──
+// ── Horarios enriquecidos con disciplina (Diciembre 2025) ──
 const horarios: Record<string, ClaseEnriquecida[]> = {
   Lunes: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Martes: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Puerto Madero", hora: "18:00", disciplina: "Primeros pasos" },
-    { sede: "Puerto Madero", hora: "19:00", disciplina: "Principiante" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
-    { sede: "Madero", hora: "19:00", disciplina: "Slalom" },
+    { sede: "Puerto Madero", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Frenadas" },
   ],
   Miércoles: [
-    { sede: "Villa Real", hora: "18:00", disciplina: "Primeros pasos" },
-    { sede: "Villa Real", hora: "19:00", disciplina: "Principiante" },
-    { sede: "Belgrano", hora: "19:00", disciplina: "Principiante" },
-    { sede: "Colegiales", hora: "18:00", disciplina: "Primeros pasos" },
-    { sede: "Vicente López", hora: "18:30", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Villa Real", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Villa Real", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
   ],
   Jueves: [
-    { sede: "P. Rivadavia", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Colegiales", hora: "19:00", disciplina: "Principiante" },
-    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Principiante" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Rampas" },
-    { sede: "Rivadavia", hora: "20:00", disciplina: "Frenadas" },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: "Urbano" },
   ],
   Viernes: [
-    { sede: "Devoto", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Villa Luro", hora: "19:00", disciplina: "Primeros pasos" },
-    { sede: "Belgrano", hora: "19:00", disciplina: "Principiante" },
+    { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Villa Luro", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
   ],
   Sábado: [
-    { sede: "Villa Real", hora: "10:30", disciplina: "Primeros pasos" },
-    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos" },
-    { sede: "Puerto Madero", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Vicente López", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "18:00", disciplina: "Principiante" },
+    { sede: "Villa Real", hora: "10:30", disciplina: NIVEL_UNIFICADO },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Vicente López", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "18:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Vicente López", hora: "09:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: "Urbano" },
-    { sede: "Madero", hora: "10:00", disciplina: "Urbano" },
+    { sede: "Puerto Madero", hora: "10:00", disciplina: "Urbano" },
     { sede: "Villa Real", hora: "11:30", disciplina: "Urbano" },
   ],
   Domingo: [
-    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Plaza La Pampa", hora: "08:00", disciplina: "Primeros pasos" },
-    { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Primeros pasos" },
-    { sede: "Parque Rivadavia", hora: "09:00", disciplina: "Slalom" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: "Slalom" },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],
 };
 
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 // ── Opciones de filtro ──
-// Disciplinas/niveles ordenados para el desplegable (deriva de los datos, manteniendo este orden)
 const ordenDisciplinas = [
-  "Primeros pasos",
-  "Principiante",
-  "Intermedio",
+  NIVEL_UNIFICADO,
   "Slalom",
   "Frenadas",
   "Urbano",
@@ -132,13 +124,13 @@ const identidades = [
     value: "arrancando",
     emoji: "🟢",
     label: "Nunca patiné o no sé por dónde empezar",
-    disciplinas: ["Primeros pasos"],
+    disciplinas: [NIVEL_UNIFICADO],
   },
   {
     value: "con-base",
     emoji: "🟡",
     label: "Ya sé lo básico, quiero mejorar",
-    disciplinas: ["Principiante", "Intermedio"],
+    disciplinas: [NIVEL_UNIFICADO],
   },
   {
     value: "desafio",
