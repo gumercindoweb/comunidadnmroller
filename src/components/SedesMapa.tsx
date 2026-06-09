@@ -1,35 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { MapPin, Clock, ExternalLink, Loader2 } from "lucide-react";
 import { sedes, Sede, disciplinaColor, ordenDias } from "@/data/sedes";
 import SedeDetalleDialog from "./SedeDetalleDialog";
-
-declare global {
-  interface Window {
-    google: any;
-    __nmRollersInitMap?: () => void;
-  }
-}
-
-const BROWSER_KEY = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY as string;
-const TRACKING_ID = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID as string;
-
-// Dark map style alineado al DS (fondo #111, agua teal tenue)
-const mapStyles = [
-  { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
-  { elementType: "labels.text.stroke", stylers: [{ color: "#111111" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#9ca3af" }] },
-  { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#2a2a2a" }] },
-  { featureType: "poi", stylers: [{ visibility: "off" }] },
-  { featureType: "road", elementType: "geometry", stylers: [{ color: "#262626" }] },
-  { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#1a1a1a" }] },
-  { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#2e2e2e" }] },
-  { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#3a3a3a" }] },
-  { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#6b7280" }] },
-  { featureType: "transit", stylers: [{ visibility: "off" }] },
-  { featureType: "water", elementType: "geometry", stylers: [{ color: "#0e2e2c" }] },
-  { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#62c3bf" }] },
-  { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#181818" }] },
-];
 
 const markerSvg = (active: boolean) => {
   const fill = active ? "#62C3BF" : "#D01C1F";
@@ -45,27 +19,13 @@ const markerSvg = (active: boolean) => {
   );
 };
 
-let mapsLoadingPromise: Promise<void> | null = null;
-const loadGoogleMaps = () => {
-  if (mapsLoadingPromise) return mapsLoadingPromise;
-  mapsLoadingPromise = new Promise<void>((resolve, reject) => {
-    if (typeof window === "undefined") return reject(new Error("no window"));
-    if (window.google?.maps) return resolve();
-    if (!BROWSER_KEY) return reject(new Error("Falta VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"));
-
-    window.__nmRollersInitMap = () => resolve();
-
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${BROWSER_KEY}&loading=async&callback=__nmRollersInitMap${
-      TRACKING_ID ? `&channel=${TRACKING_ID}` : ""
-    }`;
-    script.async = true;
-    script.defer = true;
-    script.onerror = () => reject(new Error("No se pudo cargar Google Maps"));
-    document.head.appendChild(script);
+const makeIcon = (active: boolean) =>
+  L.icon({
+    iconUrl: markerSvg(active),
+    iconSize: active ? [48, 56] : [40, 48],
+    iconAnchor: active ? [24, 55] : [20, 47],
+    className: "nm-sede-marker",
   });
-  return mapsLoadingPromise;
-};
 
 const SedesMapa = ({
   sedesList = sedes,
@@ -75,83 +35,85 @@ const SedesMapa = ({
   sidebarTitle?: string;
 } = {}) => {
   const mapDivRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<any>(null);
-  const markersRef = useRef<Map<string, any>>(new Map());
+  const mapRef = useRef<L.Map | null>(null);
+  const markersRef = useRef<globalThis.Map<string, L.Marker>>(new globalThis.Map());
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedSede, setSelectedSede] = useState<Sede | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-
-  // load script once
+  // init map once
   useEffect(() => {
-    loadGoogleMaps()
-      .then(() => setReady(true))
-      .catch((e) => setError(e.message));
-  }, []);
+    if (!mapDivRef.current || mapRef.current) return;
+    try {
+      const map = L.map(mapDivRef.current, {
+        zoomControl: true,
+        scrollWheelZoom: true,
+        attributionControl: true,
+      });
+      mapRef.current = map;
 
-  // init map
-  useEffect(() => {
-    if (!ready || !mapDivRef.current || mapRef.current) return;
-
-    const google = window.google;
-    const bounds = new google.maps.LatLngBounds();
-    sedesList.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
-
-    mapRef.current = new google.maps.Map(mapDivRef.current, {
-      center: bounds.getCenter(),
-      zoom: 12,
-      styles: mapStyles,
-      disableDefaultUI: true,
-      zoomControl: true,
-      gestureHandling: "greedy",
-      backgroundColor: "#111111",
-    });
-    mapRef.current.fitBounds(bounds, 60);
-
-    sedesList.forEach((sede) => {
-
-      const marker = new google.maps.Marker({
-        position: { lat: sede.lat, lng: sede.lng },
-        map: mapRef.current,
-        title: sede.nombre,
-        icon: {
-          url: markerSvg(false),
-          scaledSize: new google.maps.Size(40, 48),
-          anchor: new google.maps.Point(20, 47),
+      // Tiles oscuros gratuitos (CARTO Dark Matter, sin API key)
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: "abcd",
+          maxZoom: 19,
         },
+      ).addTo(map);
+
+      const bounds = L.latLngBounds(
+        sedesList.map((s) => [s.lat, s.lng] as [number, number]),
+      );
+      if (sedesList.length === 1) {
+        map.setView([sedesList[0].lat, sedesList[0].lng], 14);
+      } else {
+        map.fitBounds(bounds, { padding: [60, 60] });
+      }
+
+      sedesList.forEach((sede) => {
+        const marker = L.marker([sede.lat, sede.lng], {
+          icon: makeIcon(false),
+          title: sede.nombre,
+        }).addTo(map);
+
+        marker.on("mouseover", () => setHoveredId(sede.id));
+        marker.on("click", () => {
+          setSelectedSede(sede);
+          setDialogOpen(true);
+        });
+
+        markersRef.current.set(sede.id, marker);
       });
 
-      marker.addListener("mouseover", () => setHoveredId(sede.id));
-      marker.addListener("click", () => {
-        setSelectedSede(sede);
-        setDialogOpen(true);
-      });
+      setReady(true);
+    } catch (e: any) {
+      setError(e?.message ?? "No se pudo cargar el mapa");
+    }
 
-      markersRef.current.set(sede.id, marker);
-    });
-  }, [ready]);
+    return () => {
+      mapRef.current?.remove();
+      mapRef.current = null;
+      markersRef.current.clear();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // update marker icons when hovered changes
   useEffect(() => {
-    if (!window.google?.maps) return;
     markersRef.current.forEach((marker, id) => {
-      marker.setIcon({
-        url: markerSvg(id === hoveredId),
-        scaledSize: new window.google.maps.Size(id === hoveredId ? 48 : 40, id === hoveredId ? 56 : 48),
-        anchor: new window.google.maps.Point(id === hoveredId ? 24 : 20, id === hoveredId ? 55 : 47),
-      });
-      if (id === hoveredId) marker.setZIndex(999);
+      const active = id === hoveredId;
+      marker.setIcon(makeIcon(active));
+      marker.setZIndexOffset(active ? 1000 : 0);
     });
   }, [hoveredId]);
 
   const focusSede = (sede: Sede) => {
     setHoveredId(sede.id);
-    if (mapRef.current) {
-      mapRef.current.panTo({ lat: sede.lat, lng: sede.lng });
-      mapRef.current.setZoom(14);
-    }
+    mapRef.current?.setView([sede.lat, sede.lng], 14, { animate: true });
   };
   const hoveredSede = hoveredId ? sedesList.find((s) => s.id === hoveredId) ?? null : null;
 
@@ -208,7 +170,7 @@ const SedesMapa = ({
       <div className="relative">
         <div
           ref={mapDivRef}
-          className="w-full h-[560px] bg-[#111] border border-border"
+          className="w-full h-[560px] bg-[#111] border border-border z-0"
         />
 
         {!ready && !error && (
@@ -225,7 +187,7 @@ const SedesMapa = ({
 
         {/* Floating hover card */}
         {hoveredSede && (
-          <div className="absolute top-4 right-4 w-72 bg-card border border-primary/40 shadow-2xl shadow-primary/20 p-4 pointer-events-auto animate-fade-up">
+          <div className="absolute top-4 right-4 w-72 bg-card border border-primary/40 shadow-2xl shadow-primary/20 p-4 pointer-events-auto animate-fade-up z-[400]">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div>
                 <h4 className="text-foreground font-black italic text-base leading-tight">
