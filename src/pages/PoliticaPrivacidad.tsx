@@ -1,13 +1,5 @@
-import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import LegalLayout, { Section, Bullets } from "@/components/LegalLayout";
-
-// Marca lo que el equipo debe completar. Se ve resaltado en amarillo.
-const Todo = ({ children }: { children: ReactNode }) => (
-  <span className="bg-amber-500/20 text-amber-300 font-semibold px-1.5 py-0.5 rounded border border-amber-500/40">
-    [A COMPLETAR: {children}]
-  </span>
-);
 
 const PoliticaPrivacidad = () => {
   return (
@@ -28,9 +20,9 @@ const PoliticaPrivacidad = () => {
         <p>El responsable del tratamiento de tus datos personales es:</p>
         <Bullets
           items={[
-            <>Razón social: <Todo>razón social / nombre legal</Todo></>,
-            <>CUIT: <Todo>CUIT</Todo></>,
-            <>Domicilio: <Todo>domicilio legal</Todo></>,
+            <>Razón social: <strong className="text-foreground">PISAPPCO S.R.L.</strong></>,
+            <>CUIT: <strong className="text-foreground">33-71803404-9</strong></>,
+            <>Domicilio: Sinclair 3139, 5.º C, Ciudad Autónoma de Buenos Aires, Argentina</>,
             <>Email de contacto: <a href="mailto:hola@comunidadnmroller.com" className="text-primary hover:underline">hola@comunidadnmroller.com</a></>,
             <>WhatsApp: <a href="https://wa.me/5491165920600" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">+54 11 6592-0600</a></>,
           ]}
@@ -121,9 +113,12 @@ const PoliticaPrivacidad = () => {
 
       <Section title="8. Conservación de los datos">
         <p>
-          Conservamos tus datos mientras dure tu relación con la comunidad y durante el plazo
-          necesario para cumplir con obligaciones legales. Plazo de conservación:{" "}
-          <Todo>definir plazo de conservación</Todo>.
+          Conservamos tus datos personales mientras dure tu relación con Comunidad NM Roller y
+          hasta <strong className="text-foreground">5 años</strong> después de tu última
+          interacción. Los comprobantes y registros de pago se conservan por el plazo que exigen
+          las obligaciones legales, contables e impositivas (hasta{" "}
+          <strong className="text-foreground">10 años</strong>, conforme la normativa vigente).
+          Cumplido el plazo, los datos se eliminan o anonimizan de forma segura.
         </p>
       </Section>
 
@@ -146,7 +141,7 @@ const PoliticaPrivacidad = () => {
         <p>
           Para las clases KIDS, la inscripción y el tratamiento de datos de menores se realiza con el
           consentimiento de su madre, padre o tutor/a, quien es responsable de la información
-          brindada. <Todo>confirmar requisitos de consentimiento para menores</Todo>.
+          brindada.
         </p>
       </Section>
 
@@ -156,7 +151,7 @@ const PoliticaPrivacidad = () => {
           seguimiento ni herramientas de analítica publicitaria</strong>. El mapa de sedes utiliza
           OpenStreetMap/CARTO únicamente para mostrar las ubicaciones, sin recolectar datos
           personales. Si en el futuro incorporamos analítica o píxeles (por ejemplo, Google
-          Analytics o Meta Pixel), actualizaremos esta sección. <Todo>actualizar si se agregan cookies/analytics</Todo>.
+          Analytics o Meta Pixel), actualizaremos esta sección.
         </p>
       </Section>
 

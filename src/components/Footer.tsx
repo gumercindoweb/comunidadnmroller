@@ -39,7 +39,8 @@ const Footer = () => {
           <div>
             <h4 className="font-bold italic mb-4 text-sm tracking-wide">CONTACTO</h4>
             <ul className="space-y-2 text-foreground/60 text-sm">
-              <li>info@nmroller.com</li>
+              <li><a href="mailto:hola@comunidadnmroller.com" className="hover:text-primary transition-colors">hola@comunidadnmroller.com</a></li>
+              <li><a href="https://wa.me/5491165920600" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+54 11 6592-0600</a></li>
               <li>Buenos Aires, Argentina</li>
             </ul>
             <div className="flex gap-3 mt-4">
