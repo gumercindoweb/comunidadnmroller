@@ -280,6 +280,11 @@ const ClaseGratisConfirmada = () => {
                 tu nombre y DNI (y el comprobante, si pagaste la seña),{" "}
                 <span className="text-primary">tu clase NO queda acreditada</span>.
               </p>
+              <p className="text-sm md:text-base text-foreground/70 leading-relaxed mb-5 max-w-xl mx-auto">
+                💡 Si intentás reservar en la app antes de que te acreditemos, te va a figurar que{" "}
+                <strong className="text-foreground">no tenés créditos</strong>. Es normal: tu clase
+                se habilita en cuanto confirmamos tus datos por WhatsApp.
+              </p>
               <a
                 href={waEnviarDatos}
                 target="_blank"
