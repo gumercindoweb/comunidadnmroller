@@ -69,7 +69,7 @@ const CountdownBanner = () => {
       </div>
 
       <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-2">
-        ⏳ Cupos limitados
+        🎟️ Venta de pases hasta el viernes 26 de junio
       </p>
       <h3 className="text-2xl font-black italic tracking-tight text-foreground mb-1">
         Asegurá tu lugar antes de que se acaben los cupos
