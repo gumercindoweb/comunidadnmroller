@@ -63,9 +63,9 @@ const HeroSection = () => {
 
             {/* Subtitle */}
             <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 sm:mb-10 leading-relaxed animate-fade-up-delay-2">
-              Con profes de verdad y sin que nadie te mida. Te alquilamos el
-              equipo, sin contratos, y te sumás a una comunidad que ya patea las calles
-              de Buenos Aires. 🛼
+              Con profes que te guían y acompañan, y compañeros que te apoyan. Te
+              alquilamos el equipo, sin contratos, y te sumás a una comunidad que ya
+              patea las calles de Buenos Aires. 🛼
             </p>
 
             {/* CTA */}
