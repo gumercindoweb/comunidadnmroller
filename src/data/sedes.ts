@@ -63,11 +63,11 @@ export const sedes: Sede[] = [
   {
     id: "puerto-madero",
     nombre: "Puerto Madero",
-    direccion: "Pierina Dealessi 100-150",
+    direccion: "Juana Manso y Martha Lynch",
     area: "CABA",
     lat: -34.6118,
     lng: -58.3631,
-    mapsUrl: "https://maps.app.goo.gl/L7ZsdAEvwSPZWbwU8",
+    mapsUrl: "https://maps.app.goo.gl/QKdHNpXbNSwK9yRh9",
     alquiler: true,
     clases: [
       { dia: "Martes", hora: "18:00", disciplina: NIVEL_UNIFICADO },

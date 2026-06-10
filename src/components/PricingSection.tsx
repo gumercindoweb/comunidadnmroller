@@ -133,7 +133,7 @@ const PricingSection = () => {
             Elegí tu plan ideal
           </h2>
           <p className="text-primary-foreground/60 text-lg mb-8">
-            Todos los planes incluyen acceso a nuestras +12 sedes
+            Todos los planes incluyen acceso a nuestras +10 sedes
           </p>
 
           <div className="inline-flex bg-primary-foreground/10 rounded-full p-1">

@@ -132,7 +132,7 @@ const MasterclassPage = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   const ogTitle = `Sumate a la Masterclass | ${mc.fechaLabel} en ${mc.sede}`;
-  const ogDescription = `Aprende técnicas avanzadas el ${mc.fechaLabel} a las ${mc.hora}. Cupos limitados, venta cierra 26 de junio. Incluye 2 clases a elección + seguro médico.`;
+  const ogDescription = `Aprende técnicas avanzadas el ${mc.fechaLabel} a las ${mc.hora}. Cupos limitados. Incluye 2 clases a elección + seguro médico.`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -145,7 +145,7 @@ const MasterclassPage = () => {
         <meta property="og:url" content={`https://comunidadnmroller.com/masterclass-de-patinaje/${mc.slug}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={ogTitle} />
-        <meta name="twitter:description" content={`En ${mc.sede} — Cupos limitados, venta cierra 26 de junio`} />
+        <meta name="twitter:description" content={`En ${mc.sede} — Cupos limitados. Asegurá tu lugar.`} />
         <meta name="twitter:image" content="/og-masterclass.png" />
       </Helmet>
       <Navbar />
@@ -178,8 +178,8 @@ const MasterclassPage = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Una oportunidad para quienes siempre tuvieron curiosidad por los
-            rollers y nunca se animaron — o quieren dar el siguiente paso.{" "}
+            Una oportunidad para quienes siempre tuvieron curiosidad por patinar
+            y nunca se animaron — o quieren dar el siguiente paso.{" "}
             <span className="text-white font-semibold">
               No necesitás equipo propio: podés alquilar todo lo que necesitás.
             </span>

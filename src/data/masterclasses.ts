@@ -23,8 +23,8 @@ export const masterclasses: Masterclass[] = [
     fechaISO: "2026-06-28T15:00:00-03:00",
     fechaLabel: "Domingo 28 de Junio",
     hora: "15 hs",
-    direccion: "Pierina Dealessi 100-150, Puerto Madero",
-    mapsUrl: "https://maps.app.goo.gl/L7ZsdAEvwSPZWbwU8",
+    direccion: "Juana Manso y Martha Lynch, Puerto Madero",
+    mapsUrl: "https://maps.app.goo.gl/QKdHNpXbNSwK9yRh9",
     whatsappUrl: "https://wa.link/7vfiie",
     precios: {
       general: "$29.000",

@@ -9,7 +9,7 @@ const items = [
   },
   {
     icon: MapPin,
-    title: "+12 Sedes Outdoor",
+    title: "+10 Sedes Outdoor",
     desc: "Elegí la sede que más te convenga. Tenemos puntos en toda la ciudad de Buenos Aires.",
   },
   {

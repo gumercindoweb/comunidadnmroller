@@ -72,7 +72,7 @@ const CountdownBanner = () => {
         ⏳ Cupos limitados
       </p>
       <h3 className="text-2xl font-black italic tracking-tight text-foreground mb-1">
-        Venta cierra el 26 de junio o cuando se completen los cupos
+        Asegurá tu lugar antes de que se acaben los cupos
       </h3>
       <p className="text-sm text-muted-foreground mb-6">
         Quedan solo:

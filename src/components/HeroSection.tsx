@@ -5,7 +5,7 @@ const stats = [
   {
     icon: MapPin,
     label: "Sedes activas",
-    value: "+12",
+    value: "+10",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },

@@ -32,7 +32,7 @@ import {
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const incluye = [
-  { icon: Footprints, title: "Rollers", desc: "Patines en línea profesionales y mantenidos." },
+  { icon: Footprints, title: "Rollers", desc: "Bota rígida que cuida y sostiene tus pies." },
   { icon: HardHat, title: "Casco", desc: "Uso obligatorio en todas las clases." },
   { icon: Hand, title: "Muñequeras", desc: "Protección clave para tus primeras caídas." },
   { icon: ShieldCheck, title: "Rodilleras + Coderas", desc: "Set completo de protecciones." },
