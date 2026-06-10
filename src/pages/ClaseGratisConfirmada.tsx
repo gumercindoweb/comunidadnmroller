@@ -269,6 +269,26 @@ const ClaseGratisConfirmada = () => {
                 </li>
               ))}
             </ol>
+
+            {/* Advertencia: punto clave */}
+            <div className="mt-10 max-w-3xl mx-auto bg-[#F5B800]/10 border-2 border-[#F5B800] p-6 md:p-7 text-center">
+              <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] px-4 py-1.5 mb-4 text-xs font-black uppercase tracking-[0.18em]">
+                <AlertCircle className="w-4 h-4" strokeWidth={3} /> Paso clave
+              </div>
+              <p className="text-base md:text-lg font-bold text-foreground leading-relaxed mb-5 max-w-xl mx-auto">
+                El <span className="text-primary">paso 4 es indispensable</span>: si no nos enviás
+                tu nombre y DNI (y el comprobante, si pagaste la seña),{" "}
+                <span className="text-primary">tu clase NO queda acreditada</span>.
+              </p>
+              <a
+                href={waEnviarDatos}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-[#25D366] text-white font-bold uppercase tracking-[0.16em] text-sm transition-all hover:opacity-90 rounded-full"
+              >
+                <WhatsAppIcon className="w-5 h-5 fill-current" /> Enviar mis datos ahora
+              </a>
+            </div>
           </div>
         </section>
 
