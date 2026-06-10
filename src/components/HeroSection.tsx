@@ -62,18 +62,11 @@ const HeroSection = () => {
               <span className="hidden sm:inline">, en +12 parques de Buenos Aires</span>
             </h1>
 
-            {/* Subtitle — mobile */}
-            <p className="sm:hidden text-base text-muted-foreground max-w-md mb-6 leading-relaxed animate-fade-up-delay-2">
-              Clases todos los días en +12 sedes de CABA. Profes certificados,
-              seguro médico incluido. Sin contratos.
-            </p>
-
-            {/* Subtitle — desktop */}
-            <p className="hidden sm:block text-base md:text-lg text-muted-foreground max-w-md mb-10 leading-relaxed animate-fade-up-delay-2">
-              Clases todos los días en +12 sedes de CABA. Profesores
-              certificados, seguro médico incluido en todos los planes, sin
-              contratos ni permanencia. Aprendés desde cero o avanzás de nivel
-              — a tu ritmo, en el barrio que preferís.
+            {/* Subtitle */}
+            <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 sm:mb-10 leading-relaxed animate-fade-up-delay-2">
+              Acá nadie te apura ni te mide. Venís desde cero o a mejorar —con
+              seguro médico y sin contratos— y te sumás a +3.000 que ya patinan
+              con nosotros. 🛼
             </p>
 
             {/* CTA */}
