@@ -76,7 +76,7 @@ const Navbar = () => {
         </Link>
 
         {/* Center nav links - desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <button
               key={link.label}
@@ -102,7 +102,7 @@ const Navbar = () => {
         </div>
 
         {/* CTA button - desktop */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Button
             onClick={() => goToSection("planes")}
             className="bg-foreground hover:bg-foreground/90 text-background font-semibold text-sm px-6 py-5 rounded-full shadow-lg transition-all duration-200"
@@ -113,7 +113,7 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 rounded-lg transition-colors"
+          className="lg:hidden p-2 rounded-lg transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? (
@@ -126,7 +126,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >

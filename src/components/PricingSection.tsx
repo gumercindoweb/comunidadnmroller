@@ -157,9 +157,9 @@ const PricingSection = () => {
           {plans.map((plan, i) => (
             <div
               key={`${period}-${plan.name}`}
-              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-500 ${
+              className={`relative rounded-2xl p-5 md:p-8 flex flex-col transition-all duration-500 ${
                 plan.highlighted
-                  ? "bg-primary text-primary-foreground ring-2 ring-primary scale-[1.02]"
+                  ? "bg-primary text-primary-foreground ring-2 ring-primary md:scale-[1.02]"
                   : "bg-primary-foreground/5 border border-primary-foreground/10"
               } ${isVisible ? "animate-fade-up" : "opacity-0"}`}
               style={{ animationDelay: `${i * 0.1}s` }}

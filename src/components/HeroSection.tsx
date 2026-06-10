@@ -64,12 +64,12 @@ const HeroSection = () => {
             {/* Subtitle */}
             <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 sm:mb-10 leading-relaxed animate-fade-up-delay-2">
               Con profes de verdad y sin que nadie te mida. Te alquilamos el
-              equipo —sin contratos— y te sumás a +3.000 que ya patinan con
-              nosotros. 🛼
+              equipo, sin contratos, y te sumás a una comunidad que ya patea las calles
+              de Buenos Aires. 🛼
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up-delay-3">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 animate-fade-up-delay-3">
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
@@ -144,7 +144,7 @@ const HeroSection = () => {
             </div>
 
             {/* Floating accent card */}
-            <div className="absolute -bottom-4 -left-4 lg:-left-8 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-lg shadow-primary/25 animate-fade-up-delay-3">
+            <div className="hidden lg:block absolute -bottom-4 -left-6 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-lg shadow-primary/25 animate-fade-up-delay-3">
               <p className="text-sm font-bold">🛼 ¡Clases todos los días!</p>
             </div>
           </div>
