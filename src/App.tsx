@@ -9,6 +9,8 @@ import RegistroConfirmadoNewsletter from "./pages/RegistroConfirmadoNewsletter.t
 import PagoConfirmado from "./pages/PagoConfirmado.tsx";
 import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
 import Masterclass from "./pages/Masterclass.tsx";
+import ClaseGratis from "./pages/ClaseGratis.tsx";
+import ClaseGratisConfirmada from "./pages/ClaseGratisConfirmada.tsx";
 import TerminosCondiciones from "./pages/TerminosCondiciones.tsx";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
           <Route path="/masterclass-de-patinaje" element={<Masterclass />} />
           <Route path="/masterclass-de-patinaje/:slug" element={<Masterclass />} />
+          <Route path="/clase-gratis" element={<ClaseGratis />} />
+          <Route path="/clase-gratis-confirmada" element={<ClaseGratisConfirmada />} />
           <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
           <Route path="/politicas-de-privacidad" element={<PoliticaPrivacidad />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

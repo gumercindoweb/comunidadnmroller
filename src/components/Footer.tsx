@@ -23,6 +23,7 @@ const Footer = () => {
               <li><button onClick={() => document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Planes</button></li>
               <li><button onClick={() => document.getElementById("sedes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Sedes</button></li>
               <li><Link to="/clases-de-rollers-mas-alquiler" className="hover:text-primary transition-colors">Clases + Alquiler</Link></li>
+              <li><Link to="/clase-gratis" className="hover:text-primary transition-colors">Clase de Prueba Gratis</Link></li>
               <li><Link to="/newsletter-desde-cero" className="hover:text-primary transition-colors">Newsletter Desde Cero</Link></li>
               <li><Link to={`/masterclass-de-patinaje/${proxMc.slug}`} className="hover:text-primary transition-colors">Masterclass de Patinaje</Link></li>
             </ul>
