@@ -172,6 +172,7 @@ const pasos: Paso[] = [
 
 const despues = [
   { emoji: "🔒", text: <>Tu clase se acredita cuando te <strong>confirmemos por WhatsApp</strong>.</> },
+  { emoji: "📧", text: <><strong>Revisá tu correo</strong> (y la carpeta de spam): ahí te mandamos los detalles para empezar.</> },
   { emoji: "📲", text: <>Ingresá a la app y confirmá tu reserva en la pestaña <strong>"Nueva Reserva"</strong>.</> },
   { emoji: "👥", text: <>Sumate al <strong>grupo de WhatsApp de tu sede</strong>.</> },
   { emoji: "💬", text: <>¿Dudas? Escribinos por WhatsApp y te ayudamos al instante.</> },
