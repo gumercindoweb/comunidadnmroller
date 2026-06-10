@@ -56,17 +56,16 @@ const HeroSection = () => {
 
             {/* Heading */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-4 sm:mb-6 animate-fade-up-delay-1">
-              Aprendé a patinar con{" "}
-              <span className="text-primary">profes de verdad</span>
-              <span className="sm:hidden"> en +12 parques de BA</span>
-              <span className="hidden sm:inline">, en +12 parques de Buenos Aires</span>
+              Aprendé a patinar{" "}
+              <span className="text-primary">desde cero</span>, sin equipo ni
+              experiencia
             </h1>
 
             {/* Subtitle */}
             <p className="text-base md:text-lg text-muted-foreground max-w-md mb-8 sm:mb-10 leading-relaxed animate-fade-up-delay-2">
-              Acá nadie te apura ni te mide. Venís desde cero o a mejorar —con
-              seguro médico y sin contratos— y te sumás a +3.000 que ya patinan
-              con nosotros. 🛼
+              Con profes de verdad y sin que nadie te mida. Te alquilamos el
+              equipo —sin contratos— y te sumás a +3.000 que ya patinan con
+              nosotros. 🛼
             </p>
 
             {/* CTA */}
