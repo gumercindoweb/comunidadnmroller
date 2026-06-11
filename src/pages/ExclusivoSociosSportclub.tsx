@@ -33,6 +33,7 @@ import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
+import EquipoBanners from "@/components/sportclub/EquipoBanners";
 
 // ── Niveles incluidos en el beneficio gratuito de socio SportClub ──
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
@@ -129,6 +130,9 @@ const ExclusivoSociosSportclub = () => {
   const [nivel, setNivel] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Sede elegida en el form: para mostrar su info (dirección, alquiler, horarios)
+  const selectedSede = sportclubSedes.find((s) => s.nombre === sede);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -280,10 +284,58 @@ const ExclusivoSociosSportclub = () => {
                     {sportclubSedes.map((s) => (
                       <SelectItem key={s.id} value={s.nombre}>
                         {s.nombre}
+                        {s.alquiler ? " · Alquiler disponible" : ""}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+
+                {/* Detalle de la sede elegida: dirección, alquiler, horarios y cómo llegar */}
+                {selectedSede && (
+                  <div className="border border-primary/30 bg-primary/5 p-4">
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold uppercase text-xs tracking-wide leading-tight">
+                          {selectedSede.nombre}
+                        </p>
+                        <p className="text-foreground/60 text-xs mt-0.5">
+                          {selectedSede.direccion}
+                        </p>
+                        {selectedSede.alquiler && (
+                          <p className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-bold uppercase tracking-wide text-primary">
+                            <Tag className="w-3 h-3" /> Alquiler de equipo 50% OFF en esta sede
+                          </p>
+                        )}
+                        {selectedSede.clases?.length > 0 && (
+                          <ul className="mt-2 space-y-1">
+                            {selectedSede.clases.map((c, i) => (
+                              <li
+                                key={i}
+                                className="flex items-center gap-2 text-xs text-foreground/70"
+                              >
+                                <Clock className="w-3 h-3 text-primary shrink-0" />
+                                <span className="font-semibold">{c.dia}</span>
+                                <span className="text-foreground/50">{c.hora} hs</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {selectedSede.mapsUrl && (
+                          <a
+                            href={selectedSede.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block mt-2 text-[10px] uppercase tracking-[0.18em] text-primary font-bold"
+                          >
+                            Cómo llegar →
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <Select value={nivel} onValueChange={setNivel} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="Tu nivel actual" />
@@ -359,49 +411,56 @@ const ExclusivoSociosSportclub = () => {
           {/* Mapa Leaflet con la sublista de sedes SportClub */}
           <SedesMapa sedesList={sportclubSedes} sidebarTitle="Elegí tu sede" />
 
-          {/* Horarios por sede (estilo flyer) */}
+          {/* Todas las sedes (las 10) · grilla estilo Home con etiqueta de alquiler */}
           <div className="max-w-7xl mx-auto mt-12">
-            <h3 className="font-display italic uppercase text-xl md:text-2xl font-black mb-6">
-              Horarios por sede
+            <h3 className="font-display italic uppercase text-xl md:text-2xl font-black mb-2">
+              Todas nuestras sedes
             </h3>
+            <p className="text-foreground/60 text-sm mb-6 max-w-2xl">
+              Estas son las {sedes.length} sedes de NM Roller. Las marcadas con{" "}
+              <span className="text-secondary font-bold uppercase">Alquiler</span> ofrecen
+              equipo para alquilar — 50% OFF para socios SportClub.
+            </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {sportclubSedes.map((s) => (
-                <div key={s.id} className="bg-card border border-border p-5">
-                  <div className="flex items-start gap-2 mb-3">
-                    <MapPin className="w-4 h-4 text-primary mt-1 shrink-0" />
-                    <div>
-                      <h4 className="font-bold uppercase text-sm tracking-wide leading-tight">
-                        {s.nombre}
-                      </h4>
-                      <p className="text-foreground/50 text-[11px] leading-snug mt-0.5">
-                        {s.direccion}
-                      </p>
-                    </div>
+              {sedes.map((s) => (
+                <div
+                  key={s.id}
+                  className="bg-card border border-border p-5 flex items-start gap-2.5"
+                >
+                  <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold uppercase text-sm tracking-wide leading-tight">
+                      {s.nombre}
+                    </h4>
+                    <p className="text-foreground/50 text-[11px] leading-snug mt-0.5">
+                      {s.direccion}
+                    </p>
+                    {s.alquiler && (
+                      <div className="mt-2">
+                        <span className="inline-block text-[9px] font-bold uppercase tracking-wider text-secondary border border-secondary/40 px-2 py-0.5 rounded-full">
+                          Alquiler
+                        </span>
+                      </div>
+                    )}
+                    {s.mapsUrl && (
+                      <a
+                        href={s.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-3 text-[10px] uppercase tracking-[0.18em] text-primary font-bold"
+                      >
+                        Cómo llegar →
+                      </a>
+                    )}
                   </div>
-                  <ul className="space-y-1.5 pl-6">
-                    {s.clases.map((c, i) => (
-                      <li key={i} className="flex items-center gap-2 text-xs text-foreground/80">
-                        <Clock className="w-3 h-3 text-primary shrink-0" />
-                        <span className="font-semibold">{c.dia}</span>
-                        <span className="text-foreground/60">{c.hora} hs</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {s.mapsUrl && (
-                    <a
-                      href={s.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-3 ml-6 text-[10px] uppercase tracking-[0.18em] text-primary font-bold"
-                    >
-                      Cómo llegar →
-                    </a>
-                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Banners: alquilar equipo (socios) o armar tu propio kit */}
+        <EquipoBanners />
 
         {/* Planes para escalar (abonás extra) */}
         <PlanesSportclub />
