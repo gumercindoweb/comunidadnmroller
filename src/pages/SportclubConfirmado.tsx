@@ -1,10 +1,8 @@
-import { useEffect, useState, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { differenceInSeconds } from "date-fns";
 import {
   AlertCircle,
-  Clock,
   Smartphone,
   UserPlus,
   Send,
@@ -18,52 +16,15 @@ import PlanesSportclub from "@/components/PlanesSportclub";
 const WHATSAPP = "5491165920600";
 const APP_STORE = "https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678";
 const GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=com.turnosweb.lite";
-const EVERGREEN_HOURS = 48;
-const STORAGE_KEY = "sportclub_deadline";
 
 const waEnviarDatos =
   `https://wa.me/${WHATSAPP}?text=` +
   encodeURIComponent(
-    "¡Hola! Me registré como socio SportClub en NM Roller 🛼. Te paso mis datos para asignar mi beneficio 👉 Nombre completo: , DNI: , Plan SportClub: . ¿Necesito alquiler de equipo?: Sí / No.",
+    "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI y correo].",
   );
 const waDudas =
   `https://wa.me/${WHATSAPP}?text=` +
   encodeURIComponent("¡Hola! Tengo una duda sobre el beneficio para socios SportClub 🛼");
-
-// ── Contador evergreen (48 hs por visitante, persistido en localStorage) ──
-const getDeadline = (): number => {
-  try {
-    const stored = Number(localStorage.getItem(STORAGE_KEY));
-    if (stored && !Number.isNaN(stored)) return stored;
-    const fresh = Date.now() + EVERGREEN_HOURS * 60 * 60 * 1000;
-    localStorage.setItem(STORAGE_KEY, String(fresh));
-    return fresh;
-  } catch {
-    return Date.now() + EVERGREEN_HOURS * 60 * 60 * 1000;
-  }
-};
-
-const useCountdown = () => {
-  const [t, setT] = useState({ d: 0, h: 0, m: 0, s: 0 });
-  useEffect(() => {
-    const deadline = getDeadline();
-    const tick = () => {
-      const diff = Math.max(0, differenceInSeconds(deadline, new Date()));
-      setT({
-        d: Math.floor(diff / 86400),
-        h: Math.floor((diff % 86400) / 3600),
-        m: Math.floor((diff % 3600) / 60),
-        s: diff % 60,
-      });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return t;
-};
-
-const pad = (n: number) => String(n).padStart(2, "0");
 
 const AppButtons = () => (
   <div className="flex flex-wrap items-center gap-3 mt-4">
@@ -166,8 +127,6 @@ const despues = [
 ];
 
 const SportclubConfirmado = () => {
-  const t = useCountdown();
-
   return (
     <>
       <Helmet>
@@ -194,27 +153,25 @@ const SportclubConfirmado = () => {
               ¡Casi listo!
             </h1>
 
-            {/* Contador */}
-            <div className="flex items-center justify-center gap-2 mb-4">
-              {[
-                { v: t.d, l: "Días" },
-                { v: t.h, l: "Horas" },
-                { v: t.m, l: "Min" },
-                { v: t.s, l: "Seg" },
-              ].map((u) => (
-                <div key={u.l} className="flex flex-col items-center">
-                  <div className="bg-[#F5B800] text-[#111] font-black text-2xl md:text-4xl px-3 py-2 min-w-[3rem] md:min-w-[4rem]">
-                    {pad(u.v)}
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wide mt-1">
-                    {u.l}
-                  </span>
-                </div>
-              ))}
+            {/* Valor del beneficio */}
+            <div className="max-w-md mx-auto bg-[#F5B800]/15 border-2 border-[#F5B800] px-6 py-6 mb-6">
+              <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-[#F5B800] mb-3">
+                El valor de tu beneficio
+              </p>
+              <div className="flex items-end justify-center gap-3 flex-wrap">
+                <span className="font-display italic font-black text-2xl md:text-3xl line-through text-primary-foreground/70">
+                  $35.000
+                </span>
+                <span className="text-sm md:text-base text-primary-foreground/80 pb-1">por clase</span>
+              </div>
+              <div className="font-display italic font-black text-5xl md:text-6xl leading-none mt-1">
+                Gratis
+              </div>
+              <p className="text-sm md:text-base text-primary-foreground/95 mt-3">
+                Es lo que abona cualquier alumno por una sola clase. Vos, por ser{" "}
+                <strong>socio SportClub</strong>, no pagás nada.
+              </p>
             </div>
-            <p className="flex items-center justify-center gap-2 font-bold text-base md:text-lg mb-3">
-              <Clock className="w-5 h-5" /> Tiempo sugerido para asegurar tu cupo
-            </p>
             <p className="text-base md:text-lg leading-relaxed text-primary-foreground/95 max-w-xl mx-auto">
               Para acceder a las clases, completá estos <strong>3 pasos</strong>. Es rápido —
               en un rato estás listo/a para patinar. 🛼
