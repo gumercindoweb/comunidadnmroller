@@ -11,6 +11,8 @@ import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
 import Masterclass from "./pages/Masterclass.tsx";
 import ClaseGratis from "./pages/ClaseGratis.tsx";
 import ClaseGratisConfirmada from "./pages/ClaseGratisConfirmada.tsx";
+import ExclusivoSociosSportclub from "./pages/ExclusivoSociosSportclub.tsx";
+import SportclubConfirmado from "./pages/SportclubConfirmado.tsx";
 import TerminosCondiciones from "./pages/TerminosCondiciones.tsx";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/masterclass-de-patinaje/:slug" element={<Masterclass />} />
           <Route path="/clase-gratis" element={<ClaseGratis />} />
           <Route path="/clase-gratis-confirmada" element={<ClaseGratisConfirmada />} />
+          <Route path="/exclusivo-de-socios-sportclub" element={<ExclusivoSociosSportclub />} />
+          <Route path="/exclusivo-de-socios-sportclub-confirmado" element={<SportclubConfirmado />} />
           <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
           <Route path="/politicas-de-privacidad" element={<PoliticaPrivacidad />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
