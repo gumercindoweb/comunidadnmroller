@@ -4,16 +4,15 @@ import { Helmet } from "react-helmet-async";
 import { differenceInSeconds } from "date-fns";
 import {
   AlertCircle,
-  ArrowRight,
   Clock,
   Smartphone,
   UserPlus,
   Send,
   Check,
-  Lock,
   ArrowLeft,
 } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import PlanesSportclub from "@/components/PlanesSportclub";
 
 // ── Config ──
 const WHATSAPP = "5491165920600";
@@ -320,30 +319,8 @@ const SportclubConfirmado = () => {
           </div>
         </section>
 
-        {/* ¿Querés avanzar? — plan */}
-        <section className="px-6 py-16 md:py-20 bg-background border-t border-border">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 mb-5 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
-              <Lock className="w-3.5 h-3.5" /> Tu beneficio tiene un alcance
-            </div>
-            <h2 className="font-display italic uppercase text-2xl md:text-4xl font-black mb-4 leading-tight">
-              ¿Querés ir por más?
-            </h2>
-            <p className="text-base text-foreground/75 leading-relaxed mb-6 max-w-xl mx-auto">
-              Como socio SportClub accedés gratis a <strong>nivel inicial y principiante</strong>,
-              una clase por día, en las sedes habilitadas. Para{" "}
-              <strong>avanzar a nivel intermedio</strong>, patinar en{" "}
-              <strong>cualquiera de nuestras 10 sedes</strong> o tomar{" "}
-              <strong>2 clases por día</strong>, podés sumar un plan.
-            </p>
-            <Link
-              to="/#planes"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-bold uppercase tracking-[0.18em] text-sm hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)] transition-all"
-            >
-              Ver planes <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+        {/* Planes para escalar (abonás extra) */}
+        <PlanesSportclub />
 
         {/* Footer */}
         <footer className="py-8 text-center bg-background border-t border-border">

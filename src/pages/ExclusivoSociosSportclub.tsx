@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/select";
 import {
   ArrowLeft,
-  ArrowRight,
   Clock,
   Loader2,
   Lock,
@@ -33,6 +32,7 @@ import {
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
+import PlanesSportclub from "@/components/PlanesSportclub";
 
 // ── Niveles incluidos en el beneficio gratuito de socio SportClub ──
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
@@ -403,45 +403,8 @@ const ExclusivoSociosSportclub = () => {
           </div>
         </section>
 
-        {/* ¿Querés avanzar? — upgrade a plan */}
-        <section className="px-6 lg:px-16 py-16 bg-primary text-primary-foreground">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-center gap-3 mb-3">
-              <Lock className="w-5 h-5" />
-              <span className="text-xs uppercase tracking-[0.18em] font-bold">
-                ¿Querés ir por más?
-              </span>
-            </div>
-            <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black mb-5 leading-[0.95]">
-              Avanzá con un plan
-            </h2>
-            <p className="text-base md:text-lg text-primary-foreground/95 leading-relaxed mb-8 max-w-2xl">
-              El beneficio de socio SportClub cubre <strong>nivel inicial y principiante</strong>,
-              una clase por día, en las sedes habilitadas. Si querés:
-            </p>
-            <div className="grid sm:grid-cols-3 gap-4 mb-8">
-              {[
-                "Avanzar a nivel intermedio y seguir progresando",
-                "Patinar en cualquiera de nuestras 10 sedes",
-                "Tomar hasta 2 clases por día",
-              ].map((t) => (
-                <div key={t} className="border border-primary-foreground/25 bg-primary-foreground/5 p-4 text-sm font-semibold leading-snug">
-                  {t}
-                </div>
-              ))}
-            </div>
-            <p className="text-base text-primary-foreground/95 mb-8 max-w-2xl">
-              …necesitás adquirir un <strong>plan</strong>. Te dejamos los detalles al confirmar
-              tu registro, o podés verlos ahora.
-            </p>
-            <Link
-              to="/#planes"
-              className="inline-flex items-center gap-2 bg-primary-foreground text-primary px-8 py-4 font-bold uppercase tracking-[0.18em] text-sm hover:opacity-90 transition-opacity"
-            >
-              Ver planes <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+        {/* Planes para escalar (abonás extra) */}
+        <PlanesSportclub />
 
         {/* FAQ */}
         <section className="px-6 lg:px-16 py-16 bg-card/40 border-t border-border">
