@@ -84,7 +84,7 @@ const PLANES: Plan[] = [
 
 const PlanesSportclub = () => {
   return (
-    <section className="px-6 lg:px-16 py-16 md:py-20 bg-background border-t border-border">
+    <section id="planes" className="px-6 lg:px-16 py-16 md:py-20 bg-background border-t border-border scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Encabezado */}
         <div className="text-center max-w-3xl mx-auto mb-4">
