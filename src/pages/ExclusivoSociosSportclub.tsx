@@ -39,20 +39,37 @@ import HorariosSportclub from "@/components/sportclub/HorariosSportclub";
 // ── Niveles incluidos en el beneficio gratuito de socio SportClub ──
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
 
-// ── Horarios reales por sede (flyer SportClub · Dic 2025). El orden define el
-//    orden de aparición. Para cambiar sedes/horarios, editá SOLO este objeto. ──
+// ── Horarios del beneficio por sede (flyer SportClub · nivel Inicial/Principiante,
+//    las 10 sedes). El orden define el orden de aparición. Para cambiar
+//    sedes/horarios, editá SOLO este objeto. ──
 const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
   "rosedal": [
     { dia: "Martes", hora: "09:00" },
-    { dia: "Jueves", hora: "19:00" },
     { dia: "Viernes", hora: "09:00" },
+    { dia: "Sábado", hora: "10:00" },
     { dia: "Domingo", hora: "10:00" },
+    { dia: "Martes", hora: "19:00" },
+    { dia: "Miércoles", hora: "19:00" },
+    { dia: "Jueves", hora: "19:00" },
+    { dia: "Sábado", hora: "18:00" },
   ],
-  "villa-real": [
-    { dia: "Miércoles", hora: "18:00" },
-    { dia: "Sábado", hora: "10:30" },
+  "puerto-madero": [
+    { dia: "Martes", hora: "18:00" },
+    { dia: "Martes", hora: "19:00" },
+    { dia: "Sábado", hora: "09:00" },
   ],
-  "puerto-madero": [{ dia: "Martes", hora: "18:00" }],
+  "caballito": [
+    { dia: "Lunes", hora: "19:00" },
+    { dia: "Martes", hora: "19:00" },
+    { dia: "Jueves", hora: "19:00" },
+    { dia: "Domingo", hora: "09:00" },
+  ],
+  "vicente-lopez": [{ dia: "Sábado", hora: "09:00" }],
+  "belgrano": [
+    { dia: "Miércoles", hora: "19:00" },
+    { dia: "Viernes", hora: "19:00" },
+  ],
+  "villa-luro": [{ dia: "Viernes", hora: "19:00" }],
   "colegiales": [
     { dia: "Miércoles", hora: "18:00" },
     { dia: "Jueves", hora: "19:00" },
@@ -61,10 +78,14 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
     { dia: "Sábado", hora: "09:00" },
     { dia: "Domingo", hora: "09:00" },
   ],
-  "vicente-lopez": [{ dia: "Sábado", hora: "09:00" }],
   "devoto": [
     { dia: "Martes", hora: "19:00" },
     { dia: "Viernes", hora: "19:00" },
+  ],
+  "villa-real": [
+    { dia: "Miércoles", hora: "18:00" },
+    { dia: "Miércoles", hora: "19:00" },
+    { dia: "Sábado", hora: "10:30" },
   ],
 };
 
