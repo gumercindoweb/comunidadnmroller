@@ -22,6 +22,7 @@ import {
 import { Check, ArrowLeft, Loader2, MapPin, Sparkles, Wallet } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes } from "@/data/sedes";
+import SedesMapa from "@/components/SedesMapa";
 
 const SEDES_GRATIS_IDS = ["villa-luro", "colegiales", "plaza-la-pampa", "belgrano"];
 
@@ -233,24 +234,34 @@ const ClaseGratis = () => {
           </div>
         </section>
 
-        {/* Sedes gratis */}
+        {/* Todas las sedes + mapa (gratis vs seña) */}
         <section id="gratis-sedes" className="px-6 lg:px-16 py-16 bg-card/40 border-y border-border">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-2">
               <Sparkles className="w-5 h-5 text-primary" />
               <span className="text-xs uppercase tracking-[0.18em] text-primary font-bold">
-                Acceso sin costo
+                Dónde probar
               </span>
             </div>
             <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black mb-3">
-              4 sedes 100% gratis
+              Todas las sedes
             </h2>
             <p className="text-foreground/70 max-w-2xl mb-10">
-              En estas sedes tu clase de prueba no tiene costo. En el resto de las
-              10 sedes podés reservar con una seña bonificable.
+              Tu clase de prueba es <strong className="text-foreground">100% gratis</strong> en 4
+              sedes. En el resto reservás con una{" "}
+              <strong className="text-foreground">seña bonificable</strong>. Explorá el mapa y
+              mirá los horarios de cada sede.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {sedesGratis.map((s) => (
+          </div>
+
+          {/* Mapa estilo Home, marcando gratis vs seña */}
+          <SedesMapa sedesList={sedes} gratisIds={SEDES_GRATIS_IDS} sidebarTitle="Elegí tu sede" />
+
+          {/* Tarjetas de todas las sedes con etiqueta */}
+          <div className="max-w-7xl mx-auto mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {sedes.map((s) => {
+              const gratis = SEDES_GRATIS_IDS.includes(s.id);
+              return (
                 <a
                   key={s.id}
                   href={s.mapsUrl}
@@ -258,11 +269,22 @@ const ClaseGratis = () => {
                   rel="noopener noreferrer"
                   className="group bg-background border border-border p-5 hover:border-primary transition-colors block"
                 >
-                  <div className="flex items-start gap-2 mb-2">
-                    <MapPin className="w-4 h-4 text-primary mt-1 shrink-0" />
-                    <h3 className="font-bold uppercase text-sm tracking-wide group-hover:text-primary transition-colors">
-                      {s.nombre}
-                    </h3>
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-primary mt-1 shrink-0" />
+                      <h3 className="font-bold uppercase text-sm tracking-wide group-hover:text-primary transition-colors">
+                        {s.nombre}
+                      </h3>
+                    </div>
+                    <span
+                      className={`shrink-0 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                        gratis
+                          ? "text-[#3FB950] border-[#3FB950]/50"
+                          : "text-primary border-primary/50"
+                      }`}
+                    >
+                      {gratis ? "Gratis" : "Con seña"}
+                    </span>
                   </div>
                   <p className="text-foreground/60 text-xs leading-relaxed pl-6">
                     {s.direccion}
@@ -271,18 +293,18 @@ const ClaseGratis = () => {
                     Cómo llegar →
                   </span>
                 </a>
-              ))}
-            </div>
+              );
+            })}
+          </div>
 
-            <div className="mt-12 flex items-start gap-3 bg-background border border-border p-5">
-              <Wallet className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <p className="text-sm text-foreground/80">
-                <strong>Otras sedes con alta demanda:</strong> reservá con una seña
-                de <strong>$35.000 transferencia</strong> o <strong>$32.000 efectivo</strong>
-                {" "}— equivale a una clase única y se bonifica si comprás un plan
-                dentro de los 7 días siguientes.
-              </p>
-            </div>
+          {/* Info seña */}
+          <div className="max-w-7xl mx-auto mt-12 flex items-start gap-3 bg-background border border-border p-5">
+            <Wallet className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <p className="text-sm text-foreground/80">
+              <strong>Sedes con seña:</strong> reservás con <strong>$35.000 transferencia</strong>{" "}
+              o <strong>$32.000 efectivo</strong> — equivale a una clase única y se bonifica si
+              comprás un plan dentro de los 7 días siguientes.
+            </p>
           </div>
         </section>
 

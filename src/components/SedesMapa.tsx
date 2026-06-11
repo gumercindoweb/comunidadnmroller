@@ -5,8 +5,11 @@ import { MapPin, Clock, ExternalLink, Loader2 } from "lucide-react";
 import { sedes, Sede, disciplinaColor, ordenDias, expandirNivel } from "@/data/sedes";
 import SedeDetalleDialog from "./SedeDetalleDialog";
 
-const markerSvg = (active: boolean) => {
-  const fill = active ? "#62C3BF" : "#D01C1F";
+const COL_DEFAULT = "#D01C1F";
+const COL_ACTIVE = "#62C3BF";
+const COL_GRATIS = "#3FB950";
+
+const markerSvg = (fill: string) => {
   const stroke = "#111111";
   return (
     "data:image/svg+xml;charset=UTF-8," +
@@ -19,21 +22,29 @@ const markerSvg = (active: boolean) => {
   );
 };
 
-const makeIcon = (active: boolean) =>
+const makeIcon = (fill: string, big: boolean) =>
   L.icon({
-    iconUrl: markerSvg(active),
-    iconSize: active ? [48, 56] : [40, 48],
-    iconAnchor: active ? [24, 55] : [20, 47],
+    iconUrl: markerSvg(fill),
+    iconSize: big ? [48, 56] : [40, 48],
+    iconAnchor: big ? [24, 55] : [20, 47],
     className: "nm-sede-marker",
   });
 
 const SedesMapa = ({
   sedesList = sedes,
   sidebarTitle = "Encontrá la tuya",
+  gratisIds,
 }: {
   sedesList?: Sede[];
   sidebarTitle?: string;
+  gratisIds?: string[];
 } = {}) => {
+  const gratisSet = gratisIds ? new Set(gratisIds) : null;
+  const isGratis = (id: string) => !!gratisSet && gratisSet.has(id);
+  const iconFor = (id: string, active: boolean) => {
+    if (gratisSet) return makeIcon(gratisSet.has(id) ? COL_GRATIS : COL_DEFAULT, active);
+    return makeIcon(active ? COL_ACTIVE : COL_DEFAULT, active);
+  };
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<globalThis.Map<string, L.Marker>>(new globalThis.Map());
@@ -96,7 +107,7 @@ const SedesMapa = ({
 
       sedesList.forEach((sede) => {
         const marker = L.marker([sede.lat, sede.lng], {
-          icon: makeIcon(false),
+          icon: iconFor(sede.id, false),
           title: sede.nombre,
         }).addTo(map);
 
@@ -128,9 +139,10 @@ const SedesMapa = ({
   useEffect(() => {
     markersRef.current.forEach((marker, id) => {
       const active = id === hoveredId;
-      marker.setIcon(makeIcon(active));
+      marker.setIcon(iconFor(id, active));
       marker.setZIndexOffset(active ? 1000 : 0);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hoveredId]);
 
   const focusSede = (sede: Sede) => {
@@ -140,7 +152,18 @@ const SedesMapa = ({
   const hoveredSede = hoveredId ? sedesList.find((s) => s.id === hoveredId) ?? null : null;
 
   return (
-    <div className="grid lg:grid-cols-[280px_1fr] gap-4 max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
+      {gratisSet && (
+        <div className="flex flex-wrap items-center gap-5 mb-4">
+          <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-foreground/70">
+            <span className="w-3 h-3 rounded-full" style={{ background: COL_GRATIS }} /> Gratis
+          </span>
+          <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-foreground/70">
+            <span className="w-3 h-3 rounded-full" style={{ background: COL_DEFAULT }} /> Con seña bonificable
+          </span>
+        </div>
+      )}
+      <div className="grid lg:grid-cols-[280px_1fr] gap-4">
       {/* Sidebar lista */}
       <aside className="bg-card border border-border max-h-[560px] overflow-y-auto">
         <div className="sticky top-0 bg-card border-b border-border px-4 py-3 z-10">
@@ -172,6 +195,17 @@ const SedesMapa = ({
                   </p>
                   <p className="text-muted-foreground text-[11px] truncate">{sede.direccion}</p>
                   <div className="flex gap-1 mt-1 flex-wrap">
+                    {gratisSet && (
+                      <span
+                        className={`text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${
+                          isGratis(sede.id)
+                            ? "text-[#3FB950] border-[#3FB950]/50"
+                            : "text-primary border-primary/50"
+                        }`}
+                      >
+                        {isGratis(sede.id) ? "Gratis" : "Con seña"}
+                      </span>
+                    )}
                     {sede.alquiler && (
                       <span className="text-[8px] font-bold uppercase tracking-wider text-secondary border border-secondary/40 px-1.5 py-0.5 rounded-full">
                         Alquiler
@@ -217,11 +251,24 @@ const SedesMapa = ({
                 </h4>
                 <p className="text-muted-foreground text-[11px]">{hoveredSede.direccion}</p>
               </div>
-              {hoveredSede.alquiler && (
-                <span className="text-[8px] font-bold uppercase tracking-wider text-secondary border border-secondary/40 px-1.5 py-0.5 rounded-full shrink-0">
-                  Alquiler
-                </span>
-              )}
+              <div className="flex flex-col items-end gap-1 shrink-0">
+                {gratisSet && (
+                  <span
+                    className={`text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${
+                      isGratis(hoveredSede.id)
+                        ? "text-[#3FB950] border-[#3FB950]/50"
+                        : "text-primary border-primary/50"
+                    }`}
+                  >
+                    {isGratis(hoveredSede.id) ? "Gratis" : "Con seña"}
+                  </span>
+                )}
+                {hoveredSede.alquiler && (
+                  <span className="text-[8px] font-bold uppercase tracking-wider text-secondary border border-secondary/40 px-1.5 py-0.5 rounded-full">
+                    Alquiler
+                  </span>
+                )}
+              </div>
             </div>
 
             {hoveredSede.clases.length > 0 ? (
@@ -282,11 +329,12 @@ const SedesMapa = ({
         )}
       </div>
 
-      <SedeDetalleDialog
-        sede={selectedSede}
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-      />
+        <SedeDetalleDialog
+          sede={selectedSede}
+          open={dialogOpen}
+          onOpenChange={setDialogOpen}
+        />
+      </div>
     </div>
   );
 };
