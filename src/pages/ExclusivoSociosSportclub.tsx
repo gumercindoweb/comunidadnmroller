@@ -76,7 +76,8 @@ const sportclubSedes: Sede[] = Object.keys(SPORTCLUB_HORARIOS)
   .filter((s): s is Sede => Boolean(s))
   .map((s) => ({
     ...s,
-    alquiler: true,
+    // Respetamos el dato real de alquiler de cada sede (no lo forzamos).
+    // Así la viñeta "Alquiler" sólo aparece donde el servicio existe de verdad.
     clases: SPORTCLUB_HORARIOS[s.id].map((h) => ({ ...h, disciplina: SPORTCLUB_NIVEL })),
   }));
 
