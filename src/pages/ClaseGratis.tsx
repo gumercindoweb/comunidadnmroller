@@ -268,7 +268,7 @@ const ClaseGratis = () => {
                     {s.direccion}
                   </p>
                   <span className="inline-block mt-3 ml-6 text-[10px] uppercase tracking-[0.18em] text-primary font-bold">
-                    Gratis →
+                    Cómo llegar →
                   </span>
                 </a>
               ))}

@@ -125,7 +125,7 @@ export const sedes: Sede[] = [
   },
   {
     id: "villa-luro",
-    nombre: "Villa Luro (Skatepark)",
+    nombre: "Villa Luro",
     direccion: "Av. Rivadavia 9300",
     area: "CABA",
     lat: -34.6385,
