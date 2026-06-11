@@ -207,10 +207,19 @@ const ExclusivoSociosSportclub = () => {
 
       <main className="min-h-screen bg-background text-foreground">
         {/* Header */}
-        <header className="pt-10 pb-6 flex justify-center">
-          <Link to="/" aria-label="Inicio">
-            <img src={logoNM} alt="NM Roller" className="h-14" />
-          </Link>
+        <header className="pt-10 pb-6 px-6 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-4 md:gap-6">
+            <Link to="/" aria-label="Inicio">
+              <img src={logoNM} alt="NM Roller" className="h-12 md:h-14" />
+            </Link>
+            <span className="text-foreground/40 text-xl md:text-2xl font-light" aria-hidden="true">×</span>
+            <div className="bg-white px-3 py-2 rounded-sm">
+              <img src={logoSportclub.url} alt="SportClub" className="h-7 md:h-9" />
+            </div>
+          </div>
+          <span className="text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-foreground/50 font-bold">
+            Alianza oficial · Beneficio para socios
+          </span>
         </header>
 
         {/* Hero + form */}
