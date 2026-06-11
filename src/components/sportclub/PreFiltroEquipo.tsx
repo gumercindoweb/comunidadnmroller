@@ -23,6 +23,8 @@ const wa = (txt: string) =>
 const FALTA_ALGO_MSG =
   "[LP|NM|SS] Hola, soy Socio de SportClub y me gustaría saber más información sobre [indique si desea comprar o alquilar]";
 
+const KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
+
 const scrollTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
@@ -152,13 +154,15 @@ const PreFiltroEquipo = () => {
                 El alquiler es ideal para <strong>probar y ver la calidad del equipo</strong>;
                 después podés migrar a comprar tu propio kit.
               </p>
-              <button
-                onClick={() => closeAndScroll("equipo")}
+              <a
+                href={KIT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 font-bold uppercase tracking-[0.14em] text-xs hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)] transition-all"
               >
                 Conocé el kit de iniciación
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
 
             {/* Bloque 2 · Alquilar */}
