@@ -34,6 +34,7 @@ import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
 import EquipoBanners from "@/components/sportclub/EquipoBanners";
+import HorariosSportclub from "@/components/sportclub/HorariosSportclub";
 
 // ── Niveles incluidos en el beneficio gratuito de socio SportClub ──
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
@@ -78,6 +79,12 @@ const sportclubSedes: Sede[] = Object.keys(SPORTCLUB_HORARIOS)
     alquiler: true,
     clases: SPORTCLUB_HORARIOS[s.id].map((h) => ({ ...h, disciplina: SPORTCLUB_NIVEL })),
   }));
+
+// Las 10 sedes para el mapa: las del beneficio muestran sus horarios del
+// beneficio; el resto se muestra con sus datos base (ubicación, alquiler).
+const todasLasSedes: Sede[] = sedes.map(
+  (s) => sportclubSedes.find((b) => b.id === s.id) ?? s,
+);
 
 const PLANES_SPORTCLUB = ["Plus", "Total", "Elite", "Flex"];
 
@@ -400,63 +407,20 @@ const ExclusivoSociosSportclub = () => {
               </span>
             </div>
             <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black mb-3">
-              {sportclubSedes.length} sedes habilitadas
+              Nuestras {todasLasSedes.length} sedes
             </h2>
             <p className="text-foreground/70 max-w-2xl mb-10">
-              Estas son las sedes disponibles para socios SportClub. Explorá el mapa,
-              elegí la que te quede más cómoda y mirá sus horarios.
-            </p>
-          </div>
-
-          {/* Mapa Leaflet con la sublista de sedes SportClub */}
-          <SedesMapa sedesList={sportclubSedes} sidebarTitle="Elegí tu sede" />
-
-          {/* Todas las sedes (las 10) · grilla estilo Home con etiqueta de alquiler */}
-          <div className="max-w-7xl mx-auto mt-12">
-            <h3 className="font-display italic uppercase text-xl md:text-2xl font-black mb-2">
-              Todas nuestras sedes
-            </h3>
-            <p className="text-foreground/60 text-sm mb-6 max-w-2xl">
-              Estas son las {sedes.length} sedes de NM Roller. Las marcadas con{" "}
+              Explorá el mapa y elegí la que te quede más cómoda. Las marcadas con{" "}
               <span className="text-secondary font-bold uppercase">Alquiler</span> ofrecen
               equipo para alquilar — 50% OFF para socios SportClub.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {sedes.map((s) => (
-                <div
-                  key={s.id}
-                  className="bg-card border border-border p-5 flex items-start gap-2.5"
-                >
-                  <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold uppercase text-sm tracking-wide leading-tight">
-                      {s.nombre}
-                    </h4>
-                    <p className="text-foreground/50 text-[11px] leading-snug mt-0.5">
-                      {s.direccion}
-                    </p>
-                    {s.alquiler && (
-                      <div className="mt-2">
-                        <span className="inline-block text-[9px] font-bold uppercase tracking-wider text-secondary border border-secondary/40 px-2 py-0.5 rounded-full">
-                          Alquiler
-                        </span>
-                      </div>
-                    )}
-                    {s.mapsUrl && (
-                      <a
-                        href={s.mapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-3 text-[10px] uppercase tracking-[0.18em] text-primary font-bold"
-                      >
-                        Cómo llegar →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
+
+          {/* Mapa Leaflet con las 10 sedes (badge Alquiler donde corresponde) */}
+          <SedesMapa sedesList={todasLasSedes} sidebarTitle="Elegí tu sede" />
+
+          {/* Grilla horaria del beneficio socio (estilo Home) */}
+          <HorariosSportclub sedesBeneficio={sportclubSedes} nivelLabel={SPORTCLUB_NIVEL} />
         </section>
 
         {/* Banners: alquilar equipo (socios) o armar tu propio kit */}
