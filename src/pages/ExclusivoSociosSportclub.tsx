@@ -449,9 +449,6 @@ const ExclusivoSociosSportclub = () => {
           <HorariosSportclub sedesBeneficio={sportclubSedes} nivelLabel={SPORTCLUB_NIVEL} />
         </section>
 
-        {/* Banners: alquilar equipo (socios) o armar tu propio kit */}
-        <EquipoBanners />
-
         {/* Planes para escalar (abonás extra) */}
         <PlanesSportclub />
 
@@ -521,6 +518,9 @@ const ExclusivoSociosSportclub = () => {
             </div>
           </div>
         </section>
+
+        {/* Banners de equipo en alianza con FlyFree (cierre, post-FAQ) */}
+        <EquipoBanners />
 
         <div className="py-8 text-center">
           <Link
