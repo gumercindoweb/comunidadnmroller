@@ -214,7 +214,7 @@ const ExclusivoSociosSportclub = () => {
                 {[
                   { n: "01", t: "Elegí sede y horario", d: "De las habilitadas para socios." },
                   { n: "02", t: "Registrate como socio", d: "Te contactamos por WhatsApp." },
-                  { n: "03", t: "Patinás", d: "Clase grupal de ~1 hora." },
+                  { n: "03", t: "Retirás equipo y patinás", d: "Retirás y devolvés el equipo en tu sede. Clase de ~1 h, ¡gratis!" },
                 ].map((s) => (
                   <div key={s.n} className="border border-border/60 bg-card p-4">
                     <div className="text-primary font-display italic text-xl font-black mb-1">{s.n}</div>

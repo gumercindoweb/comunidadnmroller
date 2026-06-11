@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock, Package } from "lucide-react";
 import { Sede } from "@/data/sedes";
 
 const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
@@ -6,6 +6,7 @@ const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "
 interface ClaseDia {
   sede: string;
   hora: string;
+  alquiler: boolean;
 }
 
 const HorariosSportclub = ({
@@ -20,7 +21,7 @@ const HorariosSportclub = ({
   DIAS.forEach((d) => (porDia[d] = []));
   sedesBeneficio.forEach((s) =>
     s.clases.forEach((c) => {
-      if (porDia[c.dia]) porDia[c.dia].push({ sede: s.nombre, hora: c.hora });
+      if (porDia[c.dia]) porDia[c.dia].push({ sede: s.nombre, hora: c.hora, alquiler: !!s.alquiler });
     }),
   );
   // Ordena por hora dentro de cada día
@@ -36,9 +37,16 @@ const HorariosSportclub = ({
         <Clock className="w-3 h-3 text-primary shrink-0" />
         <p className="text-muted-foreground text-xs">{clase.hora} hs</p>
       </div>
-      <span className="inline-block mt-2 text-[9px] font-bold uppercase tracking-wide leading-tight rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/60 px-2 py-0.5">
-        {nivelLabel}
-      </span>
+      <div className="flex flex-wrap gap-1 mt-2">
+        <span className="inline-block text-[9px] font-bold uppercase tracking-wide leading-tight rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/60 px-2 py-0.5">
+          {nivelLabel}
+        </span>
+        {clase.alquiler && (
+          <span className="inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wide leading-tight rounded-full bg-secondary/15 text-secondary border border-secondary/50 px-2 py-0.5">
+            <Package className="w-2.5 h-2.5" /> Alquiler
+          </span>
+        )}
+      </div>
     </div>
   );
 
@@ -49,7 +57,11 @@ const HorariosSportclub = ({
       </h3>
       <p className="text-foreground/60 text-sm mb-8 max-w-2xl">
         Estos son los días y horarios de las clases de <strong>nivel inicial y
-        principiante</strong> incluidas en tu beneficio de socio, por sede.
+        principiante</strong> incluidas en tu beneficio de socio, por sede. La viñeta{" "}
+        <span className="inline-flex items-center gap-1 text-secondary font-bold uppercase text-[11px]">
+          <Package className="w-3 h-3" /> Alquiler
+        </span>{" "}
+        indica las sedes con servicio de alquiler de equipo (50% OFF para socios).
       </p>
 
       {/* Desktop: columna por día */}
