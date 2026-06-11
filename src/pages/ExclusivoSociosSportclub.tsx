@@ -452,6 +452,9 @@ const ExclusivoSociosSportclub = () => {
         {/* Planes para escalar (abonás extra) */}
         <PlanesSportclub />
 
+        {/* Banners de equipo en alianza con FlyFree (antes de FAQ) */}
+        <EquipoBanners />
+
         {/* FAQ */}
         <section className="px-6 lg:px-16 py-16 bg-card/40 border-t border-border">
           <div className="max-w-3xl mx-auto">
@@ -518,9 +521,6 @@ const ExclusivoSociosSportclub = () => {
             </div>
           </div>
         </section>
-
-        {/* Banners de equipo en alianza con FlyFree (cierre, post-FAQ) */}
-        <EquipoBanners />
 
         <div className="py-8 text-center">
           <Link
