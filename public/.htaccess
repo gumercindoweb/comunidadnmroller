@@ -15,9 +15,13 @@
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Cache largo para assets con hash (no cambian nunca)
+# Cache de archivos
 <IfModule mod_expires.c>
   ExpiresActive On
+  # El HTML expira al instante: cada deploy se ve enseguida
+  # (evita pantalla en blanco por index.html viejo cacheado)
+  ExpiresByType text/html "access plus 0 seconds"
+  # Assets con hash: cache largo (no cambian nunca)
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
