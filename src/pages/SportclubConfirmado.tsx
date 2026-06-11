@@ -276,8 +276,8 @@ const SportclubConfirmado = () => {
           </div>
         </section>
 
-        {/* Planes para escalar (abonás extra) */}
-        <PlanesSportclub />
+        {/* Planes pagos para escalar (ya dado de alta · venta directa) */}
+        <PlanesSportclub variant="confirmacion" />
 
         {/* Footer */}
         <footer className="py-8 text-center bg-background border-t border-border">

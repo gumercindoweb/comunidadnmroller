@@ -1,4 +1,7 @@
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, ClipboardList } from "lucide-react";
+
+const scrollTo = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
 const WHATSAPP = "5491165920600";
 const wa = (txt: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
@@ -55,7 +58,7 @@ const PLANES: Plan[] = [
   },
   {
     tag: "Alquiler + Clases",
-    nombre: "Alquiler + Clases",
+    nombre: "4 Clases + Alquiler",
     sub: "$13.750 por clase",
     ideal: (
       <>
@@ -82,30 +85,62 @@ const PLANES: Plan[] = [
   },
 ];
 
-const PlanesSportclub = () => {
+interface PlanesSportclubProps {
+  /** "landing": los planes pagos llevan al formulario de alta + leyenda.
+   *  "confirmacion": solo planes pagos, copy persuasivo, CTA directo a comprar. */
+  variant?: "landing" | "confirmacion";
+}
+
+const PlanesSportclub = ({ variant = "landing" }: PlanesSportclubProps) => {
+  const esConfirmacion = variant === "confirmacion";
+  const planes = esConfirmacion ? PLANES.filter((p) => !p.actual) : PLANES;
+
   return (
     <section id="planes" className="px-6 lg:px-16 py-16 md:py-20 bg-background border-t border-border scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Encabezado */}
         <div className="text-center max-w-3xl mx-auto mb-4">
-          <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-1.5 mb-5 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
-            Abonás extra
-          </div>
-          <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black leading-[0.95] mb-4">
-            ¿Querés acceder al resto de sedes y disciplinas?
-          </h2>
-          <p className="text-foreground/70 text-base md:text-lg leading-relaxed">
-            Tu beneficio cubre <strong>nivel inicial y principiante</strong>, una clase por día.
-            Si querés <strong>escalar tu aprendizaje</strong> y tener acceso{" "}
-            <strong>sin límite a todas las sedes, horarios, disciplinas y niveles</strong>, podés
-            abonar una diferencia extra con estos planes. Y si no tenés equipo propio, podés
-            alquilarlo con 4 clases.
-          </p>
+          {esConfirmacion ? (
+            <>
+              <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] px-4 py-1.5 mb-5 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
+                Subí de nivel
+              </div>
+              <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black leading-[0.95] mb-4">
+                ¿Querés patinar sin límites?
+              </h2>
+              <p className="text-foreground/70 text-base md:text-lg leading-relaxed">
+                Ya estás dentro. Con el <strong>Plan Full</strong> accedés{" "}
+                <strong>sin límite a las 10 sedes</strong>, todos los niveles y disciplinas
+                y hasta 2 clases por día. Y si todavía no tenés equipo, el pack{" "}
+                <strong>4 clases + alquiler</strong> te deja probar con todo incluido.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-1.5 mb-5 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
+                Abonás extra
+              </div>
+              <h2 className="font-display italic uppercase text-3xl md:text-5xl font-black leading-[0.95] mb-4">
+                ¿Querés acceder al resto de sedes y disciplinas?
+              </h2>
+              <p className="text-foreground/70 text-base md:text-lg leading-relaxed">
+                Tu beneficio cubre <strong>nivel inicial y principiante</strong>, una clase por día.
+                Si querés <strong>escalar tu aprendizaje</strong> y tener acceso{" "}
+                <strong>sin límite a todas las sedes, horarios, disciplinas y niveles</strong>, podés
+                abonar una diferencia extra con estos planes. Y si no tenés equipo propio, podés
+                alquilarlo con 4 clases.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Tarjetas */}
-        <div className="grid md:grid-cols-3 gap-5 mt-12 items-stretch">
-          {PLANES.map((p) => {
+        <div
+          className={`grid gap-5 mt-12 items-stretch ${
+            esConfirmacion ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-3"
+          }`}
+        >
+          {planes.map((p) => {
             const paid = !p.actual;
             return (
               <div
@@ -193,24 +228,45 @@ const PlanesSportclub = () => {
                 </ul>
 
                 {/* CTA */}
-                {p.cta ? (
+                {p.actual ? (
+                  <div className="mt-auto inline-flex items-center justify-center gap-2 min-h-[3rem] px-6 py-3 border border-primary/40 text-primary font-bold uppercase tracking-[0.16em] text-sm text-center leading-tight">
+                    <Sparkles className="w-4 h-4 shrink-0" /> Tu beneficio actual
+                  </div>
+                ) : esConfirmacion ? (
                   <a
-                    href={p.cta.href}
+                    href={p.cta?.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-auto inline-flex items-center justify-center h-12 px-6 bg-primary-foreground text-primary font-bold uppercase tracking-[0.16em] text-sm transition-all hover:opacity-90"
+                    className="mt-auto inline-flex items-center justify-center min-h-[3rem] px-6 py-3 bg-primary-foreground text-primary font-bold uppercase tracking-[0.16em] text-sm text-center leading-tight transition-all hover:opacity-90"
                   >
-                    {p.cta.label}
+                    Comprar plan
                   </a>
                 ) : (
-                  <div className="mt-auto inline-flex items-center justify-center gap-2 h-12 px-6 border border-primary/40 text-primary font-bold uppercase tracking-[0.16em] text-sm">
-                    <Sparkles className="w-4 h-4" /> Tu beneficio actual
-                  </div>
+                  <button
+                    onClick={() => scrollTo("form")}
+                    className="mt-auto inline-flex items-center justify-center min-h-[3rem] px-6 py-3 bg-primary-foreground text-primary font-bold uppercase tracking-[0.14em] text-xs md:text-sm text-center leading-tight transition-all hover:opacity-90"
+                  >
+                    Quiero darme de alta y comprar el plan
+                  </button>
                 )}
               </div>
             );
           })}
         </div>
+
+        {/* Leyenda del flujo de alta (solo landing) */}
+        {!esConfirmacion && (
+          <div className="mt-10 max-w-3xl mx-auto border border-primary/30 bg-primary/5 p-5 flex items-start gap-3">
+            <ClipboardList className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              <strong className="text-foreground">¿Cómo comprás un plan?</strong> Para
+              cualquiera de los planes primero tenés que completar el{" "}
+              <strong>formulario de alta</strong> de esta página. Apenas te registres, vas a
+              ver en la página de confirmación los{" "}
+              <strong>pasos para abonar y activar tu plan</strong>. El alta es obligatoria.
+            </p>
+          </div>
+        )}
 
         <p className="text-center text-foreground/45 text-xs mt-8 max-w-2xl mx-auto">
           Tarifas de referencia (Dic 2025). El alquiler requiere solicitarse con 24 hs de
