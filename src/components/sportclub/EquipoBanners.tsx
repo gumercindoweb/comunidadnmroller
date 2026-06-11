@@ -6,6 +6,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import logoFlyfree from "@/assets/logo-flyfree-urban.webp.asset.json";
+
 // Video de YouTube que se reproduce en modal (dentro de la misma landing)
 const YT_ID = "qgwPjKBUlCI";
 const KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
@@ -13,21 +15,6 @@ const FLYFREE_YELLOW = "#F5C518";
 
 const scrollToForm = () =>
   document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
-
-// Wordmark provisional de FlyFree Urban (reemplazar por el logo oficial .png)
-const FlyFreeWordmark = ({ className = "" }: { className?: string }) => (
-  <span className={`inline-flex flex-col items-center leading-none ${className}`}>
-    <span
-      className="font-display italic font-black text-2xl md:text-3xl tracking-tight"
-      style={{ color: FLYFREE_YELLOW }}
-    >
-      «FLY/FREE»
-    </span>
-    <span className="text-[10px] md:text-xs font-black tracking-[0.5em] text-foreground/80 mt-0.5 pl-[0.5em]">
-      URBAN
-    </span>
-  </span>
-);
 
 const EquipoBanners = () => {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -40,7 +27,7 @@ const EquipoBanners = () => {
           <p className="text-[11px] uppercase tracking-[0.22em] text-foreground/50 font-bold mb-3">
             Equipo en alianza con
           </p>
-          <FlyFreeWordmark />
+          <img src={logoFlyfree.url} alt="FlyFree Urban" className="h-12 md:h-14" />
         </div>
 
         {/* Banners publicitarios (simples) */}

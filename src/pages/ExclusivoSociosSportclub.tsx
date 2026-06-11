@@ -30,6 +30,7 @@ import {
   Tag,
 } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import logoSportclub from "@/assets/logo-sportclub.webp.asset.json";
 import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
@@ -206,10 +207,19 @@ const ExclusivoSociosSportclub = () => {
 
       <main className="min-h-screen bg-background text-foreground">
         {/* Header */}
-        <header className="pt-10 pb-6 flex justify-center">
-          <Link to="/" aria-label="Inicio">
-            <img src={logoNM} alt="NM Roller" className="h-14" />
-          </Link>
+        <header className="pt-10 pb-6 px-6 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-4 md:gap-6">
+            <Link to="/" aria-label="Inicio">
+              <img src={logoNM} alt="NM Roller" className="h-12 md:h-14" />
+            </Link>
+            <span className="text-foreground/40 text-xl md:text-2xl font-light" aria-hidden="true">×</span>
+            <div className="bg-white px-3 py-2 rounded-sm">
+              <img src={logoSportclub.url} alt="SportClub" className="h-7 md:h-9" />
+            </div>
+          </div>
+          <span className="text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-foreground/50 font-bold">
+            Alianza oficial · Beneficio para socios
+          </span>
         </header>
 
         {/* Hero + form */}
@@ -452,6 +462,9 @@ const ExclusivoSociosSportclub = () => {
         {/* Planes para escalar (abonás extra) */}
         <PlanesSportclub />
 
+        {/* Banners de equipo en alianza con FlyFree (antes de FAQ) */}
+        <EquipoBanners />
+
         {/* FAQ */}
         <section className="px-6 lg:px-16 py-16 bg-card/40 border-t border-border">
           <div className="max-w-3xl mx-auto">
@@ -518,9 +531,6 @@ const ExclusivoSociosSportclub = () => {
             </div>
           </div>
         </section>
-
-        {/* Banners de equipo en alianza con FlyFree (cierre, post-FAQ) */}
-        <EquipoBanners />
 
         <div className="py-8 text-center">
           <Link
