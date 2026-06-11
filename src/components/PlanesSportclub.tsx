@@ -26,26 +26,28 @@ const PLANES: Plan[] = [
     features: [
       "Clases ilimitadas",
       "1 clase por día",
-      "Acceso a 12 sedes outdoor",
+      "Acceso a 10 sedes outdoor",
       "Nivel inicial y principiante",
     ],
   },
   {
     tag: "Plan Full",
     nombre: "Plan Full Socio SportClub",
-    precioTachado: "$69.000",
+    precioTachado: "$79.000",
     precio: "45 mil",
     periodo: "Mensual",
     destacado: true,
     features: [
       "Clases ilimitadas",
       "Hasta 2 clases por día",
-      "Acceso a +18 sedes outdoor",
+      "Acceso a 10 sedes outdoor",
       "Todos los niveles y disciplinas",
     ],
     cta: {
       label: "Comprar plan",
-      href: wa("¡Hola! Quiero comprar el Plan Full Socio SportClub (45 mil/mes) 🛼"),
+      href: wa(
+        "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI] y quiero el plan de acceso full de Socio Sport Club.",
+      ),
     },
   },
   {
@@ -58,12 +60,14 @@ const PLANES: Plan[] = [
     features: [
       "4 clases por mes",
       "Patines, protecciones y casco",
-      "Acceso a 12 sedes outdoor",
+      "Acceso a 7 sedes outdoor",
       "Nivel inicial y principiante",
     ],
     cta: {
       label: "Comprar plan",
-      href: wa("¡Hola! Quiero el plan Alquiler + Clases de Socio SportClub (50 mil/mes) 🛼"),
+      href: wa(
+        "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI] y quiero el plan de Alquiler + Clases de Socio Sport Club.",
+      ),
     },
   },
 ];
