@@ -30,6 +30,7 @@ import {
   Tag,
 } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import logoSportclub from "@/assets/logo-sportclub.webp.asset.json";
 import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
