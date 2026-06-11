@@ -7,6 +7,7 @@ interface Plan {
   tag: string;
   nombre: string;
   sub?: string;
+  ideal?: React.ReactNode;
   precioTachado?: string;
   precio: string;
   periodo?: string;
@@ -21,6 +22,7 @@ const PLANES: Plan[] = [
     tag: "Beneficio actual",
     nombre: "Exclusivo Socio SportClub",
     sub: "Requerís una membresía activa",
+    ideal: "Ideal si recién empezás y todavía no tenés ningún conocimiento.",
     precio: "Gratis",
     actual: true,
     features: [
@@ -33,6 +35,7 @@ const PLANES: Plan[] = [
   {
     tag: "Plan Full",
     nombre: "Plan Full Socio SportClub",
+    ideal: "Ideal si querés acelerar tu aprendizaje, acceder a nivel intermedio y disciplinas, y tomar hasta 2 clases por día.",
     precioTachado: "$79.000",
     precio: "45 mil",
     periodo: "Mensual",
@@ -54,6 +57,13 @@ const PLANES: Plan[] = [
     tag: "Alquiler + Clases",
     nombre: "Alquiler + Clases",
     sub: "$13.750 por clase",
+    ideal: (
+      <>
+        Ideal si todavía no estás seguro/a de si te va a gustar: probás 4 clases con el
+        equipo incluido. Solo abonás el alquiler —{" "}
+        <strong className="text-primary-foreground">las clases son gratis</strong>.
+      </>
+    ),
     precioTachado: "$95.000",
     precio: "50 mil",
     periodo: "Mensual",
@@ -153,6 +163,19 @@ const PlanesSportclub = () => {
                     <span className="block text-sm font-semibold mt-1 opacity-90">{p.periodo}</span>
                   )}
                 </div>
+
+                {/* Leyenda: para qué perfil es ideal */}
+                {p.ideal && (
+                  <div
+                    className={`mb-6 text-xs leading-relaxed border-l-2 pl-3 ${
+                      paid
+                        ? "border-primary-foreground/40 text-primary-foreground/90"
+                        : "border-primary/50 text-foreground/70"
+                    }`}
+                  >
+                    {p.ideal}
+                  </div>
+                )}
 
                 {/* Features */}
                 <ul className="space-y-2.5 mb-7 flex-1">
