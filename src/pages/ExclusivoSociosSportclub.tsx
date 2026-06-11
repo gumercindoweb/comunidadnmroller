@@ -35,6 +35,7 @@ import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
 import EquipoBanners from "@/components/sportclub/EquipoBanners";
 import HorariosSportclub from "@/components/sportclub/HorariosSportclub";
+import PreFiltroEquipo from "@/components/sportclub/PreFiltroEquipo";
 
 // ── Niveles incluidos en el beneficio gratuito de socio SportClub ──
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
@@ -390,6 +391,9 @@ const ExclusivoSociosSportclub = () => {
             </div>
           </div>
         </section>
+
+        {/* Pre-filtro: ruta rápida según el equipo del usuario */}
+        <PreFiltroEquipo />
 
         {/* Beneficios */}
         <section className="px-6 lg:px-16 py-16 bg-card/40 border-y border-border">

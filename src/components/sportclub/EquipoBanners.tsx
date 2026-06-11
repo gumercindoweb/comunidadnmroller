@@ -23,7 +23,7 @@ const EquipoBanners = () => {
   const [videoOpen, setVideoOpen] = useState(false);
 
   return (
-    <section className="px-6 lg:px-16 py-16">
+    <section id="equipo" className="px-6 lg:px-16 py-16 scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Encabezado de sección */}
         <div className="flex items-center gap-3 mb-2">
