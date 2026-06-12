@@ -325,7 +325,10 @@ const SportclubConfirmado = () => {
         </section>
 
         {/* Planes pagos para escalar (ya dado de alta · venta directa) */}
-        <PlanesSportclub variant="confirmacion" />
+        <PlanesSportclub
+          variant="confirmacion"
+          userData={{ name: st?.name, dni: st?.dni }}
+        />
 
         {/* Footer */}
         <footer className="py-8 text-center bg-background border-t border-border">

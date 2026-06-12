@@ -6,6 +6,22 @@ const scrollTo = (id: string) =>
 const WHATSAPP = "5491165920600";
 const wa = (txt: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
 
+interface UserData {
+  name?: string;
+  dni?: string;
+}
+
+// Arma el WhatsApp de "Comprar plan" ya pre-llenado con nombre + DNI del form.
+// Sin datos (visita directa) usa placeholders.
+const buildPlanWa = (waPlan: string | undefined, user?: UserData) => {
+  const nombre = user?.name?.trim() || "[tu nombre]";
+  const dni = user?.dni?.trim() || "[tu DNI]";
+  return wa(
+    `[LP|PC|SS] ¡Hola! Soy ${nombre}. Mis datos registrados en turnos web son DNI ${dni}. ` +
+      `Quiero el plan ${waPlan ?? ""} de Socio SportClub.`,
+  );
+};
+
 interface Plan {
   tag: string;
   nombre: string;
@@ -17,6 +33,8 @@ interface Plan {
   destacado?: boolean;
   actual?: boolean;
   features: string[];
+  /** Frase del plan para el WhatsApp de compra (ej: "de acceso full"). */
+  waPlan?: string;
   cta?: { label: string; href: string };
 }
 
@@ -49,12 +67,7 @@ const PLANES: Plan[] = [
       "Acceso a 10 sedes outdoor",
       "Todos los niveles y disciplinas",
     ],
-    cta: {
-      label: "Comprar plan",
-      href: wa(
-        "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI] y quiero el plan de acceso full de Socio Sport Club.",
-      ),
-    },
+    waPlan: "de acceso full",
   },
   {
     tag: "Alquiler + Clases",
@@ -76,12 +89,7 @@ const PLANES: Plan[] = [
       "Acceso a 7 sedes outdoor",
       "Nivel inicial y principiante",
     ],
-    cta: {
-      label: "Comprar plan",
-      href: wa(
-        "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI] y quiero el plan de Alquiler + Clases de Socio Sport Club.",
-      ),
-    },
+    waPlan: "de Alquiler + Clases (4 clases)",
   },
 ];
 
@@ -89,9 +97,11 @@ interface PlanesSportclubProps {
   /** "landing": los planes pagos llevan al formulario de alta + leyenda.
    *  "confirmacion": solo planes pagos, copy persuasivo, CTA directo a comprar. */
   variant?: "landing" | "confirmacion";
+  /** Datos del form (confirmación) para pre-llenar el WhatsApp de "Comprar plan". */
+  userData?: UserData;
 }
 
-const PlanesSportclub = ({ variant = "landing" }: PlanesSportclubProps) => {
+const PlanesSportclub = ({ variant = "landing", userData }: PlanesSportclubProps) => {
   const esConfirmacion = variant === "confirmacion";
   const planes = esConfirmacion ? PLANES.filter((p) => !p.actual) : PLANES;
 
@@ -234,7 +244,7 @@ const PlanesSportclub = ({ variant = "landing" }: PlanesSportclubProps) => {
                   </div>
                 ) : esConfirmacion ? (
                   <a
-                    href={p.cta?.href}
+                    href={buildPlanWa(p.waPlan, userData)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-auto inline-flex items-center justify-center min-h-[3rem] px-6 py-3 bg-primary-foreground text-primary font-bold uppercase tracking-[0.16em] text-sm text-center leading-tight transition-all hover:opacity-90"
