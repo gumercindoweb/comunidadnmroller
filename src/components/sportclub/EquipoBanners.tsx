@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import logoFlyfree from "@/assets/logo-flyfree-urban.webp.asset.json";
+import logoFlyfree from "@/assets/logo-flyfree-urban.webp";
 
 // Video de YouTube que se reproduce en modal (dentro de la misma landing)
 const YT_ID = "qgwPjKBUlCI";
@@ -28,7 +28,7 @@ const EquipoBanners = () => {
             Equipo en alianza con
           </p>
           <span className="inline-flex items-center justify-center bg-white rounded-lg px-6 py-3 shadow-sm">
-            <img src={logoFlyfree.url} alt="FlyFree Urban" className="h-9 md:h-11" />
+            <img src={logoFlyfree} alt="FlyFree Urban" className="h-9 md:h-11" />
           </span>
         </div>
 

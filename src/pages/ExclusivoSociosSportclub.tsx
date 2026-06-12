@@ -30,7 +30,7 @@ import {
   Tag,
 } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
-import logoSportclub from "@/assets/logo-sportclub.webp.asset.json";
+import logoSportclub from "@/assets/logo-sportclub.webp";
 import { sedes, Sede } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import PlanesSportclub from "@/components/PlanesSportclub";
@@ -230,7 +230,7 @@ const ExclusivoSociosSportclub = () => {
             </Link>
             <span className="text-foreground/40 text-xl md:text-2xl font-light" aria-hidden="true">×</span>
             <div className="bg-white px-3 py-2 rounded-sm">
-              <img src={logoSportclub.url} alt="SportClub" className="h-7 md:h-9" />
+              <img src={logoSportclub} alt="SportClub" className="h-7 md:h-9" />
             </div>
           </div>
           <span className="text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-foreground/50 font-bold">
