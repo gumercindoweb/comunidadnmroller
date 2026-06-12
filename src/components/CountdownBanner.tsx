@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Clock, AlertTriangle } from "lucide-react";
 import { differenceInSeconds } from "date-fns";
 
@@ -10,35 +10,31 @@ interface TimeRemaining {
   isExpired: boolean;
 }
 
-const CountdownBanner = () => {
+interface Props {
+  ventaHasta: Date;
+  onExpired?: () => void;
+}
+
+const CountdownBanner = ({ ventaHasta, onExpired }: Props) => {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(null);
+  const firedRef = useRef(false);
 
   useEffect(() => {
     const calculateCountdown = () => {
-      // Fecha límite: 26 de junio 2026, 23:59:59
-      const deadline = new Date(2026, 5, 26, 23, 59, 59);
-      const now = new Date();
-      const diffInSeconds = differenceInSeconds(deadline, now);
+      const diffInSeconds = differenceInSeconds(ventaHasta, new Date());
 
       if (diffInSeconds <= 0) {
-        setTimeRemaining({
-          days: 0,
-          hours: 0,
-          minutes: 0,
-          seconds: 0,
-          isExpired: true,
-        });
+        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true });
+        if (!firedRef.current) {
+          firedRef.current = true;
+          onExpired?.();
+        }
       } else {
-        const days = Math.floor(diffInSeconds / (60 * 60 * 24));
-        const hours = Math.floor((diffInSeconds % (60 * 60 * 24)) / (60 * 60));
-        const minutes = Math.floor((diffInSeconds % (60 * 60)) / 60);
-        const seconds = diffInSeconds % 60;
-
         setTimeRemaining({
-          days,
-          hours,
-          minutes,
-          seconds,
+          days: Math.floor(diffInSeconds / (60 * 60 * 24)),
+          hours: Math.floor((diffInSeconds % (60 * 60 * 24)) / (60 * 60)),
+          minutes: Math.floor((diffInSeconds % (60 * 60)) / 60),
+          seconds: diffInSeconds % 60,
           isExpired: false,
         });
       }
@@ -47,7 +43,7 @@ const CountdownBanner = () => {
     calculateCountdown();
     const interval = setInterval(calculateCountdown, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [ventaHasta, onExpired]);
 
   if (!timeRemaining) return null;
 
@@ -74,9 +70,7 @@ const CountdownBanner = () => {
       <h3 className="text-2xl font-black italic tracking-tight text-foreground mb-1">
         Asegurá tu lugar antes de que se acaben los cupos
       </h3>
-      <p className="text-sm text-muted-foreground mb-6">
-        Quedan solo:
-      </p>
+      <p className="text-sm text-muted-foreground mb-6">Quedan solo:</p>
 
       <div className="flex justify-center gap-3 mb-6">
         {[
@@ -91,9 +85,7 @@ const CountdownBanner = () => {
                 {String(unit.value).padStart(2, "0")}
               </p>
             </div>
-            <p className="text-xs text-muted-foreground mt-1 font-semibold">
-              {unit.label}
-            </p>
+            <p className="text-xs text-muted-foreground mt-1 font-semibold">{unit.label}</p>
           </div>
         ))}
       </div>

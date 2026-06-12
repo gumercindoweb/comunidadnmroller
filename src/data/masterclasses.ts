@@ -5,6 +5,7 @@ export interface Masterclass {
   fechaISO: string; // ISO date for ordering
   fechaLabel: string; // e.g. "Sábado 28 de Junio"
   hora: string; // e.g. "15 hs"
+  ventaHasta: string; // ISO date when ticket sales close → triggers waitlist redirect
   direccion: string;
   mapsUrl: string;
   whatsappUrl: string;
@@ -23,6 +24,7 @@ export const masterclasses: Masterclass[] = [
     fechaISO: "2026-06-28T15:00:00-03:00",
     fechaLabel: "Domingo 28 de Junio",
     hora: "15 hs",
+    ventaHasta: "2026-06-26T23:59:59-03:00",
     direccion: "Juana Manso y Martha Lynch, Puerto Madero",
     mapsUrl: "https://maps.app.goo.gl/QKdHNpXbNSwK9yRh9",
     whatsappUrl: "https://wa.link/7vfiie",
@@ -33,12 +35,13 @@ export const masterclasses: Masterclass[] = [
     },
   },
   {
-    slug: "skatepark-pacha-palermo",
-    sede: "Skatepark Pacha Palermo",
-    sedeCorta: "Skatepark Pacha",
+    slug: "skatepark-costanera-norte",
+    sede: "Skatepark Costanera Norte",
+    sedeCorta: "Costanera Norte",
     fechaISO: "2026-07-26T15:00:00-03:00",
     fechaLabel: "Sábado 26 de Julio",
     hora: "15 hs",
+    ventaHasta: "2026-07-24T23:59:59-03:00",
     direccion: "Av. Costanera Rafael Obligado, Palermo",
     mapsUrl: "https://maps.google.com/?q=Skatepark+Pacha+Palermo",
     whatsappUrl: "https://wa.link/7vfiie",

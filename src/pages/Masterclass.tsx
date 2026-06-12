@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import { useParams, Navigate, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   Calendar,
@@ -110,14 +110,25 @@ const incluye = [
 
 const MasterclassPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const mc = getMasterclass(slug);
   const [modalPase, setModalPase] = useState<'general' | 'alquiler' | null>(null);
 
   useEffect(() => {
     if (mc) {
       document.title = `Masterclass de Patinaje — ${mc.sede} | ${mc.fechaLabel}`;
+      // Si la venta ya cerró al cargar la página, redirigir a lista de espera
+      if (new Date() > new Date(mc.ventaHasta)) {
+        navigate(`/masterclass-de-patinaje/${mc.slug}/lista-de-espera`, { replace: true });
+      }
     }
-  }, [mc]);
+  }, [mc, navigate]);
+
+  const handleCountdownExpired = useCallback(() => {
+    if (mc) {
+      navigate(`/masterclass-de-patinaje/${mc.slug}/lista-de-espera`, { replace: true });
+    }
+  }, [mc, navigate]);
 
   if (!slug) {
     const next = getProximaMasterclass();
@@ -307,7 +318,10 @@ const MasterclassPage = () => {
       {/* COUNTDOWN — Urgencia de venta */}
       <section className="py-12 bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <CountdownBanner />
+          <CountdownBanner
+            ventaHasta={new Date(mc.ventaHasta)}
+            onExpired={handleCountdownExpired}
+          />
         </div>
       </section>
 

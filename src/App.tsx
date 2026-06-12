@@ -9,6 +9,8 @@ import RegistroConfirmadoNewsletter from "./pages/RegistroConfirmadoNewsletter.t
 import PagoConfirmado from "./pages/PagoConfirmado.tsx";
 import ClasesMasAlquiler from "./pages/ClasesMasAlquiler.tsx";
 import Masterclass from "./pages/Masterclass.tsx";
+import ListaEsperaPage from "./pages/ListaEsperaPage.tsx";
+import ListaEsperaConfirmada from "./pages/ListaEsperaConfirmada.tsx";
 import ClaseGratis from "./pages/ClaseGratis.tsx";
 import ClaseGratisConfirmada from "./pages/ClaseGratisConfirmada.tsx";
 import ExclusivoSociosSportclub from "./pages/ExclusivoSociosSportclub.tsx";
@@ -34,6 +36,8 @@ const App = () => (
           <Route path="/clases-de-rollers-mas-alquiler" element={<ClasesMasAlquiler />} />
           <Route path="/masterclass-de-patinaje" element={<Masterclass />} />
           <Route path="/masterclass-de-patinaje/:slug" element={<Masterclass />} />
+          <Route path="/masterclass-de-patinaje/:slug/lista-de-espera" element={<ListaEsperaPage />} />
+          <Route path="/masterclass-de-patinaje/lista-de-espera-confirmada" element={<ListaEsperaConfirmada />} />
           <Route path="/clase-gratis" element={<ClaseGratis />} />
           <Route path="/clase-gratis-confirmada" element={<ClaseGratisConfirmada />} />
           <Route path="/exclusivo-de-socios-sportclub" element={<ExclusivoSociosSportclub />} />
