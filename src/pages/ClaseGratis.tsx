@@ -37,6 +37,7 @@ const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   phone: z.string().trim().min(6, "WhatsApp inválido").max(40),
+  dni: z.string().trim().min(6, "Ingresá tu DNI").max(20),
   sede: z.string().trim().min(1, "Elegí una sede"),
   nivel: z.string().trim().min(1, "Elegí tu nivel"),
 });
@@ -46,6 +47,7 @@ const ClaseGratis = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [dni, setDni] = useState("");
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
   const [website, setWebsite] = useState("");
@@ -56,20 +58,24 @@ const ClaseGratis = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = FormSchema.safeParse({ name, email, phone, sede, nivel });
+    const parsed = FormSchema.safeParse({ name, email, phone, dni, sede, nivel });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Datos inválidos");
       return;
     }
     setLoading(true);
     try {
+      // El backend (subscribe-clase-gratis) recibe solo los campos que ya esperaba.
+      // dni se usa para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-clase-gratis", {
-        body: { ...parsed.data, website },
+        body: { name, email, phone, sede, nivel, website },
       });
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        navigate("/clase-gratis-confirmada");
+        navigate("/clase-gratis-confirmada", {
+          state: { name, email, phone, dni, sede, nivel },
+        });
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }
@@ -182,6 +188,17 @@ const ClaseGratis = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   disabled={loading}
                   maxLength={40}
+                  required
+                  className="h-12 rounded-none bg-background border-border text-base"
+                />
+                <Input
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="DNI (sin puntos)"
+                  value={dni}
+                  onChange={(e) => setDni(e.target.value)}
+                  disabled={loading}
+                  maxLength={20}
                   required
                   className="h-12 rounded-none bg-background border-border text-base"
                 />

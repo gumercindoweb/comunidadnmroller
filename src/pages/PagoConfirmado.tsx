@@ -43,9 +43,20 @@ const PagoConfirmado = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [dni, setDni] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+
+  // Mensaje de WhatsApp ya pre-llenado con los datos cargados (sin que el usuario escriba).
+  const waAcreditar =
+    `https://wa.me/5491165920600?text=` +
+    encodeURIComponent(
+      `[LP|NM|CC] ¡Hola! Soy ${nombre.trim() || "[tu nombre]"} (DNI ${dni.trim() || "[tu DNI]"}). ` +
+        `Realicé el pago del plan ${displayPlanLabel || "[plan]"}. ` +
+        `Adjunto el comprobante y quiero que me acrediten el plan. ` +
+        `Mi correo ${email.trim() || "[correo]"} y WhatsApp ${telefono.trim() || "[whatsapp]"}.`,
+    );
 
   const fileError = useMemo(() => {
     if (!file) return null;
@@ -58,6 +69,7 @@ const PagoConfirmado = () => {
     nombre.trim().length > 1 &&
     /^\S+@\S+\.\S+$/.test(email) &&
     telefono.trim().length >= 6 &&
+    dni.trim().length >= 6 &&
     file !== null &&
     !fileError &&
     !submitting;
@@ -316,7 +328,7 @@ const PagoConfirmado = () => {
                     <Mail className="w-4 h-4" /> Abrir mi correo
                   </a>
                   <a
-                    href="https://wa.me/5491165920600?text=%5BLP%7CNM%7CCC%5D%20Hola!%20Mi%20nombre%20es%20%5Bindique%5D.%20Realic%C3%A9%20un%20pago.%20Adjunto%20comprobante%20y%20quiero%20que%20me%20acrediten%20el%20plan%20que%20compr%C3%A9."
+                    href={waAcreditar}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 bg-background border-2 border-[#25D366] text-[#25D366] font-bold uppercase tracking-[0.18em] text-xs transition-all hover:bg-[#25D366] hover:text-white"
@@ -389,6 +401,22 @@ const PagoConfirmado = () => {
                       className="rounded-none border-foreground/20 h-12"
                     />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="dni" className="uppercase tracking-[0.12em] text-xs font-bold">
+                    DNI *
+                  </Label>
+                  <Input
+                    id="dni"
+                    required
+                    inputMode="numeric"
+                    value={dni}
+                    onChange={(e) => setDni(e.target.value)}
+                    placeholder="DNI (sin puntos)"
+                    maxLength={20}
+                    className="rounded-none border-foreground/20 h-12"
+                  />
                 </div>
 
                 {displayPlanLabel && (
