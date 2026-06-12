@@ -157,9 +157,21 @@ const despues = [
   { emoji: "💬", text: <>¿Dudas? Escribinos por WhatsApp y te ayudamos al instante.</> },
 ];
 
+// Lee los datos del form desde el router state o, si se recargó, desde sessionStorage.
+const readFormState = (navState: unknown): FormState | null => {
+  const fromNav = navState as FormState | null;
+  if (fromNav?.name) return fromNav;
+  try {
+    const raw = sessionStorage.getItem("sportclub_form");
+    return raw ? (JSON.parse(raw) as FormState) : null;
+  } catch {
+    return null;
+  }
+};
+
 const SportclubConfirmado = () => {
   const location = useLocation();
-  const st = (location.state as FormState | null) ?? null;
+  const st = readFormState(location.state);
   const waEnviarDatos = buildWaEnviarDatos(st);
   const pasos = buildPasos(waEnviarDatos);
 

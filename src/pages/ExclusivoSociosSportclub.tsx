@@ -191,9 +191,12 @@ const ExclusivoSociosSportclub = () => {
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        navigate("/exclusivo-de-socios-sportclub-confirmado", {
-          state: { name, email, phone, dni, plan, sede, nivel, alquiler },
-        });
+        const payload = { name, email, phone, dni, plan, sede, nivel, alquiler };
+        // Backup en sessionStorage: el mensaje sigue personalizado aunque recarguen.
+        try {
+          sessionStorage.setItem("sportclub_form", JSON.stringify(payload));
+        } catch {}
+        navigate("/exclusivo-de-socios-sportclub-confirmado", { state: payload });
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }

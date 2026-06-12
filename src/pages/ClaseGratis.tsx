@@ -73,9 +73,12 @@ const ClaseGratis = () => {
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        navigate("/clase-gratis-confirmada", {
-          state: { name, email, phone, dni, sede, nivel },
-        });
+        const payload = { name, email, phone, dni, sede, nivel };
+        // Backup en sessionStorage: el mensaje sigue personalizado aunque recarguen.
+        try {
+          sessionStorage.setItem("clasegratis_form", JSON.stringify(payload));
+        } catch {}
+        navigate("/clase-gratis-confirmada", { state: payload });
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }
