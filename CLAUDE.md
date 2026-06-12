@@ -85,3 +85,9 @@ Cuando el usuario pida algo, **buscá siempre el camino más fácil / menos comp
 
 ### 10. Screenshots del preview salen en **negro** (glitch)
 - Verificar por DOM con `preview_eval` (leer textos/atributos) en vez de pelear con el screenshot.
+
+### 11. **CDN de Hostinger** rompe el dominio (404 en algunos edges, SSL error, cambia la IP)
+- **Síntoma:** al activar el CDN de Hostinger, el dominio cambia a una **IP de CDN** (ej. `104.160.67.72`, headers "pelados" sin `server`), que puede **cachear los 404 viejos** y servirlos en algunos edges (anda en una red/celu y en otra no). Al **desactivarlo**, queda en limbo de propagación con **error SSL** ("conexión no es privada") hasta que el DNS vuelva al origen (**24–48 hs**, normalmente menos).
+- **Diagnóstico:** comparar IPs con `dig +short comunidadnmroller.com`. El **origen real** es `185.249.224.136` / `77.37.85.34` (el de `lp` es otro: `62.72.62.63`). Verificar que el origen está sano sin depender del DNS:
+  `curl -sk --resolve comunidadnmroller.com:443:185.249.224.136 https://comunidadnmroller.com/ | grep '<title>'` → debe dar "Escuela #1 de Patinaje…".
+- **Fix:** **mantener el CDN DESACTIVADO** para este sitio (es liviano, no lo necesita) y esperar la propagación DNS al origen. No tocar archivos: el origen ya está bien. Flush DNS local del Mac: `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`.
