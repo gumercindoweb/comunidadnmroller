@@ -284,6 +284,22 @@ const PagoConfirmado = () => {
               ))}
 
             </ol>
+
+            {/* Advertencia: punto clave */}
+            <div className="mt-10 max-w-3xl mx-auto bg-[#F5B800]/10 border-2 border-[#F5B800] p-6 md:p-7 text-center">
+              <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] px-4 py-1.5 mb-4 text-xs font-black uppercase tracking-[0.18em]">
+                <AlertCircle className="w-4 h-4" strokeWidth={3} /> Paso clave
+              </div>
+              <p className="text-base md:text-lg font-bold text-foreground leading-relaxed mb-5 max-w-xl mx-auto">
+                Subir el comprobante es <span className="text-primary">indispensable</span>: sin él{" "}
+                <span className="text-primary">no podemos acreditar tu plan</span>.
+              </p>
+              <p className="text-sm md:text-base text-foreground/70 leading-relaxed max-w-xl mx-auto">
+                💡 Si entrás a la app antes de que validemos tu pago, te va a figurar que{" "}
+                <strong className="text-foreground">no tenés créditos</strong>. Es normal: tu plan
+                se habilita en cuanto confirmamos el comprobante.
+              </p>
+            </div>
           </div>
         </section>
 
