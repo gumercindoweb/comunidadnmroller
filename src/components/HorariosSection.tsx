@@ -502,12 +502,12 @@ const HorariosSection = () => {
                         >
                           🛼 Elegir mi plan <ArrowRight className="w-4 h-4" />
                         </a>
-                        <a
-                          href="#planes"
+                        <Link
+                          to="/clase-gratis"
                           className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-semibold uppercase tracking-[0.1em] text-xs px-7 py-3.5 rounded-full hover:border-primary/50 hover:text-primary transition-colors"
                         >
                           Probar una clase gratis
-                        </a>
+                        </Link>
                       </div>
                       <p className="text-muted-foreground text-xs">
                         ¿Todavía dudás?{" "}
