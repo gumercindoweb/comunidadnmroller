@@ -42,6 +42,11 @@ Cuando el usuario pida algo, **buscá siempre el camino más fácil / menos comp
 
 ## 🔧 Errores recurrentes y cómo se resolvieron
 
+> ⭐ **REGLA (PRIORIDAD ALTA):** ante un error **igual o parecido** a alguno de abajo,
+> **NO reinventar el diagnóstico**: ir directo a este apartado, identificar el patrón y
+> **repetir el fix documentado** que ya funcionó. Recién si no aplica, investigar de cero.
+> Si aparece un **error nuevo que se repite**, sumá su patrón (síntoma → causa → fix) a esta lista.
+
 > **Antes de pelear con un bug de deploy/Hostinger/Lovable, leé acá: ya nos pasó.**
 
 ### 1. El sitio en producción da **404** en todo (home, rutas internas) tras subir el `dist/`
