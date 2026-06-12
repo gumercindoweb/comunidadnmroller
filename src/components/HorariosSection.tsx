@@ -388,14 +388,17 @@ const HorariosSection = () => {
                   ¿Te gustaría que lo tuviéramos? Dejanos tu sugerencia — leemos todo.
                 </p>
 
-                {/* Botón buzón (por ahora placeholder) */}
-                <button
-                  disabled
-                  title="Próximamente: buzón de sugerencias"
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold uppercase tracking-[0.12em] text-xs px-6 py-3 rounded-full opacity-90 cursor-not-allowed mb-4"
-                >
-                  💬 Dejar una sugerencia
-                </button>
+                {/* Botón buzón → abre modal de sugerencia */}
+                <SugerenciaTrigger>
+                  {(openSug) => (
+                    <button
+                      onClick={openSug}
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold uppercase tracking-[0.12em] text-xs px-6 py-3 rounded-full hover:shadow-[0_0_24px_rgba(208,28,31,0.5)] transition-all mb-4"
+                    >
+                      💬 Dejar una sugerencia
+                    </button>
+                  )}
+                </SugerenciaTrigger>
 
                 {/* Limpiar filtros */}
                 <div>
