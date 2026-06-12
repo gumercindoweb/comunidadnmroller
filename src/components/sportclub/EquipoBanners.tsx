@@ -27,7 +27,9 @@ const EquipoBanners = () => {
           <p className="text-[11px] uppercase tracking-[0.22em] text-foreground/50 font-bold mb-3">
             Equipo en alianza con
           </p>
-          <img src={logoFlyfree.url} alt="FlyFree Urban" className="h-12 md:h-14" />
+          <span className="inline-flex items-center justify-center bg-white rounded-lg px-6 py-3 shadow-sm">
+            <img src={logoFlyfree.url} alt="FlyFree Urban" className="h-9 md:h-11" />
+          </span>
         </div>
 
         {/* Banners publicitarios (simples) */}
