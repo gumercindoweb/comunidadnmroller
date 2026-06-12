@@ -16,6 +16,7 @@ import SportclubConfirmado from "./pages/SportclubConfirmado.tsx";
 import TerminosCondiciones from "./pages/TerminosCondiciones.tsx";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import WhatsappFloat from "./components/WhatsappFloat.tsx";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <WhatsappFloat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
