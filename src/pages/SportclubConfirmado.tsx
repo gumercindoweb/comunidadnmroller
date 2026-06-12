@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   AlertCircle,
@@ -17,14 +17,45 @@ const WHATSAPP = "5491165920600";
 const APP_STORE = "https://apps.apple.com/ar/app/turnosweb-app-2-0/id1169566678";
 const GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=com.turnosweb.lite";
 
-const waEnviarDatos =
-  `https://wa.me/${WHATSAPP}?text=` +
-  encodeURIComponent(
-    "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI y correo].",
-  );
-const waDudas =
-  `https://wa.me/${WHATSAPP}?text=` +
-  encodeURIComponent("¡Hola! Tengo una duda sobre el beneficio para socios SportClub 🛼");
+const wa = (txt: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
+
+interface FormState {
+  name?: string;
+  email?: string;
+  phone?: string;
+  dni?: string;
+  plan?: string;
+  sede?: string;
+  nivel?: string;
+  alquiler?: string;
+}
+
+// Arma el mensaje de WhatsApp ya pre-llenado con los datos del formulario.
+// Si se entra sin datos (visita directa), usa el texto con placeholders.
+const buildWaEnviarDatos = (st: FormState | null) => {
+  if (!st?.name) {
+    return wa(
+      "[LP|PC|SS] Hola soy [tu nombre] Mis datos registrados en turnos web son [indica tu nro de DNI y correo].",
+    );
+  }
+  const alquilerLine =
+    st.alquiler === "si"
+      ? "Voy a necesitar alquiler de equipo. 🛼"
+      : st.alquiler === "no"
+        ? "Tengo mi propio equipo, no necesito alquiler."
+        : "";
+  const msg =
+    `[LP|PC|SS] ¡Hola! Soy ${st.name}. ` +
+    `Mi DNI es ${st.dni ?? "—"} y mi correo es ${st.email ?? "—"}. ` +
+    (st.plan ? `Soy socio SportClub plan ${st.plan}. ` : "") +
+    (st.sede
+      ? `Quiero tomar mis clases en ${st.sede}${st.nivel ? ` (nivel ${st.nivel})` : ""}. `
+      : "") +
+    alquilerLine;
+  return wa(msg);
+};
+
+const waDudas = wa("¡Hola! Tengo una duda sobre el beneficio para socios SportClub 🛼");
 
 const AppButtons = () => (
   <div className="flex flex-wrap items-center gap-3 mt-4">
@@ -71,7 +102,7 @@ interface Paso {
   body: ReactNode;
 }
 
-const pasos: Paso[] = [
+const buildPasos = (waEnviarDatos: string): Paso[] => [
   {
     Icon: Smartphone,
     title: 'Descargá la app "TurnosWeb"',
@@ -127,6 +158,11 @@ const despues = [
 ];
 
 const SportclubConfirmado = () => {
+  const location = useLocation();
+  const st = (location.state as FormState | null) ?? null;
+  const waEnviarDatos = buildWaEnviarDatos(st);
+  const pasos = buildPasos(waEnviarDatos);
+
   return (
     <>
       <Helmet>

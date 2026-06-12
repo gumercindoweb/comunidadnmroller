@@ -142,13 +142,20 @@ const BENEFICIOS = [
   },
 ];
 
+const ALQUILER_OPCIONES = [
+  { value: "si", label: "Sí, voy a necesitar alquilar equipo" },
+  { value: "no", label: "No, tengo mi propio equipo" },
+];
+
 const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   phone: z.string().trim().min(6, "WhatsApp inválido").max(40),
+  dni: z.string().trim().min(6, "Ingresá tu DNI").max(20),
   plan: z.string().trim().min(1, "Elegí tu plan SportClub"),
   sede: z.string().trim().min(1, "Elegí una sede"),
   nivel: z.string().trim().min(1, "Elegí tu nivel"),
+  alquiler: z.string().trim().min(1, "Indicá si necesitás alquiler"),
 });
 
 const ExclusivoSociosSportclub = () => {
@@ -156,9 +163,11 @@ const ExclusivoSociosSportclub = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [dni, setDni] = useState("");
   const [plan, setPlan] = useState("");
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
+  const [alquiler, setAlquiler] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -167,20 +176,24 @@ const ExclusivoSociosSportclub = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = FormSchema.safeParse({ name, email, phone, plan, sede, nivel });
+    const parsed = FormSchema.safeParse({ name, email, phone, dni, plan, sede, nivel, alquiler });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Datos inválidos");
       return;
     }
     setLoading(true);
     try {
+      // El backend (subscribe-sportclub) recibe solo los campos que ya esperaba.
+      // dni y alquiler se usan para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-sportclub", {
-        body: { ...parsed.data, website },
+        body: { name, email, phone, plan, sede, nivel, website },
       });
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        navigate("/exclusivo-de-socios-sportclub-confirmado");
+        navigate("/exclusivo-de-socios-sportclub-confirmado", {
+          state: { name, email, phone, dni, plan, sede, nivel, alquiler },
+        });
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }
@@ -306,6 +319,17 @@ const ExclusivoSociosSportclub = () => {
                   required
                   className="h-12 rounded-none bg-background border-border text-base"
                 />
+                <Input
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="DNI (sin puntos)"
+                  value={dni}
+                  onChange={(e) => setDni(e.target.value)}
+                  disabled={loading}
+                  maxLength={20}
+                  required
+                  className="h-12 rounded-none bg-background border-border text-base"
+                />
                 <Select value={plan} onValueChange={setPlan} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="Tu plan SportClub" />
@@ -383,6 +407,16 @@ const ExclusivoSociosSportclub = () => {
                   <SelectContent>
                     {NIVELES.map((n) => (
                       <SelectItem key={n} value={n}>{n}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select value={alquiler} onValueChange={setAlquiler} disabled={loading}>
+                  <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
+                    <SelectValue placeholder="¿Vas a necesitar alquiler de equipo?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ALQUILER_OPCIONES.map((o) => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
