@@ -1,72 +1,51 @@
-## Actualización de horarios — Diciembre 2025
+## Buzón de sugerencias — horarios / sedes
 
-Reemplazo total de la grilla de clases y alquiler basándome en los 3 flyers (Niveles, Disciplinas, Alquiler). Unifico Inicial/Principiante/Intermedio en una sola etiqueta y elimino sedes huérfanas.
+Camino simple: un **formulario corto** que dispara un **email a `hola@comunidadnmroller.com`** usando la infraestructura de email de Lovable Cloud (sin servicios externos, sin tablas, sin panel). Cada sugerencia llega como un mail prolijo a tu casilla y respondés desde ahí.
 
-### Archivos a modificar
+### Dónde aparece
 
-**1. `src/data/sedes.ts`** — Reemplazo completo del array `sedes[]` y de `disciplinaColor`.
+1. **Empty-state del filtro de horarios** (lo que ya tenés diseñado: "Ooops… dejá tu sugerencia"). El botón **"Dejar una sugerencia"** abre el modal del form en vez del tooltip "próximamente".
+2. **Footer** — link discreto "Sugerí horario o sede" que abre el mismo modal.
 
-- **Sedes eliminadas:** `belgrano-skatepark` (se fusiona dentro de `villa-luro`/`belgrano` como disciplina Skatepark donde corresponda), `parque-las-heras` (no figura en flyers).
-- **Sedes finales (11):** Rosedal Palermo, Puerto Madero, Caballito (P. Rivadavia), Vicente López, Belgrano, Villa Luro, Colegiales, Plaza La Pampa, Devoto, Villa Real, + se mantiene Belgrano como sede única que también tiene Skatepark.
-- **Nueva etiqueta unificada:** `"Inicial · Principiante · Intermedio"` reemplaza a las 3 separadas (`Primeros pasos`, `Principiante`, `Intermedio`). Se mantiene el estilo pill teal.
-- **Disciplinas técnicas se mantienen:** Slalom, Frenadas, Urbano, Skatepark, Rampas (con sus colores actuales).
+### Form (modal `Dialog` shadcn, estilo NM Roller)
 
-**2. `src/data/sedes-alquiler.ts`** — Reemplazo según flyer de Alquiler.
+Campos:
+- **Nombre** (texto, requerido)
+- **Email** (email, requerido — para poder responderte si hace falta)
+- **Zona / barrio sugerido** (texto, requerido — ej. "Caballito Norte")
+- **Día preferido** (select: Lun–Dom + "Cualquiera")
+- **Horario preferido** (select de franjas: Mañana / Mediodía / Tarde / Noche + "Cualquiera")
+- **Comentario** (textarea opcional, máx 500 — "contanos más si querés")
+- Honeypot oculto anti-spam.
 
-- 7 sedes con alquiler: Rosedal Palermo, Villa Real, Puerto Madero, Colegiales, Plaza La Pampa, Vicente López, Devoto.
-- Actualizo el flag `alquiler: true` en `sedes.ts` para que coincida exactamente con esta lista (sacar de Devoto/Villa Real/Plaza La Pampa donde no esté, agregar donde falte).
+Validación con **zod** (mismo patrón que el resto de los forms). Toast de éxito + cierre del modal.
 
-**3. `src/components/HorariosSection.tsx`** — Actualizar el mapa `disciplinaColor` local para incluir la nueva etiqueta unificada y remover las viejas (`Primeros pasos`, `Principiante`, `Intermedio`).
+### Backend
 
-### Nuevos horarios — Niveles (etiqueta unificada)
+- **Lovable Emails** (built-in, sin API keys de terceros). Requiere prerequisitos automáticos: setup de email infra + scaffold de transactional emails + dominio `notify.comunidadnmroller.com` delegado (si todavía no está, te abro el diálogo de setup; el form igual queda armado).
+- **Edge Function nueva**: `submit-sugerencia` (verify_jwt=false) que valida con zod e invoca `send-transactional-email` con template `sugerencia-horario`.
+- **Template React Email** `sugerencia-horario.tsx`: subject `🛼 Nueva sugerencia de [Zona]`, cuerpo prolijo con todos los campos, `reply_to` = email del usuario para responder con un click. Destinatario fijo: `hola@comunidadnmroller.com`.
+- **Idempotency key**: hash de email+zona+timestamp para evitar duplicados por doble-click.
 
-| Sede | Días/Horarios |
-|---|---|
-| P. Rivadavia (Caballito) | Lun, Mar, Jue 19hs · Dom 9am |
-| Villa Real | Mié 18 y 19hs · Sáb 10:30 |
-| Devoto | Mar y Vie 19hs |
-| Villa Luro | Vie 19hs |
-| Plaza La Pampa | Sáb y Dom 9am |
-| Belgrano | Mié y Vie 19hs |
-| Puerto Madero | Mar 18 y 19hs · Sáb 9hs |
-| Colegiales | Mié 18hs · Jue 19hs |
-| Vicente López | Sáb 9hs |
-| Rosedal Palermo | Mar y Vie 9am · Sáb y Dom 10am · Mar, Mié y Jue 19hs · Sáb 18hs |
+### Limpieza de copy
 
-### Nuevos horarios — Disciplinas
+Ya está corregido en mi memoria: el correo oficial es **`hola@comunidadnmroller.com`**. Reviso si aparece otro mail viejo hardcodeado en el sitio y lo unifico.
 
-| Sede / Disciplina | Horarios |
-|---|---|
-| Rosedal · Slalom | Mar y Vie 9hs · Mié 20hs · Jue 19hs |
-| Rosedal · Urbano | Sáb 10hs |
-| Rosedal · Frenadas | Mar 20hs |
-| Rosedal · Rampas | Jue 20hs |
-| Parque Rivadavia · (sin disciplina específica — flyer dice solo "Dom 9am" sin etiqueta) → lo dejo como nivel ya cubierto arriba |
-| Puerto Madero · Slalom | Mar 19hs |
-| Puerto Madero · Urbano | Sáb 10hs |
-| Vicente López · Slalom | Sáb 9hs |
-| Villa Real · Urbano | Sáb 11:30 |
-| Caballito · Urbano | Jue 20hs |
-| Villa Luro · Skatepark | Vie 20hs |
-| Belgrano · Skatepark | Mié y Vie 20hs |
+### Archivos a tocar
 
-### Nuevos horarios — Alquiler (`sedes-alquiler.ts`)
+- `src/components/sugerencias/SugerenciaDialog.tsx` (nuevo) — modal + form + zod + llamada al edge function.
+- `src/components/sugerencias/SugerenciaTrigger.tsx` (nuevo) — botón reutilizable que abre el modal.
+- `src/components/HorariosSection.tsx` — reemplazar el tooltip "Próximamente" por el `<SugerenciaTrigger>`.
+- `src/components/Footer.tsx` — agregar link "Sugerí horario o sede".
+- `supabase/functions/submit-sugerencia/index.ts` + `config.toml` (nuevos).
+- `supabase/functions/_shared/transactional-email-templates/sugerencia-horario.tsx` (nuevo) + registrar en `registry.ts`.
+- Búsqueda global de mails viejos → reemplazo por `hola@comunidadnmroller.com`.
 
-```
-Rosedal Palermo  → Mar y Vie 9hs · Dom 10am · Jue 19hs
-Villa Real       → Mié 18hs · Sáb 10:30
-Puerto Madero    → Mar 18hs
-Colegiales       → Mié 18hs · Jue 19hs
-Plaza La Pampa   → Sáb y Dom 9am
-Vicente López    → Sáb 9hs
-Devoto           → Mar y Vie 19hs
-```
+### Lo que NO hace falta
 
-### Notas
+- Sin base de datos nueva.
+- Sin panel de admin.
+- Sin GetResponse para esto (la lista de marketing queda intacta).
+- Sin servicios externos (Resend/Mailgun) salvo que prefieras esa ruta.
 
-- "Madero" en el flyer = Puerto Madero.
-- "Rivadavia" en disciplinas = Caballito / Parque Rivadavia (mismo lugar).
-- El estilo visual (chips, colores por disciplina, mapa, dialog de detalle) no cambia — solo la data.
-- No toco la sección de precios, alquiler banner, ni otras partes del sitio.
-
-Confirmá y lo aplico.
+¿Confirmás y lo implemento?
