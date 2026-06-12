@@ -2,6 +2,7 @@ import { Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { getProximaMasterclass } from "@/data/masterclasses";
+import SugerenciaTrigger from "@/components/sugerencias/SugerenciaTrigger";
 
 const Footer = () => {
   const proxMc = getProximaMasterclass();
@@ -27,6 +28,15 @@ const Footer = () => {
               <li><Link to="/exclusivo-de-socios-sportclub" className="hover:text-primary transition-colors">Exclusivo Socios SportClub</Link></li>
               <li><Link to="/newsletter-desde-cero" className="hover:text-primary transition-colors">Newsletter Desde Cero</Link></li>
               <li><Link to={`/masterclass-de-patinaje/${proxMc.slug}`} className="hover:text-primary transition-colors">Masterclass de Patinaje</Link></li>
+              <li>
+                <SugerenciaTrigger>
+                  {(open) => (
+                    <button onClick={open} className="hover:text-primary transition-colors text-left">
+                      Sugerí horario o sede
+                    </button>
+                  )}
+                </SugerenciaTrigger>
+              </li>
             </ul>
           </div>
 

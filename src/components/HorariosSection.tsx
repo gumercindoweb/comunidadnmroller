@@ -13,6 +13,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
 import { NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
+import SugerenciaTrigger from "@/components/sugerencias/SugerenciaTrigger";
 // ── Tipos ──
 interface ClaseEnriquecida {
   sede: string;
