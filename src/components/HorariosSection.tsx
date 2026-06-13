@@ -166,11 +166,9 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
           <Tooltip key={b} delayDuration={150}>
             <TooltipTrigger asChild>
               <span
-                title={badgeDescriptions[b] || ""}
-                className={`inline-flex items-center gap-1 px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words ${badgeStyles[b] || ""}`}
+                className={`inline-flex items-center gap-0.5 px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words cursor-default ${badgeStyles[b] || ""}`}
               >
-                {b}
-                {badgeDescriptions[b] && <Info className="w-2.5 h-2.5 opacity-70 shrink-0" />}
+                {b}<Info className="w-2.5 h-2.5 opacity-50 shrink-0" />
               </span>
             </TooltipTrigger>
             {badgeDescriptions[b] && (
@@ -203,10 +201,9 @@ const ClaseDayCard = ({ clase }: { clase: ClaseEnriquecida }) => (
             <Tooltip key={b} delayDuration={150}>
               <TooltipTrigger asChild>
                 <span
-                  className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight ${badgeStyles[b] || ""}`}
+                  className={`inline-flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight cursor-default ${badgeStyles[b] || ""}`}
                 >
-                  {b}
-                  {badgeDescriptions[b] && <Info className="w-2.5 h-2.5 opacity-70 shrink-0" />}
+                  {b}<Info className="w-2.5 h-2.5 opacity-50 shrink-0" />
                 </span>
               </TooltipTrigger>
               {badgeDescriptions[b] && (

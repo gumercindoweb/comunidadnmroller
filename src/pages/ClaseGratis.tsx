@@ -22,95 +22,73 @@ import {
 import { Check, ArrowLeft, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import FlyFreePanel from "@/components/FlyFreePanel";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
-import { sedes, NIVEL_INICIAL, NIVEL_PRINCIP_INTER } from "@/data/sedes";
+import { sedes, NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-// Badges de nivel (mismos estilos que HorariosSection)
-const NIVEL_BADGES: { label: string; className: string; desc: string }[] = [
-  {
-    label: NIVEL_INICIAL,
-    className: "bg-emerald-500/20 text-emerald-300 border-emerald-400/70",
-    desc: "Desde cero: tu primera vez sobre rollers, sin experiencia previa.",
-  },
-  {
-    label: NIVEL_PRINCIP_INTER,
-    className: "bg-sky-500/20 text-sky-300 border-sky-400/70",
-    desc: "Principiante e Intermedio: ya tenés base y querés seguir mejorando.",
-  },
-];
-
-const NivelBadges = () => (
-  <div className="flex flex-wrap gap-1 mt-2">
-    {NIVEL_BADGES.map((b) => (
-      <Tooltip key={b.label} delayDuration={150}>
-        <TooltipTrigger asChild>
-          <span
-            className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide leading-tight ${b.className}`}
-          >
-            {b.label}
-            <Info className="w-2.5 h-2.5 opacity-70" />
-          </span>
-        </TooltipTrigger>
-        <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
-          {b.desc}
-        </TooltipContent>
-      </Tooltip>
-    ))}
-  </div>
-);
-
 const SEDES_GRATIS_IDS = ["villa-luro", "colegiales", "plaza-la-pampa", "belgrano"];
-
-// Sedes que son gratis (por nombre corto, para marcarlas en el grid)
-const SEDES_GRATIS_NOMBRES = new Set(["Belgrano", "Villa Luro", "Colegiales", "Plaza La Pampa"]);
 
 const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
-const HORARIOS_CLASES: Record<string, { sede: string; hora: string }[]> = {
+const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: string }[]> = {
   Lunes: [
-    { sede: "P. Rivadavia", hora: "19:00" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Martes: [
-    { sede: "P. Rivadavia", hora: "19:00" },
-    { sede: "Devoto", hora: "19:00" },
-    { sede: "Puerto Madero", hora: "18:00" },
-    { sede: "Puerto Madero", hora: "19:00" },
-    { sede: "Rosedal Palermo", hora: "09:00" },
-    { sede: "Rosedal Palermo", hora: "19:00" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Miércoles: [
-    { sede: "Villa Real", hora: "18:00" },
-    { sede: "Villa Real", hora: "19:00" },
-    { sede: "Belgrano", hora: "19:00" },
-    { sede: "Colegiales", hora: "18:00" },
-    { sede: "Rosedal Palermo", hora: "19:00" },
+    { sede: "Villa Real", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Villa Real", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Jueves: [
-    { sede: "P. Rivadavia", hora: "19:00" },
-    { sede: "Colegiales", hora: "19:00" },
-    { sede: "Rosedal Palermo", hora: "19:00" },
+    { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Viernes: [
-    { sede: "Devoto", hora: "19:00" },
-    { sede: "Villa Luro", hora: "19:00" },
-    { sede: "Belgrano", hora: "19:00" },
-    { sede: "Rosedal Palermo", hora: "09:00" },
+    { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Villa Luro", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
   ],
   Sábado: [
-    { sede: "Villa Real", hora: "10:30" },
-    { sede: "Plaza La Pampa", hora: "09:00" },
-    { sede: "Puerto Madero", hora: "09:00" },
-    { sede: "Vicente López", hora: "09:00" },
-    { sede: "Rosedal Palermo", hora: "10:00" },
-    { sede: "Rosedal Palermo", hora: "18:00" },
+    { sede: "Villa Real", hora: "10:30", disciplina: NIVEL_UNIFICADO },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Vicente López", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "18:00", disciplina: NIVEL_UNIFICADO },
   ],
   Domingo: [
-    { sede: "P. Rivadavia", hora: "09:00" },
-    { sede: "Plaza La Pampa", hora: "09:00" },
-    { sede: "Rosedal Palermo", hora: "10:00" },
+    { sede: "P. Rivadavia", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],
 };
+
+const BADGE_STYLES: Record<string, string> = {
+  [NIVEL_INICIAL]: "rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/70 font-extrabold",
+  [NIVEL_PRINCIP_INTER]: "rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/70 font-extrabold",
+};
+
+const BADGE_DESC: Record<string, string> = {
+  [NIVEL_INICIAL]: "Desde cero: tu primera vez sobre rollers, sin experiencia previa.",
+  [NIVEL_PRINCIP_INTER]: "Principiante e Intermedio: ya tenés base y querés seguir mejorando.",
+};
+
+const IDENTIDADES = [
+  { value: "arrancando", emoji: "🟢", label: "Nunca patiné o no sé por dónde empezar", nivel: NIVEL_INICIAL },
+  { value: "con-base",   emoji: "🟡", label: "Ya sé lo básico, quiero mejorar",         nivel: NIVEL_PRINCIP_INTER },
+];
 
 const EQUIPO_OPCIONES = [
   { value: "alquiler", label: "Sí, voy a necesitar alquilar equipo" },
@@ -145,11 +123,24 @@ const ClaseGratis = () => {
   const [nivel, setNivel] = useState("");
   const [equipo, setEquipo] = useState("");
   const [filtroDia, setFiltroDia] = useState("__todos__");
+  const [filtroIdentidad, setFiltroIdentidad] = useState("__todos__");
 
-  const diasVisibles = useMemo(
-    () => filtroDia === "__todos__" ? DIAS_SEMANA : DIAS_SEMANA.filter((d) => d === filtroDia),
-    [filtroDia],
-  );
+  const hayFiltros = filtroDia !== "__todos__" || filtroIdentidad !== "__todos__";
+  const limpiarFiltros = () => { setFiltroDia("__todos__"); setFiltroIdentidad("__todos__"); };
+
+  const clasesFiltradas = (dia: string) => {
+    if (filtroIdentidad === "__todos__") return HORARIOS_CLASES[dia];
+    const id = IDENTIDADES.find((x) => x.value === filtroIdentidad);
+    return id ? HORARIOS_CLASES[dia].filter((c) =>
+      expandirNivel(c.disciplina).includes(id.nivel)
+    ) : HORARIOS_CLASES[dia];
+  };
+
+  const diasVisibles = useMemo(() => {
+    const base = filtroDia === "__todos__" ? DIAS_SEMANA : DIAS_SEMANA.filter((d) => d === filtroDia);
+    return base.filter((d) => clasesFiltradas(d).length > 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtroDia, filtroIdentidad]);
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -390,10 +381,10 @@ const ClaseGratis = () => {
 
           {/* Grilla de horarios por día */}
           <div className="max-w-7xl mx-auto mt-12">
-            {/* Filtro de día */}
-            <div className="flex items-center gap-3 mb-8">
+            {/* Filtros */}
+            <div className="flex flex-wrap items-center gap-3 mb-8">
               <Select value={filtroDia} onValueChange={setFiltroDia}>
-                <SelectTrigger className="w-52 rounded-none bg-background border-border">
+                <SelectTrigger className="w-48 rounded-none bg-background border-border">
                   <SelectValue placeholder="Todos los días" />
                 </SelectTrigger>
                 <SelectContent>
@@ -403,12 +394,25 @@ const ClaseGratis = () => {
                   ))}
                 </SelectContent>
               </Select>
-              {filtroDia !== "__todos__" && (
+              <Select value={filtroIdentidad} onValueChange={setFiltroIdentidad}>
+                <SelectTrigger className="w-64 rounded-none bg-background border-border">
+                  <SelectValue placeholder="¿Cómo te definís?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__todos__">Cualquier nivel</SelectItem>
+                  {IDENTIDADES.map((id) => (
+                    <SelectItem key={id.value} value={id.value}>
+                      {id.emoji} {id.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {hayFiltros && (
                 <button
-                  onClick={() => setFiltroDia("__todos__")}
+                  onClick={limpiarFiltros}
                   className="inline-flex items-center gap-1.5 text-xs text-primary font-bold hover:underline"
                 >
-                  <X className="w-3 h-3" /> Ver todos
+                  <X className="w-3 h-3" /> Limpiar
                 </button>
               )}
             </div>
@@ -426,19 +430,27 @@ const ClaseGratis = () => {
                     </h3>
                   </div>
                   <div className="flex flex-col gap-2">
-                    {HORARIOS_CLASES[dia].map((clase, i) => (
-                      <div
-                        key={i}
-                        className="bg-card border border-border rounded-lg p-3 hover:border-primary/40 transition-colors"
-                      >
-                        <p className="font-bold text-xs text-foreground leading-tight">
-                          {clase.sede}
-                        </p>
+                    {clasesFiltradas(dia).map((clase, i) => (
+                      <div key={i} className="bg-card border border-border rounded-lg p-3 hover:border-primary/40 transition-colors">
+                        <p className="font-bold text-xs text-foreground leading-tight">{clase.sede}</p>
                         <div className="flex items-center gap-1 mt-1.5">
                           <Clock className="w-3 h-3 text-primary shrink-0" />
                           <span className="text-xs text-muted-foreground">{clase.hora}</span>
                         </div>
-                        <NivelBadges />
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {expandirNivel(clase.disciplina).map((b) => (
+                            <Tooltip key={b} delayDuration={150}>
+                              <TooltipTrigger asChild>
+                                <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide cursor-default ${BADGE_STYLES[b] ?? ""}`}>
+                                  {b}<Info className="w-2.5 h-2.5 opacity-50 shrink-0" />
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent side="top" className="max-w-[200px] text-xs leading-snug">
+                                {BADGE_DESC[b]}
+                              </TooltipContent>
+                            </Tooltip>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -454,19 +466,27 @@ const ClaseGratis = () => {
                     <h3 className="font-black italic text-foreground text-lg">{dia}</h3>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    {HORARIOS_CLASES[dia].map((clase, i) => (
-                      <div
-                        key={i}
-                        className="bg-card border border-border rounded-lg p-3"
-                      >
-                        <p className="font-bold text-sm text-foreground leading-tight">
-                          {clase.sede}
-                        </p>
+                    {clasesFiltradas(dia).map((clase, i) => (
+                      <div key={i} className="bg-card border border-border rounded-lg p-3">
+                        <p className="font-bold text-sm text-foreground leading-tight">{clase.sede}</p>
                         <div className="flex items-center gap-1 mt-1.5">
                           <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
                           <span className="text-sm text-muted-foreground">{clase.hora}</span>
                         </div>
-                        <NivelBadges />
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {expandirNivel(clase.disciplina).map((b) => (
+                            <Tooltip key={b} delayDuration={150}>
+                              <TooltipTrigger asChild>
+                                <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide cursor-default ${BADGE_STYLES[b] ?? ""}`}>
+                                  {b}<Info className="w-2.5 h-2.5 opacity-50 shrink-0" />
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent side="top" className="max-w-[200px] text-xs leading-snug">
+                                {BADGE_DESC[b]}
+                              </TooltipContent>
+                            </Tooltip>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
