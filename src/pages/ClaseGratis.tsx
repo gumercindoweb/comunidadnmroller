@@ -22,6 +22,7 @@ import {
 import { Check, ArrowLeft, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import FlyFreePanel from "@/components/FlyFreePanel";
 import EquipoPropioNota from "@/components/EquipoPropioNota";
+import UpgradeNivelCallout from "@/components/UpgradeNivelCallout";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes, NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
@@ -86,9 +87,12 @@ const BADGE_DESC: Record<string, string> = {
   [NIVEL_PRINCIP_INTER]: "Principiante e Intermedio: ya tenés base y querés seguir mejorando.",
 };
 
+const PERFIL_AVANZADO = "desafio";
+
 const IDENTIDADES = [
   { value: "arrancando", emoji: "🟢", label: "Nunca patiné o no sé por dónde empezar", nivel: NIVEL_INICIAL },
   { value: "con-base",   emoji: "🟡", label: "Ya sé lo básico, quiero mejorar",         nivel: NIVEL_PRINCIP_INTER },
+  { value: PERFIL_AVANZADO, emoji: "🔴", label: "Quiero superarme y avanzar rápido",   nivel: NIVEL_PRINCIP_INTER },
 ];
 
 const EQUIPO_OPCIONES = [
@@ -408,6 +412,10 @@ const ClaseGratis = () => {
               )}
             </div>
 
+            {filtroIdentidad === PERFIL_AVANZADO ? (
+              <UpgradeNivelCallout variant="clase-gratis" />
+            ) : (
+            <>
             {/* Desktop: columna por día */}
             <div
               className="hidden lg:grid gap-2"
@@ -484,6 +492,8 @@ const ClaseGratis = () => {
                 </div>
               ))}
             </div>
+            </>
+            )}
           </div>
 
           {/* Info seña */}
