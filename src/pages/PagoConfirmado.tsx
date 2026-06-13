@@ -12,9 +12,11 @@ import {
   Upload,
   FileCheck,
   AlertCircle,
+  ShieldCheck,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import FlyFreePanel from "@/components/FlyFreePanel";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const PLAN_LABELS: Record<string, string> = {
@@ -362,6 +364,25 @@ const PagoConfirmado = () => {
                     gestionás todo desde la app <strong className="text-foreground/80">Turnos Web</strong>:
                     comprá planes, reservá clases, cancelá turnos y enterate de novedades.
                   </p>
+                </div>
+
+                {/* Recordatorio no bloqueante: equipo y protecciones para la primera clase */}
+                <div className="border-t border-foreground/10 pt-6 mt-6 text-left">
+                  <div className="flex items-start gap-2 mb-3">
+                    <ShieldCheck className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                    <div>
+                      <h4 className="font-bold uppercase text-sm tracking-wide text-foreground mb-1">
+                        Preparate para tu primera clase
+                      </h4>
+                      <p className="text-sm text-foreground/70 leading-relaxed">
+                        Para subirte a los rollers vas a necesitar <strong>casco y protecciones</strong>{" "}
+                        (muñequeras, coderas y rodilleras). Son <strong>obligatorias</strong> — el seguro
+                        solo cubre si las usás. ¿Todavía no las tenés? Alquilá tu equipo en la sede o armá
+                        el tuyo 👇
+                      </p>
+                    </div>
+                  </div>
+                  <FlyFreePanel />
                 </div>
               </div>
             ) : (
