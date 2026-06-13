@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import FlyFreePanel from "@/components/FlyFreePanel";
+import EquipoPropioNota from "@/components/EquipoPropioNota";
 import {
   ArrowLeft,
   Clock,
@@ -415,6 +416,7 @@ const ExclusivoSociosSportclub = () => {
                   </SelectContent>
                 </Select>
 
+                {alquiler === "no" && <EquipoPropioNota />}
                 {alquiler === "considerando" && <FlyFreePanel />}
 
                 <Button

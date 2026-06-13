@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Check, ArrowLeft, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import FlyFreePanel from "@/components/FlyFreePanel";
+import EquipoPropioNota from "@/components/EquipoPropioNota";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes, NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
@@ -328,6 +329,7 @@ const ClaseGratis = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                {equipo === "propio" && <EquipoPropioNota />}
                 {equipo === "considerando" && <FlyFreePanel />}
                 <Button
                   type="submit"
