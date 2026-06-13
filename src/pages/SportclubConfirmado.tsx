@@ -46,10 +46,10 @@ const buildWaEnviarDatos = (st: FormState | null) => {
         : "";
   const msg =
     `[LP|PC|SS] ¡Hola! Soy ${st.name}. ` +
-    `Mi DNI es ${st.dni ?? "—"} y mi correo es ${st.email ?? "—"}. ` +
+    `Mi DNI es [completá tu DNI] y mi correo es ${st.email ?? "—"}. ` +
     (st.plan ? `Soy socio SportClub plan ${st.plan}. ` : "") +
     (st.sede
-      ? `Quiero tomar mis clases en ${st.sede}${st.nivel ? ` (nivel ${st.nivel})` : ""}. `
+      ? `Quiero tomar mis clases en ${st.sede}${st.nivel ? ` (perfil: ${st.nivel})` : ""}. `
       : "") +
     alquilerLine;
   return wa(msg);

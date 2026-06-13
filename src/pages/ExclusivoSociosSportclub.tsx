@@ -113,11 +113,11 @@ const todasLasSedes: Sede[] = sedes.map(
 
 const PLANES_SPORTCLUB = ["Plus", "Total", "Elite", "Flex"];
 
-// El beneficio gratuito cubre solo nivel inicial y principiante.
-const NIVELES = [
-  "Primeros pasos (no sé patinar)",
-  "Inicial (me puedo desplazar solo/a)",
-  "Principiante (giros y frenadas básicas)",
+// El beneficio gratuito cubre solo nivel inicial y principiante; reformulamos
+// la pregunta como "perfil/identidad" (mismo estilo que los filtros de la Home).
+const PERFILES = [
+  { value: "Nunca patiné o no sé por dónde empezar", emoji: "🟢" },
+  { value: "Ya sé lo básico, quiero mejorar", emoji: "🟡" },
 ];
 
 const BENEFICIOS = [
@@ -153,10 +153,9 @@ const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   phone: z.string().trim().min(6, "WhatsApp inválido").max(40),
-  dni: z.string().trim().min(6, "Ingresá tu DNI").max(20),
   plan: z.string().trim().min(1, "Elegí tu plan SportClub"),
   sede: z.string().trim().min(1, "Elegí una sede"),
-  nivel: z.string().trim().min(1, "Elegí tu nivel"),
+  nivel: z.string().trim().min(1, "Elegí tu perfil"),
   alquiler: z.string().trim().min(1, "Indicá si necesitás alquiler"),
 });
 
@@ -165,7 +164,6 @@ const ExclusivoSociosSportclub = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [dni, setDni] = useState("");
   const [plan, setPlan] = useState("");
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
@@ -178,7 +176,7 @@ const ExclusivoSociosSportclub = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = FormSchema.safeParse({ name, email, phone, dni, plan, sede, nivel, alquiler });
+    const parsed = FormSchema.safeParse({ name, email, phone, plan, sede, nivel, alquiler });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Datos inválidos");
       return;
@@ -186,14 +184,14 @@ const ExclusivoSociosSportclub = () => {
     setLoading(true);
     try {
       // El backend (subscribe-sportclub) recibe solo los campos que ya esperaba.
-      // dni y alquiler se usan para pre-llenar el WhatsApp en la confirmación.
+      // alquiler se usa para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-sportclub", {
         body: { name, email, phone, plan, sede, nivel, website },
       });
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        const payload = { name, email, phone, dni, plan, sede, nivel, alquiler };
+        const payload = { name, email, phone, plan, sede, nivel, alquiler };
         // Backup en sessionStorage: el mensaje sigue personalizado aunque recarguen.
         try {
           sessionStorage.setItem("sportclub_form", JSON.stringify(payload));
@@ -324,17 +322,6 @@ const ExclusivoSociosSportclub = () => {
                   required
                   className="h-12 rounded-none bg-background border-border text-base"
                 />
-                <Input
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="DNI (sin puntos)"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
-                  disabled={loading}
-                  maxLength={20}
-                  required
-                  className="h-12 rounded-none bg-background border-border text-base"
-                />
                 <Select value={plan} onValueChange={setPlan} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="Tu plan SportClub" />
@@ -342,6 +329,18 @@ const ExclusivoSociosSportclub = () => {
                   <SelectContent>
                     {PLANES_SPORTCLUB.map((p) => (
                       <SelectItem key={p} value={p}>{p}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select value={nivel} onValueChange={setNivel} disabled={loading}>
+                  <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
+                    <SelectValue placeholder="Elegí el perfil con el que más te identificás" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PERFILES.map((p) => (
+                      <SelectItem key={p.value} value={p.value}>
+                        {p.emoji} {p.value}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -405,16 +404,6 @@ const ExclusivoSociosSportclub = () => {
                   </div>
                 )}
 
-                <Select value={nivel} onValueChange={setNivel} disabled={loading}>
-                  <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
-                    <SelectValue placeholder="Tu nivel actual" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {NIVELES.map((n) => (
-                      <SelectItem key={n} value={n}>{n}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
                 <Select value={alquiler} onValueChange={setAlquiler} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="¿Vas a necesitar alquiler de equipo?" />
