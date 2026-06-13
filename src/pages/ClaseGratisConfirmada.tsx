@@ -44,7 +44,7 @@ const buildWaEnviarDatos = (st: FormState | null) => {
   }
   const sedeLine = st.sede ? ` Sede: ${st.sede}.` : "";
   return wa(
-    `¡Hola! Reservé mi clase de prueba en NM Roller 🛼. Te paso mis datos para acreditarla 👉 Nombre completo: ${st.name}, DNI: ${st.dni ?? "—"}.${sedeLine} (Si transferí la seña, adjunto el comprobante.)`,
+    `¡Hola! Reservé mi clase de prueba en NM Roller 🛼. Te paso mis datos para acreditarla 👉 Nombre completo: ${st.name}, DNI: [completá tu DNI].${sedeLine} (Si transferí la seña, adjunto el comprobante.)`,
   );
 };
 

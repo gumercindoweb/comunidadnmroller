@@ -96,20 +96,20 @@ const EQUIPO_OPCIONES = [
   { value: "considerando", label: "Estoy pensando en comprar mi propio equipo" },
 ];
 
-const NIVELES = [
-  "Primeros pasos (no sé patinar)",
-  "Inicial (me puedo desplazar solo/a)",
-  "Principiante (giros y frenadas básicas)",
-  "Intermedio (slalom, frenadas, urbano)",
+// Pregunta de "perfil/identidad" (mismo estilo que los filtros de la Home).
+// Cubre desde cero hasta intermedio.
+const PERFILES = [
+  { value: "Nunca patiné o no sé por dónde empezar", emoji: "🟢" },
+  { value: "Ya sé lo básico, quiero mejorar", emoji: "🟡" },
+  { value: "Quiero superarme y avanzar rápido", emoji: "🔴" },
 ];
 
 const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   phone: z.string().trim().min(6, "WhatsApp inválido").max(40),
-  dni: z.string().trim().min(6, "Ingresá tu DNI").max(20),
   sede: z.string().trim().min(1, "Elegí una sede"),
-  nivel: z.string().trim().min(1, "Elegí tu nivel"),
+  nivel: z.string().trim().min(1, "Elegí tu perfil"),
   equipo: z.string().trim().min(1, "Indicá tu situación de equipo"),
 });
 
@@ -118,7 +118,6 @@ const ClaseGratis = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [dni, setDni] = useState("");
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
   const [equipo, setEquipo] = useState("");
@@ -149,7 +148,7 @@ const ClaseGratis = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = FormSchema.safeParse({ name, email, phone, dni, sede, nivel, equipo });
+    const parsed = FormSchema.safeParse({ name, email, phone, sede, nivel, equipo });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Datos inválidos");
       return;
@@ -157,14 +156,13 @@ const ClaseGratis = () => {
     setLoading(true);
     try {
       // El backend (subscribe-clase-gratis) recibe solo los campos que ya esperaba.
-      // dni se usa para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-clase-gratis", {
         body: { name, email, phone, sede, nivel, equipo, website },
       });
       if (error) throw error;
       if (data?.success) {
         toast.success("¡Listo! Te contactamos por WhatsApp.");
-        const payload = { name, email, phone, dni, sede, nivel };
+        const payload = { name, email, phone, sede, nivel };
         // Backup en sessionStorage: el mensaje sigue personalizado aunque recarguen.
         try {
           sessionStorage.setItem("clasegratis_form", JSON.stringify(payload));
@@ -285,17 +283,6 @@ const ClaseGratis = () => {
                   required
                   className="h-12 rounded-none bg-background border-border text-base"
                 />
-                <Input
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="DNI (sin puntos)"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
-                  disabled={loading}
-                  maxLength={20}
-                  required
-                  className="h-12 rounded-none bg-background border-border text-base"
-                />
                 <Select value={sede} onValueChange={setSede} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="Sede en la que querés probar" />
@@ -321,11 +308,13 @@ const ClaseGratis = () => {
                 </Select>
                 <Select value={nivel} onValueChange={setNivel} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
-                    <SelectValue placeholder="Tu nivel actual" />
+                    <SelectValue placeholder="Elegí el perfil con el que más te identificás" />
                   </SelectTrigger>
                   <SelectContent>
-                    {NIVELES.map((n) => (
-                      <SelectItem key={n} value={n}>{n}</SelectItem>
+                    {PERFILES.map((p) => (
+                      <SelectItem key={p.value} value={p.value}>
+                        {p.emoji} {p.value}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
