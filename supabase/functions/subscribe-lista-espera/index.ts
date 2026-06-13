@@ -27,6 +27,7 @@ const BodySchema = z.object({
   email: z.string().trim().email().max(255),
   phone: z.string().trim().max(40).optional().or(z.literal('')),
   sede: z.string().trim().min(1).max(120),
+  equipo: z.string().trim().max(60).optional().or(z.literal('')),
   motivacion: z.string().trim().max(100).optional().or(z.literal('')),
   website: z.string().max(0).optional().or(z.literal('')),
 })
@@ -59,7 +60,7 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { name, email, phone, sede, motivacion, website } = parsed.data
+    const { name, email, phone, sede, equipo, motivacion, website } = parsed.data
 
     if (website && website.length > 0) {
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
@@ -69,6 +70,7 @@ Deno.serve(async (req) => {
 
     const note = [
       `Lista de Espera · Masterclass ${sede}`,
+      equipo ? `Equipo: ${equipo}` : null,
       motivacion ? `Motivación: ${motivacion}` : null,
       phone ? `WhatsApp: ${phone}` : null,
     ].filter(Boolean).join(' · ')

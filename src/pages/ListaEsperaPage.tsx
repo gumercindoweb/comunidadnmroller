@@ -20,15 +20,25 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { getMasterclass } from "@/data/masterclasses";
 
+const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
+const FLY_FREE_MODELOS_URL = "https://www.flyfreeurban.com/marcas/";
+
 const FormSchema = z.object({
   name: z.string().trim().min(2, "Ingresá tu nombre"),
   email: z.string().trim().email("Email inválido"),
   phone: z.string().trim().max(40).optional(),
+  equipo: z.string().min(1, "Indicá tu situación de equipo"),
   motivacion: z.string().min(1, "Elegí una opción"),
   website: z.string().max(0).optional(),
 });
 
 type FormData = z.infer<typeof FormSchema>;
+
+const EQUIPO_OPCIONES = [
+  { value: "alquiler", label: "Sí, voy a necesitar alquilar equipo" },
+  { value: "propio", label: "No, tengo mi propio equipo" },
+  { value: "considerando", label: "Estoy pensando en comprar mi propio equipo" },
+];
 
 const MOTIVACIONES = [
   "Aprender desde cero",
@@ -43,6 +53,7 @@ const ListaEsperaPage = () => {
   const mc = getMasterclass(slug);
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [equipoValue, setEquipoValue] = useState("");
 
   const {
     register,
@@ -67,6 +78,7 @@ const ListaEsperaPage = () => {
             email: data.email,
             phone: data.phone ?? "",
             sede: mc.sede,
+            equipo: data.equipo,
             motivacion: data.motivacion,
             website: data.website ?? "",
           },
@@ -201,6 +213,62 @@ const ListaEsperaPage = () => {
                   placeholder="+54 9 11 1234-5678"
                   {...register("phone")}
                 />
+              </div>
+
+              {/* Campo equipo */}
+              <div className="space-y-1.5">
+                <Label>¿Vas a necesitar alquilar equipo?</Label>
+                <Select
+                  onValueChange={(val) => {
+                    setEquipoValue(val);
+                    setValue("equipo", val, { shouldValidate: true });
+                  }}
+                >
+                  <SelectTrigger className={errors.equipo ? "border-red-500" : ""}>
+                    <SelectValue placeholder="Elegí una opción…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {EQUIPO_OPCIONES.map((o) => (
+                      <SelectItem key={o.value} value={o.value}>
+                        {o.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.equipo && (
+                  <p className="text-xs text-red-500">{errors.equipo.message}</p>
+                )}
+
+                {/* Panel condicional: quiere comprar equipo */}
+                {equipoValue === "considerando" && (
+                  <div className="border border-primary/30 bg-primary/5 rounded-xl p-4 mt-2">
+                    <p className="font-bold uppercase text-xs tracking-wide text-primary mb-1">
+                      ¡Buena decisión!
+                    </p>
+                    <p className="text-muted-foreground text-xs leading-relaxed mb-3">
+                      Tener tu propio equipo es la mejor inversión si vas a patinar seguido.
+                      Explorá las opciones de Fly Free, nuestra marca aliada.
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <a
+                        href={FLY_FREE_KIT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-between gap-2 border border-primary text-primary rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors"
+                      >
+                        Ver kit de iniciación <ArrowRight className="w-3 h-3 shrink-0" />
+                      </a>
+                      <a
+                        href={FLY_FREE_MODELOS_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-between gap-2 border border-border text-muted-foreground rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition-colors"
+                      >
+                        Explorar todos los modelos <ArrowRight className="w-3 h-3 shrink-0" />
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-1.5">
