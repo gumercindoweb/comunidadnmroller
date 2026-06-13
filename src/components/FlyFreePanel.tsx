@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap } from "lucide-react";
 import logoFlyFree from "@/assets/logo-flyfree-urban.webp";
 
 const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
@@ -25,11 +25,20 @@ const FlyFreePanel = () => (
       <p className="font-black uppercase text-sm tracking-tight text-foreground mb-1">
         ¡Invertí en tu equipo propio!
       </p>
-      <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+      <p className="text-muted-foreground text-xs leading-relaxed mb-3">
         Tener tus rollers marca la diferencia: más progreso, más comodidad,
         más ganas de salir a patinar. Fly Free tiene opciones para todos los
         presupuestos y niveles.
       </p>
+
+      {/* Diferenciador de autoridad */}
+      <div className="flex items-start gap-2 bg-[#F5C400]/10 border border-[#F5C400]/25 rounded-lg px-3 py-2.5 mb-4">
+        <GraduationCap className="w-3.5 h-3.5 text-[#F5C400] shrink-0 mt-0.5" />
+        <p className="text-[11px] leading-snug text-foreground/80">
+          <span className="font-bold text-foreground">Los asesores de Fly Free son profes de NM Roller</span>
+          {" "}— enseñan, patinan y te asesoran desde la cancha, no desde un mostrador.
+        </p>
+      </div>
 
       <div className="flex flex-col gap-2">
         <a
