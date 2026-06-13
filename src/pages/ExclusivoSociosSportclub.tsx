@@ -299,7 +299,7 @@ const ExclusivoSociosSportclub = () => {
                   style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
                 />
                 <Input
-                  placeholder="Nombre y apellido"
+                  placeholder="Tu nombre"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={loading}

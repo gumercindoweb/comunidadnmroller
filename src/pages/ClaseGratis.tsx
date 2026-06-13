@@ -19,12 +19,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, ArrowLeft, Loader2, MapPin, Sparkles, Wallet } from "lucide-react";
+import { Check, ArrowLeft, ArrowRight, Loader2, MapPin, Sparkles, Wallet } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 
 const SEDES_GRATIS_IDS = ["villa-luro", "colegiales", "plaza-la-pampa", "belgrano"];
+
+const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
+const FLY_FREE_MODELOS_URL = "https://www.flyfreeurban.com/marcas/";
+
+const EQUIPO_OPCIONES = [
+  { value: "alquiler", label: "Sí, voy a necesitar alquilar equipo" },
+  { value: "propio", label: "No, tengo mi propio equipo" },
+  { value: "considerando", label: "Estoy pensando en comprar mi propio equipo" },
+];
 
 const NIVELES = [
   "Primeros pasos (no sé patinar)",
@@ -40,6 +49,7 @@ const FormSchema = z.object({
   dni: z.string().trim().min(6, "Ingresá tu DNI").max(20),
   sede: z.string().trim().min(1, "Elegí una sede"),
   nivel: z.string().trim().min(1, "Elegí tu nivel"),
+  equipo: z.string().trim().min(1, "Indicá tu situación de equipo"),
 });
 
 const ClaseGratis = () => {
@@ -50,6 +60,7 @@ const ClaseGratis = () => {
   const [dni, setDni] = useState("");
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
+  const [equipo, setEquipo] = useState("");
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -58,7 +69,7 @@ const ClaseGratis = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed = FormSchema.safeParse({ name, email, phone, dni, sede, nivel });
+    const parsed = FormSchema.safeParse({ name, email, phone, dni, sede, nivel, equipo });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Datos inválidos");
       return;
@@ -68,7 +79,7 @@ const ClaseGratis = () => {
       // El backend (subscribe-clase-gratis) recibe solo los campos que ya esperaba.
       // dni se usa para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-clase-gratis", {
-        body: { name, email, phone, sede, nivel, website },
+        body: { name, email, phone, sede, nivel, equipo, website },
       });
       if (error) throw error;
       if (data?.success) {
@@ -166,7 +177,7 @@ const ClaseGratis = () => {
                   style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
                 />
                 <Input
-                  placeholder="Nombre y apellido"
+                  placeholder="Tu nombre"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={loading}
@@ -238,6 +249,45 @@ const ClaseGratis = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                <Select value={equipo} onValueChange={setEquipo} disabled={loading}>
+                  <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
+                    <SelectValue placeholder="¿Vas a necesitar alquilar equipo?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {EQUIPO_OPCIONES.map((o) => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {equipo === "considerando" && (
+                  <div className="border border-primary/30 bg-primary/5 p-4">
+                    <p className="font-bold uppercase text-xs tracking-wide text-primary mb-1">
+                      ¡Buena decisión!
+                    </p>
+                    <p className="text-foreground/60 text-xs leading-relaxed mb-3">
+                      Tener tu propio equipo es la mejor inversión si vas a patinar seguido.
+                      Explorá las opciones de Fly Free, nuestra marca aliada.
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <a
+                        href={FLY_FREE_KIT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-between gap-2 border border-primary text-primary px-3 py-2 text-xs font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors"
+                      >
+                        Ver kit de iniciación <ArrowRight className="w-3 h-3 shrink-0" />
+                      </a>
+                      <a
+                        href={FLY_FREE_MODELOS_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-between gap-2 border border-border text-foreground/60 px-3 py-2 text-xs font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition-colors"
+                      >
+                        Explorar todos los modelos <ArrowRight className="w-3 h-3 shrink-0" />
+                      </a>
+                    </div>
+                  </div>
+                )}
                 <Button
                   type="submit"
                   disabled={loading}

@@ -28,6 +28,7 @@ const BodySchema = z.object({
   phone: z.string().trim().min(6).max(40),
   sede: z.string().trim().min(1).max(120),
   nivel: z.string().trim().min(1).max(60),
+  equipo: z.string().trim().max(60).optional().or(z.literal('')),
   website: z.string().max(0).optional().or(z.literal('')),
 })
 
@@ -59,14 +60,18 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { name, email, phone, sede, nivel, website } = parsed.data
+    const { name, email, phone, sede, nivel, equipo, website } = parsed.data
     if (website && website.length > 0) {
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
 
-    const note = `Clase gratis · Sede: ${sede} · Nivel: ${nivel} · Tel: ${phone}`
+    const note = [
+      `Clase gratis · Sede: ${sede} · Nivel: ${nivel}`,
+      equipo ? `Equipo: ${equipo}` : null,
+      `Tel: ${phone}`,
+    ].filter(Boolean).join(' · ')
 
     const res = await fetch('https://api.getresponse.com/v3/contacts', {
       method: 'POST',

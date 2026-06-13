@@ -122,7 +122,7 @@ const NewsletterDesdeCero = () => {
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Input
                     type="text"
-                    placeholder="Nombre"
+                    placeholder="Tu nombre"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     disabled={loading || success}
