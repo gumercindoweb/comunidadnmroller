@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Clock, Wrench, Package, ArrowRight, X, CalendarSearch } from "lucide-react";
+import { Clock, Wrench, Package, ArrowRight, X, CalendarSearch, Info } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
@@ -167,9 +167,10 @@ const ClaseCard = ({ clase, size = "sm" }: { clase: ClaseEnriquecida; size?: "sm
             <TooltipTrigger asChild>
               <span
                 title={badgeDescriptions[b] || ""}
-                className={`inline-block px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words cursor-help ${badgeStyles[b] || ""}`}
+                className={`inline-flex items-center gap-1 px-2 py-0.5 max-w-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wide leading-tight break-words ${badgeStyles[b] || ""}`}
               >
                 {b}
+                {badgeDescriptions[b] && <Info className="w-2.5 h-2.5 opacity-70 shrink-0" />}
               </span>
             </TooltipTrigger>
             {badgeDescriptions[b] && (
@@ -202,9 +203,10 @@ const ClaseDayCard = ({ clase }: { clase: ClaseEnriquecida }) => (
             <Tooltip key={b} delayDuration={150}>
               <TooltipTrigger asChild>
                 <span
-                  className={`inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight cursor-help ${badgeStyles[b] || ""}`}
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-tight ${badgeStyles[b] || ""}`}
                 >
                   {b}
+                  {badgeDescriptions[b] && <Info className="w-2.5 h-2.5 opacity-70 shrink-0" />}
                 </span>
               </TooltipTrigger>
               {badgeDescriptions[b] && (

@@ -19,11 +19,46 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, ArrowLeft, Clock, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
+import { Check, ArrowLeft, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import FlyFreePanel from "@/components/FlyFreePanel";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
-import { sedes } from "@/data/sedes";
+import { sedes, NIVEL_INICIAL, NIVEL_PRINCIP_INTER } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+
+// Badges de nivel (mismos estilos que HorariosSection)
+const NIVEL_BADGES: { label: string; className: string; desc: string }[] = [
+  {
+    label: NIVEL_INICIAL,
+    className: "bg-emerald-500/20 text-emerald-300 border-emerald-400/70",
+    desc: "Desde cero: tu primera vez sobre rollers, sin experiencia previa.",
+  },
+  {
+    label: NIVEL_PRINCIP_INTER,
+    className: "bg-sky-500/20 text-sky-300 border-sky-400/70",
+    desc: "Principiante e Intermedio: ya tenés base y querés seguir mejorando.",
+  },
+];
+
+const NivelBadges = () => (
+  <div className="flex flex-wrap gap-1 mt-2">
+    {NIVEL_BADGES.map((b) => (
+      <Tooltip key={b.label} delayDuration={150}>
+        <TooltipTrigger asChild>
+          <span
+            className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide leading-tight ${b.className}`}
+          >
+            {b.label}
+            <Info className="w-2.5 h-2.5 opacity-70" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="max-w-xs text-xs leading-snug">
+          {b.desc}
+        </TooltipContent>
+      </Tooltip>
+    ))}
+  </div>
+);
 
 const SEDES_GRATIS_IDS = ["villa-luro", "colegiales", "plaza-la-pampa", "belgrano"];
 
@@ -391,32 +426,21 @@ const ClaseGratis = () => {
                     </h3>
                   </div>
                   <div className="flex flex-col gap-2">
-                    {HORARIOS_CLASES[dia].map((clase, i) => {
-                      const esGratis = SEDES_GRATIS_NOMBRES.has(clase.sede);
-                      return (
-                        <div
-                          key={i}
-                          className="bg-card border border-border rounded-lg p-3 hover:border-primary/40 transition-colors"
-                        >
-                          <p className="font-bold text-xs text-foreground leading-tight">
-                            {clase.sede}
-                          </p>
-                          <div className="flex items-center gap-1 mt-1.5">
-                            <Clock className="w-3 h-3 text-primary shrink-0" />
-                            <span className="text-xs text-muted-foreground">{clase.hora}</span>
-                          </div>
-                          <span
-                            className={`inline-block mt-2 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border rounded-full ${
-                              esGratis
-                                ? "text-[#3FB950] border-[#3FB950]/40"
-                                : "text-primary border-primary/40"
-                            }`}
-                          >
-                            {esGratis ? "Gratis" : "Con seña"}
-                          </span>
+                    {HORARIOS_CLASES[dia].map((clase, i) => (
+                      <div
+                        key={i}
+                        className="bg-card border border-border rounded-lg p-3 hover:border-primary/40 transition-colors"
+                      >
+                        <p className="font-bold text-xs text-foreground leading-tight">
+                          {clase.sede}
+                        </p>
+                        <div className="flex items-center gap-1 mt-1.5">
+                          <Clock className="w-3 h-3 text-primary shrink-0" />
+                          <span className="text-xs text-muted-foreground">{clase.hora}</span>
                         </div>
-                      );
-                    })}
+                        <NivelBadges />
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -430,32 +454,21 @@ const ClaseGratis = () => {
                     <h3 className="font-black italic text-foreground text-lg">{dia}</h3>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    {HORARIOS_CLASES[dia].map((clase, i) => {
-                      const esGratis = SEDES_GRATIS_NOMBRES.has(clase.sede);
-                      return (
-                        <div
-                          key={i}
-                          className="bg-card border border-border rounded-lg p-3"
-                        >
-                          <p className="font-bold text-sm text-foreground leading-tight">
-                            {clase.sede}
-                          </p>
-                          <div className="flex items-center gap-1 mt-1.5">
-                            <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
-                            <span className="text-sm text-muted-foreground">{clase.hora}</span>
-                          </div>
-                          <span
-                            className={`inline-block mt-2 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border rounded-full ${
-                              esGratis
-                                ? "text-[#3FB950] border-[#3FB950]/40"
-                                : "text-primary border-primary/40"
-                            }`}
-                          >
-                            {esGratis ? "Gratis" : "Con seña"}
-                          </span>
+                    {HORARIOS_CLASES[dia].map((clase, i) => (
+                      <div
+                        key={i}
+                        className="bg-card border border-border rounded-lg p-3"
+                      >
+                        <p className="font-bold text-sm text-foreground leading-tight">
+                          {clase.sede}
+                        </p>
+                        <div className="flex items-center gap-1 mt-1.5">
+                          <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
+                          <span className="text-sm text-muted-foreground">{clase.hora}</span>
                         </div>
-                      );
-                    })}
+                        <NivelBadges />
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
