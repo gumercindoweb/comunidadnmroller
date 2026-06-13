@@ -19,9 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import FlyFreePanel from "@/components/FlyFreePanel";
 import {
   ArrowLeft,
-  ArrowRight,
   Clock,
   Loader2,
   Lock,
@@ -148,9 +148,6 @@ const ALQUILER_OPCIONES = [
   { value: "no", label: "No, tengo mi propio equipo" },
   { value: "considerando", label: "Estoy pensando en comprar mi propio equipo" },
 ];
-
-const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
-const FLY_FREE_MODELOS_URL = "https://www.flyfreeurban.com/marcas/";
 
 const FormSchema = z.object({
   name: z.string().trim().min(1, "Ingresá tu nombre").max(100),
@@ -429,35 +426,7 @@ const ExclusivoSociosSportclub = () => {
                   </SelectContent>
                 </Select>
 
-                {alquiler === "considerando" && (
-                  <div className="border border-primary/30 bg-primary/5 p-4">
-                    <p className="font-bold uppercase text-xs tracking-wide text-primary mb-1">
-                      ¡Buena decisión!
-                    </p>
-                    <p className="text-foreground/60 text-xs leading-relaxed mb-3">
-                      Tener tu propio equipo es la mejor inversión si vas a patinar seguido.
-                      Explorá las opciones de Fly Free, nuestra marca aliada.
-                    </p>
-                    <div className="flex flex-col gap-2">
-                      <a
-                        href={FLY_FREE_KIT_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-between gap-2 border border-primary text-primary px-3 py-2 text-xs font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors"
-                      >
-                        Ver kit de iniciación <ArrowRight className="w-3 h-3 shrink-0" />
-                      </a>
-                      <a
-                        href={FLY_FREE_MODELOS_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-between gap-2 border border-border text-foreground/60 px-3 py-2 text-xs font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition-colors"
-                      >
-                        Explorar todos los modelos <ArrowRight className="w-3 h-3 shrink-0" />
-                      </a>
-                    </div>
-                  </div>
-                )}
+                {alquiler === "considerando" && <FlyFreePanel />}
 
                 <Button
                   type="submit"
