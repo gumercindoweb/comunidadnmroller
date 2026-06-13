@@ -223,9 +223,9 @@ const ClaseGratis = () => {
               {/* Pasos */}
               <div className="grid sm:grid-cols-3 gap-4 mb-10">
                 {[
-                  { n: "01", t: "Elegí sede", d: "Gratis o con seña bonificable." },
-                  { n: "02", t: "Completá tus datos", d: "Te contactamos por WhatsApp." },
-                  { n: "03", t: "Patinás", d: "Clase grupal de ~1 hora." },
+                  { n: "01", t: "Registrate", d: "Completá el formulario con tus datos." },
+                  { n: "02", t: "Elegí sede y horario", d: "Gratis o con seña bonificable." },
+                  { n: "03", t: "Validamos tu alta", d: "Confirmamos tu registro y, si necesitás alquiler, lo coordinamos para tu clase." },
                 ].map((s) => (
                   <div key={s.n} className="border border-border/60 bg-card p-4">
                     <div className="text-primary font-display italic text-xl font-black mb-1">{s.n}</div>

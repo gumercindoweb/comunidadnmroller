@@ -262,9 +262,9 @@ const ExclusivoSociosSportclub = () => {
               {/* Pasos */}
               <div className="grid sm:grid-cols-3 gap-4 mb-10">
                 {[
-                  { n: "01", t: "Elegí sede y horario", d: "De las habilitadas para socios." },
-                  { n: "02", t: "Registrate como socio", d: "Te contactamos por WhatsApp." },
-                  { n: "03", t: "Retirás equipo y patinás", d: "Entrega y retiro del equipo en la sede, totalmente gratis." },
+                  { n: "01", t: "Registrate como socio", d: "Completá el formulario con tus datos." },
+                  { n: "02", t: "Elegí sede y horario", d: "De las habilitadas para socios." },
+                  { n: "03", t: "Validamos tu alta", d: "Confirmamos tu beneficio y, si necesitás alquiler, lo coordinamos para tu próxima clase." },
                 ].map((s) => (
                   <div key={s.n} className="border border-border/60 bg-card p-4">
                     <div className="text-primary font-display italic text-xl font-black mb-1">{s.n}</div>
