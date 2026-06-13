@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Helmet } from "react-helmet-async";
@@ -19,12 +19,62 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, ArrowLeft, ArrowRight, Loader2, MapPin, Sparkles, Wallet } from "lucide-react";
+import { Check, ArrowLeft, ArrowRight, Clock, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes } from "@/data/sedes";
 import SedesMapa from "@/components/SedesMapa";
 
 const SEDES_GRATIS_IDS = ["villa-luro", "colegiales", "plaza-la-pampa", "belgrano"];
+
+// Sedes que son gratis (por nombre corto, para marcarlas en el grid)
+const SEDES_GRATIS_NOMBRES = new Set(["Belgrano", "Villa Luro", "Colegiales", "Plaza La Pampa"]);
+
+const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+const HORARIOS_CLASES: Record<string, { sede: string; hora: string }[]> = {
+  Lunes: [
+    { sede: "P. Rivadavia", hora: "19:00" },
+  ],
+  Martes: [
+    { sede: "P. Rivadavia", hora: "19:00" },
+    { sede: "Devoto", hora: "19:00" },
+    { sede: "Puerto Madero", hora: "18:00" },
+    { sede: "Puerto Madero", hora: "19:00" },
+    { sede: "Rosedal Palermo", hora: "09:00" },
+    { sede: "Rosedal Palermo", hora: "19:00" },
+  ],
+  Miércoles: [
+    { sede: "Villa Real", hora: "18:00" },
+    { sede: "Villa Real", hora: "19:00" },
+    { sede: "Belgrano", hora: "19:00" },
+    { sede: "Colegiales", hora: "18:00" },
+    { sede: "Rosedal Palermo", hora: "19:00" },
+  ],
+  Jueves: [
+    { sede: "P. Rivadavia", hora: "19:00" },
+    { sede: "Colegiales", hora: "19:00" },
+    { sede: "Rosedal Palermo", hora: "19:00" },
+  ],
+  Viernes: [
+    { sede: "Devoto", hora: "19:00" },
+    { sede: "Villa Luro", hora: "19:00" },
+    { sede: "Belgrano", hora: "19:00" },
+    { sede: "Rosedal Palermo", hora: "09:00" },
+  ],
+  Sábado: [
+    { sede: "Villa Real", hora: "10:30" },
+    { sede: "Plaza La Pampa", hora: "09:00" },
+    { sede: "Puerto Madero", hora: "09:00" },
+    { sede: "Vicente López", hora: "09:00" },
+    { sede: "Rosedal Palermo", hora: "10:00" },
+    { sede: "Rosedal Palermo", hora: "18:00" },
+  ],
+  Domingo: [
+    { sede: "P. Rivadavia", hora: "09:00" },
+    { sede: "Plaza La Pampa", hora: "09:00" },
+    { sede: "Rosedal Palermo", hora: "10:00" },
+  ],
+};
 
 const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
 const FLY_FREE_MODELOS_URL = "https://www.flyfreeurban.com/marcas/";
@@ -61,6 +111,12 @@ const ClaseGratis = () => {
   const [sede, setSede] = useState("");
   const [nivel, setNivel] = useState("");
   const [equipo, setEquipo] = useState("");
+  const [filtroDia, setFiltroDia] = useState("__todos__");
+
+  const diasVisibles = useMemo(
+    () => filtroDia === "__todos__" ? DIAS_SEMANA : DIAS_SEMANA.filter((d) => d === filtroDia),
+    [filtroDia],
+  );
   const [website, setWebsite] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -327,44 +383,113 @@ const ClaseGratis = () => {
           {/* Mapa estilo Home, marcando gratis vs seña */}
           <SedesMapa sedesList={sedes} gratisIds={SEDES_GRATIS_IDS} sidebarTitle="Elegí tu sede" />
 
-          {/* Tarjetas de todas las sedes con etiqueta */}
-          <div className="max-w-7xl mx-auto mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {sedes.map((s) => {
-              const gratis = SEDES_GRATIS_IDS.includes(s.id);
-              return (
-                <a
-                  key={s.id}
-                  href={s.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-background border border-border p-5 hover:border-primary transition-colors block"
+          {/* Grilla de horarios por día */}
+          <div className="max-w-7xl mx-auto mt-12">
+            {/* Filtro de día */}
+            <div className="flex items-center gap-3 mb-8">
+              <Select value={filtroDia} onValueChange={setFiltroDia}>
+                <SelectTrigger className="w-52 rounded-none bg-background border-border">
+                  <SelectValue placeholder="Todos los días" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__todos__">Todos los días</SelectItem>
+                  {DIAS_SEMANA.map((d) => (
+                    <SelectItem key={d} value={d}>{d}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {filtroDia !== "__todos__" && (
+                <button
+                  onClick={() => setFiltroDia("__todos__")}
+                  className="inline-flex items-center gap-1.5 text-xs text-primary font-bold hover:underline"
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <div className="flex items-start gap-2">
-                      <MapPin className="w-4 h-4 text-primary mt-1 shrink-0" />
-                      <h3 className="font-bold uppercase text-sm tracking-wide group-hover:text-primary transition-colors">
-                        {s.nombre}
-                      </h3>
-                    </div>
-                    <span
-                      className={`shrink-0 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
-                        gratis
-                          ? "text-[#3FB950] border-[#3FB950]/50"
-                          : "text-primary border-primary/50"
-                      }`}
-                    >
-                      {gratis ? "Gratis" : "Con seña"}
-                    </span>
+                  <X className="w-3 h-3" /> Ver todos
+                </button>
+              )}
+            </div>
+
+            {/* Desktop: columna por día */}
+            <div
+              className="hidden lg:grid gap-2"
+              style={{ gridTemplateColumns: `repeat(${diasVisibles.length}, minmax(0, 1fr))` }}
+            >
+              {diasVisibles.map((dia) => (
+                <div key={dia}>
+                  <div className="border-b-2 border-primary/20 pb-2 mb-3">
+                    <h3 className="font-black italic text-foreground text-sm tracking-tight text-center">
+                      {dia}
+                    </h3>
                   </div>
-                  <p className="text-foreground/60 text-xs leading-relaxed pl-6">
-                    {s.direccion}
-                  </p>
-                  <span className="inline-block mt-3 ml-6 text-[10px] uppercase tracking-[0.18em] text-primary font-bold">
-                    Cómo llegar →
-                  </span>
-                </a>
-              );
-            })}
+                  <div className="flex flex-col gap-2">
+                    {HORARIOS_CLASES[dia].map((clase, i) => {
+                      const esGratis = SEDES_GRATIS_NOMBRES.has(clase.sede);
+                      return (
+                        <div
+                          key={i}
+                          className="bg-card border border-border rounded-lg p-3 hover:border-primary/40 transition-colors"
+                        >
+                          <p className="font-bold text-xs text-foreground leading-tight">
+                            {clase.sede}
+                          </p>
+                          <div className="flex items-center gap-1 mt-1.5">
+                            <Clock className="w-3 h-3 text-primary shrink-0" />
+                            <span className="text-xs text-muted-foreground">{clase.hora}</span>
+                          </div>
+                          <span
+                            className={`inline-block mt-2 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border rounded-full ${
+                              esGratis
+                                ? "text-[#3FB950] border-[#3FB950]/40"
+                                : "text-primary border-primary/40"
+                            }`}
+                          >
+                            {esGratis ? "Gratis" : "Con seña"}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile: lista por día */}
+            <div className="lg:hidden flex flex-col gap-6">
+              {diasVisibles.map((dia) => (
+                <div key={dia}>
+                  <div className="border-b-2 border-primary/20 pb-2 mb-3">
+                    <h3 className="font-black italic text-foreground text-lg">{dia}</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {HORARIOS_CLASES[dia].map((clase, i) => {
+                      const esGratis = SEDES_GRATIS_NOMBRES.has(clase.sede);
+                      return (
+                        <div
+                          key={i}
+                          className="bg-card border border-border rounded-lg p-3"
+                        >
+                          <p className="font-bold text-sm text-foreground leading-tight">
+                            {clase.sede}
+                          </p>
+                          <div className="flex items-center gap-1 mt-1.5">
+                            <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
+                            <span className="text-sm text-muted-foreground">{clase.hora}</span>
+                          </div>
+                          <span
+                            className={`inline-block mt-2 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 border rounded-full ${
+                              esGratis
+                                ? "text-[#3FB950] border-[#3FB950]/40"
+                                : "text-primary border-primary/40"
+                            }`}
+                          >
+                            {esGratis ? "Gratis" : "Con seña"}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Info seña */}
