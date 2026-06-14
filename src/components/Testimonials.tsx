@@ -23,7 +23,7 @@ const Testimonials = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24" ref={ref}>
+    <section id="testimonios" className="py-24" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-1 mb-3">

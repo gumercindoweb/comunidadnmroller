@@ -1,51 +1,82 @@
-## Buzón de sugerencias — horarios / sedes
+# Rediseño del footer — ajustado
 
-Camino simple: un **formulario corto** que dispara un **email a `hola@comunidadnmroller.com`** usando la infraestructura de email de Lovable Cloud (sin servicios externos, sin tablas, sin panel). Cada sugerencia llega como un mail prolijo a tu casilla y respondés desde ahí.
+Solo trabajamos el **footer**. Las páginas nuevas que aparezcan como links se crean después, en una segunda etapa. Los links a páginas que todavía no existen quedan apuntando a `#` con `preventDefault` para no romper UX ni dar 404.
 
-### Dónde aparece
+## Nueva estructura del footer
 
-1. **Empty-state del filtro de horarios** (lo que ya tenés diseñado: "Ooops… dejá tu sugerencia"). El botón **"Dejar una sugerencia"** abre el modal del form en vez del tooltip "próximamente".
-2. **Footer** — link discreto "Sugerí horario o sede" que abre el mismo modal.
+### Desktop (≥ md): **5 columnas**
 
-### Form (modal `Dialog` shadcn, estilo NM Roller)
+| Columna 1 | Columna 2 | Columna 3 | Columna 4 | Columna 5 |
+|---|---|---|---|---|
+| **Marca + Contacto** | **Nosotros** | **Clases & Planes** | **Alianzas** | **Recursos** |
+| Logo NM | ¿Por qué NM? | Planes | Beneficio SportClub | Newsletter Desde Cero |
+| Mini-claim | Staff de profes | Clases + Alquiler | Alquiler recreativo (Fly Free) | Ruta de aprendizaje |
+| Instagram | Sedes | Clase gratis | Kit iniciación Fly Free | Tutoriales |
+| Email | Testimonios | Masterclass | Equipamiento Fly Free | Soporte y ayuda |
+| WhatsApp | | | | |
+| Ubicación | | | | |
 
-Campos:
-- **Nombre** (texto, requerido)
-- **Email** (email, requerido — para poder responderte si hace falta)
-- **Zona / barrio sugerido** (texto, requerido — ej. "Caballito Norte")
-- **Día preferido** (select: Lun–Dom + "Cualquiera")
-- **Horario preferido** (select de franjas: Mañana / Mediodía / Tarde / Noche + "Cualquiera")
-- **Comentario** (textarea opcional, máx 500 — "contanos más si querés")
-- Honeypot oculto anti-spam.
+- Legal y copyright pasan a una **fila full-width** debajo de las 5 columnas, separada por un divisor sutil.
+- Así Marca y Contacto quedan unidos en un solo bloque vertical, no en columnas separadas.
 
-Validación con **zod** (mismo patrón que el resto de los forms). Toast de éxito + cierre del modal.
+### Responsive
+- Tablet (sm–md): grid 3 cols, Marca+Contacto arriba full-width.
+- Mobile: stack vertical, 1 col.
 
-### Backend
+## Detalle de cada columna
 
-- **Lovable Emails** (built-in, sin API keys de terceros). Requiere prerequisitos automáticos: setup de email infra + scaffold de transactional emails + dominio `notify.comunidadnmroller.com` delegado (si todavía no está, te abro el diálogo de setup; el form igual queda armado).
-- **Edge Function nueva**: `submit-sugerencia` (verify_jwt=false) que valida con zod e invoca `send-transactional-email` con template `sugerencia-horario`.
-- **Template React Email** `sugerencia-horario.tsx`: subject `🛼 Nueva sugerencia de [Zona]`, cuerpo prolijo con todos los campos, `reply_to` = email del usuario para responder con un click. Destinatario fijo: `hola@comunidadnmroller.com`.
-- **Idempotency key**: hash de email+zona+timestamp para evitar duplicados por doble-click.
+### 1. Marca + Contacto (NUEVO bloque unificado)
+- Logo NM Roller.
+- Mini-claim: *"Comunidad de patinaje urbano en Buenos Aires."*
+- Icono + link Instagram.
+- Email `hola@comunidadnmroller.com`.
+- WhatsApp `+54 11 6592-0600`.
+- Buenos Aires, Argentina.
 
-### Limpieza de copy
+### 2. Nosotros (NUEVA)
+- ¿Por qué NM? → `#propuesta`
+- Staff de profes → `#` *(TODO)*
+- Sedes → `#sedes`
+- Testimonios → `#testimonios` *(necesita agregar `id` a la sección)*
 
-Ya está corregido en mi memoria: el correo oficial es **`hola@comunidadnmroller.com`**. Reviso si aparece otro mail viejo hardcodeado en el sitio y lo unifico.
+### 3. Clases & Planes
+- Planes → `#planes`
+- Clases + Alquiler → `/clases-de-rollers-mas-alquiler`
+- Clase de prueba gratis → `/clase-gratis`
+- Masterclass de patinaje → `/masterclass-de-patinaje/<próxima>`
 
-### Archivos a tocar
+### 4. Alianzas comerciales (NUEVA)
+- Beneficio Socios SportClub → `/exclusivo-de-socios-sportclub`
+- Alquiler recreativo (Fly Free) → `#` *(TODO)*
+- Kit de iniciación (Fly Free) → link externo a Fly Free
+- Equipamiento – Tienda Fly Free → link externo a Fly Free
 
-- `src/components/sugerencias/SugerenciaDialog.tsx` (nuevo) — modal + form + zod + llamada al edge function.
-- `src/components/sugerencias/SugerenciaTrigger.tsx` (nuevo) — botón reutilizable que abre el modal.
-- `src/components/HorariosSection.tsx` — reemplazar el tooltip "Próximamente" por el `<SugerenciaTrigger>`.
-- `src/components/Footer.tsx` — agregar link "Sugerí horario o sede".
-- `supabase/functions/submit-sugerencia/index.ts` + `config.toml` (nuevos).
-- `supabase/functions/_shared/transactional-email-templates/sugerencia-horario.tsx` (nuevo) + registrar en `registry.ts`.
-- Búsqueda global de mails viejos → reemplazo por `hola@comunidadnmroller.com`.
+### 5. Recursos (NUEVA)
+- Newsletter Desde Cero → `/newsletter-desde-cero`
+- Ruta de aprendizaje → `#` *(TODO)*
+- Tutoriales → `#` *(TODO)*
+- Soporte y ayuda → `#` *(TODO)*
 
-### Lo que NO hace falta
+### Fila inferior: Legal
+- Términos y Condiciones
+- Política de Privacidad
+- Copyright © 2026 NM Roller
 
-- Sin base de datos nueva.
-- Sin panel de admin.
-- Sin GetResponse para esto (la lista de marketing queda intacta).
-- Sin servicios externos (Resend/Mailgun) salvo que prefieras esa ruta.
+## Otros cambios
+
+- **Sugerí horario o sede** se **elimina del footer** (queda solo en la grilla de horarios como trigger del empty-state).
+- Links con TODO: mismo estilo visual, `href="#"`, `onClick={e => e.preventDefault()}`.
+- Sin badge "próximamente" para no ensuciar.
+
+## Archivos a tocar
+
+- `src/components/Footer.tsx` — reescritura completa con 5 cols + fila legal.
+- `src/components/Testimonials.tsx` — agregar `id="testimonios"` a la sección raíz.
+
+## Lo que NO se hace ahora
+
+- Sin crear páginas nuevas.
+- Sin tocar navbar ni otras secciones.
+- Sin modificar `App.tsx` ni rutas.
 
 ¿Confirmás y lo implemento?

@@ -1,70 +1,144 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { getProximaMasterclass } from "@/data/masterclasses";
-import SugerenciaTrigger from "@/components/sugerencias/SugerenciaTrigger";
+
+const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
+const FLY_FREE_TIENDA_URL = "https://www.flyfreeurban.com/marcas/";
 
 const Footer = () => {
   const proxMc = getProximaMasterclass();
+
+  const scrollTo = (id: string) => () =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const noop = (e: React.MouseEvent) => e.preventDefault();
+
+  const colHeading = "font-bold italic mb-4 text-sm tracking-wide uppercase";
+  const linkCls = "hover:text-primary transition-colors text-left";
+
   return (
     <footer className="bg-card text-foreground py-16 border-t border-border">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
-          <div>
-            <img src={logoNM} alt="NM Roller" className="h-12 mb-2" />
-            <p className="text-foreground/50 text-sm mt-4 leading-relaxed">
-              La escuela de patinaje #1 de Argentina. Más de 3.000 alumnos confían en nosotros.
+        {/* 5 columnas: Marca+Contacto / Nosotros / Clases / Alianzas / Recursos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+          {/* 1. Marca + Contacto */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <img src={logoNM} alt="NM Roller" className="h-12 mb-4" />
+            <p className="text-foreground/50 text-sm leading-relaxed mb-5">
+              Comunidad de patinaje urbano en Buenos Aires.
             </p>
-          </div>
-
-          <div>
-            <h4 className="font-bold italic mb-4 text-sm tracking-wide">NAVEGACIÓN</h4>
+            <div className="flex gap-3 mb-5">
+              <a
+                href="https://instagram.com/nmroller"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram NM Roller"
+                className="w-9 h-9 rounded-full bg-foreground/10 flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+            </div>
             <ul className="space-y-2 text-foreground/60 text-sm">
-              <li><button onClick={() => document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">¿Por qué NM?</button></li>
-              <li><button onClick={() => document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Planes</button></li>
-              <li><button onClick={() => document.getElementById("sedes")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary transition-colors">Sedes</button></li>
-              <li><Link to="/clases-de-rollers-mas-alquiler" className="hover:text-primary transition-colors">Clases + Alquiler</Link></li>
-              <li><Link to="/clase-gratis" className="hover:text-primary transition-colors">Clase de Prueba Gratis</Link></li>
-              <li><Link to="/exclusivo-de-socios-sportclub" className="hover:text-primary transition-colors">Exclusivo Socios SportClub</Link></li>
-              <li><Link to="/newsletter-desde-cero" className="hover:text-primary transition-colors">Newsletter Desde Cero</Link></li>
-              <li><Link to={`/masterclass-de-patinaje/${proxMc.slug}`} className="hover:text-primary transition-colors">Masterclass de Patinaje</Link></li>
-              <li>
-                <SugerenciaTrigger>
-                  {(open) => (
-                    <button onClick={open} className="hover:text-primary transition-colors text-left">
-                      Sugerí horario o sede
-                    </button>
-                  )}
-                </SugerenciaTrigger>
+              <li className="flex items-start gap-2">
+                <Mail className="w-3.5 h-3.5 mt-1 shrink-0 text-foreground/40" />
+                <a href="mailto:hola@comunidadnmroller.com" className="hover:text-primary transition-colors break-all">
+                  hola@comunidadnmroller.com
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <Phone className="w-3.5 h-3.5 mt-1 shrink-0 text-foreground/40" />
+                <a
+                  href="https://wa.me/5491165920600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  +54 11 6592-0600
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 mt-1 shrink-0 text-foreground/40" />
+                <span>Buenos Aires, Argentina</span>
               </li>
             </ul>
           </div>
 
+          {/* 2. Nosotros */}
           <div>
-            <h4 className="font-bold italic mb-4 text-sm tracking-wide">LEGAL</h4>
+            <h4 className={colHeading}>Nosotros</h4>
             <ul className="space-y-2 text-foreground/60 text-sm">
-              <li><Link to="/terminos-y-condiciones" className="hover:text-primary transition-colors">Términos y Condiciones</Link></li>
-              <li><Link to="/politicas-de-privacidad" className="hover:text-primary transition-colors">Política de Privacidad</Link></li>
+              <li><button onClick={scrollTo("propuesta")} className={linkCls}>¿Por qué NM?</button></li>
+              <li>
+                {/* TODO: crear página /staff */}
+                <a href="#" onClick={noop} className={linkCls}>Staff de profes</a>
+              </li>
+              <li><button onClick={scrollTo("sedes")} className={linkCls}>Sedes</button></li>
+              <li><button onClick={scrollTo("testimonios")} className={linkCls}>Testimonios</button></li>
             </ul>
           </div>
 
+          {/* 3. Clases & Planes */}
           <div>
-            <h4 className="font-bold italic mb-4 text-sm tracking-wide">CONTACTO</h4>
+            <h4 className={colHeading}>Clases & Planes</h4>
             <ul className="space-y-2 text-foreground/60 text-sm">
-              <li><a href="mailto:hola@comunidadnmroller.com" className="hover:text-primary transition-colors">hola@comunidadnmroller.com</a></li>
-              <li><a href="https://wa.me/5491165920600" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+54 11 6592-0600</a></li>
-              <li>Buenos Aires, Argentina</li>
+              <li><button onClick={scrollTo("planes")} className={linkCls}>Planes</button></li>
+              <li><Link to="/clases-de-rollers-mas-alquiler" className={linkCls}>Clases + Alquiler</Link></li>
+              <li><Link to="/clase-gratis" className={linkCls}>Clase de prueba gratis</Link></li>
+              <li><Link to={`/masterclass-de-patinaje/${proxMc.slug}`} className={linkCls}>Masterclass de patinaje</Link></li>
             </ul>
-            <div className="flex gap-3 mt-4">
-              <a href="https://instagram.com/nmroller" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-foreground/10 flex items-center justify-center hover:bg-primary transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
-            </div>
+          </div>
+
+          {/* 4. Alianzas comerciales */}
+          <div>
+            <h4 className={colHeading}>Alianzas comerciales</h4>
+            <ul className="space-y-2 text-foreground/60 text-sm">
+              <li><Link to="/exclusivo-de-socios-sportclub" className={linkCls}>Beneficio Socios SportClub</Link></li>
+              <li>
+                {/* TODO: crear página /alquiler-recreativo */}
+                <a href="#" onClick={noop} className={linkCls}>Alquiler recreativo (Fly Free)</a>
+              </li>
+              <li>
+                <a href={FLY_FREE_KIT_URL} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  Kit de iniciación (Fly Free)
+                </a>
+              </li>
+              <li>
+                <a href={FLY_FREE_TIENDA_URL} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  Equipamiento · Tienda Fly Free
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* 5. Recursos */}
+          <div>
+            <h4 className={colHeading}>Recursos</h4>
+            <ul className="space-y-2 text-foreground/60 text-sm">
+              <li><Link to="/newsletter-desde-cero" className={linkCls}>Newsletter Desde Cero</Link></li>
+              <li>
+                {/* TODO: crear página /ruta-de-aprendizaje */}
+                <a href="#" onClick={noop} className={linkCls}>Ruta de aprendizaje</a>
+              </li>
+              <li>
+                {/* TODO: crear página /tutoriales */}
+                <a href="#" onClick={noop} className={linkCls}>Tutoriales</a>
+              </li>
+              <li>
+                {/* TODO: crear página /ayuda */}
+                <a href="#" onClick={noop} className={linkCls}>Soporte y ayuda</a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-border/10 pt-8 text-center text-foreground/40 text-sm">
-          © {new Date().getFullYear()} NM Roller. Todos los derechos reservados.
+        {/* Fila inferior: Legal + Copyright */}
+        <div className="border-t border-border/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-foreground/40 text-sm">
+          <p>© {new Date().getFullYear()} NM Roller. Todos los derechos reservados.</p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <li><Link to="/terminos-y-condiciones" className="hover:text-primary transition-colors">Términos y Condiciones</Link></li>
+            <li><Link to="/politicas-de-privacidad" className="hover:text-primary transition-colors">Política de Privacidad</Link></li>
+          </ul>
         </div>
       </div>
     </footer>
