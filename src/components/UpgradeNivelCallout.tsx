@@ -14,8 +14,8 @@ const waMedida =
 const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis" }) => {
   const esSportclub = variant === "sportclub";
 
-  const scrollToPlanes = () =>
-    document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="max-w-3xl mx-auto border border-primary/40 bg-primary/5 p-6 md:p-8">
@@ -49,13 +49,22 @@ const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis
 
       <div className="flex flex-col sm:flex-row gap-3">
         {esSportclub ? (
-          <button
-            onClick={scrollToPlanes}
-            className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-bold uppercase tracking-[0.14em] text-xs md:text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
-          >
-            Ver Plan Full
-            <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-          </button>
+          <>
+            <button
+              onClick={() => scrollTo("planes")}
+              className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-bold uppercase tracking-[0.14em] text-xs md:text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
+            >
+              Ver Plan Full
+              <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+            <button
+              onClick={() => scrollTo("equipo")}
+              className="group inline-flex items-center justify-center gap-2 border border-primary/50 text-foreground/80 px-6 py-3 font-bold uppercase tracking-[0.14em] text-xs md:text-sm transition-all hover:border-primary hover:text-foreground"
+            >
+              Comprar o alquilar equipo
+              <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </>
         ) : (
           <a
             href={waMedida}
@@ -69,18 +78,20 @@ const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis
         )}
       </div>
 
-      <p className="text-foreground/50 text-xs leading-relaxed mt-4">
-        ¿Todavía no tenés tu equipo?{" "}
-        <a
-          href={FLY_FREE_MODELOS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-bold text-foreground/70 underline underline-offset-2 hover:text-primary"
-        >
-          Mirá las opciones de Fly Free
-        </a>{" "}
-        para armar el tuyo.
-      </p>
+      {!esSportclub && (
+        <p className="text-foreground/50 text-xs leading-relaxed mt-4">
+          ¿Todavía no tenés tu equipo?{" "}
+          <a
+            href={FLY_FREE_MODELOS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-foreground/70 underline underline-offset-2 hover:text-primary"
+          >
+            Mirá las opciones de Fly Free
+          </a>{" "}
+          para armar el tuyo.
+        </p>
+      )}
     </div>
   );
 };

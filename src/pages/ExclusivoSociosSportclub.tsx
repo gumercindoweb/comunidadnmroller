@@ -27,6 +27,7 @@ import {
   Loader2,
   Lock,
   MapPin,
+  Rocket,
   ShieldCheck,
   Sparkles,
   Tag,
@@ -116,9 +117,12 @@ const PLANES_SPORTCLUB = ["Plus", "Total", "Elite", "Flex"];
 
 // El beneficio gratuito cubre solo nivel inicial y principiante; reformulamos
 // la pregunta como "perfil/identidad" (mismo estilo que los filtros de la Home).
+const PERFIL_AVANZADO = "Quiero superarme y avanzar rápido";
+
 const PERFILES = [
   { value: "Nunca patiné o no sé por dónde empezar", emoji: "🟢" },
   { value: "Ya sé lo básico, quiero mejorar", emoji: "🟡" },
+  { value: PERFIL_AVANZADO, emoji: "🔴" },
 ];
 
 const BENEFICIOS = [
@@ -345,6 +349,21 @@ const ExclusivoSociosSportclub = () => {
                     ))}
                   </SelectContent>
                 </Select>
+
+                {nivel === PERFIL_AVANZADO && (
+                  <div className="flex items-start gap-3 border border-[#F5B800]/40 bg-[#F5B800]/10 p-4">
+                    <Rocket className="w-5 h-5 text-[#F5B800] mt-0.5 shrink-0" />
+                    <p className="text-xs text-foreground/80 leading-relaxed">
+                      <strong className="text-foreground">Querés ir más allá de inicial y principiante.</strong>{" "}
+                      Tu beneficio cubre esos dos niveles sin costo. Para acceder a{" "}
+                      <strong>nivel intermedio, disciplinas y más frecuencia</strong> podés sumar
+                      —de forma <strong>opcional</strong>— el <strong>Plan Full Socio SportClub</strong>{" "}
+                      (si ya tenés tu equipo) o <strong>4 Clases + Alquiler</strong> (si te falta).
+                      Completá tu registro y en la <strong>confirmación</strong> te damos los pasos.
+                      Mientras tanto, podés empezar gratis en inicial y principiante.
+                    </p>
+                  </div>
+                )}
                 <Select value={sede} onValueChange={setSede} disabled={loading}>
                   <SelectTrigger className="h-12 rounded-none bg-background border-border text-base">
                     <SelectValue placeholder="Sede en la que querés patinar" />

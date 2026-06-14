@@ -82,9 +82,13 @@ const HorariosSportclub = ({
   );
 
   return (
-    <div className="max-w-7xl mx-auto mt-16">
+    <div className="max-w-7xl mx-auto mt-16 border border-[#F5B800]/25 bg-[#F5B800]/[0.04] p-5 md:p-8">
+      <span className="inline-flex items-center gap-1.5 bg-[#F5B800] text-[#111] text-[10px] md:text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1 mb-4">
+        Beneficio SportClub · Clases bonificadas
+      </span>
       <h3 className="font-display italic uppercase text-2xl md:text-4xl font-black mb-2">
-        Grilla horaria del beneficio
+        Grilla horaria del beneficio de{" "}
+        <span className="text-[#F5B800]">clases bonificadas</span>
       </h3>
       <p className="text-foreground/60 text-sm mb-8 max-w-2xl">
         Estos son los días y horarios de las clases de <strong>nivel inicial y
