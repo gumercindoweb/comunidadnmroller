@@ -1,14 +1,5 @@
 import { Rocket, ArrowRight } from "lucide-react";
 
-const FLY_FREE_MODELOS_URL = "https://www.flyfreeurban.com/marcas/";
-const WHATSAPP = "5491165920600";
-const waMedida =
-  `https://wa.me/${WHATSAPP}?text=` +
-  encodeURIComponent(
-    "[LP|CG] ¡Hola! Ya tengo base patinando y quiero avanzar más rápido " +
-      "(disciplinas / más clases por semana). ¿Qué plan me conviene?",
-  );
-
 // Callout de upgrade que aparece cuando el usuario elige el perfil intermedio/avanzado
 // en el filtro. Convierte el filtro en una guía: le marca la ruta para subir de nivel.
 const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis" }) => {
@@ -67,9 +58,7 @@ const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis
           </>
         ) : (
           <a
-            href={waMedida}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#planes"
             className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-bold uppercase tracking-[0.14em] text-xs md:text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
           >
             Quiero un plan a mi medida
@@ -82,14 +71,12 @@ const UpgradeNivelCallout = ({ variant }: { variant: "sportclub" | "clase-gratis
         <p className="text-foreground/50 text-xs leading-relaxed mt-4">
           ¿Todavía no tenés tu equipo?{" "}
           <a
-            href={FLY_FREE_MODELOS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/clases-de-rollers-mas-alquiler"
             className="font-bold text-foreground/70 underline underline-offset-2 hover:text-primary"
           >
-            Mirá las opciones de Fly Free
-          </a>{" "}
-          para armar el tuyo.
+            Mirá nuestras clases con alquiler incluido
+          </a>
+          .
         </p>
       )}
     </div>
