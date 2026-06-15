@@ -42,17 +42,17 @@ const MasterclassFooterBanner = () => {
         <div className="container mx-auto px-4 py-3 md:py-4 flex items-center gap-3">
 
           {/* Badge (solo desktop) */}
-          <div className="hidden md:inline-flex items-center gap-1.5 bg-primary px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-primary-foreground shrink-0">
-            <Sparkles className="w-2.5 h-2.5" /> Evento
+          <div className="inline-flex items-center gap-1.5 bg-primary px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-primary-foreground shrink-0">
+            <Sparkles className="w-2.5 h-2.5" /> Masterclass
           </div>
 
           {/* Info */}
           <div className="flex-1 min-w-0">
             <p className="text-[9px] font-black uppercase tracking-[0.18em] text-primary leading-none mb-0.5">
-              Patinaje al máximo
+              Solo un día
             </p>
             <p className="font-black italic text-foreground text-sm md:text-base leading-tight truncate">
-              Masterclass de Patinaje
+              Llevate el nivel
             </p>
             <p className="text-foreground/60 text-xs leading-tight flex flex-wrap gap-x-3 gap-y-0.5 mt-0.5">
               <span className="flex items-center gap-1">

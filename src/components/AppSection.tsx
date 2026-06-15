@@ -50,7 +50,7 @@ const AppSection = () => {
               <p className="text-primary-foreground/70 text-xs font-semibold uppercase tracking-[0.2em] mb-2">
                 Al pedirte nombre de empresa poné <strong className="text-primary-foreground">NM ROLLER</strong>
               </p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary-foreground italic uppercase leading-tight mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-primary-foreground italic uppercase leading-tight mb-8">
                 Gestioná todo directamente en la APP Turnos Web
               </h2>
 

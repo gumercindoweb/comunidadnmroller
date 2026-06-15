@@ -100,10 +100,10 @@ const SedesMapa = ({
         if (sedesList.length === 1) {
           map.setView([sedesList[0].lat, sedesList[0].lng], 14);
         } else {
-          map.fitBounds(bounds, { padding: [40, 40] });
-          // En mobile el viewport es angosto y fitBounds puede ir a zoom 10-11;
-          // forzamos mínimo zoom 12 para que los pins no aparezcan diminutos.
-          if (map.getZoom() < 12) map.setZoom(12);
+          // maxZoom 13: evita over-zoom cuando hay pocas sedes cercanas.
+          // minZoom 11: evita que el mapa quede muy alejado con todas las sedes.
+          map.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+          if (map.getZoom() < 11) map.setZoom(11);
         }
       };
 

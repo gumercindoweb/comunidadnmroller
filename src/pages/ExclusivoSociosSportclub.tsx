@@ -247,13 +247,13 @@ const ExclusivoSociosSportclub = () => {
         <section className="px-6 lg:px-16 py-10">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 mb-6 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
+              <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] px-4 py-1.5 mb-6 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
                 <Sparkles className="w-3.5 h-3.5" /> Beneficio exclusivo · Socios SportClub
               </div>
-              <h1 className="font-display italic uppercase leading-[0.95] text-3xl md:text-5xl lg:text-6xl font-black mb-8">
+              <h1 className="font-display italic uppercase leading-[0.95] text-2xl md:text-4xl lg:text-5xl font-black mb-8">
                 Aprendé a patinar<br />
-                <span className="text-primary">sin costo extra</span> si sos<br />
-                socio SportClub
+                en poco tiempo<br />
+                <span className="text-primary">y sin costo extra</span>
               </h1>
               <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-xl">
                 Si tenés un plan <strong>Plus, Total, Elite o Flex</strong>, accedés a nuestras

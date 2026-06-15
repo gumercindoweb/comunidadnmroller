@@ -49,9 +49,9 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left column — Text */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col min-w-0">
             {/* Badge */}
-            <div className="animate-fade-up mb-5 sm:mb-8">
+            <div className="self-start animate-fade-up mb-5 sm:mb-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
@@ -61,7 +61,7 @@ const HeroSection = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-4 sm:mb-6 animate-fade-up-delay-1">
+            <h1 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-4 sm:mb-6 animate-fade-up-delay-1">
               Aprendé a patinar{" "}
               <span className="text-primary">desde cero</span>, sin equipo ni
               experiencia
@@ -75,10 +75,10 @@ const HeroSection = () => {
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 animate-fade-up-delay-3">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 animate-fade-up-delay-3 w-full sm:w-auto">
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
+                className="w-full sm:w-auto whitespace-normal bg-primary hover:bg-primary/90 text-primary-foreground font-semibold sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 group"
                 onClick={() =>
                   document
                     .getElementById("planes")
@@ -91,7 +91,7 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-foreground/30 bg-foreground/5 text-foreground hover:bg-foreground/10 hover:border-foreground/50 font-semibold text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
+                className="w-full sm:w-auto whitespace-normal border-foreground/30 bg-foreground/5 text-foreground hover:bg-foreground/10 hover:border-foreground/50 font-semibold text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
                 onClick={() => navigate("/clases-de-rollers-mas-alquiler")}
               >
                 Clases + Alquiler
@@ -101,11 +101,12 @@ const HeroSection = () => {
             {/* Social proof numbers */}
             <div className="mt-10 hidden sm:flex items-center gap-6 animate-fade-up-delay-3 flex-wrap">
               {[
-                { value: "+3.000", label: "alumnos totales" },
+                { eyebrow: "★ en el último año", value: "+3.000", label: "alumnos han superado el desafío" },
                 { value: "+400", label: "activos por mes" },
                 { value: "+200", label: "salidas urbanas" },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col">
+                  {"eyebrow" in s && <span className="text-[9px] uppercase tracking-[0.15em] text-primary font-bold mb-0.5">{s.eyebrow}</span>}
                   <span className="text-xl font-black text-foreground leading-tight">{s.value}</span>
                   <span className="text-xs text-muted-foreground">{s.label}</span>
                 </div>
@@ -119,19 +120,19 @@ const HeroSection = () => {
               {stats.map((stat, i) => {
                 const inner = (
                   <>
-                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                      <stat.icon className="w-5 h-5 text-primary" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                      <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
-                    <p className="text-3xl font-black text-foreground mb-1 tracking-tight">
+                    <p className="text-xl sm:text-3xl font-black text-foreground mb-1 tracking-tight leading-tight">
                       {stat.value}
                     </p>
-                    <p className="text-sm text-muted-foreground font-medium">
+                    <p className="text-xs sm:text-sm text-muted-foreground font-medium leading-snug">
                       {stat.label}
                     </p>
                   </>
                 );
 
-                const baseClass = `group bg-card border rounded-2xl p-6 shadow-sm transition-all duration-300 ${
+                const baseClass = `group bg-card border rounded-2xl p-4 sm:p-6 shadow-sm transition-all duration-300 ${
                   i === 1 ? "lg:translate-y-6" : ""
                 } ${i === 2 ? "lg:-translate-y-2" : ""}`;
 
