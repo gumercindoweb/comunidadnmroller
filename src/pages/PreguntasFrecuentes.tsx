@@ -278,8 +278,8 @@ const SECCIONES: FaqSection[] = [
           <>
             Solo nivel inicial y principiante. Para acceder a nivel intermedio, disciplinas y más
             frecuencia de clases podés sumar{" "}
-            <Link to="/#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
-              un plan de NM Roller →
+            <Link to="/exclusivo-de-socios-sportclub#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              el Plan Full Socios SportClub →
             </Link>
           </>
         ),
@@ -290,7 +290,16 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Necesito mi propio equipo?",
-        a: "No es obligatorio. Podés alquilar rollers y protecciones en las sedes habilitadas a mitad de precio (con 24 hs de anticipación).",
+        a: (
+          <>
+            No es obligatorio. Podés alquilar rollers y protecciones en las sedes habilitadas a
+            mitad de precio (con 24 hs de anticipación). También tenemos el{" "}
+            <Link to="/exclusivo-de-socios-sportclub#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              plan 4 Clases + Alquiler →
+            </Link>{" "}
+            que incluye todo el equipo desde el primer día.
+          </>
+        ),
       },
       {
         q: "¿Cómo acredito que soy socio SportClub?",
