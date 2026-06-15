@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, ArrowLeft, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
+import { Check, ArrowLeft, ChevronRight, Clock, Info, Loader2, MapPin, Sparkles, Wallet, X } from "lucide-react";
 import FlyFreePanel from "@/components/FlyFreePanel";
 import EquipoPropioNota from "@/components/EquipoPropioNota";
 import UpgradeNivelCallout from "@/components/UpgradeNivelCallout";
@@ -216,9 +216,9 @@ const ClaseGratis = () => {
                 Probá gratis<br />
                 una <span className="text-primary">clase de patinaje</span>
               </h1>
-              <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 px-4 py-2 mb-6">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
-                <span className="text-sm font-bold text-primary">Quedan 5 cupos disponibles esta semana</span>
+              <div className="inline-flex items-center gap-2 bg-primary px-5 py-2.5 mb-6">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
+                <span className="text-sm font-bold text-white tracking-wide">Quedan 5 cupos disponibles esta semana</span>
               </div>
               <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-xl">
                 Reservá tu clase de prueba en <strong>4 sedes 100% gratis</strong> o
@@ -521,7 +521,7 @@ const ClaseGratis = () => {
               Trabajamos los tres niveles en una misma clase, con atención
               personalizada del instructor.
             </p>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
               {[
                 { t: "Inicial", d: "Equilibrio, primeros desplazamientos y confianza desde cero." },
                 { t: "Principiante", d: "Giros más precisos, frenadas y postura para moverte con seguridad." },
@@ -535,6 +535,13 @@ const ClaseGratis = () => {
                 </div>
               ))}
             </div>
+            <Link
+              to="/ruta-de-aprendizaje"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground hover:border-primary hover:text-primary transition-colors text-sm font-bold uppercase tracking-[0.12em] px-6 py-3"
+            >
+              Ver la ruta de aprendizaje completa
+              <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 
