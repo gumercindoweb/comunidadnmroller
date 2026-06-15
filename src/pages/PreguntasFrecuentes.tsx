@@ -11,7 +11,7 @@ import logoNM from "@/assets/Logo-NM-Rollers.png";
 import React from "react";
 
 const WA_SOPORTE =
-  "https://wa.me/5491165920600?text=Hola%21+Te+escribo+desde+la+p%C3%A1gina+de+Preguntas+Frecuentes+de+Comunidad+NM+Roller.+Tengo+una+consulta+%F0%9F%9B%BC";
+  "https://wa.me/5491165920600?text=%5BLP-FAQ-NM%5D+Hola%21+Te+escribo+desde+la+p%C3%A1gina+de+Preguntas+Frecuentes+de+Comunidad+NM+Roller.+Tengo+una+consulta+espec%C3%ADfica%3A+%5Bespecifique+su+duda%5D";
 
 interface FaqItem {
   q: string;
