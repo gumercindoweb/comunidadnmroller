@@ -13,6 +13,7 @@ import AppSection from "@/components/AppSection";
 import Footer from "@/components/Footer";
 import BannerAlquilerHome from "@/components/alquiler/BannerAlquilerHome";
 import MasterclassPopup from "@/components/MasterclassPopup";
+import NewsletterBannerHome from "@/components/NewsletterBannerHome";
 
 const Index = () => {
   const location = useLocation();
@@ -51,6 +52,7 @@ const Index = () => {
       <HorariosSection />
       <AppSection />
       <Testimonials />
+      <NewsletterBannerHome />
       <Footer />
       <MasterclassPopup />
     </div>

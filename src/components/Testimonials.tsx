@@ -4,18 +4,18 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const testimonials = [
   {
     name: "Camila R.",
-    plan: "Plan Black Free",
-    text: "Empecé sin saber nada y en 3 meses ya patino con confianza. Los profes son increíbles y la comunidad te motiva un montón.",
+    nivel: "Nivel intermedio · Palermo",
+    text: "Llegué sin saber ni frenar. En 3 meses ya patino salidas urbanas todos los sábados. Los profes son patinadores de verdad, no instructores de manual.",
   },
   {
     name: "Martín G.",
-    plan: "Plan Basic Fun",
-    text: "La mejor decisión que tomé. Cada clase es diferente, te divertís y aprendés. Las sedes al aire libre son un golazo.",
+    nivel: "Nivel principiante · Caballito",
+    text: "Me compré rollers hace años y los tenía guardados. Me animé a venir y no lo puedo creer. En 4 clases ya rodaba solo en el parque.",
   },
   {
     name: "Valentina S.",
-    plan: "Plan Black Free",
-    text: "Me encanta poder ir a cualquier sede, en el horario que me convenga. Los eventos son lo mejor, conocés gente genial.",
+    nivel: "Nivel inicial · Belgrano",
+    text: "Pensaba que era muy grande para aprender. Tengo 42 años y arrancé desde cero. Hoy voy a clases dos veces por semana y me siento otra persona.",
   },
 ];
 
@@ -41,7 +41,7 @@ const Testimonials = () => {
           {testimonials.map((t, i) => (
             <div
               key={t.name}
-              className={`bg-muted rounded-2xl p-8 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
+              className={`bg-muted rounded-2xl p-8 flex flex-col ${isVisible ? "animate-fade-up" : "opacity-0"}`}
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               <div className="flex items-center gap-1 mb-4">
@@ -49,10 +49,10 @@ const Testimonials = () => {
                   <Star key={j} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
-              <p className="text-foreground mb-6 leading-relaxed">"{t.text}"</p>
+              <p className="text-foreground mb-6 leading-relaxed flex-1">"{t.text}"</p>
               <div>
                 <p className="font-bold text-foreground">{t.name}</p>
-                <p className="text-muted-foreground text-sm">{t.plan}</p>
+                <p className="text-muted-foreground text-sm">{t.nivel}</p>
               </div>
             </div>
           ))}

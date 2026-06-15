@@ -98,25 +98,18 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            {/* Social proof */}
-            <div className="mt-12 hidden sm:flex items-center gap-3 animate-fade-up-delay-3">
-
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-muted border-2 border-background flex items-center justify-center"
-                  >
-                    <span className="text-[10px] font-bold text-muted-foreground">
-                      {String.fromCharCode(64 + i)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">+3.000</span>{" "}
-                alumnos nos eligieron
-              </p>
+            {/* Social proof numbers */}
+            <div className="mt-10 hidden sm:flex items-center gap-6 animate-fade-up-delay-3 flex-wrap">
+              {[
+                { value: "+3.000", label: "alumnos totales" },
+                { value: "+400", label: "activos por mes" },
+                { value: "+200", label: "salidas urbanas" },
+              ].map((s) => (
+                <div key={s.label} className="flex flex-col">
+                  <span className="text-xl font-black text-foreground leading-tight">{s.value}</span>
+                  <span className="text-xs text-muted-foreground">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 

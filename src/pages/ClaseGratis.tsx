@@ -212,10 +212,14 @@ const ClaseGratis = () => {
               <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-foreground/70 mb-6">
                 Antes de comprometerte con un plan
               </p>
-              <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-5xl lg:text-6xl font-black mb-8">
+              <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-5xl lg:text-6xl font-black mb-5">
                 Probá gratis<br />
                 una <span className="text-primary">clase de patinaje</span>
               </h1>
+              <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 px-4 py-2 mb-6">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
+                <span className="text-sm font-bold text-primary">Quedan 5 cupos disponibles esta semana</span>
+              </div>
               <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-xl">
                 Reservá tu clase de prueba en <strong>4 sedes 100% gratis</strong> o
                 asegurá tu lugar con una <strong>seña bonificable</strong> en sedes con

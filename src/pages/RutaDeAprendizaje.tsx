@@ -269,6 +269,15 @@ const NivelCard = ({ nivel }: { nivel: (typeof NIVELES)[number] }) => {
             {nivel.desafio}
           </p>
         </div>
+
+        {/* CTA nivel */}
+        <Link
+          to="/clase-gratis"
+          className={`flex items-center justify-between text-sm font-bold border ${nivel.colorBorder} ${nivel.colorText} px-4 py-2.5 hover:bg-white/5 transition-colors`}
+        >
+          <span>¿Querés practicar este nivel? Probar una clase gratis</span>
+          <ChevronRight className="w-4 h-4 shrink-0" />
+        </Link>
       </div>
     </div>
   );
@@ -534,6 +543,33 @@ const RutaDeAprendizaje = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Barrios / SEO local */}
+        <section className="py-14 border-b border-border">
+          <div className="container mx-auto px-4 max-w-3xl text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-2">
+              Dónde practicás
+            </p>
+            <h2 className="font-black italic text-2xl text-foreground mb-4">
+              Clases de patinaje en +10 sedes de Buenos Aires
+            </h2>
+            <p className="text-foreground/60 text-sm leading-relaxed mb-6">
+              Podés recorrer esta ruta de aprendizaje en cualquiera de nuestras sedes outdoor en CABA y
+              GBA:{" "}
+              <span className="text-foreground font-medium">
+                Palermo, Caballito, Belgrano, Colegiales, Villa Luro, Puerto Madero, Devoto, Villa
+                Real, Plaza La Pampa y Vicente López.
+              </span>{" "}
+              Todas las clases se dictan al aire libre, con profesores del staff de NM Roller.
+            </p>
+            <Link
+              to="/clase-gratis"
+              className="inline-flex items-center gap-2 bg-primary text-white font-black italic text-sm uppercase tracking-[0.12em] px-6 py-3 hover:bg-primary/90 transition-colors"
+            >
+              Elegí tu sede y probá gratis
+            </Link>
           </div>
         </section>
 
