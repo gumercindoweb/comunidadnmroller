@@ -144,7 +144,7 @@ Deno.serve(async (req) => {
         `*Sede:* ${sede}`,
         `*Nivel:* ${nivel}`,
       ].join('\n')
-      await notifySlack({ channel: 'sugerencias-usuarios', text: slackText, logTag: '[sportclub]' })
+      await notifySlack({ channel: 'registro-socios-sportclub', text: slackText, logTag: '[sportclub]' })
 
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },

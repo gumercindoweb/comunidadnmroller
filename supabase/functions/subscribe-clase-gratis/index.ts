@@ -143,7 +143,7 @@ Deno.serve(async (req) => {
         `*Nivel:* ${nivel}`,
         equipo ? `*Equipo:* ${equipo}` : null,
       ].filter(Boolean).join('\n')
-      await notifySlack({ channel: 'sugerencias-usuarios', text: slackText, logTag: '[clase-gratis]' })
+      await notifySlack({ channel: 'registro-clase-gratis', text: slackText, logTag: '[clase-gratis]' })
 
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },

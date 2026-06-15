@@ -1,5 +1,6 @@
 import { z } from 'npm:zod@3.23.8'
 import { createClient } from 'npm:@supabase/supabase-js@2'
+import { notifySlack } from '../_shared/slack.ts'
 
 const ALLOWED_ORIGINS = new Set([
   'https://comunidadnmroller.com',
@@ -133,6 +134,18 @@ Deno.serve(async (req) => {
 
     // Éxito si GetResponse anduvo o si guardamos el respaldo (no perdemos el lead)
     if (grOk || savedBackup) {
+      const slackText = [
+        `*🕐 Nueva inscripción en lista de espera · Clases + Alquiler*`,
+        ``,
+        `*Nombre:* ${name}`,
+        `*Email:* ${email}`,
+        phone ? `*Tel:* ${phone}` : null,
+        `*Sede:* ${sede}`,
+        equipo ? `*Equipo:* ${equipo}` : null,
+        motivacion ? `*Motivación:* ${motivacion}` : null,
+      ].filter(Boolean).join('\n')
+      await notifySlack({ channel: 'venta-alquiler-clases', text: slackText, logTag: '[lista-espera]' })
+
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
