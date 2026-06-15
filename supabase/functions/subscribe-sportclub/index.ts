@@ -1,5 +1,6 @@
 import { z } from 'npm:zod@3.23.8'
 import { createClient } from 'npm:@supabase/supabase-js@2'
+import { notifySlack } from '../_shared/slack.ts'
 
 const ALLOWED_ORIGINS = new Set([
   'https://comunidadnmroller.com',
@@ -132,6 +133,19 @@ Deno.serve(async (req) => {
 
     // Éxito si GetResponse anduvo o si guardamos el respaldo (no perdemos el lead)
     if (grOk || savedBackup) {
+      // --- Slack (no bloqueante) ---
+      const slackText = [
+        `*💪 Nuevo socio SportClub*`,
+        ``,
+        `*Nombre:* ${name}`,
+        `*Email:* ${email}`,
+        `*Tel:* ${phone}`,
+        `*Plan:* ${plan}`,
+        `*Sede:* ${sede}`,
+        `*Nivel:* ${nivel}`,
+      ].join('\n')
+      await notifySlack({ channel: 'sugerencias-usuarios', text: slackText, logTag: '[sportclub]' })
+
       return new Response(JSON.stringify({ success: true, alreadySubscribed: false }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })

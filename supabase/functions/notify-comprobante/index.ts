@@ -1,6 +1,7 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { z } from "npm:zod@3.23.8";
+import { notifySlack } from "../_shared/slack.ts";
 
 const schema = z.object({
   nombre: z.string().trim().min(1).max(120),
@@ -119,6 +120,19 @@ Deno.serve(async (req) => {
     const settled = await Promise.allSettled(tasks);
     const results = settled.map((s) => s.status === "fulfilled" ? s.value : { target: "unknown", ok: false, error: String(s.reason) });
     console.log("notify-comprobante results", JSON.stringify({ email, plan, origen, signedErr, results }));
+
+    // --- Slack (no bloqueante) ---
+    const tipo = origen === "clases-alquiler" ? "💳 Compra confirmada · Clases + Alquiler" : "💳 Compra confirmada · Plan NM";
+    const slackText = [
+      `*${tipo}*`,
+      ``,
+      `*Nombre:* ${nombre}`,
+      `*Email:* ${email}`,
+      `*Tel:* ${telefono}`,
+      plan ? `*Plan:* ${plan}` : null,
+      comprobante_url ? `*Comprobante:* <${comprobante_url}|Ver comprobante (7 días)>` : `*Comprobante:* ${file_path}`,
+    ].filter(Boolean).join("\n");
+    await notifySlack({ channel: "sugerencias-usuarios", text: slackText, logTag: `[comprobante:${origen}]` });
 
     return new Response(
       JSON.stringify({ ok: true, comprobante_url_generated: !!comprobante_url, results }),
