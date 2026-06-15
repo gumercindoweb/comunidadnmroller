@@ -44,7 +44,15 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Hay una clase de prueba gratuita?",
-        a: "Sí. Ofrecemos una clase de prueba gratuita para que conozcas la dinámica, la sede y al profe antes de comprometerte con un plan. Podés reservar tu lugar en la sección 'Clase gratis' del sitio.",
+        a: (
+          <>
+            Sí. Ofrecemos una clase de prueba gratuita para que conozcas la dinámica, la sede y al
+            profe antes de comprometerte con un plan.{" "}
+            <Link to="/clase-gratis" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Reservá tu lugar acá →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Es obligatorio usar protecciones?",
@@ -63,7 +71,14 @@ const SECCIONES: FaqSection[] = [
     items: [
       {
         q: "¿Cuánto cuestan las clases?",
-        a: "Tenemos varios planes: clases sueltas, pack mensual y pack 4 clases + alquiler de equipo. Los precios actualizados los encontrás en la sección 'Planes' de la home.",
+        a: (
+          <>
+            Tenemos varios planes: clase suelta, pack mensual y pack 4 clases + alquiler de equipo.{" "}
+            <Link to="/#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Ver precios actualizados →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Cómo se paga?",
@@ -119,7 +134,14 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Puedo cambiar o cancelar la reserva de alquiler?",
-        a: "Sí. Podés reprogramar avisando con 24 hs de anticipación. En caso de lluvia, se reprograma automáticamente.",
+        a: (
+          <>
+            Sí. Podés reprogramar avisando con{" "}
+            <strong className="text-foreground">al menos 24 hs de anticipación a la hora de tu clase</strong>.
+            Si no avisás a tiempo, el crédito se pierde y no se reembolsa. En caso de lluvia, la
+            clase se reprograma automáticamente sin costo.
+          </>
+        ),
       },
       {
         q: "¿El equipo de alquiler es higiénico?",
@@ -127,7 +149,19 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Puedo alquilar equipo sin tomar una clase?",
-        a: "El alquiler está pensado para acompañar a las clases. Si buscás alquilar patines para pasear de forma recreativa de manera independiente, te recomendamos alquilerdepatines.com (Fly Free).",
+        a: (
+          <>
+            El alquiler está pensado para acompañar a las clases. Si buscás alquilar patines para
+            pasear de forma recreativa de manera independiente, te recomendamos{" "}
+            <a href="https://www.alquilerdepatines.com" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              alquilerdepatines.com
+            </a>{" "}
+            de nuestros amigos de{" "}
+            <a href="https://www.flyfreeurban.com" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Fly Free Urban
+            </a>.
+          </>
+        ),
       },
     ],
   },
@@ -138,7 +172,15 @@ const SECCIONES: FaqSection[] = [
     items: [
       {
         q: "¿Dónde están ubicadas las sedes?",
-        a: "Tenemos más de 10 sedes distribuidas en Buenos Aires: Palermo, Puerto Madero, Caballito, Vicente López, Belgrano, Villa Luro, Núñez, Retiro y más. Podés ver el mapa completo en la sección 'Sedes' de la home.",
+        a: (
+          <>
+            Tenemos más de 10 sedes en Buenos Aires: Palermo, Puerto Madero, Caballito, Vicente
+            López, Belgrano, Villa Luro, Núñez, Retiro y más.{" "}
+            <Link to="/#sedes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Ver mapa completo →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Las clases son en interiores o al aire libre?",
@@ -150,7 +192,14 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Cómo veo los horarios disponibles?",
-        a: "En la sección 'Horarios' de la home podés filtrar por sede y ver los días y horarios de cada clase. También podés consultarnos por WhatsApp.",
+        a: (
+          <>
+            Podés filtrar por sede y ver todos los días y horarios en{" "}
+            <Link to="/#horarios" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              la sección de horarios →
+            </Link>
+          </>
+        ),
       },
     ],
   },
@@ -169,11 +218,28 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Cuándo es la próxima Masterclass?",
-        a: "Las fechas se actualizan en la página de Masterclass. Podés suscribirte a la lista de espera si el cupo se agotó o si querés que te avisemos de la próxima fecha.",
+        a: (
+          <>
+            Las fechas se actualizan en{" "}
+            <Link to="/masterclass-de-patinaje" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              la página de Masterclass →
+            </Link>{" "}
+            Podés anotarte en la lista de espera si el cupo se agotó o para que te avisemos de la
+            próxima fecha.
+          </>
+        ),
       },
       {
         q: "¿Cómo se paga la Masterclass?",
-        a: "Hay distintos tipos de pase (completo, medio día, etc.) con sus respectivos precios. El pago se realiza por Mercado Pago. Los detalles están en la página de Masterclass.",
+        a: (
+          <>
+            Hay distintos tipos de pase (completo, medio día, etc.) con sus respectivos precios. El
+            pago se realiza por Mercado Pago.{" "}
+            <Link to="/masterclass-de-patinaje" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Ver opciones y precios →
+            </Link>
+          </>
+        ),
       },
     ],
   },
@@ -188,7 +254,15 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Qué niveles cubre el beneficio?",
-        a: "Solo nivel inicial y principiante. Para acceder a nivel intermedio, disciplinas y más frecuencia de clases podés sumar un plan de NM Roller.",
+        a: (
+          <>
+            Solo nivel inicial y principiante. Para acceder a nivel intermedio, disciplinas y más
+            frecuencia de clases podés sumar{" "}
+            <Link to="/#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              un plan de NM Roller →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Tiene algún costo para el socio?",
@@ -204,7 +278,15 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Los cupos son limitados?",
-        a: "Sí. Las clases son grupales con atención personalizada, por lo que el cupo por sede y horario es limitado. Te recomendamos registrarte cuanto antes.",
+        a: (
+          <>
+            Sí. Las clases son grupales con atención personalizada, por lo que el cupo por sede y
+            horario es limitado. Te recomendamos{" "}
+            <Link to="/exclusivo-de-socios-sportclub" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              registrarte cuanto antes →
+            </Link>
+          </>
+        ),
       },
     ],
   },
@@ -219,11 +301,32 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Qué equipo recomiendan para principiantes?",
-        a: "Para empezar recomendamos patines en línea con freno trasero (no agresivos), rodilleras, coderas, muñequeras y casco. La marca y modelo dependen de tu presupuesto y uso. Nuestro partner Fly Free Urban puede asesorarte.",
+        a: (
+          <>
+            Para empezar: patines en línea con freno trasero, rodilleras, coderas, muñequeras y
+            casco. La marca y modelo dependen de tu presupuesto. Nuestro partner{" "}
+            <a href="https://www.flyfreeurban.com/marcas/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Fly Free Urban
+            </a>{" "}
+            puede asesorarte sin costo.
+          </>
+        ),
       },
       {
         q: "¿Dónde puedo comprar equipo de calidad?",
-        a: "Tenemos alianza con Fly Free Urban, que asesora y vende equipamiento de calidad. Podés visitar flyfreeurban.com o consultarles directamente por WhatsApp desde la sección de tutoriales.",
+        a: (
+          <>
+            Tenemos alianza con{" "}
+            <a href="https://www.flyfreeurban.com/marcas/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Fly Free Urban
+            </a>
+            , que asesora y vende equipamiento de calidad. También podés consultarles directamente
+            por WhatsApp desde nuestra{" "}
+            <Link to="/tutoriales-de-patinaje" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              sección de tutoriales →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Puedo traer mis propios rollers a la clase?",
