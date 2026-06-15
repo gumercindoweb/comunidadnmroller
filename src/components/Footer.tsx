@@ -2,6 +2,7 @@ import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { getProximaMasterclass } from "@/data/masterclasses";
+import MasterclassFooterBanner from "@/components/MasterclassFooterBanner";
 
 const FLY_FREE_KIT_URL = "https://lp.flyfreeurban.com/kit-de-iniciacion-adulto/";
 const FLY_FREE_TIENDA_URL = "https://www.flyfreeurban.com/marcas/";
@@ -133,6 +134,9 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+
+        {/* Banner Masterclass (entre grid y Legal) */}
+        <MasterclassFooterBanner />
 
         {/* Fila inferior: Legal + Copyright */}
         <div className="border-t border-border/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-foreground/40 text-sm">

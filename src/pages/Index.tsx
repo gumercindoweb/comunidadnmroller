@@ -12,7 +12,6 @@ import Testimonials from "@/components/Testimonials";
 import AppSection from "@/components/AppSection";
 import Footer from "@/components/Footer";
 import BannerAlquilerHome from "@/components/alquiler/BannerAlquilerHome";
-import MasterclassPopup from "@/components/MasterclassPopup";
 import NewsletterBannerHome from "@/components/NewsletterBannerHome";
 import VideoSocialProof from "@/components/VideoSocialProof";
 
@@ -56,7 +55,6 @@ const Index = () => {
       <VideoSocialProof />
       <NewsletterBannerHome />
       <Footer />
-      <MasterclassPopup />
     </div>
   );
 };
