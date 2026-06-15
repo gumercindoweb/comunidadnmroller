@@ -28,6 +28,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import CountdownBanner from "@/components/CountdownBanner";
+import InstagramEmbed from "@/components/InstagramEmbed";
 import { getMasterclass, getProximaMasterclass } from "@/data/masterclasses";
 
 const objetivos = [
@@ -311,6 +312,25 @@ const MasterclassPage = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RECAP REAL — Prueba social de la última Masterclass */}
+      <section className="py-12 sm:py-20 bg-background">
+        <div className="max-w-2xl mx-auto px-6 lg:px-8">
+          <p className="text-xs font-bold uppercase tracking-cta text-primary text-center mb-3">
+            No te lo contamos, te lo mostramos
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4 text-center">
+            Así se vivió la <span className="text-primary">última Masterclass</span>
+          </h2>
+          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-10">
+            Aprendizajes, desafíos, risas y un montón de gente animándose a probar
+            algo nuevo. Esto es lo que te espera.
+          </p>
+          <div className="max-w-sm mx-auto">
+            <InstagramEmbed url="https://www.instagram.com/p/DZXjkOVxMoJ/" className="w-full" />
           </div>
         </div>
       </section>

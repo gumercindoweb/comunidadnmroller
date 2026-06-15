@@ -1,12 +1,6 @@
-import { useEffect, useRef } from "react";
 import { Instagram } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-
-declare global {
-  interface Window {
-    instgrm?: { Embeds: { process: () => void } };
-  }
-}
+import InstagramEmbed from "@/components/InstagramEmbed";
 
 const REELS = [
   {
@@ -28,25 +22,6 @@ const REELS = [
 
 const VideoSocialProof = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const processed = useRef(false);
-
-  useEffect(() => {
-    const process = () => window.instgrm?.Embeds.process();
-
-    if (window.instgrm) {
-      process();
-      return;
-    }
-
-    if (!processed.current) {
-      processed.current = true;
-      const script = document.createElement("script");
-      script.src = "https://www.instagram.com/embed.js";
-      script.async = true;
-      script.onload = process;
-      document.body.appendChild(script);
-    }
-  }, []);
 
   return (
     <section className="py-24 bg-muted" ref={ref}>
@@ -83,12 +58,7 @@ const VideoSocialProof = () => {
                 <h3 className="text-lg font-bold text-foreground">{reel.titulo}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mt-1">{reel.bajada}</p>
               </div>
-              <blockquote
-                className="instagram-media w-full"
-                data-instgrm-permalink={reel.url}
-                data-instgrm-version="14"
-                style={{ margin: 0, minWidth: "unset" }}
-              />
+              <InstagramEmbed url={reel.url} className="w-full" />
             </div>
           ))}
         </div>
