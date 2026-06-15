@@ -343,11 +343,13 @@ const SECCIONES: FaqSection[] = [
         a: (
           <>
             Para empezar: patines en línea con freno trasero, rodilleras, coderas, muñequeras y
-            casco. La marca y modelo dependen de tu presupuesto. Nuestro partner{" "}
+            casco. La marca y modelo dependen de tu presupuesto. Podés consultar a nuestros profes
+            a través de{" "}
             <a href="https://www.flyfreeurban.com/marcas/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
               Fly Free Urban
-            </a>{" "}
-            puede asesorarte sin costo.
+            </a>
+            : son patinadores activos que enseñan y practican el deporte constantemente, no
+            vendedores de mostrador.
           </>
         ),
       },
@@ -359,8 +361,11 @@ const SECCIONES: FaqSection[] = [
             <a href="https://www.flyfreeurban.com/marcas/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
               Fly Free Urban
             </a>
-            , que asesora y vende equipamiento de calidad. También podés consultarles directamente
-            por WhatsApp desde nuestra{" "}
+            . Lo que los diferencia: quienes te asesoran son{" "}
+            <strong className="text-foreground">profesores del staff de NM Roller</strong> —
+            patinadores que enseñan y practican el deporte constantemente. No te atiende alguien
+            que vende desde el mostrador sin conocer el producto desde adentro. También podés
+            consultarles directamente por WhatsApp desde nuestra{" "}
             <Link to="/tutoriales-de-patinaje" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
               sección de tutoriales →
             </Link>
