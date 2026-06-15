@@ -83,9 +83,10 @@ Deno.serve(async (req) => {
       }
     }
 
-    // --- Slack Incoming Webhook (no bloqueante) ---
-    const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
-    if (SLACK_WEBHOOK_URL) {
+    // --- Slack vía conector de Lovable (no bloqueante) ---
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const SLACK_API_KEY = Deno.env.get("SLACK_API_KEY");
+    if (LOVABLE_API_KEY && SLACK_API_KEY) {
       try {
         const lines = [
           `*🛼 Nueva sugerencia de horario/sede*`,
@@ -98,22 +99,32 @@ Deno.serve(async (req) => {
           comentario ? `*Comentario:* ${comentario}` : null,
         ].filter(Boolean).join("\n");
 
-        const res = await fetch(SLACK_WEBHOOK_URL, {
+        const res = await fetch(`${SLACK_GATEWAY}/chat.postMessage`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: lines }),
+          headers: {
+            "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+            "X-Connection-Api-Key": SLACK_API_KEY,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: JSON.stringify({
+            channel: SLACK_CHANNEL,
+            text: lines,
+            unfurl_links: false,
+            unfurl_media: false,
+          }),
         });
 
-        if (!res.ok) {
-          console.warn("[sugerencia] Slack webhook falló:", res.status, await res.text());
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          console.warn("[sugerencia] Slack postMessage falló:", res.status, JSON.stringify(data));
         } else {
-          console.log("[sugerencia] Slack notificado OK");
+          console.log("[sugerencia] Slack notificado OK en #" + SLACK_CHANNEL);
         }
       } catch (e) {
         console.warn("[sugerencia] Slack fetch falló:", e);
       }
     } else {
-      console.warn("[sugerencia] SLACK_WEBHOOK_URL no configurado");
+      console.warn("[sugerencia] LOVABLE_API_KEY o SLACK_API_KEY no configurados");
     }
 
     return json({ ok: true });
