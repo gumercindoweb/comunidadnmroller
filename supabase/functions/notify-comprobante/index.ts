@@ -132,7 +132,8 @@ Deno.serve(async (req) => {
       plan ? `*Plan:* ${plan}` : null,
       comprobante_url ? `*Comprobante:* <${comprobante_url}|Ver comprobante (7 días)>` : `*Comprobante:* ${file_path}`,
     ].filter(Boolean).join("\n");
-    await notifySlack({ channel: "sugerencias-usuarios", text: slackText, logTag: `[comprobante:${origen}]` });
+    const slackChannel = origen === "clases-alquiler" ? "venta-alquiler-clases" : "venta-de-planes";
+    await notifySlack({ channel: slackChannel, text: slackText, logTag: `[comprobante:${origen}]` });
 
     return new Response(
       JSON.stringify({ ok: true, comprobante_url_generated: !!comprobante_url, results }),
