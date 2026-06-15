@@ -84,9 +84,9 @@ const RegistroConfirmadoNewsletter = () => {
 
             <Button
               onClick={() => setVideoOpen(true)}
-              className="h-12 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.18em] text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
+              className="h-12 px-6 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.1em] text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
             >
-              Conocer la ruta de aprendizaje
+              Ruta de aprendizaje
             </Button>
           </div>
         </section>
@@ -105,9 +105,9 @@ const RegistroConfirmadoNewsletter = () => {
               </p>
               <Button
                 asChild
-                className="h-12 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.18em] text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
+                className="h-12 px-6 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.1em] text-sm transition-all hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
               >
-                <Link to="/clases-de-rollers-mas-alquiler">Quiero probar una clase</Link>
+                <Link to="/clases-de-rollers-mas-alquiler">Probar una clase</Link>
               </Button>
             </div>
 

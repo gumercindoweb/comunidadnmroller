@@ -94,7 +94,7 @@ const HeroSection = () => {
                 className="border-foreground/30 bg-foreground/5 text-foreground hover:bg-foreground/10 hover:border-foreground/50 font-semibold text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
                 onClick={() => navigate("/clases-de-rollers-mas-alquiler")}
               >
-                Clases + Alquiler · sin equipo propio
+                Clases + Alquiler
               </Button>
             </div>
 
