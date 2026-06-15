@@ -2,9 +2,9 @@
 // y notifica al canal de Slack #sugerencias-usuarios vía el conector de Slack de Lovable.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { notifySlack } from "../_shared/slack.ts";
 
 const SLACK_CHANNEL = "sugerencias-usuarios";
-const SLACK_GATEWAY = "https://connector-gateway.lovable.dev/slack/api";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -84,96 +84,17 @@ Deno.serve(async (req) => {
     }
 
     // --- Slack vía conector de Lovable (no bloqueante) ---
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    const SLACK_API_KEY = Deno.env.get("SLACK_API_KEY");
-    if (LOVABLE_API_KEY && SLACK_API_KEY) {
-      try {
-        const lines = [
-          `*🛼 Nueva sugerencia de horario/sede*`,
-          ``,
-          `*Nombre:* ${nombre}`,
-          `*Email:* ${email}`,
-          `*Zona sugerida:* ${zona}`,
-          `*Día preferido:* ${dia}`,
-          `*Horario preferido:* ${franja}`,
-          comentario ? `*Comentario:* ${comentario}` : null,
-        ].filter(Boolean).join("\n");
-
-        const slackHeaders = {
-          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-          "X-Connection-Api-Key": SLACK_API_KEY,
-          "Content-Type": "application/json; charset=utf-8",
-        };
-
-        const postMessage = async () => {
-          const r = await fetch(`${SLACK_GATEWAY}/chat.postMessage`, {
-            method: "POST",
-            headers: slackHeaders,
-            body: JSON.stringify({
-              channel: SLACK_CHANNEL,
-              text: lines,
-              unfurl_links: false,
-              unfurl_media: false,
-            }),
-          });
-          const d = await r.json().catch(() => ({}));
-          return { r, d };
-        };
-
-        let { r: res, d: data } = await postMessage();
-
-        // Si el bot no está en el canal, intentar unirse y reintentar.
-        if (!data?.ok && data?.error === "not_in_channel") {
-          console.log("[sugerencia] bot no está en el canal, intentando join…");
-          // 1) buscar el ID del canal por nombre
-          let channelId = "";
-          let cursor = "";
-          do {
-            const listRes = await fetch(
-              `${SLACK_GATEWAY}/conversations.list?limit=200&types=public_channel${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`,
-              { method: "POST", headers: slackHeaders },
-            );
-            const listData = await listRes.json().catch(() => ({}));
-            if (!listData?.ok) {
-              console.warn("[sugerencia] conversations.list falló:", JSON.stringify(listData));
-              break;
-            }
-            const hit = listData.channels?.find((c: any) => c.name === SLACK_CHANNEL);
-            if (hit) {
-              channelId = hit.id;
-              break;
-            }
-            cursor = listData.response_metadata?.next_cursor ?? "";
-          } while (cursor);
-
-          if (channelId) {
-            const joinRes = await fetch(
-              `${SLACK_GATEWAY}/conversations.join?channel=${channelId}`,
-              { method: "POST", headers: slackHeaders },
-            );
-            const joinData = await joinRes.json().catch(() => ({}));
-            if (joinData?.ok) {
-              console.log("[sugerencia] bot unido al canal, reintentando postMessage");
-              ({ r: res, d: data } = await postMessage());
-            } else {
-              console.warn("[sugerencia] conversations.join falló:", JSON.stringify(joinData));
-            }
-          } else {
-            console.warn("[sugerencia] no se encontró el canal #" + SLACK_CHANNEL);
-          }
-        }
-
-        if (!res.ok || !data?.ok) {
-          console.warn("[sugerencia] Slack postMessage falló:", res.status, JSON.stringify(data));
-        } else {
-          console.log("[sugerencia] Slack notificado OK en #" + SLACK_CHANNEL);
-        }
-      } catch (e) {
-        console.warn("[sugerencia] Slack fetch falló:", e);
-      }
-    } else {
-      console.warn("[sugerencia] LOVABLE_API_KEY o SLACK_API_KEY no configurados");
-    }
+    const slackText = [
+      `*🛼 Nueva sugerencia de horario/sede*`,
+      ``,
+      `*Nombre:* ${nombre}`,
+      `*Email:* ${email}`,
+      `*Zona sugerida:* ${zona}`,
+      `*Día preferido:* ${dia}`,
+      `*Horario preferido:* ${franja}`,
+      comentario ? `*Comentario:* ${comentario}` : null,
+    ].filter(Boolean).join("\n");
+    await notifySlack({ channel: SLACK_CHANNEL, text: slackText, logTag: "[sugerencia]" });
 
     return json({ ok: true });
   } catch (e) {
