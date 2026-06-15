@@ -1,7 +1,10 @@
 // Recibe una sugerencia de horario/sede, la envía por email a hola@comunidadnmroller.com
-// y notifica al canal de Slack configurado en SLACK_WEBHOOK_URL.
+// y notifica al canal de Slack #sugerencias-usuarios vía el conector de Slack de Lovable.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+
+const SLACK_CHANNEL = "sugerencias-usuarios";
+const SLACK_GATEWAY = "https://connector-gateway.lovable.dev/slack/api";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
