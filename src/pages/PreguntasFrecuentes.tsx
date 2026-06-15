@@ -303,7 +303,17 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Cómo acredito que soy socio SportClub?",
-        a: "Después de registrarte te escribimos por WhatsApp y te pedimos los datos de tu membresía para validarla. Es rápido.",
+        a: (
+          <>
+            Completá el{" "}
+            <Link to="/exclusivo-de-socios-sportclub#form" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              formulario de registro →
+            </Link>{" "}
+            y seguí las indicaciones que te llegan después. Luego envianos los datos de tu
+            membresía por WhatsApp para que podamos validar tu beneficio gratuito de Socio
+            SportClub.
+          </>
+        ),
       },
       {
         q: "¿Los cupos son limitados?",
