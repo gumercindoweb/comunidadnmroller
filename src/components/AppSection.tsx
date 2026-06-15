@@ -111,7 +111,7 @@ const AppSection = () => {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Text */}
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary italic uppercase leading-tight mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-primary italic uppercase leading-tight mb-6">
                 ¿Ya tenés la app y querés reservar?
               </h2>
               <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-lg">

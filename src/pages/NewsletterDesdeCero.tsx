@@ -243,18 +243,18 @@ const NewsletterDesdeCero = () => {
         </section>
 
         {/* Benefits band */}
-        <section className="bg-primary text-primary-foreground py-16 px-6">
+        <section className="bg-primary text-primary-foreground py-10 sm:py-16 px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-center font-display italic uppercase text-2xl md:text-4xl font-black mb-12 tracking-tight">
+            <h2 className="text-center font-display italic uppercase text-xl sm:text-2xl md:text-4xl font-black mb-6 sm:mb-12 tracking-tight">
               Recibí en tu bandeja de entrada
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8">
               {benefits.map((b) => (
-                <div key={b} className="flex flex-col items-center text-center">
-                  <div className="w-10 h-10 bg-primary-foreground text-primary flex items-center justify-center mb-4">
-                    <Check className="w-6 h-6" strokeWidth={3} />
+                <div key={b} className="flex sm:flex-col items-center gap-3 sm:gap-0 text-left sm:text-center">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-foreground text-primary flex items-center justify-center shrink-0 sm:mb-4">
+                    <Check className="w-4 h-4 sm:w-6 sm:h-6" strokeWidth={3} />
                   </div>
-                  <p className="text-sm md:text-base font-medium leading-snug max-w-[220px]">
+                  <p className="text-sm font-medium leading-snug sm:max-w-[220px]">
                     {b}
                   </p>
                 </div>

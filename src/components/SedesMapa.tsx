@@ -68,8 +68,8 @@ const SedesMapa = ({
       const map = L.map(mapDivRef.current, {
         zoomControl: true,
         scrollWheelZoom: false,
-        touchZoom: !isTouchPrimary,
-        dragging: !isTouchPrimary,
+        touchZoom: true,          // pinch-to-zoom siempre activo; no bloquea el scroll de página
+        dragging: !isTouchPrimary, // dragging con dedo desactivado en mobile para no bloquear scroll
         doubleClickZoom: false,
         attributionControl: true,
       });
@@ -100,7 +100,10 @@ const SedesMapa = ({
         if (sedesList.length === 1) {
           map.setView([sedesList[0].lat, sedesList[0].lng], 14);
         } else {
-          map.fitBounds(bounds, { padding: [60, 60] });
+          map.fitBounds(bounds, { padding: [40, 40] });
+          // En mobile el viewport es angosto y fitBounds puede ir a zoom 10-11;
+          // forzamos mínimo zoom 12 para que los pins no aparezcan diminutos.
+          if (map.getZoom() < 12) map.setZoom(12);
         }
       };
 
