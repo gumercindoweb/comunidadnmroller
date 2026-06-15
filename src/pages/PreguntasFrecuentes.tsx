@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/accordion";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import React from "react";
 
 const WA_SOPORTE =
   "https://wa.me/5491165920600?text=Hola%21+Te+escribo+desde+la+p%C3%A1gina+de+Preguntas+Frecuentes+de+Comunidad+NM+Roller.+Tengo+una+consulta+%F0%9F%9B%BC";
 
 interface FaqItem {
   q: string;
-  a: string;
+  a: React.ReactNode;
 }
 interface FaqSection {
   id: string;
@@ -74,11 +75,28 @@ const SECCIONES: FaqSection[] = [
       },
       {
         q: "¿Cuántas clases puedo tomar por semana?",
-        a: "Depende del plan que elijas. Algunos planes habilitan hasta 2 clases por semana en cualquier sede; otros están limitados a una. Revisá los detalles de cada plan en la sección de Planes.",
+        a: (
+          <>
+            Depende del plan: podés tomar 1 clase por semana o 4 en el mes. Con el{" "}
+            <strong className="text-foreground">Plan Black</strong> podés tomar hasta{" "}
+            <strong className="text-foreground">2 clases por día</strong>.{" "}
+            <Link to="/#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Ver todos los planes →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Puedo tomar clases en cualquier sede con el mismo plan?",
-        a: "Con los planes 'multi-sede' podés ir a cualquiera de nuestras más de 10 sedes en Buenos Aires. Los planes básicos tienen la sede fija. Fijate en la descripción de cada plan.",
+        a: (
+          <>
+            Sí, siempre y cuando tu plan lo incluya. Esto queda especificado al momento de
+            comprar: cada plan indica claramente si es de sede fija o multi-sede.{" "}
+            <Link to="/#planes" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Revisá los detalles de cada plan →
+            </Link>
+          </>
+        ),
       },
     ],
   },
