@@ -441,7 +441,7 @@ const RutaDeAprendizaje = () => {
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
               Ruta de Aprendizaje · NM Roller
             </p>
-            <h1 className="font-black italic text-4xl sm:text-5xl leading-tight text-foreground mb-5">
+            <h1 className="font-black italic text-3xl sm:text-5xl leading-tight text-foreground mb-5">
               Descubrí todo lo que podés aprender{" "}
               <span className="text-primary">aunque hoy no sepas ni frenar</span>
             </h1>

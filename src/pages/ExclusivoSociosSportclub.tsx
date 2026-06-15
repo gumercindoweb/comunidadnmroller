@@ -250,7 +250,7 @@ const ExclusivoSociosSportclub = () => {
               <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 mb-6 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
                 <Sparkles className="w-3.5 h-3.5" /> Beneficio exclusivo · Socios SportClub
               </div>
-              <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-5xl lg:text-6xl font-black mb-8">
+              <h1 className="font-display italic uppercase leading-[0.95] text-3xl md:text-5xl lg:text-6xl font-black mb-8">
                 Aprendé a patinar<br />
                 <span className="text-primary">sin costo extra</span> si sos<br />
                 socio SportClub

@@ -212,20 +212,30 @@ const ClaseGratis = () => {
               <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-foreground/70 mb-6">
                 Antes de comprometerte con un plan
               </p>
-              <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-5xl lg:text-6xl font-black mb-5">
+              <h1 className="font-display italic uppercase leading-[0.95] text-3xl md:text-5xl lg:text-6xl font-black mb-5">
                 Probá gratis<br />
                 una <span className="text-primary">clase de patinaje</span>
               </h1>
-              <div className="inline-flex items-center gap-2 bg-primary px-5 py-2.5 mb-6">
+              <div className="inline-flex items-center gap-2 bg-primary px-5 py-2.5 mb-4">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
                 <span className="text-sm font-bold text-white tracking-wide">Quedan 5 cupos disponibles esta semana</span>
               </div>
+              {/* Mobile: CTA rápido para saltar al form sin scrollear */}
+              <a
+                href="#form"
+                className="lg:hidden flex items-center justify-center gap-2 bg-primary/10 border border-primary/40 text-primary font-bold uppercase tracking-[0.12em] text-xs px-4 py-2.5 mb-5 hover:bg-primary/20 transition-colors"
+              >
+                Solicitar mi clase <ChevronRight className="w-3.5 h-3.5" />
+              </a>
               <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-xl">
                 Reservá tu clase de prueba en <strong>4 sedes 100% gratis</strong> o
                 asegurá tu lugar con una <strong>seña bonificable</strong> en sedes con
-                alta demanda. La seña equivale al valor de una clase única:{" "}
-                <strong className="text-primary">$35.000 transferencia · $32.000 efectivo</strong>,
-                y se descuenta si comprás un plan dentro de los 7 días siguientes.
+                alta demanda.{" "}
+                <span className="hidden sm:inline">
+                  La seña equivale al valor de una clase única:{" "}
+                  <strong className="text-primary">$35.000 transferencia · $32.000 efectivo</strong>,
+                  y se descuenta si comprás un plan dentro de los 7 días siguientes.
+                </span>
               </p>
 
               {/* Pasos */}

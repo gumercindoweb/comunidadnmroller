@@ -94,7 +94,7 @@ const NewsletterDesdeCero = () => {
               <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-foreground/70 mb-6">
                 ¿Y sí sí podés empezar a patinar?
               </p>
-              <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-5xl lg:text-6xl font-black mb-8">
+              <h1 className="font-display italic uppercase leading-[0.95] text-3xl md:text-5xl lg:text-6xl font-black mb-8">
                 La newsletter que te<br />
                 impulsa a dar<br />
                 <span className="text-primary">tu primer paso</span>
