@@ -117,8 +117,7 @@ const Footer = () => {
               <li><Link to="/preguntas-frecuentes" className={linkCls}>Preguntas frecuentes</Link></li>
               <li><Link to="/newsletter-desde-cero" className={linkCls}>Newsletter Desde Cero</Link></li>
               <li>
-                {/* TODO: crear página /ruta-de-aprendizaje */}
-                <a href="#" onClick={noop} className={linkCls}>Ruta de aprendizaje</a>
+                <Link to="/ruta-de-aprendizaje" className={linkCls}>Ruta de aprendizaje</Link>
               </li>
               <li>
                 <Link to="/tutoriales-de-patinaje" className={linkCls}>Tutoriales</Link>

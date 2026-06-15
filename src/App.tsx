@@ -20,6 +20,7 @@ import PoliticaPrivacidad from "./pages/PoliticaPrivacidad.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import TutorialesPatinaje from "./pages/TutorialesPatinaje.tsx";
 import PreguntasFrecuentes from "./pages/PreguntasFrecuentes.tsx";
+import RutaDeAprendizaje from "./pages/RutaDeAprendizaje.tsx";
 import WhatsappFloat from "./components/WhatsappFloat.tsx";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/politicas-de-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/tutoriales-de-patinaje" element={<TutorialesPatinaje />} />
           <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
+          <Route path="/ruta-de-aprendizaje" element={<RutaDeAprendizaje />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
