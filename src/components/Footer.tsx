@@ -124,7 +124,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://wa.me/5491165920600?text=Hola%21+Te+escribo+desde+el+sitio+web+de+Comunidad+NM+Roller.+Necesito+ayuda+%F0%9F%9B%BC"
+                  href="https://wa.me/5491165920600?text=%5BLP-SP-FT%5D+Hola%21+Te+escribo+desde+el+sitio+web+de+Comunidad+NM+Roller.+Necesito+ayuda+con+%5Bespecifique+su+pregunta%5D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={linkCls}
