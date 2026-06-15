@@ -1,38 +1,44 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Calendar, Users, ShieldCheck } from "lucide-react";
+import { ArrowRight, MapPin, Calendar, Zap, ShieldCheck } from "lucide-react";
 
-const stats = [
+const stats: {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  scrollTo?: string;
+}[] = [
   {
     icon: MapPin,
     label: "Sedes activas",
     value: "+10",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    scrollTo: "sedes",
   },
   {
     icon: Calendar,
     label: "Clases semanales",
     value: "40+",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    scrollTo: "horarios",
   },
   {
-    icon: Users,
-    label: "Alumnos activos",
-    value: "3.000+",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    icon: Zap,
+    label: "Cancelá cuando querás",
+    value: "Sin contrato",
   },
   {
     icon: ShieldCheck,
     label: "Seguro médico",
     value: "Incluido",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
   },
 ];
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background pt-16">
       {/* Subtle decorative blurs */}
@@ -85,14 +91,10 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-muted font-medium text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
-                onClick={() =>
-                  document
-                    .getElementById("alquiler")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                className="border-foreground/30 bg-foreground/5 text-foreground hover:bg-foreground/10 hover:border-foreground/50 font-semibold text-base px-8 py-5 sm:py-6 rounded-full transition-all duration-200"
+                onClick={() => navigate("/clases-de-rollers-mas-alquiler")}
               >
-                Empezá sin equipo propio
+                Clases + Alquiler · sin equipo propio
               </Button>
             </div>
 
@@ -121,26 +123,43 @@ const HeroSection = () => {
           {/* Right column — Stats cards */}
           <div className="relative animate-fade-up-delay-2">
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className={`group bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 ${
-                    i === 1 ? "lg:translate-y-6" : ""
-                  } ${i === 2 ? "lg:-translate-y-2" : ""}`}
-                >
-                  <div
-                    className={`w-10 h-10 ${stat.bgColor} rounded-xl flex items-center justify-center mb-4`}
-                  >
-                    <stat.icon className={`w-5 h-5 ${stat.color}`} />
+              {stats.map((stat, i) => {
+                const inner = (
+                  <>
+                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                      <stat.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-3xl font-black text-foreground mb-1 tracking-tight">
+                      {stat.value}
+                    </p>
+                    <p className="text-sm text-muted-foreground font-medium">
+                      {stat.label}
+                    </p>
+                  </>
+                );
+
+                const baseClass = `group bg-card border rounded-2xl p-6 shadow-sm transition-all duration-300 ${
+                  i === 1 ? "lg:translate-y-6" : ""
+                } ${i === 2 ? "lg:-translate-y-2" : ""}`;
+
+                if (stat.scrollTo) {
+                  return (
+                    <button
+                      key={stat.label}
+                      onClick={() => scrollTo(stat.scrollTo!)}
+                      className={`${baseClass} border-border hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 text-left cursor-pointer`}
+                    >
+                      {inner}
+                    </button>
+                  );
+                }
+
+                return (
+                  <div key={stat.label} className={`${baseClass} border-border hover:shadow-md`}>
+                    {inner}
                   </div>
-                  <p className="text-3xl font-black text-foreground mb-1 tracking-tight">
-                    {stat.value}
-                  </p>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Floating accent card */}
