@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import BannerAlquilerHome from "@/components/alquiler/BannerAlquilerHome";
 import MasterclassPopup from "@/components/MasterclassPopup";
 import NewsletterBannerHome from "@/components/NewsletterBannerHome";
+import VideoSocialProof from "@/components/VideoSocialProof";
 
 const Index = () => {
   const location = useLocation();
@@ -52,6 +53,7 @@ const Index = () => {
       <HorariosSection />
       <AppSection />
       <Testimonials />
+      <VideoSocialProof />
       <NewsletterBannerHome />
       <Footer />
       <MasterclassPopup />
