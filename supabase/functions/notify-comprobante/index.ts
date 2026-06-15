@@ -72,10 +72,11 @@ Deno.serve(async (req) => {
               email,
               name: nombre,
               campaign: { campaignId: GR_CAMPAIGN_ID },
-              customFieldValues: [
-                ...(telefono ? [{ name: "telefono", value: [telefono] }] : []),
-                ...(plan ? [{ name: "plan", value: [plan] }] : []),
-              ],
+              note: [
+                origen === "clases-alquiler" ? "Comprobante · Clases + Alquiler" : "Comprobante · Plan NM",
+                plan ? `Plan: ${plan}` : null,
+                telefono ? `Tel: ${telefono}` : null,
+              ].filter(Boolean).join(" · "),
             }),
           });
           const text = await res.text();
