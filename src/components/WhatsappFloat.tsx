@@ -12,6 +12,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const WhatsappFloat = () => {
   const [visible, setVisible] = useState(false);
+  const [bannerOpen, setBannerOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600);
@@ -20,13 +21,24 @@ const WhatsappFloat = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Sube el botón cuando la barra de Masterclass está visible
+  useEffect(() => {
+    const check = () => setBannerOpen(document.body.classList.contains("mc-banner-open"));
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <a
       href={HREF}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escribinos por WhatsApp"
-      className={`fixed bottom-5 left-5 z-50 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-all duration-300 hover:scale-105 ${
+      className={`fixed left-5 z-50 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-all duration-300 hover:scale-105 ${
+        bannerOpen ? "bottom-[72px]" : "bottom-5"
+      } ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >

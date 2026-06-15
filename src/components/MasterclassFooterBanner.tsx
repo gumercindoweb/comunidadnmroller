@@ -18,6 +18,16 @@ const MasterclassFooterBanner = () => {
     }
   }, [storageKey]);
 
+  // Señaliza al WhatsAppFloat que suba cuando el banner está abierto
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add("mc-banner-open");
+    } else {
+      document.body.classList.remove("mc-banner-open");
+    }
+    return () => document.body.classList.remove("mc-banner-open");
+  }, [visible]);
+
   const cerrar = () => {
     try { localStorage.setItem(storageKey, "1"); } catch {}
     setVisible(false);
@@ -27,9 +37,8 @@ const MasterclassFooterBanner = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 animate-in slide-in-from-bottom duration-300">
-      {/* En mobile: pl-20 deja libre el espacio del botón WhatsApp (bottom-5 left-5, 56px) */}
       <div className="bg-card border-t border-primary/30 shadow-[0_-4px_24px_rgba(0,0,0,0.3)]">
-        <div className="container mx-auto px-4 pl-20 md:pl-4 py-3 md:py-4 flex items-center gap-3">
+        <div className="container mx-auto px-4 py-3 md:py-4 flex items-center gap-3">
 
           {/* Badge (solo desktop) */}
           <div className="hidden md:inline-flex items-center gap-1.5 bg-primary/15 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-primary shrink-0">
