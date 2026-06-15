@@ -1,7 +1,5 @@
-// Recibe una sugerencia de horario/sede y la envía por email a hola@comunidadnmroller.com
-// Usa Lovable Emails (send-transactional-email) si está disponible.
-// Si todavía no hay infra de email configurada, igual responde 200 y loguea la sugerencia
-// para que ningún dato del usuario se pierda (revisable en logs).
+// Recibe una sugerencia de horario/sede, la envía por email a hola@comunidadnmroller.com
+// y notifica al canal de Slack configurado en SLACK_WEBHOOK_URL.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
@@ -31,14 +29,13 @@ Deno.serve(async (req) => {
   try {
     const body = (await req.json()) as Payload;
 
-    // Validación básica server-side
     if (!body || typeof body !== "object") {
       return json({ error: "Invalid body" }, 400);
     }
     if (body.website && body.website.length > 0) {
-      // Honeypot tocado → ignorar silenciosamente
       return json({ ok: true });
     }
+
     const nombre = String(body.nombre ?? "").trim().slice(0, 80);
     const email = String(body.email ?? "").trim().slice(0, 150);
     const zona = String(body.zona ?? "").trim().slice(0, 120);
@@ -53,15 +50,15 @@ Deno.serve(async (req) => {
       return json({ error: "Email inválido" }, 400);
     }
 
-    // Log estructurado (siempre)
     console.log(
       "[sugerencia]",
       JSON.stringify({ ts: new Date().toISOString(), nombre, email, zona, dia, franja, comentario }),
     );
 
-    // Intento de envío vía Lovable Emails (si está scaffolded)
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+    // --- Email via Lovable (no bloqueante) ---
     if (SUPABASE_URL && SERVICE_ROLE) {
       try {
         const admin = createClient(SUPABASE_URL, SERVICE_ROLE);
@@ -79,8 +76,41 @@ Deno.serve(async (req) => {
           console.warn("[sugerencia] send-transactional-email no disponible:", error.message);
         }
       } catch (e) {
-        console.warn("[sugerencia] email send falló (probablemente infra no configurada):", e);
+        console.warn("[sugerencia] email send falló:", e);
       }
+    }
+
+    // --- Slack Incoming Webhook (no bloqueante) ---
+    const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
+    if (SLACK_WEBHOOK_URL) {
+      try {
+        const lines = [
+          `*🛼 Nueva sugerencia de horario/sede*`,
+          ``,
+          `*Nombre:* ${nombre}`,
+          `*Email:* ${email}`,
+          `*Zona sugerida:* ${zona}`,
+          `*Día preferido:* ${dia}`,
+          `*Horario preferido:* ${franja}`,
+          comentario ? `*Comentario:* ${comentario}` : null,
+        ].filter(Boolean).join("\n");
+
+        const res = await fetch(SLACK_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: lines }),
+        });
+
+        if (!res.ok) {
+          console.warn("[sugerencia] Slack webhook falló:", res.status, await res.text());
+        } else {
+          console.log("[sugerencia] Slack notificado OK");
+        }
+      } catch (e) {
+        console.warn("[sugerencia] Slack fetch falló:", e);
+      }
+    } else {
+      console.warn("[sugerencia] SLACK_WEBHOOK_URL no configurado");
     }
 
     return json({ ok: true });
