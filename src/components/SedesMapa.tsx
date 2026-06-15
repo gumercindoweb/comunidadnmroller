@@ -59,9 +59,18 @@ const SedesMapa = ({
   useEffect(() => {
     if (!mapDivRef.current || mapRef.current) return;
     try {
+      // Touch-primary devices (phones + tablets): map stays static so page scroll
+      // is not blocked. Desktop keeps drag-to-pan but not scroll-wheel zoom.
+      const isTouchPrimary =
+        typeof window !== "undefined" &&
+        window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
       const map = L.map(mapDivRef.current, {
         zoomControl: true,
-        scrollWheelZoom: true,
+        scrollWheelZoom: false,
+        touchZoom: !isTouchPrimary,
+        dragging: !isTouchPrimary,
+        doubleClickZoom: false,
         attributionControl: true,
       });
       mapRef.current = map;

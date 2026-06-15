@@ -114,6 +114,7 @@ const Footer = () => {
           <div>
             <h4 className={colHeading}>Recursos</h4>
             <ul className="space-y-2 text-foreground/60 text-sm">
+              <li><Link to="/preguntas-frecuentes" className={linkCls}>Preguntas frecuentes</Link></li>
               <li><Link to="/newsletter-desde-cero" className={linkCls}>Newsletter Desde Cero</Link></li>
               <li>
                 {/* TODO: crear página /ruta-de-aprendizaje */}

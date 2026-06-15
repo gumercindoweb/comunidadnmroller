@@ -239,7 +239,7 @@ const CTAS: Record<Categoria, CtaData> = {
       "Contestamos todas tus dudas antes de que compres. Modelo, talle, presupuesto — te ayudamos a elegir el que más se adapta a vos.",
     cta1Label: "Escribirnos por WhatsApp",
     cta1Href:
-      "https://wa.me/5491165920600?text=Hola%21+Quiero+asesoramiento+para+elegir+mis+rollers.+%C2%BFPueden+ayudarme%3F",
+      "https://wa.me/5491151097151?text=%5BLP-TT-NM%5D+Hola%21+Te+escribo+desde+los+tutoriales+de+Comunidad+NM+Roller.+Quiero+asesoramiento+para+elegir+mis+rollers.+%C2%BFPueden+ayudarme%3F",
     cta1IsInternal: false,
     cta2Label: "Ver equipamiento · Fly Free",
     cta2Href: "https://www.flyfreeurban.com/marcas/",
