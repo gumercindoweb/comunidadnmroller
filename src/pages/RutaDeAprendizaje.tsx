@@ -300,7 +300,7 @@ const LeadForm = ({ compact = false }: { compact?: boolean }) => {
             ? "Ya estabas en la lista. ¡Nos vemos pronto!"
             : "¡Listo! Te avisamos cuando la guía esté disponible."
         );
-        navigate("/registro-confirmado-newsletter");
+        navigate("/registro-confirmado-newsletter?from=ruta");
       } else {
         throw new Error(data?.error ?? "Algo salió mal");
       }

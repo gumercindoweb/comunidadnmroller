@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -16,6 +16,8 @@ const beneficios = [
 
 const RegistroConfirmadoNewsletter = () => {
   const [videoOpen, setVideoOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const fromRuta = searchParams.get("from") === "ruta";
   return (
     <>
       <Helmet>
@@ -39,16 +41,34 @@ const RegistroConfirmadoNewsletter = () => {
             <h1 className="font-display italic uppercase leading-[0.95] text-4xl md:text-6xl font-black mb-8">
               ¡Ya estás en el camino!
             </h1>
-            <p className="font-bold text-lg md:text-xl mb-4">
-              Acabás de dar tu primer paso de compromiso.
-            </p>
-            <p className="text-base md:text-lg leading-relaxed mb-6 text-primary-foreground/95">
-              A partir de ahora vas a recibir correos que te acompañan, motivan y te muestran que{" "}
-              <strong>sí podés</strong>.
-            </p>
-            <p className="font-bold text-base md:text-lg">
-              Te esperamos. Desde cero. Con vos.
-            </p>
+            {fromRuta ? (
+              <>
+                <p className="font-bold text-lg md:text-xl mb-4">
+                  La guía completa + Bitácora están en preparación.
+                </p>
+                <p className="text-base md:text-lg leading-relaxed mb-6 text-primary-foreground/95">
+                  En cuanto esté lista, sos el primero en recibirla —{" "}
+                  <strong>sin costo, directamente en tu mail</strong>. Mientras tanto, vas a recibir
+                  contenido que te acompaña y te motiva en el camino.
+                </p>
+                <p className="font-bold text-base md:text-lg">
+                  Tu ruta empieza ahora.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-bold text-lg md:text-xl mb-4">
+                  Acabás de dar tu primer paso de compromiso.
+                </p>
+                <p className="text-base md:text-lg leading-relaxed mb-6 text-primary-foreground/95">
+                  A partir de ahora vas a recibir correos que te acompañan, motivan y te muestran que{" "}
+                  <strong>sí podés</strong>.
+                </p>
+                <p className="font-bold text-base md:text-lg">
+                  Te esperamos. Desde cero. Con vos.
+                </p>
+              </>
+            )}
           </div>
 
           {/* Wave inferior */}
