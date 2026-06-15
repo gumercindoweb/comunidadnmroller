@@ -95,8 +95,7 @@ const Footer = () => {
             <ul className="space-y-2 text-foreground/60 text-sm">
               <li><Link to="/exclusivo-de-socios-sportclub" className={linkCls}>Beneficio Socios SportClub</Link></li>
               <li>
-                {/* TODO: crear página /alquiler-recreativo */}
-                <a href="#" onClick={noop} className={linkCls}>Alquiler recreativo (Fly Free)</a>
+                <a href="https://www.alquilerdepatines.com" target="_blank" rel="noopener noreferrer" className={linkCls}>Alquiler recreativo (Fly Free)</a>
               </li>
               <li>
                 <a href={FLY_FREE_KIT_URL} target="_blank" rel="noopener noreferrer" className={linkCls}>
