@@ -121,12 +121,15 @@ const Footer = () => {
                 <a href="#" onClick={noop} className={linkCls}>Ruta de aprendizaje</a>
               </li>
               <li>
-                {/* TODO: crear página /tutoriales */}
-                <a href="#" onClick={noop} className={linkCls}>Tutoriales</a>
+                <Link to="/tutoriales-de-patinaje" className={linkCls}>Tutoriales</Link>
               </li>
               <li>
-                {/* TODO: crear página /ayuda */}
-                <a href="#" onClick={noop} className={linkCls}>Soporte y ayuda</a>
+                <a
+                  href="https://wa.me/5491165920600?text=Hola%21+Te+escribo+desde+el+sitio+web+de+Comunidad+NM+Roller.+Necesito+ayuda+%F0%9F%9B%BC"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkCls}
+                >Soporte y ayuda</a>
               </li>
             </ul>
           </div>
