@@ -37,16 +37,20 @@ const MasterclassFooterBanner = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 animate-in slide-in-from-bottom duration-300">
-      <div className="bg-card border-t border-primary/30 shadow-[0_-4px_24px_rgba(0,0,0,0.3)]">
+      <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+      <div className="bg-gradient-to-r from-[#1f0505] via-[#160303] to-card border-t border-primary/40 shadow-[0_-12px_40px_hsl(var(--primary)/0.45)]">
         <div className="container mx-auto px-4 py-3 md:py-4 flex items-center gap-3">
 
           {/* Badge (solo desktop) */}
-          <div className="hidden md:inline-flex items-center gap-1.5 bg-primary/15 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-primary shrink-0">
+          <div className="hidden md:inline-flex items-center gap-1.5 bg-primary px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-primary-foreground shrink-0">
             <Sparkles className="w-2.5 h-2.5" /> Evento
           </div>
 
           {/* Info */}
           <div className="flex-1 min-w-0">
+            <p className="text-[9px] font-black uppercase tracking-[0.18em] text-primary leading-none mb-0.5">
+              Patinaje al máximo
+            </p>
             <p className="font-black italic text-foreground text-sm md:text-base leading-tight truncate">
               Masterclass de Patinaje
             </p>
@@ -72,7 +76,7 @@ const MasterclassFooterBanner = () => {
           <Link
             to={`/masterclass-de-patinaje/${mc.slug}`}
             onClick={cerrar}
-            className="shrink-0 inline-flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground px-3 md:px-5 py-2 md:py-2.5 font-bold uppercase tracking-[0.1em] text-[11px] md:text-xs transition-all rounded-full shadow-sm hover:shadow-primary/30 hover:shadow-md"
+            className="shrink-0 inline-flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground px-3 md:px-5 py-2 md:py-2.5 font-bold uppercase tracking-[0.1em] text-[11px] md:text-xs transition-all rounded-full shadow-sm hover:shadow-primary/30 hover:shadow-md hover:shadow-[0_0_16px_hsl(var(--primary)/0.5)]"
           >
             <span className="hidden sm:inline">Quiero sumarme</span>
             <span className="sm:hidden">Sumarme</span>
