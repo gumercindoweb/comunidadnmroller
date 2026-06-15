@@ -210,11 +210,31 @@ const SECCIONES: FaqSection[] = [
     items: [
       {
         q: "¿Qué es la Masterclass?",
-        a: "Es un taller intensivo de un día diseñado para patinadores que ya tienen base y quieren dar un salto de nivel. Con profes especializados, correcciones en tiempo real y un grupo que te empuja.",
+        a: (
+          <>
+            Es un <strong className="text-foreground">encuentro mensual</strong> donde se reúne
+            toda la comunidad: alumnos activos y nuevos miembros, con el propósito de desafiarse y
+            conocerse. Ese día podés elegir{" "}
+            <strong className="text-foreground">2 clases a elección</strong> entre las disciplinas
+            disponibles: nivel inicial, principiante, slalom, saltos/rampas y frenadas. El
+            encuentro cierra con una <strong className="text-foreground">salida urbana</strong> o
+            una <strong className="text-foreground">ranchada</strong> — un momento para tomar mate,
+            comer y charlar, ideal para integrarse al grupo y conocer personas.
+          </>
+        ),
       },
       {
         q: "¿Qué nivel necesito para ir a la Masterclass?",
-        a: "Se recomienda tener al menos experiencia de nivel principiante-intermedio: que puedas frenarte, hacer curvas y moverte con cierta confianza sobre los rollers.",
+        a: (
+          <>
+            <strong className="text-foreground">Ninguno.</strong> La Masterclass tiene clases para
+            todos los niveles, incluyendo personas que arrancan desde cero. Cada disciplina está
+            pensada para que puedas sumarte independientemente de tu experiencia previa.{" "}
+            <Link to="/masterclass-de-patinaje" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              Ver detalles de la próxima edición →
+            </Link>
+          </>
+        ),
       },
       {
         q: "¿Cuándo es la próxima Masterclass?",
