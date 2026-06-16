@@ -90,14 +90,22 @@ const HorariosSportclub = ({
         Grilla horaria del beneficio de{" "}
         <span className="text-[#F5B800]">clases bonificadas</span>
       </h3>
+      <div className="flex flex-wrap items-baseline gap-3 mb-3">
+        <span className="font-display italic uppercase font-black text-xl md:text-2xl line-through text-foreground/30">
+          $35.000 la clase
+        </span>
+        <span className="font-display italic uppercase font-black text-xl md:text-2xl text-[#F5B800]">
+          Para socios: $0
+        </span>
+      </div>
       <p className="text-foreground/70 text-sm mb-8 max-w-2xl">
-        Cada clase cuesta <strong className="text-foreground">$35.000</strong> al público general.
-        Como socio SportClub, la tomás <strong className="text-[#F5B800]">incluida en tu membresía, sin pagar de más</strong>.
+        Como socio con plan habilitado, todas las clases de nivel inicial y principiante
+        están <strong className="text-foreground">incluidas en tu membresía</strong>.
         Las sedes con{" "}
         <span className="inline-flex items-center gap-1 text-secondary font-bold uppercase text-[11px]">
           <Package className="w-3 h-3" /> Alquiler
         </span>{" "}
-        ofrecen equipo con 50% OFF para socios — ideal si todavía no tenés el tuyo.
+        ofrecen equipo con <strong>50% OFF</strong> para socios.
       </p>
 
       {/* Filtros: día + perfil */}

@@ -250,18 +250,17 @@ const ExclusivoSociosSportclub = () => {
               <div className="inline-flex items-center gap-2 bg-[#F5B800] text-[#111] px-4 py-1.5 mb-6 text-[11px] md:text-xs font-black uppercase tracking-[0.18em]">
                 <Sparkles className="w-3.5 h-3.5" /> Beneficio exclusivo · Socios SportClub
               </div>
-              <h1 className="font-display italic uppercase leading-tight text-2xl md:text-4xl lg:text-5xl font-black mb-3">
-                Patinaje ilimitado<br />
-                <span className="line-through text-foreground/30 text-xl md:text-3xl lg:text-4xl">
-                  $35.000 la clase
-                </span><br />
-                <span className="text-primary">Para socios: $0</span>
+              <h1 className="font-display italic uppercase leading-[0.95] text-2xl md:text-4xl lg:text-5xl font-black mb-8">
+                Aprendé a patinar<br />
+                en poco tiempo<br />
+                <span className="text-primary">y sin costo extra</span>
               </h1>
-              <p className="text-base text-foreground/80 leading-relaxed mb-8 max-w-xl">
-                Con plan <strong>Plus, Total, Elite o Flex</strong>: clases de nivel
-                inicial y principiante sin límite de asistencia, con instructores NM Roller.
-                Más <strong className="text-[#F5B800]">50% de descuento en alquiler de equipo</strong>.{" "}
-                <strong className="text-primary">Cupos limitados.</strong>
+              <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8 max-w-xl">
+                Si tenés un plan <strong>Plus, Total, Elite o Flex</strong>, accedés a nuestras
+                clases de patinaje de <strong>nivel inicial y principiante</strong> en sedes
+                seleccionadas, con instructores de la comunidad NM Roller.{" "}
+                <strong className="text-primary">Cupos limitados</strong> — registrate y asegurá
+                tu lugar.
               </p>
 
               {/* Pasos */}
