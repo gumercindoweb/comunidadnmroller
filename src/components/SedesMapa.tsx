@@ -253,9 +253,9 @@ const SedesMapa = ({
           </div>
         )}
 
-        {/* Floating hover card */}
+        {/* Floating hover card — solo desktop (md+). En mobile solo se muestra el dialog. */}
         {hoveredSede && (
-          <div className="absolute top-4 right-4 w-72 bg-card border border-primary/40 shadow-2xl shadow-primary/20 p-4 pointer-events-auto animate-fade-up z-[400]">
+          <div className="hidden md:block absolute top-4 right-4 w-72 bg-card border border-primary/40 shadow-2xl shadow-primary/20 p-4 pointer-events-auto animate-fade-up z-[400]">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div>
                 <h4 className="text-foreground font-black italic text-base leading-tight">
