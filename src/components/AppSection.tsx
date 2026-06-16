@@ -55,14 +55,14 @@ const AppSection = () => {
               </h2>
 
               {/* Feature grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-10">
                 {features.map((feat) => (
-                  <div key={feat.title} className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2">
-                    <feat.icon className="w-8 h-8 text-primary-foreground" strokeWidth={1.5} />
-                    <h3 className="text-sm font-black italic uppercase tracking-wider text-primary-foreground">
+                  <div key={feat.title} className="flex flex-col items-center lg:items-start text-center lg:text-left gap-1.5 sm:gap-2">
+                    <feat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-foreground" strokeWidth={1.5} />
+                    <h3 className="text-xs sm:text-sm font-black italic uppercase tracking-wider text-primary-foreground leading-tight">
                       {feat.title}
                     </h3>
-                    <p className="text-xs text-primary-foreground/70 italic leading-relaxed">
+                    <p className="hidden sm:block text-xs text-primary-foreground/70 italic leading-relaxed">
                       {feat.description}
                     </p>
                   </div>
