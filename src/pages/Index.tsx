@@ -51,8 +51,8 @@ const Index = () => {
       <PricingSection />
       <HorariosSection />
       <AppSection />
-      <Testimonials />
       <VideoSocialProof />
+      <Testimonials />
       <NewsletterBannerHome />
       <Footer />
     </div>
