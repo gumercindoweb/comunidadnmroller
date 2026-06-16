@@ -37,6 +37,41 @@ Cuando el usuario pida algo, **buscá siempre el camino más fácil / menos comp
 - **Mapa:** Leaflet + tiles oscuros de CARTO (`SedesMapa.tsx`). Sin Google Maps, sin API key, sin billing.
 - **Pagos:** links de Mercado Pago por plan en `PricingSection.tsx`; al volver, el usuario sube comprobante en `/pago-confirmado`.
 - **Dev server:** Vite en puerto 8080 (o `PORT` si el preview lo asigna).
+- **ScrollToTop:** ya existe en `src/components/ScrollToTop.tsx` y está montado en `App.tsx`. Hace `window.scrollTo(0,0)` en cada cambio de ruta. No recrear.
+
+## ⚠️ Escala de fuentes personalizada (CRÍTICO para mobile)
+
+Este proyecto **sobreescribe** las clases de tamaño de Tailwind. Los valores reales son:
+
+| Clase Tailwind | Tamaño real en este proyecto |
+|---|---|
+| `text-xl` | 28 px |
+| `text-2xl` | 36 px |
+| `text-3xl` | 48 px |
+| `text-4xl` | 64 px |
+| `text-5xl` | ~80 px |
+
+**Regla práctica para mobile:** usar `text-2xl` (36px) para h1/h2 en mobile. `text-3xl` (48px) es demasiado grande en 375px. Ver `tailwind.config.ts` si hay dudas.
+
+## Paleta de colores
+
+| Token | Valor | Uso |
+|---|---|---|
+| `primary` / `#D01C1F` | Rojo NM | CTAs, acentos, badges |
+| `#F5B800` | Dorado SportClub | Elementos de alianza SportClub |
+| `background` / `#111` | Negro base | Fondo general |
+| `card` / `#1A1A1A` | Gris oscuro | Cards, secciones alternadas |
+
+## Mapa de componentes clave
+
+| Componente | Ruta | Qué hace |
+|---|---|---|
+| `SedesMapa` | `src/components/SedesMapa.tsx` | Mapa Leaflet + sidebar + dialog de sede |
+| `HorariosSportclub` | `src/components/sportclub/HorariosSportclub.tsx` | Grilla horaria del beneficio SportClub |
+| `MasterclassFooterBanner` | `src/components/MasterclassFooterBanner.tsx` | Banner fijo inferior con CTA masterclass |
+| `NewsletterBannerHome` | `src/components/NewsletterBannerHome.tsx` | Bloque newsletter embebido en Home |
+| `ScrollToTop` | `src/components/ScrollToTop.tsx` | Reset de scroll en cambio de ruta |
+| `Index` | `src/pages/Index.tsx` | Orden de secciones en Home — editar acá para reordenar bloques |
 
 ---
 
@@ -85,6 +120,21 @@ Cuando el usuario pida algo, **buscá siempre el camino más fácil / menos comp
 
 ### 10. Screenshots del preview salen en **negro** (glitch)
 - Verificar por DOM con `preview_eval` (leer textos/atributos) en vez de pelear con el screenshot.
+
+### 12. **H1/H2 demasiado grande en mobile** — la escala de fuentes no es la estándar de Tailwind
+- `text-3xl` en este proyecto = **48px**, no 30px. En un viewport de 375px, 48px es enorme.
+- **Fix:** usar `text-2xl` (36px) para titulares en mobile. Patrón: `text-2xl sm:text-3xl md:text-5xl`.
+- Ver tabla de escala de fuentes en la sección "Notas técnicas" de este archivo.
+
+### 13. **Overflow horizontal en mobile** por `whitespace-nowrap` dentro de un grid
+- **Síntoma:** el contenido se sale del viewport (scroll horizontal), aunque la sección tenga `overflow-hidden`.
+- **Causa:** `Button` de shadcn/ui tiene `whitespace-nowrap` en sus estilos base → el botón exige su ancho de texto completo → expande la columna del grid → overflow.
+- **Fix:** agregar `min-w-0` al item del grid que contiene el botón, y `whitespace-normal` al `Button`. Verificar con `document.documentElement.scrollWidth` en la consola.
+
+### 14. **Hover card del mapa aparece junto al dialog en mobile** (doble popup)
+- **Síntoma:** al tocar un pin en mobile se abren simultáneamente la hover card flotante Y el `SedeDetalleDialog`.
+- **Causa:** en touch, `touchstart` dispara `mouseover` (abre la card) y `click` (abre el dialog) en el mismo gesto.
+- **Fix ya aplicado:** `hidden md:block` en el wrapper de la hover card en `SedesMapa.tsx`. En mobile solo se muestra el dialog (que tiene botón X para cerrar).
 
 ### 11. **CDN de Hostinger** rompe el dominio (404 en algunos edges, SSL error, cambia la IP)
 - **Síntoma:** al activar el CDN de Hostinger, el dominio cambia a una **IP de CDN** (ej. `104.160.67.72`, headers "pelados" sin `server`), que puede **cachear los 404 viejos** y servirlos en algunos edges (anda en una red/celu y en otra no). Al **desactivarlo**, queda en limbo de propagación con **error SSL** ("conexión no es privada") hasta que el DNS vuelva al origen (**24–48 hs**, normalmente menos).
