@@ -22,6 +22,7 @@ import TutorialesPatinaje from "./pages/TutorialesPatinaje.tsx";
 import PreguntasFrecuentes from "./pages/PreguntasFrecuentes.tsx";
 import RutaDeAprendizaje from "./pages/RutaDeAprendizaje.tsx";
 import WhatsappFloat from "./components/WhatsappFloat.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/newsletter-desde-cero" element={<NewsletterDesdeCero />} />
