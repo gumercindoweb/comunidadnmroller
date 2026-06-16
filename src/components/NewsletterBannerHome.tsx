@@ -47,9 +47,9 @@ const NewsletterBannerHome = () => {
   };
 
   return (
-    <section className="py-20 border-t border-border bg-card">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+    <section className="py-20 md:py-28 border-t border-border bg-card">
+      <div className="container mx-auto px-6 lg:px-16 max-w-7xl">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <div className="inline-flex items-center gap-2 mb-4">
               <Mail className="w-4 h-4 text-primary" />
@@ -57,7 +57,7 @@ const NewsletterBannerHome = () => {
                 Newsletter Desde Cero
               </span>
             </div>
-            <h2 className="font-black italic text-3xl md:text-4xl text-foreground leading-tight mb-4">
+            <h2 className="font-black italic text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
               ¿Todavía no estás listo para sumarte?
             </h2>
             <p className="text-foreground/60 text-base leading-relaxed mb-4">
