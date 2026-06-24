@@ -106,6 +106,9 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
   ],
 };
 
+// Orden ascendente por hora dentro de cada día
+Object.values(horarios).forEach((list) => list.sort((a, b) => a.hora.localeCompare(b.hora)));
+
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 // ── Opciones de filtro ──

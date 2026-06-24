@@ -77,6 +77,9 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
   ],
 };
 
+// Orden ascendente por hora dentro de cada día
+Object.values(HORARIOS_CLASES).forEach((list) => list.sort((a, b) => a.hora.localeCompare(b.hora)));
+
 const BADGE_STYLES: Record<string, string> = {
   [NIVEL_INICIAL]: "rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/70 font-extrabold",
   [NIVEL_PRINCIP_INTER]: "rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/70 font-extrabold",

@@ -198,6 +198,15 @@ export const sedes: Sede[] = [
 
 export const ordenDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
+// Ordena las clases de cada sede por día (Lunes→Domingo) y dentro del día por hora ascendente.
+sedes.forEach((s) => {
+  s.clases.sort((a, b) => {
+    const d = ordenDias.indexOf(a.dia) - ordenDias.indexOf(b.dia);
+    if (d !== 0) return d;
+    return a.hora.localeCompare(b.hora);
+  });
+});
+
 export const disciplinaColor: Record<string, string> = {
   Slalom: "rounded-none bg-primary/15 text-primary border border-primary/50",
   Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
