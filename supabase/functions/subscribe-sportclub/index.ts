@@ -32,6 +32,7 @@ const BodySchema = z.object({
   sede: z.string().trim().min(1).max(120),
   plan: z.string().trim().min(1).max(60),
   nivel: z.string().trim().min(1).max(60),
+  alquiler: z.string().trim().max(80).optional(),
   // Honeypot: bots lo completan, humanos no. Debe ir vacío.
   website: z.string().max(0).optional().or(z.literal('')),
 })
@@ -60,7 +61,7 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { name, email, phone, sede, plan, nivel, website } = parsed.data
+    const { name, email, phone, sede, plan, nivel, alquiler, website } = parsed.data
 
     // Honeypot disparado → aceptar en silencio sin reenviar.
     if (website && website.length > 0) {
@@ -120,7 +121,7 @@ Deno.serve(async (req) => {
       const { error: insErr } = await admin.from('leads').insert({
         origen: 'sportclub',
         name, email, phone,
-        payload: { plan, sede, nivel },
+        payload: { plan, sede, nivel, alquiler },
         getresponse_ok: grOk,
         getresponse_status: grStatus,
         getresponse_error: grError,
@@ -143,6 +144,7 @@ Deno.serve(async (req) => {
         `*Plan:* ${plan}`,
         `*Sede:* ${sede}`,
         `*Nivel:* ${nivel}`,
+        `*Alquiler:* ${alquiler ?? 'No indicado'}`,
       ].join('\n')
       await notifySlack({ channel: 'registro-socios-sportclub', text: slackText, logTag: '[sportclub]' })
 

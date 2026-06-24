@@ -191,7 +191,7 @@ const ExclusivoSociosSportclub = () => {
       // El backend (subscribe-sportclub) recibe solo los campos que ya esperaba.
       // alquiler se usa para pre-llenar el WhatsApp en la confirmación.
       const { data, error } = await supabase.functions.invoke("subscribe-sportclub", {
-        body: { name, email, phone, plan, sede, nivel, website },
+        body: { name, email, phone, plan, sede, nivel, alquiler, website },
       });
       if (error) throw error;
       if (data?.success) {
