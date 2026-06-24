@@ -16,6 +16,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
+import AlquilerHorariosGrid from "@/components/alquiler/AlquilerHorariosGrid";
 import PricingAlquilerSection from "@/components/alquiler/PricingAlquilerSection";
 import { Button } from "@/components/ui/button";
 import {
@@ -272,6 +273,20 @@ const ClasesMasAlquiler = () => {
             </div>
 
             <AlquilerSedesGrid />
+
+            {/* Grilla horaria de sedes con alquiler */}
+            <div className="mt-14">
+              <div className="text-center mb-6">
+                <p className="text-primary font-bold text-xs tracking-[0.18em] uppercase mb-1">
+                  Horarios
+                </p>
+                <h3 className="text-2xl md:text-3xl font-black italic tracking-tight text-foreground">
+                  Clases disponibles en estas sedes
+                </h3>
+              </div>
+              <AlquilerHorariosGrid />
+            </div>
+
 
 
             <div className="text-center mt-10">

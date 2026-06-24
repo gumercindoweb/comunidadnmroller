@@ -325,7 +325,7 @@ const TutorialesPatinaje = () => {
               ? TUTORIALES.length
               : TUTORIALES.filter((t) => t.categoria === cat).length;
           const activeStyle =
-            cat !== "Todos" && cat !== "Todos"
+            cat !== "Todos"
               ? CATEGORIA_ACTIVE[cat as Categoria]
               : "bg-foreground text-background border-foreground";
 
