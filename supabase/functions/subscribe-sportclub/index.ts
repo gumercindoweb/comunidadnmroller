@@ -70,7 +70,15 @@ Deno.serve(async (req) => {
       })
     }
 
-    const note = `Socio SportClub · Plan: ${plan} · Sede: ${sede} · Nivel: ${nivel} · Tel: ${phone}`
+    // Mapeo del valor crudo de alquiler al label legible (también usado más abajo en Slack)
+    const ALQUILER_LABELS: Record<string, string> = {
+      si: 'Sí, voy a necesitar alquilar equipo',
+      no: 'No, tengo mi propio equipo',
+      considerando: 'Estoy pensando en comprar mi propio equipo',
+    }
+    const alquilerLabel = alquiler ? (ALQUILER_LABELS[alquiler] ?? alquiler) : 'No indicado'
+
+    const note = `Socio SportClub · Plan: ${plan} · Sede: ${sede} · Nivel: ${nivel} · Tel: ${phone} · Alquiler: ${alquilerLabel}`
 
     // --- GetResponse (no bloqueante: si falla, igual guardamos el lead) ---
     let grOk = false
@@ -134,13 +142,10 @@ Deno.serve(async (req) => {
 
     // Éxito si GetResponse anduvo o si guardamos el respaldo (no perdemos el lead)
     if (grOk || savedBackup) {
-      // Mapeo del valor crudo de alquiler al label legible que ve el usuario en el form
-      const ALQUILER_LABELS: Record<string, string> = {
-        si: 'Sí, voy a necesitar alquilar equipo',
-        no: 'No, tengo mi propio equipo',
-        considerando: 'Estoy pensando en comprar mi propio equipo',
-      }
-      const alquilerLabel = alquiler ? (ALQUILER_LABELS[alquiler] ?? alquiler) : 'No indicado'
+      console.log('[sportclub] payload recibido', {
+        plan, sede, nivel, alquiler: alquiler ?? null,
+      })
+
 
       console.log('[sportclub] payload recibido', {
         plan, sede, nivel, alquiler: alquiler ?? null,
