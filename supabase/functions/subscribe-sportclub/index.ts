@@ -156,7 +156,7 @@ Deno.serve(async (req) => {
         `*Plan:* ${plan}`,
         `*Sede:* ${sede}`,
         `*Nivel:* ${nivel}`,
-        `*Alquiler:* ${alquiler ?? 'No indicado'}`,
+        `*Alquiler:* ${alquilerLabel}`,
       ].join('\n')
       await notifySlack({ channel: 'registro-socios-sportclub', text: slackText, logTag: '[sportclub]' })
 
