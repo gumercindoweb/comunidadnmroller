@@ -146,11 +146,6 @@ Deno.serve(async (req) => {
         plan, sede, nivel, alquiler: alquiler ?? null,
       })
 
-
-      console.log('[sportclub] payload recibido', {
-        plan, sede, nivel, alquiler: alquiler ?? null,
-      })
-
       // --- Slack (no bloqueante) ---
       const slackText = [
         `*💪 Nuevo socio SportClub*`,
