@@ -77,6 +77,22 @@ export async function notifySlack({ channel, text, logTag = '[slack]' }: NotifyS
   const webhookUrl = secretName ? Deno.env.get(secretName) : null
   if (!webhookUrl) {
     try {
+      const directChannel = normalizedChannel.startsWith('#') ? normalizedChannel : `#${normalizedChannel}`
+      try {
+        await slackGatewayFetch('chat.postMessage', {
+          body: {
+            channel: directChannel,
+            text,
+            username: 'Bot NM Roller',
+            icon_emoji: ':roller_skate:',
+          },
+        })
+        console.log(`${logTag} Slack notificado OK en ${directChannel}`)
+        return true
+      } catch (directError) {
+        console.warn(`${logTag} Slack directo por nombre falló; intentando resolver canal:`, directError)
+      }
+
       const channelId = await findChannelId(normalizedChannel)
       if (!channelId) {
         console.warn(`${logTag} No se encontró el canal #${normalizedChannel}`)
