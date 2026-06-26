@@ -1,29 +1,18 @@
-## Diagnóstico
+Voy a resolverlo por el camino más simple y robusto:
 
-En tu captura de Slack el mensaje termina en **Nivel:** y no aparece la línea de **Alquiler**. Sin embargo el código actual en el repo (`supabase/functions/subscribe-sportclub/index.ts`) **sí** incluye `*Alquiler:* ${alquiler ?? 'No indicado'}` en el texto que manda a Slack, y el form (`ExclusivoSociosSportclub.tsx`) ya envía ese campo.
+1. **Corregir la fuente del mensaje de Slack**
+   - Ajustar `subscribe-sportclub` para que el mensaje de Slack incluya siempre una línea `Alquiler`, incluso si el valor llega con otro nombre/capitalización o vacío.
+   - Normalizar valores posibles (`si`, `sí`, `no`, `considerando`, textos legibles) a una etiqueta clara.
 
-Conclusión: la versión actualmente desplegada de la Edge Function es **más vieja** que la del repo (todavía no tiene la línea de Alquiler). Hay que forzar un redeploy. De paso, mejoramos un par de cosas para que el dato se vea claro en Slack.
+2. **Evitar que dependa de automatizaciones externas**
+   - Mantener el envío directo desde la Edge Function al canal `registro-socios-sportclub` como fuente confiable.
+   - Incluir todos los campos del formulario en ese mensaje: nombre, email, teléfono, plan, sede, nivel/perfil y alquiler.
 
-## Cambios
+3. **Agregar trazabilidad sin exponer datos sensibles**
+   - Dejar un log interno compacto indicando si llegó `alquiler` y qué valor se mandó a Slack, para poder verificar futuros envíos.
 
-### 1. `supabase/functions/subscribe-sportclub/index.ts`
-- Mapear el valor crudo (`si` / `no` / `considerando`) al label legible que ve el usuario en el form, para que en Slack no aparezca solo "si":
-  - `si` → `Sí, voy a necesitar alquilar equipo`
-  - `no` → `No, tengo mi propio equipo`
-  - `considerando` → `Estoy pensando en comprar mi propio equipo`
-  - vacío → `No indicado`
-- Mantener el resto del bloque (`Nombre`, `Email`, `Tel`, `Plan`, `Sede`, `Nivel`, `Alquiler`).
-- Agregar un `console.log` breve del payload recibido (sin datos sensibles completos) para poder diagnosticar en logs si vuelve a fallar.
+4. **Deploy y validación**
+   - Redeployar `subscribe-sportclub`.
+   - Probar la función con un envío de prueba que incluya `alquiler` y revisar que Slack reciba la línea `Alquiler` completa.
 
-### 2. Redeploy de `subscribe-sportclub`
-- Forzar redeploy para que la versión activa sea la del repo.
-
-### 3. Verificación
-- Revisar los logs de la Edge Function tras un envío real para confirmar que llega `alquiler` desde el front.
-- Confirmar visualmente en `#registro-socios-sportclub` que ahora aparece la línea **Alquiler:** con el label completo.
-
-## Lo que NO se toca
-
-- El form de la página de Socios SportClub (ya envía el campo bien).
-- GetResponse, confirmación, WhatsApp pre-llenado.
-- Otras Edge Functions / canales de Slack.
+**Nota:** El código actual ya intenta enviar `Alquiler`, pero el síntoma de Slack muestra que producción o el flujo real todavía no lo está incorporando. El fix será hacerlo tolerante a variantes y validar contra la función desplegada.
