@@ -33,9 +33,38 @@ const BodySchema = z.object({
   plan: z.string().trim().min(1).max(60),
   nivel: z.string().trim().min(1).max(60),
   alquiler: z.string().trim().max(80).optional(),
+  rental: z.string().trim().max(80).optional(),
+  necesitaAlquiler: z.string().trim().max(80).optional(),
+  equipo: z.string().trim().max(80).optional(),
   // Honeypot: bots lo completan, humanos no. Debe ir vacío.
   website: z.string().max(0).optional().or(z.literal('')),
 })
+
+function normalizeText(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
+function getAlquilerLabel(rawValue?: string | null) {
+  const cleanValue = rawValue?.trim()
+  if (!cleanValue) return 'No indicado'
+
+  const normalized = normalizeText(cleanValue)
+  if (['si', 's', 'yes', 'true'].includes(normalized) || normalized.includes('necesit')) {
+    return 'Sí, voy a necesitar alquilar equipo'
+  }
+  if (['no', 'n', 'false'].includes(normalized) || normalized.includes('propio')) {
+    return 'No, tengo mi propio equipo'
+  }
+  if (normalized.includes('consider') || normalized.includes('pensando') || normalized.includes('comprar')) {
+    return 'Estoy pensando en comprar mi propio equipo'
+  }
+
+  return cleanValue
+}
 
 Deno.serve(async (req) => {
   const corsHeaders = buildCors(req.headers.get('origin'))
@@ -61,7 +90,8 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { name, email, phone, sede, plan, nivel, alquiler, website } = parsed.data
+    const { name, email, phone, sede, plan, nivel, website } = parsed.data
+    const alquiler = parsed.data.alquiler ?? parsed.data.rental ?? parsed.data.necesitaAlquiler ?? parsed.data.equipo
 
     // Honeypot disparado → aceptar en silencio sin reenviar.
     if (website && website.length > 0) {
@@ -70,13 +100,7 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Mapeo del valor crudo de alquiler al label legible (también usado más abajo en Slack)
-    const ALQUILER_LABELS: Record<string, string> = {
-      si: 'Sí, voy a necesitar alquilar equipo',
-      no: 'No, tengo mi propio equipo',
-      considerando: 'Estoy pensando en comprar mi propio equipo',
-    }
-    const alquilerLabel = alquiler ? (ALQUILER_LABELS[alquiler] ?? alquiler) : 'No indicado'
+    const alquilerLabel = getAlquilerLabel(alquiler)
 
     const note = `Socio SportClub · Plan: ${plan} · Sede: ${sede} · Nivel: ${nivel} · Tel: ${phone} · Alquiler: ${alquilerLabel}`
 
@@ -143,7 +167,7 @@ Deno.serve(async (req) => {
     // Éxito si GetResponse anduvo o si guardamos el respaldo (no perdemos el lead)
     if (grOk || savedBackup) {
       console.log('[sportclub] payload recibido', {
-        plan, sede, nivel, alquiler: alquiler ?? null,
+        plan, sede, nivel, alquiler: alquiler ?? null, alquiler_label: alquilerLabel,
       })
 
       // --- Slack (no bloqueante) ---
