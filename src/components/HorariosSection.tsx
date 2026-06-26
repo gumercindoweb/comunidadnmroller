@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import AlquilerSedesGrid from "@/components/alquiler/AlquilerSedesGrid";
-import AlquilerHorariosGrid from "@/components/alquiler/AlquilerHorariosGrid";
 import { NIVEL_UNIFICADO, NIVEL_INICIAL, NIVEL_PRINCIP_INTER, expandirNivel } from "@/data/sedes";
 import SugerenciaTrigger from "@/components/sugerencias/SugerenciaTrigger";
 // ── Tipos ──
@@ -545,20 +544,6 @@ const HorariosSection = () => {
 
             {/* Alquiler cards */}
             <AlquilerSedesGrid />
-
-            {/* Grilla horaria de sedes con alquiler */}
-            <div className="mt-12">
-              <div className="text-center mb-6">
-                <p className="text-primary font-bold text-xs tracking-widest uppercase mb-1">
-                  Horarios
-                </p>
-                <h4 className="text-xl md:text-2xl font-black italic tracking-tight text-foreground">
-                  Clases disponibles en sedes con alquiler
-                </h4>
-              </div>
-              <AlquilerHorariosGrid />
-            </div>
-
 
             {/* Nota + CTA */}
             <div className="mt-8 bg-muted rounded-xl p-5 max-w-2xl mx-auto text-center">
