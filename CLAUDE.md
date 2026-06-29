@@ -17,7 +17,9 @@ Cuando el usuario pida algo, **buscá siempre el camino más fácil / menos comp
 
 - **Qué es:** landing/sitio de NM Roller (escuela de patinaje, Buenos Aires). React + Vite + TypeScript + Tailwind + shadcn/ui.
 - **Origen:** generado en **Lovable**, sincronizado con GitHub (`git@github.com:gumercindoweb/comunidadnmroller.git`).
-- **Backend:** Supabase (Edge Functions `subscribe-newsletter` y `notify-comprobante`) + GetResponse (secuencias de email). Lovable administra ese Supabase; las Edge Functions se redeployan desde Lovable.
+- **Backend:** Supabase (Edge Functions en `supabase/functions/`: `subscribe-newsletter`, `notify-comprobante`, `subscribe-sportclub`, `subscribe-clase-gratis`, `subscribe-lista-espera`, `submit-sugerencia`) + GetResponse (secuencias de email) + Slack (notificaciones, ver `_shared/slack.ts`).
+- ⚠️ **OJO: hay DOS proyectos Supabase (no confundir).** Producción usa **`bosutrnpmpjxylcgjmbt`** (tiene la base de datos real: tabla `leads`, etc.) — es a donde apunta el `.env` y el frontend en Hostinger. Lovable, en cambio, deploya las Edge Functions en **`zpeijyutagfqeoatlvdq`** (lo dice `supabase/config.toml`), que está VACÍO de datos. Ver el error recurrente #15 más abajo. **El frontend (`.env`) debe seguir apuntando a `bosutr`; nunca a `zpeij`.**
+- **Deploy de Edge Functions a producción:** por Supabase CLI a `bosutr`, NO desde Lovable (Lovable solo alcanza `zpeij`). Ver error #15.
 
 ## Flujo de trabajo (Git)
 
@@ -141,3 +143,20 @@ Este proyecto **sobreescribe** las clases de tamaño de Tailwind. Los valores re
 - **Diagnóstico:** comparar IPs con `dig +short comunidadnmroller.com`. El **origen real** es `185.249.224.136` / `77.37.85.34` (el de `lp` es otro: `62.72.62.63`). Verificar que el origen está sano sin depender del DNS:
   `curl -sk --resolve comunidadnmroller.com:443:185.249.224.136 https://comunidadnmroller.com/ | grep '<title>'` → debe dar "Escuela #1 de Patinaje…".
 - **Fix:** **mantener el CDN DESACTIVADO** para este sitio (es liviano, no lo necesita) y esperar la propagación DNS al origen. No tocar archivos: el origen ya está bien. Flush DNS local del Mac: `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`.
+
+### 15. Un formulario **manda los datos pero un campo NO llega a Slack/GetResponse** — aunque en la preview de Lovable SÍ funciona
+- **Caso real (jun 2026):** el campo "Alquiler" del form SportClub no aparecía en Slack desde producción, pero sí desde la preview de Lovable. Recompilar y resubir el frontend NO lo arreglaba.
+- **Causa raíz — DOS proyectos Supabase desincronizados:**
+  - Producción (frontend en Hostinger) llama al proyecto **`bosutrnpmpjxylcgjmbt`** → es el del `.env` y el que tiene la **base de datos real** (tabla `leads`, etc.).
+  - Lovable deploya las Edge Functions en **`zpeijyutagfqeoatlvdq`** (lo dice `supabase/config.toml`), que está **vacío de datos**.
+  - Cuando Lovable "redeploya" una función, corrige `zpeij` (la preview funciona) pero **NO toca `bosutr`** (producción sigue con la versión vieja). Por eso un campo nuevo agregado al frontend llega al backend pero la Edge Function vieja lo ignora.
+- **Cómo confirmarlo rápido:**
+  - Qué Supabase usa producción: `curl -s https://comunidadnmroller.com/assets/index-*.js | grep -oE 'https://[a-z]+\.supabase\.co'` (o leer `VITE_SUPABASE_URL` del `.env`).
+  - Qué proyecto deploya Lovable: `project_id` en `supabase/config.toml`.
+  - Si difieren → ese es el problema.
+- **Fix que funcionó — deployar la Edge Function corregida en `bosutr` por Supabase CLI** (NO por Lovable, que solo alcanza `zpeij`):
+  - La CLI local está logueada en la cuenta **`escuelanmroller@gmail.com`**, dueña de `bosutr` (`supabase projects list` lo muestra `linked:true ACTIVE_HEALTHY`).
+  - Comando: `supabase functions deploy <fn> --project-ref bosutrnpmpjxylcgjmbt --no-verify-jwt`
+  - Solo actualiza el **código** de esa función; los secrets (Slack, GetResponse) y la base de datos quedan **intactos**. El `WARNING: Docker is not running` es irrelevante (deploya por API).
+  - ⚠️ **Lo corre el USUARIO en su terminal**, no Claude: el auto-mode de Claude Code bloquea deploys directos a producción, y macOS pide la contraseña del Mac (llavero "Supabase CLI" → "Permitir siempre"). Claude prepara el comando exacto y el usuario lo pega.
+- ❌ **NO "arreglar" esto apuntando el `.env` a `zpeij`**: rompería el guardado de leads de TODOS los formularios, porque `zpeij` no tiene las tablas. Producción debe seguir en `bosutr`.
