@@ -15,6 +15,21 @@ interface Props {
   onExpired?: () => void;
 }
 
+const TZ = "America/Argentina/Buenos_Aires";
+
+// "hasta el jueves 9 de julio a las 12 del mediodía" — derivado de ventaHasta
+// para que el texto nunca quede desactualizado respecto del contador.
+const ventaHastaTexto = (ventaHasta: Date): string => {
+  const fecha = ventaHasta
+    .toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: TZ })
+    .replace(",", "");
+  const hora = Number(ventaHasta.toLocaleString("es-AR", { hour: "numeric", hour12: false, timeZone: TZ }));
+  const minuto = Number(ventaHasta.toLocaleString("es-AR", { minute: "numeric", timeZone: TZ }));
+  if (hora === 23 && minuto >= 59) return `hasta el ${fecha}`; // cierre a fin de día: sin hora
+  if (hora === 12 && minuto === 0) return `hasta el ${fecha} a las 12 del mediodía`;
+  return `hasta el ${fecha} a las ${hora}${minuto ? `:${String(minuto).padStart(2, "0")}` : ""} hs`;
+};
+
 const CountdownBanner = ({ ventaHasta, onExpired }: Props) => {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(null);
   const firedRef = useRef(false);
@@ -65,7 +80,7 @@ const CountdownBanner = ({ ventaHasta, onExpired }: Props) => {
       </div>
 
       <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-2">
-        🎟️ Venta de pases hasta el viernes 26 de junio
+        🎟️ Venta de pases {ventaHastaTexto(ventaHasta)}
       </p>
       <h3 className="text-2xl font-black italic tracking-tight text-foreground mb-1">
         Asegurá tu lugar antes de que se acaben los cupos

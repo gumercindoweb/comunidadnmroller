@@ -21,10 +21,10 @@ export const masterclasses: Masterclass[] = [
     slug: "puerto-madero",
     sede: "Puerto Madero",
     sedeCorta: "Puerto Madero",
-    fechaISO: "2026-07-05T15:00:00-03:00",
-    fechaLabel: "Domingo 5 de Julio",
+    fechaISO: "2026-07-09T15:00:00-03:00",
+    fechaLabel: "Jueves 9 de Julio",
     hora: "15 hs",
-    ventaHasta: "2026-07-03T23:59:59-03:00",
+    ventaHasta: "2026-07-09T12:00:00-03:00",
     direccion: "Juana Manso y Martha Lynch, Puerto Madero",
     mapsUrl: "https://maps.app.goo.gl/QKdHNpXbNSwK9yRh9",
     whatsappUrl: "https://wa.link/7vfiie",
@@ -39,7 +39,7 @@ export const masterclasses: Masterclass[] = [
     sede: "Skatepark Costanera Norte",
     sedeCorta: "Costanera Norte",
     fechaISO: "2026-07-26T15:00:00-03:00",
-    fechaLabel: "Sábado 26 de Julio",
+    fechaLabel: "Domingo 26 de Julio",
     hora: "15 hs",
     ventaHasta: "2026-07-24T23:59:59-03:00",
     direccion: "Av. Costanera Rafael Obligado, Palermo",
@@ -60,8 +60,11 @@ export const getMasterclass = (slug?: string): Masterclass | undefined => {
 
 export const getProximaMasterclass = (): Masterclass => {
   const ahora = Date.now();
-  const futuras = masterclasses
-    .filter((m) => new Date(m.fechaISO).getTime() >= ahora)
+  // Una masterclass se promociona hasta que cierra su venta (ventaHasta).
+  // Al cerrar, todas las promos del sitio (banner, popup, footer, redirect)
+  // pasan automáticamente a la siguiente.
+  const vigentes = masterclasses
+    .filter((m) => new Date(m.ventaHasta).getTime() > ahora)
     .sort((a, b) => a.fechaISO.localeCompare(b.fechaISO));
-  return futuras[0] ?? masterclasses[0];
+  return vigentes[0] ?? masterclasses[masterclasses.length - 1];
 };
