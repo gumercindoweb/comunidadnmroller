@@ -47,7 +47,7 @@ export const sedes: Sede[] = [
       { dia: "Martes", hora: "18:00", disciplina: "KIDS" },
       { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "09:00", disciplina: "Slalom" },
-      { dia: "Martes", hora: "20:00", disciplina: "Frenadas" },
+      { dia: "Martes", hora: "20:00", disciplina: "Slalom" },
       { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Miércoles", hora: "20:00", disciplina: "Slalom" },
       { dia: "Jueves", hora: "18:00", disciplina: "KIDS" },

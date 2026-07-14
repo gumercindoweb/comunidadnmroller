@@ -62,7 +62,7 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Puerto Madero", hora: "19:00", disciplina: "Slalom" },
-    { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Frenadas" },
+    { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
     { sede: "P. Rivadavia", hora: "20:00", disciplina: "Urbano" },
     { sede: "P. Rivadavia", hora: "20:00", disciplina: "Frenadas" },
   ],
