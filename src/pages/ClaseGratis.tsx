@@ -68,7 +68,7 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
   Sábado: [
     { sede: "Villa Real", hora: "10:30", disciplina: NIVEL_UNIFICADO },
     { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
-    { sede: "Puerto Madero", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Puerto Madero", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Vicente López", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "18:00", disciplina: NIVEL_UNIFICADO },

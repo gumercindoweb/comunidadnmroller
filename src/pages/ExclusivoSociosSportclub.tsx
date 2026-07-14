@@ -62,7 +62,6 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
   "puerto-madero": [
     { dia: "Martes", hora: "18:00" },
     { dia: "Martes", hora: "19:00" },
-    { dia: "Sábado", hora: "09:00" },
     { dia: "Sábado", hora: "10:00" },
   ],
   "caballito": [
