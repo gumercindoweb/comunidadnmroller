@@ -97,6 +97,7 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
     { dia: "Miércoles", hora: "19:00" },
     { dia: "Sábado", hora: "10:30" },
   ],
+  "facultad-medicina": [{ dia: "Viernes", hora: "19:00" }],
 };
 
 // Construye las sedes SportClub a partir de los datos base (ubicación, mapa)

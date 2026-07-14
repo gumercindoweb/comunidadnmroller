@@ -74,6 +74,7 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
+    { sede: "Converse Park", hora: "20:00", disciplina: "Rampas" },
   ],
   Jueves: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
@@ -91,11 +92,13 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Belgrano", hora: "18:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Facultad de Medicina", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Colegiales", hora: "20:00", disciplina: "Frenadas" },
+    { sede: "Converse Park", hora: "20:00", disciplina: "Rampas" },
   ],
   Sábado: [
     { sede: "Villa Real", hora: "10:30", disciplina: NIVEL_UNIFICADO },
@@ -116,6 +119,7 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "P. Rivadavia", hora: "09:00", disciplina: "Slalom" },
     { sede: "P. Rivadavia", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Facultad de Medicina", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],
 };

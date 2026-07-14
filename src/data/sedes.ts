@@ -206,6 +206,32 @@ export const sedes: Sede[] = [
       { dia: "Sábado", hora: "11:30", disciplina: "Urbano" },
     ],
   },
+  {
+    id: "facultad-medicina",
+    nombre: "Facultad de Medicina",
+    direccion: "Paraguay 2155, Recoleta",
+    area: "CABA",
+    lat: -34.598356,
+    lng: -58.3982251,
+    mapsUrl: "https://maps.app.goo.gl/VtfkVCWiwq3Ewjk8A",
+    clases: [
+      { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Domingo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
+    ],
+  },
+  {
+    id: "converse-park",
+    nombre: "Converse Park",
+    direccion: "Castañeda 2020, CABA",
+    area: "CABA",
+    lat: -34.5507951,
+    lng: -58.4386438,
+    mapsUrl: "https://maps.app.goo.gl/sgrKxCFS1yX5PaLv6",
+    clases: [
+      { dia: "Miércoles", hora: "20:00", disciplina: "Rampas" },
+      { dia: "Viernes", hora: "20:00", disciplina: "Rampas" },
+    ],
+  },
 ];
 
 export const ordenDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];

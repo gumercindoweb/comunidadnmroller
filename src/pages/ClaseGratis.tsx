@@ -62,6 +62,7 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
     { sede: "Villa Luro", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Facultad de Medicina", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
   ],
   Sábado: [
@@ -77,6 +78,7 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
     { sede: "P. Rivadavia", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "P. Rivadavia", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Facultad de Medicina", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],
 };
