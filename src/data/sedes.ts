@@ -140,9 +140,7 @@ export const sedes: Sede[] = [
     lng: -58.4386438,
     mapsUrl: "https://maps.app.goo.gl/sgrKxCFS1yX5PaLv6",
     clases: [
-      { dia: "Miércoles", hora: "20:00", disciplina: "Skate Park" },
       { dia: "Miércoles", hora: "20:00", disciplina: "Rampas" },
-      { dia: "Viernes", hora: "20:00", disciplina: "Skate Park" },
       { dia: "Viernes", hora: "20:00", disciplina: "Rampas" },
     ],
   },
@@ -250,7 +248,6 @@ export const disciplinaColor: Record<string, string> = {
   Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
-  "Skate Park": "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
   KIDS: "rounded-none bg-violet-500/15 text-violet-300 border border-violet-500/50",
   // Niveles: pills redondeados que resaltan, cada uno con su color

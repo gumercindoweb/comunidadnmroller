@@ -30,7 +30,6 @@ const badgeStyles: Record<string, string> = {
   Frenadas: "rounded-none bg-primary/10 text-primary border border-primary/40 border-dashed",
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
-  "Skate Park": "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
   KIDS: "rounded-none bg-violet-500/15 text-violet-300 border border-violet-500/50",
 };
@@ -42,7 +41,6 @@ const badgeDescriptions: Record<string, string> = {
   "Slalom": "Técnica y flow entre conos para dominar cada movimiento.",
   "Frenadas": "Control total: aprendé a frenar seguro y moverte con confianza.",
   "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
-  "Skate Park": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
   "Rampas": "Subidas, bajadas y saltos para llevar tu nivel al siguiente paso.",
   "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
   "KIDS": "Clases pensadas para los más chicos, a su ritmo y con juego.",
@@ -75,7 +73,6 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
-    { sede: "Belgrano Converse Park", hora: "20:00", disciplina: "Skate Park" },
     { sede: "Belgrano Converse Park", hora: "20:00", disciplina: "Rampas" },
   ],
   Jueves: [
@@ -99,7 +96,6 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Colegiales", hora: "20:00", disciplina: "Frenadas" },
-    { sede: "Belgrano Converse Park", hora: "20:00", disciplina: "Skate Park" },
     { sede: "Belgrano Converse Park", hora: "20:00", disciplina: "Rampas" },
   ],
   Sábado: [
@@ -138,7 +134,6 @@ const ordenDisciplinas = [
   "Frenadas",
   "Urbano",
   "Skatepark",
-  "Skate Park",
   "Rampas",
   "KIDS",
 ];
