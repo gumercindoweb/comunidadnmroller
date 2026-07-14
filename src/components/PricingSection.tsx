@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import { sedes } from "@/data/sedes";
 
 type Period = "mensual" | "trimestral";
 
@@ -133,7 +134,7 @@ const PricingSection = () => {
             Elegí tu plan ideal
           </h2>
           <p className="text-primary-foreground/60 text-lg mb-8">
-            Todos los planes incluyen acceso a nuestras +10 sedes
+            Todos los planes incluyen acceso a nuestras +{sedes.length} sedes
           </p>
 
           <div className="inline-flex bg-primary-foreground/10 rounded-full p-1">

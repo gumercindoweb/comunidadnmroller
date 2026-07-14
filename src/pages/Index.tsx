@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { sedes } from "@/data/sedes";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ValueProposition from "@/components/ValueProposition";
@@ -32,9 +33,9 @@ const Index = () => {
     <div className="min-h-screen">
       <Helmet>
         <title>Escuela #1 de Patinaje en Argentina — NM Roller</title>
-        <meta name="description" content="Aprende a patinar desde cero o mejorá tu técnica con NM Roller. +3.000 alumnos, +10 sedes outdoor en CABA. Clases ilimitadas, seguro médico incluido, sin contratos." />
+        <meta name="description" content={`Aprende a patinar desde cero o mejorá tu técnica con NM Roller. +3.000 alumnos, +${sedes.length} sedes outdoor en CABA. Clases ilimitadas, seguro médico incluido, sin contratos.`} />
         <meta property="og:title" content="Escuela #1 de Patinaje en Argentina" />
-        <meta property="og:description" content="Aprende desde cero o mejorá tu técnica. +10 sedes, profesores certificados, sin contratos ni permanencia." />
+        <meta property="og:description" content={`Aprende desde cero o mejorá tu técnica. +${sedes.length} sedes, profesores certificados, sin contratos ni permanencia.`} />
         <meta property="og:image" content="/og-home.png" />
         <meta property="og:url" content="https://comunidadnmroller.com" />
         <meta name="twitter:card" content="summary_large_image" />

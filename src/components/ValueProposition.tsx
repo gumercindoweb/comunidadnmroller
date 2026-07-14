@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight, Infinity, MapPin, ShieldCheck, TrendingUp } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { sedes } from "@/data/sedes";
 
 const SEGURO_NOTE =
   "Para acceder a la cobertura del seguro, debés usar tus protecciones completas en cada clase: rodilleras, coderas, muñequeras y casco. Es un requisito básico de seguridad — y la forma en que nos aseguramos de cuidarte bien.";
@@ -62,7 +63,7 @@ const ValueProposition = () => {
             <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
               <MapPin className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-2 text-center">+10 Sedes Outdoor</h3>
+            <h3 className="text-lg font-bold text-foreground mb-2 text-center">+{sedes.length} Sedes Outdoor</h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4 text-center">
               Elegí la sede que más te convenga. Tenemos puntos en toda la ciudad de Buenos Aires.
             </p>

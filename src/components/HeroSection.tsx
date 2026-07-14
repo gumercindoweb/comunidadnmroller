@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Calendar, Zap, ShieldCheck } from "lucide-react";
+import { sedes } from "@/data/sedes";
 
 const stats: {
   icon: React.ElementType;
@@ -12,7 +13,7 @@ const stats: {
   {
     icon: MapPin,
     label: "Sedes activas",
-    value: "+10",
+    value: `+${sedes.length}`,
     scrollTo: "sedes",
   },
   {
