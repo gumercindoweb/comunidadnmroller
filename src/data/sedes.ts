@@ -133,7 +133,7 @@ export const sedes: Sede[] = [
   },
   {
     id: "belgrano-skate-park",
-    nombre: "Belgrano Skate Park",
+    nombre: "Belgrano Converse Park",
     direccion: "Castañeda 2020, CABA",
     area: "CABA",
     lat: -34.5507951,
