@@ -49,7 +49,7 @@ const PLANES: Plan[] = [
     features: [
       "Clases ilimitadas",
       "1 clase por día",
-      "Acceso a 10 sedes outdoor",
+      "Acceso a 11 sedes outdoor",
       "Nivel inicial y principiante",
     ],
   },
@@ -64,7 +64,7 @@ const PLANES: Plan[] = [
     features: [
       "Clases ilimitadas",
       "Hasta 2 clases por día",
-      "Acceso a 10 sedes outdoor",
+      "Acceso a 11 sedes outdoor",
       "Todos los niveles y disciplinas",
     ],
     waPlan: "de acceso full",
@@ -120,7 +120,7 @@ const PlanesSportclub = ({ variant = "landing", userData }: PlanesSportclubProps
               </h2>
               <p className="text-foreground/70 text-base md:text-lg leading-relaxed">
                 Ya estás dentro. Con el <strong>Plan Full</strong> accedés{" "}
-                <strong>sin límite a las 10 sedes</strong>, todos los niveles y disciplinas
+                <strong>sin límite a las 11 sedes</strong>, todos los niveles y disciplinas
                 y hasta 2 clases por día. Y si todavía no tenés equipo, el pack{" "}
                 <strong>4 clases + alquiler</strong> te deja probar con todo incluido.
               </p>

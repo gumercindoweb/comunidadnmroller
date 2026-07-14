@@ -45,7 +45,7 @@ import PreFiltroEquipo from "@/components/sportclub/PreFiltroEquipo";
 const SPORTCLUB_NIVEL = "Inicial · Princip.";
 
 // ── Horarios del beneficio por sede (flyer SportClub · nivel Inicial/Principiante,
-//    las 10 sedes). El orden define el orden de aparición. Para cambiar
+//    las 11 sedes). El orden define el orden de aparición. Para cambiar
 //    sedes/horarios, editá SOLO este objeto. ──
 const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
   "rosedal": [
@@ -96,7 +96,10 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
     { dia: "Miércoles", hora: "19:00" },
     { dia: "Sábado", hora: "10:30" },
   ],
-  "facultad-medicina": [{ dia: "Viernes", hora: "19:00" }],
+  "facultad-medicina": [
+    { dia: "Viernes", hora: "19:00" },
+    { dia: "Domingo", hora: "10:00" },
+  ],
 };
 
 // Construye las sedes SportClub a partir de los datos base (ubicación, mapa)
@@ -112,7 +115,7 @@ const sportclubSedes: Sede[] = Object.keys(SPORTCLUB_HORARIOS)
     clases: SPORTCLUB_HORARIOS[s.id].map((h) => ({ ...h, disciplina: SPORTCLUB_NIVEL })),
   }));
 
-// Las 10 sedes para el mapa: las del beneficio muestran sus horarios del
+// Las 11 sedes para el mapa: las del beneficio muestran sus horarios del
 // beneficio; el resto se muestra con sus datos base (ubicación, alquiler).
 const todasLasSedes: Sede[] = sedes.map(
   (s) => sportclubSedes.find((b) => b.id === s.id) ?? s,
@@ -509,7 +512,7 @@ const ExclusivoSociosSportclub = () => {
             </p>
           </div>
 
-          {/* Mapa Leaflet con las 10 sedes (badge Alquiler donde corresponde) */}
+          {/* Mapa Leaflet con las 11 sedes (badge Alquiler donde corresponde) */}
           <SedesMapa sedesList={todasLasSedes} sidebarTitle="Elegí tu sede" />
 
           {/* Grilla horaria del beneficio socio (estilo Home) */}
@@ -540,7 +543,7 @@ const ExclusivoSociosSportclub = () => {
                 },
                 {
                   q: "¿Puedo ir a cualquier sede o tomar 2 clases por día?",
-                  a: "Con el beneficio de socio accedés a las sedes habilitadas y a una clase por día. Para patinar en cualquiera de nuestras 10 sedes o tomar hasta 2 clases por día, necesitás un plan.",
+                  a: "Con el beneficio de socio accedés a las sedes habilitadas y a una clase por día. Para patinar en cualquiera de nuestras 11 sedes o tomar hasta 2 clases por día, necesitás un plan.",
                 },
                 {
                   q: "¿Tiene algún costo para el socio?",
