@@ -44,11 +44,13 @@ export const sedes: Sede[] = [
     alquiler: true,
     clases: [
       { dia: "Martes", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Martes", hora: "18:00", disciplina: "KIDS" },
       { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "09:00", disciplina: "Slalom" },
       { dia: "Martes", hora: "20:00", disciplina: "Frenadas" },
       { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Miércoles", hora: "20:00", disciplina: "Slalom" },
+      { dia: "Jueves", hora: "18:00", disciplina: "KIDS" },
       { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Jueves", hora: "19:00", disciplina: "Slalom" },
       { dia: "Jueves", hora: "20:00", disciplina: "Rampas" },
@@ -57,6 +59,8 @@ export const sedes: Sede[] = [
       { dia: "Sábado", hora: "10:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "18:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Sábado", hora: "10:00", disciplina: "Urbano" },
+      { dia: "Sábado", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Sábado", hora: "19:00", disciplina: "Slalom" },
       { dia: "Domingo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
@@ -74,7 +78,7 @@ export const sedes: Sede[] = [
       { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "19:00", disciplina: "Slalom" },
       { dia: "Sábado", hora: "09:00", disciplina: NIVEL_UNIFICADO },
-      { dia: "Sábado", hora: "10:00", disciplina: "Urbano" },
+      { dia: "Sábado", hora: "11:00", disciplina: "Urbano" },
     ],
   },
   {
@@ -87,11 +91,16 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/PoyVBEq58EbUdtM59",
     clases: [
       { dia: "Lunes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Lunes", hora: "20:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Martes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Martes", hora: "20:00", disciplina: "Urbano" },
+      { dia: "Martes", hora: "20:00", disciplina: "Frenadas" },
       { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Jueves", hora: "20:00", disciplina: "Urbano" },
+      { dia: "Jueves", hora: "20:00", disciplina: "Frenadas" },
       { dia: "Domingo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Domingo", hora: "09:00", disciplina: "Slalom" },
+      { dia: "Domingo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     ],
   },
   {
@@ -119,6 +128,7 @@ export const sedes: Sede[] = [
     clases: [
       { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Miércoles", hora: "20:00", disciplina: "Skatepark" },
+      { dia: "Viernes", hora: "18:00", disciplina: "Slalom" },
       { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Viernes", hora: "20:00", disciplina: "Skatepark" },
     ],
@@ -146,8 +156,10 @@ export const sedes: Sede[] = [
     mapsUrl: "https://maps.app.goo.gl/689B4vaoSq851ZJ1A",
     alquiler: true,
     clases: [
-      { dia: "Miércoles", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Miércoles", hora: "19:00", disciplina: NIVEL_UNIFICADO },
       { dia: "Jueves", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Viernes", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+      { dia: "Viernes", hora: "20:00", disciplina: "Frenadas" },
     ],
   },
   {
@@ -213,6 +225,7 @@ export const disciplinaColor: Record<string, string> = {
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
+  KIDS: "rounded-none bg-violet-500/15 text-violet-300 border border-violet-500/50",
   // Niveles: pills redondeados que resaltan, cada uno con su color
   [NIVEL_INICIAL]: "rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/70 font-extrabold",
   [NIVEL_PRINCIP_INTER]: "rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/70 font-extrabold",

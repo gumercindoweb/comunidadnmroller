@@ -31,6 +31,7 @@ const badgeStyles: Record<string, string> = {
   Urbano: "rounded-none bg-muted text-foreground border border-border",
   Skatepark: "rounded-none bg-amber-500/15 text-amber-300 border border-amber-500/50",
   Rampas: "rounded-none bg-amber-500/25 text-amber-200 border border-amber-500/70",
+  KIDS: "rounded-none bg-violet-500/15 text-violet-300 border border-violet-500/50",
 };
 
 const badgeDescriptions: Record<string, string> = {
@@ -42,12 +43,14 @@ const badgeDescriptions: Record<string, string> = {
   "Skatepark": "Desafío, adrenalina y nuevos trucos en un entorno distinto.",
   "Rampas": "Subidas, bajadas y saltos para llevar tu nivel al siguiente paso.",
   "Urbano": "La ciudad como pista: aprendé a moverte con seguridad real.",
+  "KIDS": "Clases pensadas para los más chicos, a su ritmo y con juego.",
 };
 
 // ── Horarios enriquecidos con disciplina (Diciembre 2025) ──
 const horarios: Record<string, ClaseEnriquecida[]> = {
   Lunes: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: NIVEL_UNIFICADO },
   ],
   Martes: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
@@ -55,16 +58,19 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Puerto Madero", hora: "18:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Puerto Madero", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "18:00", disciplina: "KIDS" },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Puerto Madero", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Frenadas" },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: "Urbano" },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: "Frenadas" },
   ],
   Miércoles: [
     { sede: "Villa Real", hora: "18:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Villa Real", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
-    { sede: "Colegiales", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
@@ -72,19 +78,24 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
   Jueves: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "18:00", disciplina: "KIDS" },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "20:00", disciplina: "Rampas" },
     { sede: "P. Rivadavia", hora: "20:00", disciplina: "Urbano" },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: "Frenadas" },
   ],
   Viernes: [
     { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Villa Luro", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Belgrano", hora: "18:00", disciplina: "Slalom" },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: "Slalom" },
     { sede: "Villa Luro", hora: "20:00", disciplina: "Skatepark" },
     { sede: "Belgrano", hora: "20:00", disciplina: "Skatepark" },
+    { sede: "Colegiales", hora: "20:00", disciplina: "Frenadas" },
   ],
   Sábado: [
     { sede: "Villa Real", hora: "10:30", disciplina: NIVEL_UNIFICADO },
@@ -93,14 +104,17 @@ const horarios: Record<string, ClaseEnriquecida[]> = {
     { sede: "Vicente López", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Vicente López", hora: "09:00", disciplina: "Slalom" },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: "Urbano" },
-    { sede: "Puerto Madero", hora: "10:00", disciplina: "Urbano" },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: "Slalom" },
+    { sede: "Puerto Madero", hora: "11:00", disciplina: "Urbano" },
     { sede: "Villa Real", hora: "11:30", disciplina: "Urbano" },
   ],
   Domingo: [
     { sede: "P. Rivadavia", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "P. Rivadavia", hora: "09:00", disciplina: "Slalom" },
+    { sede: "P. Rivadavia", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],
@@ -119,6 +133,7 @@ const ordenDisciplinas = [
   "Urbano",
   "Skatepark",
   "Rampas",
+  "KIDS",
 ];
 const disciplinasDisponibles = ordenDisciplinas.filter((d) =>
   Object.values(horarios).some((clases) => clases.some((c) => c.disciplina === d)),
