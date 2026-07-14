@@ -35,6 +35,7 @@ const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sáb
 const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: string }[]> = {
   Lunes: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "P. Rivadavia", hora: "20:00", disciplina: NIVEL_UNIFICADO },
   ],
   Martes: [
     { sede: "P. Rivadavia", hora: "19:00", disciplina: NIVEL_UNIFICADO },
@@ -48,7 +49,7 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
     { sede: "Villa Real", hora: "18:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Villa Real", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
-    { sede: "Colegiales", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Jueves: [
@@ -60,6 +61,7 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
     { sede: "Devoto", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Villa Luro", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Belgrano", hora: "19:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Colegiales", hora: "19:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "09:00", disciplina: NIVEL_UNIFICADO },
   ],
   Sábado: [
@@ -69,9 +71,11 @@ const HORARIOS_CLASES: Record<string, { sede: string; hora: string; disciplina: 
     { sede: "Vicente López", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "18:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "Rosedal Palermo", hora: "19:00", disciplina: NIVEL_UNIFICADO },
   ],
   Domingo: [
     { sede: "P. Rivadavia", hora: "09:00", disciplina: NIVEL_UNIFICADO },
+    { sede: "P. Rivadavia", hora: "10:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Plaza La Pampa", hora: "09:00", disciplina: NIVEL_UNIFICADO },
     { sede: "Rosedal Palermo", hora: "10:00", disciplina: NIVEL_UNIFICADO },
   ],

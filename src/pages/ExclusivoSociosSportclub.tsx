@@ -57,17 +57,21 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
     { dia: "Miércoles", hora: "19:00" },
     { dia: "Jueves", hora: "19:00" },
     { dia: "Sábado", hora: "18:00" },
+    { dia: "Sábado", hora: "19:00" },
   ],
   "puerto-madero": [
     { dia: "Martes", hora: "18:00" },
     { dia: "Martes", hora: "19:00" },
     { dia: "Sábado", hora: "09:00" },
+    { dia: "Sábado", hora: "10:00" },
   ],
   "caballito": [
     { dia: "Lunes", hora: "19:00" },
+    { dia: "Lunes", hora: "20:00" },
     { dia: "Martes", hora: "19:00" },
     { dia: "Jueves", hora: "19:00" },
     { dia: "Domingo", hora: "09:00" },
+    { dia: "Domingo", hora: "10:00" },
   ],
   "vicente-lopez": [{ dia: "Sábado", hora: "09:00" }],
   "belgrano": [
@@ -76,8 +80,9 @@ const SPORTCLUB_HORARIOS: Record<string, { dia: string; hora: string }[]> = {
   ],
   "villa-luro": [{ dia: "Viernes", hora: "19:00" }],
   "colegiales": [
-    { dia: "Miércoles", hora: "18:00" },
+    { dia: "Miércoles", hora: "19:00" },
     { dia: "Jueves", hora: "19:00" },
+    { dia: "Viernes", hora: "19:00" },
   ],
   "plaza-la-pampa": [
     { dia: "Sábado", hora: "09:00" },
