@@ -160,3 +160,13 @@ Este proyecto **sobreescribe** las clases de tamaño de Tailwind. Los valores re
   - Solo actualiza el **código** de esa función; los secrets (Slack, GetResponse) y la base de datos quedan **intactos**. El `WARNING: Docker is not running` es irrelevante (deploya por API).
   - ⚠️ **Lo corre el USUARIO en su terminal**, no Claude: el auto-mode de Claude Code bloquea deploys directos a producción, y macOS pide la contraseña del Mac (llavero "Supabase CLI" → "Permitir siempre"). Claude prepara el comando exacto y el usuario lo pega.
 - ❌ **NO "arreglar" esto apuntando el `.env` a `zpeij`**: rompería el guardado de leads de TODOS los formularios, porque `zpeij` no tiene las tablas. Producción debe seguir en `bosutr`.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
