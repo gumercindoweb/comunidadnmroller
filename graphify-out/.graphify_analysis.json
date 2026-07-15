@@ -1,6 +1,67 @@
 {
   "communities": {
     "0": [
+      "src_components_alquiler_alquilerhorariosgrid",
+      "src_components_alquiler_alquilerhorariosgrid_alquilerhorariosgrid",
+      "src_components_alquiler_alquilerhorariosgrid_buildhorarios",
+      "src_components_alquiler_alquilersedesgrid",
+      "src_components_alquiler_alquilersedesgrid_alquilersedes",
+      "src_components_alquiler_alquilersedesgrid_alquilersedesgrid",
+      "src_components_equipopropionota",
+      "src_components_equipopropionota_equipopropionota",
+      "src_components_flyfreepanel",
+      "src_components_flyfreepanel_flyfreepanel",
+      "src_components_sededetalledialog",
+      "src_components_sededetalledialog_props",
+      "src_components_sededetalledialog_sededetalledialog",
+      "src_components_sedesmapa",
+      "src_components_sedesmapa_makeicon",
+      "src_components_sedesmapa_markersvg",
+      "src_components_sedesmapa_sedesmapa",
+      "src_components_ui_accordion",
+      "src_components_ui_accordion_accordioncontent",
+      "src_components_ui_accordion_accordionitem",
+      "src_components_ui_accordion_accordiontrigger",
+      "src_data_sedes",
+      "src_data_sedes_clasesede",
+      "src_data_sedes_disciplinacolor",
+      "src_data_sedes_expandirnivel",
+      "src_data_sedes_ordendias",
+      "src_data_sedes_sede",
+      "src_data_sedes_sedes",
+      "src_pages_clasegratis",
+      "src_pages_clasegratis_badge_desc",
+      "src_pages_clasegratis_badge_styles",
+      "src_pages_clasegratis_clasegratis",
+      "src_pages_clasegratis_dias_semana",
+      "src_pages_clasegratis_equipo_opciones",
+      "src_pages_clasegratis_formschema",
+      "src_pages_clasegratis_horarios_clases",
+      "src_pages_clasegratis_identidades",
+      "src_pages_clasegratis_perfiles",
+      "src_pages_clasegratis_sedes_gratis_ids",
+      "src_pages_clasesmasalquiler",
+      "src_pages_clasesmasalquiler_clasesmasalquiler",
+      "src_pages_clasesmasalquiler_faq",
+      "src_pages_clasesmasalquiler_incluye",
+      "src_pages_clasesmasalquiler_pasos",
+      "src_pages_exclusivosociossportclub",
+      "src_pages_exclusivosociossportclub_alquiler_opciones",
+      "src_pages_exclusivosociossportclub_beneficios",
+      "src_pages_exclusivosociossportclub_exclusivosociossportclub",
+      "src_pages_exclusivosociossportclub_formschema",
+      "src_pages_exclusivosociossportclub_perfiles",
+      "src_pages_exclusivosociossportclub_planes_sportclub",
+      "src_pages_exclusivosociossportclub_sportclub_horarios",
+      "src_pages_exclusivosociossportclub_sportclubsedes",
+      "src_pages_exclusivosociossportclub_todaslassedes",
+      "src_pages_preguntasfrecuentes",
+      "src_pages_preguntasfrecuentes_faqitem",
+      "src_pages_preguntasfrecuentes_faqsection",
+      "src_pages_preguntasfrecuentes_preguntasfrecuentes",
+      "src_pages_preguntasfrecuentes_secciones"
+    ],
+    "1": [
       "src_components_countdownbanner",
       "src_components_countdownbanner_countdownbanner",
       "src_components_countdownbanner_props",
@@ -15,9 +76,6 @@
       "src_components_masterclassfooterbanner_masterclassfooterbanner",
       "src_components_masterclasspopup",
       "src_components_masterclasspopup_masterclasspopup",
-      "src_components_sededetalledialog",
-      "src_components_sededetalledialog_props",
-      "src_components_sededetalledialog_sededetalledialog",
       "src_components_sportclub_equipobanners",
       "src_components_sportclub_equipobanners_equipobanners",
       "src_components_sportclub_equipobanners_scrolltoform",
@@ -38,6 +96,7 @@
       "src_components_ui_command_commandshortcut",
       "src_components_ui_dialog",
       "src_components_ui_dialog_dialogcontent",
+      "src_components_ui_dialog_dialogdescription",
       "src_components_ui_dialog_dialogfooter",
       "src_components_ui_dialog_dialogheader",
       "src_components_ui_dialog_dialogoverlay",
@@ -47,7 +106,6 @@
       "src_data_masterclasses_getproximamasterclass",
       "src_data_masterclasses_masterclass",
       "src_data_masterclasses_masterclasses",
-      "src_data_sedes_sede",
       "src_pages_masterclass",
       "src_pages_masterclass_incluye",
       "src_pages_masterclass_logros",
@@ -58,81 +116,70 @@
       "src_pages_registroconfirmadonewsletter_beneficios",
       "src_pages_registroconfirmadonewsletter_registroconfirmadonewsletter"
     ],
-    "1": [
-      "src_app",
-      "src_app_app",
-      "src_app_queryclient",
-      "src_components_legallayout",
-      "src_components_legallayout_bullets",
-      "src_components_legallayout_legallayout",
-      "src_components_legallayout_legallayoutprops",
-      "src_components_legallayout_section",
-      "src_components_scrolltotop",
-      "src_components_scrolltotop_scrolltotop",
-      "src_components_ui_sonner",
-      "src_components_ui_sonner_toaster",
-      "src_components_ui_sonner_toasterprops",
-      "src_components_whatsappfloat",
-      "src_components_whatsappfloat_whatsappfloat",
-      "src_components_whatsappfloat_whatsappicon",
-      "src_main",
+    "2": [
+      "src_components_alquiler_banneralquilerhome",
+      "src_components_alquiler_banneralquilerhome_banneralquilerhome",
+      "src_components_alquiler_banneralquilerhome_handleclick",
+      "src_components_alquiler_pricingalquilersection",
+      "src_components_alquiler_pricingalquilersection_alquilerplan",
+      "src_components_alquiler_pricingalquilersection_plans",
+      "src_components_alquiler_pricingalquilersection_pricingalquilersection",
+      "src_components_appsection",
+      "src_components_appsection_appsection",
+      "src_components_appsection_features",
+      "src_components_forwhom",
+      "src_components_forwhom_forwhom",
+      "src_components_forwhom_points",
+      "src_components_herosection",
+      "src_components_herosection_herosection",
+      "src_components_herosection_stats",
+      "src_components_navbar",
+      "src_components_navbar_navbar",
+      "src_components_navbar_navlinks",
+      "src_components_pricingsection",
+      "src_components_pricingsection_monthlyplans",
+      "src_components_pricingsection_period",
+      "src_components_pricingsection_plan",
+      "src_components_pricingsection_pricingsection",
+      "src_components_pricingsection_quarterlyplans",
+      "src_components_sedessection",
+      "src_components_sedessection_sedessection",
+      "src_components_testimonials",
+      "src_components_testimonials_testimonials",
+      "src_components_ui_badge",
+      "src_components_ui_badge_badge",
+      "src_components_ui_badge_badgeprops",
+      "src_components_ui_badge_badgevariants",
+      "src_components_ui_button_button",
+      "src_components_valueproposition",
+      "src_components_valueproposition_valueproposition",
+      "src_components_videosocialproof",
+      "src_components_videosocialproof_reels",
+      "src_components_videosocialproof_videosocialproof",
+      "src_hooks_usescrollanimation",
+      "src_hooks_usescrollanimation_usescrollanimation",
+      "src_pages_index",
+      "src_pages_index_index",
       "src_pages_listaesperaconfirmada",
       "src_pages_listaesperaconfirmada_listaesperaconfirmada",
-      "src_pages_listaesperaconfirmada_navstate",
-      "src_pages_notfound",
-      "src_pages_notfound_atajos",
-      "src_pages_notfound_notfound",
-      "src_pages_politicaprivacidad",
-      "src_pages_politicaprivacidad_politicaprivacidad",
-      "src_pages_terminoscondiciones",
-      "src_pages_terminoscondiciones_terminoscondiciones",
-      "src_pages_tutorialespatinaje",
-      "src_pages_tutorialespatinaje_categoria",
-      "src_pages_tutorialespatinaje_categoria_active",
-      "src_pages_tutorialespatinaje_categoria_style",
-      "src_pages_tutorialespatinaje_categorias",
-      "src_pages_tutorialespatinaje_ctadata",
-      "src_pages_tutorialespatinaje_ctas",
-      "src_pages_tutorialespatinaje_tutorial",
-      "src_pages_tutorialespatinaje_tutoriales",
-      "src_pages_tutorialespatinaje_tutorialespatinaje"
-    ],
-    "2": [
-      "src_components_ui_toast",
-      "src_components_ui_toast_toast",
-      "src_components_ui_toast_toastaction",
-      "src_components_ui_toast_toastactionelement",
-      "src_components_ui_toast_toastclose",
-      "src_components_ui_toast_toastdescription",
-      "src_components_ui_toast_toastprops",
-      "src_components_ui_toast_toasttitle",
-      "src_components_ui_toast_toastvariants",
-      "src_components_ui_toast_toastviewport",
-      "src_components_ui_toaster",
-      "src_components_ui_toaster_toaster",
-      "src_components_ui_use_toast",
-      "src_hooks_use_toast",
-      "src_hooks_use_toast_action",
-      "src_hooks_use_toast_actiontype",
-      "src_hooks_use_toast_actiontypes",
-      "src_hooks_use_toast_addtoremovequeue",
-      "src_hooks_use_toast_dispatch",
-      "src_hooks_use_toast_genid",
-      "src_hooks_use_toast_listeners",
-      "src_hooks_use_toast_memorystate",
-      "src_hooks_use_toast_reducer",
-      "src_hooks_use_toast_state",
-      "src_hooks_use_toast_toast",
-      "src_hooks_use_toast_toastertoast",
-      "src_hooks_use_toast_toasttimeouts",
-      "src_hooks_use_toast_usetoast"
+      "src_pages_listaesperaconfirmada_navstate"
     ],
     "3": [
       "src_components_ui_separator",
       "src_components_ui_separator_separator",
+      "src_components_ui_sheet",
+      "src_components_ui_sheet_sheetcontent",
+      "src_components_ui_sheet_sheetcontentprops",
+      "src_components_ui_sheet_sheetdescription",
+      "src_components_ui_sheet_sheetfooter",
+      "src_components_ui_sheet_sheetheader",
+      "src_components_ui_sheet_sheetoverlay",
+      "src_components_ui_sheet_sheettitle",
+      "src_components_ui_sheet_sheetvariants",
       "src_components_ui_sidebar",
       "src_components_ui_sidebar_sidebar",
       "src_components_ui_sidebar_sidebarcontent",
+      "src_components_ui_sidebar_sidebarcontext",
       "src_components_ui_sidebar_sidebarfooter",
       "src_components_ui_sidebar_sidebargroup",
       "src_components_ui_sidebar_sidebargroupaction",
@@ -154,9 +201,108 @@
       "src_components_ui_sidebar_sidebarprovider",
       "src_components_ui_sidebar_sidebarrail",
       "src_components_ui_sidebar_sidebarseparator",
-      "src_components_ui_sidebar_sidebartrigger"
+      "src_components_ui_sidebar_sidebartrigger",
+      "src_components_ui_sidebar_usesidebar",
+      "src_hooks_use_mobile",
+      "src_hooks_use_mobile_useismobile"
     ],
     "4": [
+      "src_app",
+      "src_app_app",
+      "src_app_queryclient",
+      "src_components_legallayout",
+      "src_components_legallayout_bullets",
+      "src_components_legallayout_legallayout",
+      "src_components_legallayout_legallayoutprops",
+      "src_components_legallayout_section",
+      "src_components_scrolltotop",
+      "src_components_scrolltotop_scrolltotop",
+      "src_components_ui_sonner",
+      "src_components_ui_sonner_toaster",
+      "src_components_ui_sonner_toasterprops",
+      "src_components_ui_toaster_toaster",
+      "src_components_whatsappfloat",
+      "src_components_whatsappfloat_whatsappfloat",
+      "src_components_whatsappfloat_whatsappicon",
+      "src_main",
+      "src_pages_notfound",
+      "src_pages_notfound_atajos",
+      "src_pages_notfound_notfound",
+      "src_pages_politicaprivacidad",
+      "src_pages_politicaprivacidad_politicaprivacidad",
+      "src_pages_terminoscondiciones",
+      "src_pages_terminoscondiciones_terminoscondiciones",
+      "src_pages_tutorialespatinaje",
+      "src_pages_tutorialespatinaje_categoria",
+      "src_pages_tutorialespatinaje_categoria_active",
+      "src_pages_tutorialespatinaje_categoria_style",
+      "src_pages_tutorialespatinaje_categorias",
+      "src_pages_tutorialespatinaje_ctadata",
+      "src_pages_tutorialespatinaje_ctas",
+      "src_pages_tutorialespatinaje_tutorial",
+      "src_pages_tutorialespatinaje_tutoriales",
+      "src_pages_tutorialespatinaje_tutorialespatinaje"
+    ],
+    "5": [
+      "package_dependencies_react",
+      "react",
+      "src_components_ui_carousel",
+      "src_components_ui_carousel_carousel",
+      "src_components_ui_carousel_carouselapi",
+      "src_components_ui_carousel_carouselcontent",
+      "src_components_ui_carousel_carouselcontext",
+      "src_components_ui_carousel_carouselcontextprops",
+      "src_components_ui_carousel_carouselitem",
+      "src_components_ui_carousel_carouselnext",
+      "src_components_ui_carousel_carouseloptions",
+      "src_components_ui_carousel_carouselplugin",
+      "src_components_ui_carousel_carouselprevious",
+      "src_components_ui_carousel_carouselprops",
+      "src_components_ui_carousel_usecarousel",
+      "src_components_ui_carousel_usecarouselparameters",
+      "src_components_ui_chart",
+      "src_components_ui_chart_chartconfig",
+      "src_components_ui_chart_chartcontainer",
+      "src_components_ui_chart_chartcontext",
+      "src_components_ui_chart_chartcontextprops",
+      "src_components_ui_chart_chartlegendcontent",
+      "src_components_ui_chart_chartstyle",
+      "src_components_ui_chart_charttooltipcontent",
+      "src_components_ui_chart_getpayloadconfigfrompayload",
+      "src_components_ui_chart_themes",
+      "src_components_ui_chart_usechart",
+      "src_components_ui_form_useformfield"
+    ],
+    "6": [
+      "src_components_ui_toast",
+      "src_components_ui_toast_toast",
+      "src_components_ui_toast_toastaction",
+      "src_components_ui_toast_toastactionelement",
+      "src_components_ui_toast_toastclose",
+      "src_components_ui_toast_toastdescription",
+      "src_components_ui_toast_toastprops",
+      "src_components_ui_toast_toasttitle",
+      "src_components_ui_toast_toastvariants",
+      "src_components_ui_toast_toastviewport",
+      "src_components_ui_toaster",
+      "src_components_ui_use_toast",
+      "src_hooks_use_toast",
+      "src_hooks_use_toast_action",
+      "src_hooks_use_toast_actiontype",
+      "src_hooks_use_toast_actiontypes",
+      "src_hooks_use_toast_addtoremovequeue",
+      "src_hooks_use_toast_dispatch",
+      "src_hooks_use_toast_genid",
+      "src_hooks_use_toast_listeners",
+      "src_hooks_use_toast_memorystate",
+      "src_hooks_use_toast_reducer",
+      "src_hooks_use_toast_state",
+      "src_hooks_use_toast_toast",
+      "src_hooks_use_toast_toastertoast",
+      "src_hooks_use_toast_toasttimeouts",
+      "src_hooks_use_toast_usetoast"
+    ],
+    "7": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_es2020",
@@ -184,10 +330,12 @@
       "tsconfig_app_compileroptions_usedefineforclassfields",
       "tsconfig_app_include"
     ],
-    "5": [
+    "8": [
       "src_components_horariossection",
       "src_components_horariossection_badgedescriptions",
       "src_components_horariossection_badgestyles",
+      "src_components_horariossection_clasecard",
+      "src_components_horariossection_clasedaycard",
       "src_components_horariossection_claseenriquecida",
       "src_components_horariossection_dias",
       "src_components_horariossection_disciplinasdisponibles",
@@ -210,7 +358,32 @@
       "src_components_ui_tooltip",
       "src_components_ui_tooltip_tooltipcontent"
     ],
-    "6": [
+    "9": [
+      "src_components_navlink",
+      "src_components_navlink_navlink",
+      "src_components_navlink_navlinkcompatprops",
+      "src_components_ui_checkbox",
+      "src_components_ui_checkbox_checkbox",
+      "src_components_ui_hover_card",
+      "src_components_ui_hover_card_hovercardcontent",
+      "src_components_ui_popover",
+      "src_components_ui_popover_popovercontent",
+      "src_components_ui_progress",
+      "src_components_ui_progress_progress",
+      "src_components_ui_scroll_area",
+      "src_components_ui_scroll_area_scrollarea",
+      "src_components_ui_scroll_area_scrollbar",
+      "src_components_ui_slider",
+      "src_components_ui_slider_slider",
+      "src_components_ui_switch",
+      "src_components_ui_switch_switch",
+      "src_components_ui_tabs",
+      "src_components_ui_tabs_tabscontent",
+      "src_components_ui_tabs_tabslist",
+      "src_components_ui_tabs_tabstrigger",
+      "src_lib_utils"
+    ],
+    "10": [
       "supabase_functions_notify_comprobante_index",
       "supabase_functions_notify_comprobante_index_schema",
       "supabase_functions_shared_slack",
@@ -234,53 +407,7 @@
       "supabase_functions_subscribe_sportclub_index_getalquilerlabel",
       "supabase_functions_subscribe_sportclub_index_normalizetext"
     ],
-    "7": [
-      "src_components_alquiler_alquilerhorariosgrid",
-      "src_components_alquiler_alquilerhorariosgrid_alquilerhorariosgrid",
-      "src_components_alquiler_alquilerhorariosgrid_buildhorarios",
-      "src_components_alquiler_alquilersedesgrid",
-      "src_components_alquiler_alquilersedesgrid_alquilersedes",
-      "src_components_alquiler_alquilersedesgrid_alquilersedesgrid",
-      "src_components_herosection",
-      "src_components_herosection_herosection",
-      "src_components_herosection_stats",
-      "src_components_horariossection_clasecard",
-      "src_components_horariossection_clasedaycard",
-      "src_components_sedesmapa",
-      "src_components_sedesmapa_makeicon",
-      "src_components_sedesmapa_markersvg",
-      "src_components_sedesmapa_sedesmapa",
-      "src_data_sedes",
-      "src_data_sedes_clasesede",
-      "src_data_sedes_disciplinacolor",
-      "src_data_sedes_expandirnivel",
-      "src_data_sedes_ordendias",
-      "src_data_sedes_sedes"
-    ],
-    "8": [
-      "src_components_navlink",
-      "src_components_navlink_navlink",
-      "src_components_navlink_navlinkcompatprops",
-      "src_components_ui_checkbox",
-      "src_components_ui_checkbox_checkbox",
-      "src_components_ui_input_otp",
-      "src_components_ui_input_otp_inputotp",
-      "src_components_ui_input_otp_inputotpgroup",
-      "src_components_ui_input_otp_inputotpseparator",
-      "src_components_ui_input_otp_inputotpslot",
-      "src_components_ui_popover",
-      "src_components_ui_popover_popovercontent",
-      "src_components_ui_progress",
-      "src_components_ui_progress_progress",
-      "src_components_ui_radio_group",
-      "src_components_ui_radio_group_radiogroup",
-      "src_components_ui_radio_group_radiogroupitem",
-      "src_components_ui_scroll_area",
-      "src_components_ui_scroll_area_scrollarea",
-      "src_components_ui_scroll_area_scrollbar",
-      "src_lib_utils"
-    ],
-    "9": [
+    "11": [
       "src_components_planessportclub",
       "src_components_planessportclub_buildplanwa",
       "src_components_planessportclub_plan",
@@ -303,28 +430,7 @@
       "src_pages_sportclubconfirmado_wadudas",
       "src_pages_sportclubconfirmado_whatsappicon"
     ],
-    "10": [
-      "src_components_appsection",
-      "src_components_appsection_appsection",
-      "src_components_appsection_features",
-      "src_components_forwhom",
-      "src_components_forwhom_forwhom",
-      "src_components_forwhom_points",
-      "src_components_sedessection",
-      "src_components_sedessection_sedessection",
-      "src_components_testimonials",
-      "src_components_testimonials_testimonials",
-      "src_components_valueproposition",
-      "src_components_valueproposition_valueproposition",
-      "src_components_videosocialproof",
-      "src_components_videosocialproof_reels",
-      "src_components_videosocialproof_videosocialproof",
-      "src_hooks_usescrollanimation",
-      "src_hooks_usescrollanimation_usescrollanimation",
-      "src_pages_index",
-      "src_pages_index_index"
-    ],
-    "11": [
+    "12": [
       "src_components_sportclub_horariossportclub",
       "src_components_sportclub_horariossportclub_clasedia",
       "src_components_sportclub_horariossportclub_dias",
@@ -338,6 +444,8 @@
       "src_components_ui_select_selectscrollupbutton",
       "src_components_ui_select_selectseparator",
       "src_components_ui_select_selecttrigger",
+      "src_components_upgradenivelcallout",
+      "src_components_upgradenivelcallout_upgradenivelcallout",
       "src_pages_listaesperapage",
       "src_pages_listaesperapage_equipo_opciones",
       "src_pages_listaesperapage_formdata",
@@ -345,7 +453,7 @@
       "src_pages_listaesperapage_listaesperapage",
       "src_pages_listaesperapage_motivaciones"
     ],
-    "12": [
+    "13": [
       "ref_es2023",
       "ref_vite_config_ts",
       "tsconfig_node",
@@ -364,26 +472,6 @@
       "tsconfig_node_compileroptions_strict",
       "tsconfig_node_compileroptions_target",
       "tsconfig_node_include"
-    ],
-    "13": [
-      "src_components_alquiler_pricingalquilersection",
-      "src_components_alquiler_pricingalquilersection_alquilerplan",
-      "src_components_alquiler_pricingalquilersection_plans",
-      "src_components_alquiler_pricingalquilersection_pricingalquilersection",
-      "src_components_navbar",
-      "src_components_navbar_navbar",
-      "src_components_navbar_navlinks",
-      "src_components_pricingsection",
-      "src_components_pricingsection_monthlyplans",
-      "src_components_pricingsection_period",
-      "src_components_pricingsection_plan",
-      "src_components_pricingsection_pricingsection",
-      "src_components_pricingsection_quarterlyplans",
-      "src_components_ui_badge",
-      "src_components_ui_badge_badge",
-      "src_components_ui_badge_badgeprops",
-      "src_components_ui_badge_badgevariants",
-      "src_components_ui_button_button"
     ],
     "14": [
       "components",
@@ -458,38 +546,22 @@
       "src_pages_clasegratisconfirmada_whatsappicon"
     ],
     "18": [
-      "src_components_ui_accordion",
-      "src_components_ui_accordion_accordioncontent",
-      "src_components_ui_accordion_accordionitem",
-      "src_components_ui_accordion_accordiontrigger",
-      "src_pages_clasesmasalquiler",
-      "src_pages_clasesmasalquiler_clasesmasalquiler",
-      "src_pages_clasesmasalquiler_faq",
-      "src_pages_clasesmasalquiler_incluye",
-      "src_pages_clasesmasalquiler_pasos",
-      "src_pages_preguntasfrecuentes",
-      "src_pages_preguntasfrecuentes_faqitem",
-      "src_pages_preguntasfrecuentes_faqsection",
-      "src_pages_preguntasfrecuentes_preguntasfrecuentes",
-      "src_pages_preguntasfrecuentes_secciones"
+      "src_components_ui_drawer",
+      "src_components_ui_drawer_drawer",
+      "src_components_ui_drawer_drawercontent",
+      "src_components_ui_drawer_drawerdescription",
+      "src_components_ui_drawer_drawerfooter",
+      "src_components_ui_drawer_drawerheader",
+      "src_components_ui_drawer_draweroverlay",
+      "src_components_ui_drawer_drawertitle",
+      "src_components_ui_resizable",
+      "src_components_ui_resizable_resizablehandle",
+      "src_components_ui_resizable_resizablepanelgroup",
+      "src_components_ui_skeleton",
+      "src_components_ui_skeleton_skeleton",
+      "src_lib_utils_cn"
     ],
     "19": [
-      "src_components_ui_form",
-      "src_components_ui_form_formcontrol",
-      "src_components_ui_form_formdescription",
-      "src_components_ui_form_formfield",
-      "src_components_ui_form_formfieldcontext",
-      "src_components_ui_form_formfieldcontextvalue",
-      "src_components_ui_form_formitem",
-      "src_components_ui_form_formitemcontext",
-      "src_components_ui_form_formitemcontextvalue",
-      "src_components_ui_form_formlabel",
-      "src_components_ui_form_formmessage",
-      "src_components_ui_label",
-      "src_components_ui_label_label",
-      "src_components_ui_label_labelvariants"
-    ],
-    "20": [
       "autoprefixer",
       "globals",
       "package_devdependencies",
@@ -504,40 +576,10 @@
       "typescript",
       "vitest"
     ],
-    "21": [
-      "src_components_ui_carousel",
-      "src_components_ui_carousel_carousel",
-      "src_components_ui_carousel_carouselapi",
-      "src_components_ui_carousel_carouselcontent",
-      "src_components_ui_carousel_carouselcontext",
-      "src_components_ui_carousel_carouselcontextprops",
-      "src_components_ui_carousel_carouselitem",
-      "src_components_ui_carousel_carouselnext",
-      "src_components_ui_carousel_carouseloptions",
-      "src_components_ui_carousel_carouselplugin",
-      "src_components_ui_carousel_carouselprevious",
-      "src_components_ui_carousel_carouselprops",
-      "src_components_ui_carousel_usecarouselparameters"
-    ],
-    "22": [
-      "src_components_upgradenivelcallout",
-      "src_components_upgradenivelcallout_upgradenivelcallout",
-      "src_pages_clasegratis",
-      "src_pages_clasegratis_badge_desc",
-      "src_pages_clasegratis_badge_styles",
-      "src_pages_clasegratis_clasegratis",
-      "src_pages_clasegratis_dias_semana",
-      "src_pages_clasegratis_equipo_opciones",
-      "src_pages_clasegratis_formschema",
-      "src_pages_clasegratis_horarios_clases",
-      "src_pages_clasegratis_identidades",
-      "src_pages_clasegratis_perfiles",
-      "src_pages_clasegratis_sedes_gratis_ids"
-    ],
-    "23": [
-      "class_variance_authority",
+    "20": [
+      "cmdk",
       "package_dependencies",
-      "package_dependencies_class_variance_authority",
+      "package_dependencies_cmdk",
       "package_dependencies_radix_ui_react_alert_dialog",
       "package_dependencies_radix_ui_react_context_menu",
       "package_dependencies_radix_ui_react_progress",
@@ -548,35 +590,7 @@
       "radix_ui_react_progress",
       "radix_ui_react_tabs"
     ],
-    "24": [
-      "src_components_equipopropionota",
-      "src_components_equipopropionota_equipopropionota",
-      "src_pages_exclusivosociossportclub",
-      "src_pages_exclusivosociossportclub_alquiler_opciones",
-      "src_pages_exclusivosociossportclub_beneficios",
-      "src_pages_exclusivosociossportclub_exclusivosociossportclub",
-      "src_pages_exclusivosociossportclub_formschema",
-      "src_pages_exclusivosociossportclub_perfiles",
-      "src_pages_exclusivosociossportclub_planes_sportclub",
-      "src_pages_exclusivosociossportclub_sportclub_horarios",
-      "src_pages_exclusivosociossportclub_sportclubsedes",
-      "src_pages_exclusivosociossportclub_todaslassedes"
-    ],
-    "25": [
-      "src_components_ui_hover_card",
-      "src_components_ui_hover_card_hovercardcontent",
-      "src_components_ui_resizable",
-      "src_components_ui_resizable_resizablehandle",
-      "src_components_ui_resizable_resizablepanelgroup",
-      "src_components_ui_skeleton",
-      "src_components_ui_skeleton_skeleton",
-      "src_components_ui_slider",
-      "src_components_ui_slider_slider",
-      "src_components_ui_switch",
-      "src_components_ui_switch_switch",
-      "src_lib_utils_cn"
-    ],
-    "26": [
+    "21": [
       "src_components_ui_menubar",
       "src_components_ui_menubar_menubar",
       "src_components_ui_menubar_menubarcheckboxitem",
@@ -590,7 +604,20 @@
       "src_components_ui_menubar_menubarsubtrigger",
       "src_components_ui_menubar_menubartrigger"
     ],
-    "27": [
+    "22": [
+      "src_components_ui_form",
+      "src_components_ui_form_formcontrol",
+      "src_components_ui_form_formdescription",
+      "src_components_ui_form_formfield",
+      "src_components_ui_form_formfieldcontext",
+      "src_components_ui_form_formfieldcontextvalue",
+      "src_components_ui_form_formitem",
+      "src_components_ui_form_formitemcontext",
+      "src_components_ui_form_formitemcontextvalue",
+      "src_components_ui_form_formlabel",
+      "src_components_ui_form_formmessage"
+    ],
+    "23": [
       "src_integrations_supabase_types",
       "src_integrations_supabase_types_compositetypes",
       "src_integrations_supabase_types_constants",
@@ -603,7 +630,7 @@
       "src_integrations_supabase_types_tablesinsert",
       "src_integrations_supabase_types_tablesupdate"
     ],
-    "28": [
+    "24": [
       "tsconfig",
       "tsconfig_compileroptions",
       "tsconfig_compileroptions_allowjs",
@@ -616,31 +643,7 @@
       "tsconfig_files",
       "tsconfig_references"
     ],
-    "29": [
-      "src_components_sugerencias_sugerenciadialog",
-      "src_components_sugerencias_sugerenciadialog_dias",
-      "src_components_sugerencias_sugerenciadialog_franjas",
-      "src_components_sugerencias_sugerenciadialog_props",
-      "src_components_sugerencias_sugerenciadialog_schema",
-      "src_components_sugerencias_sugerenciadialog_sugerenciadialog",
-      "src_components_ui_dialog_dialogdescription",
-      "src_components_ui_textarea",
-      "src_components_ui_textarea_textarea",
-      "src_components_ui_textarea_textareaprops"
-    ],
-    "30": [
-      "src_components_ui_chart",
-      "src_components_ui_chart_chartconfig",
-      "src_components_ui_chart_chartcontainer",
-      "src_components_ui_chart_chartcontext",
-      "src_components_ui_chart_chartcontextprops",
-      "src_components_ui_chart_chartlegendcontent",
-      "src_components_ui_chart_chartstyle",
-      "src_components_ui_chart_charttooltipcontent",
-      "src_components_ui_chart_getpayloadconfigfrompayload",
-      "src_components_ui_chart_themes"
-    ],
-    "31": [
+    "25": [
       "src_components_ui_context_menu",
       "src_components_ui_context_menu_contextmenucheckboxitem",
       "src_components_ui_context_menu_contextmenucontent",
@@ -652,7 +655,7 @@
       "src_components_ui_context_menu_contextmenusubcontent",
       "src_components_ui_context_menu_contextmenusubtrigger"
     ],
-    "32": [
+    "26": [
       "src_components_ui_dropdown_menu",
       "src_components_ui_dropdown_menu_dropdownmenucheckboxitem",
       "src_components_ui_dropdown_menu_dropdownmenucontent",
@@ -664,18 +667,18 @@
       "src_components_ui_dropdown_menu_dropdownmenusubcontent",
       "src_components_ui_dropdown_menu_dropdownmenusubtrigger"
     ],
-    "33": [
-      "package_dependencies_react",
-      "react",
-      "src_components_ui_carousel_usecarousel",
-      "src_components_ui_chart_usechart",
-      "src_components_ui_form_useformfield",
-      "src_components_ui_sidebar_sidebarcontext",
-      "src_components_ui_sidebar_usesidebar",
-      "src_hooks_use_mobile",
-      "src_hooks_use_mobile_useismobile"
+    "27": [
+      "src_components_sugerencias_sugerenciadialog",
+      "src_components_sugerencias_sugerenciadialog_dias",
+      "src_components_sugerencias_sugerenciadialog_franjas",
+      "src_components_sugerencias_sugerenciadialog_props",
+      "src_components_sugerencias_sugerenciadialog_schema",
+      "src_components_sugerencias_sugerenciadialog_sugerenciadialog",
+      "src_components_ui_textarea",
+      "src_components_ui_textarea_textarea",
+      "src_components_ui_textarea_textareaprops"
     ],
-    "34": [
+    "28": [
       "src_components_ui_alert_dialog",
       "src_components_ui_alert_dialog_alertdialogaction",
       "src_components_ui_alert_dialog_alertdialogcancel",
@@ -686,18 +689,7 @@
       "src_components_ui_alert_dialog_alertdialogoverlay",
       "src_components_ui_alert_dialog_alertdialogtitle"
     ],
-    "35": [
-      "src_components_ui_sheet",
-      "src_components_ui_sheet_sheetcontent",
-      "src_components_ui_sheet_sheetcontentprops",
-      "src_components_ui_sheet_sheetdescription",
-      "src_components_ui_sheet_sheetfooter",
-      "src_components_ui_sheet_sheetheader",
-      "src_components_ui_sheet_sheetoverlay",
-      "src_components_ui_sheet_sheettitle",
-      "src_components_ui_sheet_sheetvariants"
-    ],
-    "36": [
+    "29": [
       "src_components_ui_table",
       "src_components_ui_table_table",
       "src_components_ui_table_tablebody",
@@ -708,7 +700,7 @@
       "src_components_ui_table_tableheader",
       "src_components_ui_table_tablerow"
     ],
-    "37": [
+    "30": [
       "package_scripts",
       "package_scripts_build",
       "package_scripts_build_dev",
@@ -718,7 +710,7 @@
       "package_scripts_test",
       "package_scripts_test_watch"
     ],
-    "38": [
+    "31": [
       "src_components_ui_breadcrumb",
       "src_components_ui_breadcrumb_breadcrumb",
       "src_components_ui_breadcrumb_breadcrumbellipsis",
@@ -728,17 +720,7 @@
       "src_components_ui_breadcrumb_breadcrumbpage",
       "src_components_ui_breadcrumb_breadcrumbseparator"
     ],
-    "39": [
-      "src_components_ui_drawer",
-      "src_components_ui_drawer_drawer",
-      "src_components_ui_drawer_drawercontent",
-      "src_components_ui_drawer_drawerdescription",
-      "src_components_ui_drawer_drawerfooter",
-      "src_components_ui_drawer_drawerheader",
-      "src_components_ui_drawer_draweroverlay",
-      "src_components_ui_drawer_drawertitle"
-    ],
-    "40": [
+    "32": [
       "src_components_ui_navigation_menu",
       "src_components_ui_navigation_menu_navigationmenu",
       "src_components_ui_navigation_menu_navigationmenucontent",
@@ -748,7 +730,16 @@
       "src_components_ui_navigation_menu_navigationmenutriggerstyle",
       "src_components_ui_navigation_menu_navigationmenuviewport"
     ],
-    "41": [
+    "33": [
+      "src_components_ui_label",
+      "src_components_ui_label_label",
+      "src_components_ui_label_labelvariants",
+      "src_pages_pagoconfirmado",
+      "src_pages_pagoconfirmado_accepted",
+      "src_pages_pagoconfirmado_pagoconfirmado",
+      "src_pages_pagoconfirmado_plan_labels"
+    ],
+    "34": [
       "src_components_ui_toggle",
       "src_components_ui_toggle_group",
       "src_components_ui_toggle_group_togglegroup",
@@ -757,399 +748,403 @@
       "src_components_ui_toggle_toggle",
       "src_components_ui_toggle_togglevariants"
     ],
-    "42": [
-      "src_components_flyfreepanel",
-      "src_components_flyfreepanel_flyfreepanel",
-      "src_pages_pagoconfirmado",
-      "src_pages_pagoconfirmado_accepted",
-      "src_pages_pagoconfirmado_pagoconfirmado",
-      "src_pages_pagoconfirmado_plan_labels"
-    ],
-    "43": [
+    "35": [
       "package",
       "package_name",
       "package_private",
       "package_type",
       "package_version"
     ],
-    "44": [
+    "36": [
       "src_components_ui_alert",
       "src_components_ui_alert_alert",
       "src_components_ui_alert_alertdescription",
       "src_components_ui_alert_alerttitle",
       "src_components_ui_alert_alertvariants"
     ],
-    "45": [
+    "37": [
+      "src_components_ui_input_otp",
+      "src_components_ui_input_otp_inputotp",
+      "src_components_ui_input_otp_inputotpgroup",
+      "src_components_ui_input_otp_inputotpseparator",
+      "src_components_ui_input_otp_inputotpslot"
+    ],
+    "38": [
       "src_components_ui_avatar",
       "src_components_ui_avatar_avatar",
       "src_components_ui_avatar_avatarfallback",
       "src_components_ui_avatar_avatarimage"
     ],
-    "46": [
-      "src_components_ui_tabs",
-      "src_components_ui_tabs_tabscontent",
-      "src_components_ui_tabs_tabslist",
-      "src_components_ui_tabs_tabstrigger"
-    ],
-    "47": [
+    "39": [
       "supabase_functions_subscribe_lista_espera_index",
       "supabase_functions_subscribe_lista_espera_index_allowed_origins",
       "supabase_functions_subscribe_lista_espera_index_bodyschema",
       "supabase_functions_subscribe_lista_espera_index_buildcors"
     ],
-    "48": [
+    "40": [
       "supabase_functions_subscribe_newsletter_index",
       "supabase_functions_subscribe_newsletter_index_allowed_origins",
       "supabase_functions_subscribe_newsletter_index_bodyschema",
       "supabase_functions_subscribe_newsletter_index_buildcors"
     ],
-    "49": [
-      "src_components_alquiler_banneralquilerhome",
-      "src_components_alquiler_banneralquilerhome_banneralquilerhome",
-      "src_components_alquiler_banneralquilerhome_handleclick"
+    "41": [
+      "src_components_ui_radio_group",
+      "src_components_ui_radio_group_radiogroup",
+      "src_components_ui_radio_group_radiogroupitem"
     ],
-    "50": [
+    "42": [
       "src_data_sedes_alquiler",
       "src_data_sedes_alquiler_alquilerclasesede",
       "src_data_sedes_alquiler_alquilerclasesedes"
     ],
-    "51": [
-      "embla_carousel_react",
-      "package_dependencies_embla_carousel_react"
+    "43": [
+      "class_variance_authority",
+      "package_dependencies_class_variance_authority"
     ],
-    "52": [
+    "44": [
       "clsx",
       "package_dependencies_clsx"
     ],
-    "53": [
-      "cmdk",
-      "package_dependencies_cmdk"
-    ],
-    "54": [
+    "45": [
       "date_fns",
       "package_dependencies_date_fns"
     ],
-    "55": [
+    "46": [
+      "embla_carousel_react",
+      "package_dependencies_embla_carousel_react"
+    ],
+    "47": [
       "eslint",
       "package_devdependencies_eslint"
     ],
-    "56": [
+    "48": [
       "eslint_js",
       "package_devdependencies_eslint_js"
     ],
-    "57": [
-      "eslint_plugin_react_hooks",
-      "package_devdependencies_eslint_plugin_react_hooks"
-    ],
-    "58": [
+    "49": [
       "eslint_plugin_react_refresh",
       "package_devdependencies_eslint_plugin_react_refresh"
     ],
-    "59": [
+    "50": [
       "hookform_resolvers",
       "package_dependencies_hookform_resolvers"
     ],
-    "60": [
+    "51": [
       "input_otp",
       "package_dependencies_input_otp"
     ],
-    "61": [
+    "52": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "62": [
+    "53": [
       "leaflet",
       "package_dependencies_leaflet"
     ],
-    "63": [
+    "54": [
       "lovable_tagger",
       "package_devdependencies_lovable_tagger"
     ],
-    "64": [
+    "55": [
       "lucide_react",
       "package_dependencies_lucide_react"
     ],
-    "65": [
+    "56": [
       "next_themes",
       "package_dependencies_next_themes"
     ],
-    "66": [
+    "57": [
       "package_dependencies_radix_ui_react_accordion",
       "radix_ui_react_accordion"
     ],
-    "67": [
+    "58": [
       "package_dependencies_radix_ui_react_aspect_ratio",
       "radix_ui_react_aspect_ratio"
     ],
-    "68": [
+    "59": [
       "package_dependencies_radix_ui_react_avatar",
       "radix_ui_react_avatar"
     ],
-    "69": [
+    "60": [
       "package_dependencies_radix_ui_react_checkbox",
       "radix_ui_react_checkbox"
     ],
-    "70": [
+    "61": [
       "package_dependencies_radix_ui_react_collapsible",
       "radix_ui_react_collapsible"
     ],
-    "71": [
+    "62": [
       "package_dependencies_radix_ui_react_dialog",
       "radix_ui_react_dialog"
     ],
-    "72": [
+    "63": [
       "package_dependencies_radix_ui_react_dropdown_menu",
       "radix_ui_react_dropdown_menu"
     ],
-    "73": [
+    "64": [
       "package_dependencies_radix_ui_react_hover_card",
       "radix_ui_react_hover_card"
     ],
-    "74": [
+    "65": [
       "package_dependencies_radix_ui_react_label",
       "radix_ui_react_label"
     ],
-    "75": [
+    "66": [
       "package_dependencies_radix_ui_react_menubar",
       "radix_ui_react_menubar"
     ],
-    "76": [
+    "67": [
       "package_dependencies_radix_ui_react_navigation_menu",
       "radix_ui_react_navigation_menu"
     ],
-    "77": [
+    "68": [
       "package_dependencies_radix_ui_react_popover",
       "radix_ui_react_popover"
     ],
-    "78": [
+    "69": [
       "package_dependencies_radix_ui_react_radio_group",
       "radix_ui_react_radio_group"
     ],
-    "79": [
+    "70": [
       "package_dependencies_radix_ui_react_scroll_area",
       "radix_ui_react_scroll_area"
     ],
-    "80": [
+    "71": [
       "package_dependencies_radix_ui_react_select",
       "radix_ui_react_select"
     ],
-    "81": [
+    "72": [
       "package_dependencies_radix_ui_react_separator",
       "radix_ui_react_separator"
     ],
-    "82": [
+    "73": [
       "package_dependencies_radix_ui_react_slider",
       "radix_ui_react_slider"
     ],
-    "83": [
+    "74": [
       "package_dependencies_radix_ui_react_slot",
       "radix_ui_react_slot"
     ],
-    "84": [
+    "75": [
       "package_dependencies_radix_ui_react_switch",
       "radix_ui_react_switch"
     ],
-    "85": [
+    "76": [
       "package_dependencies_radix_ui_react_toggle",
       "radix_ui_react_toggle"
     ],
-    "86": [
+    "77": [
       "package_dependencies_radix_ui_react_toggle_group",
       "radix_ui_react_toggle_group"
     ],
-    "87": [
+    "78": [
       "package_dependencies_radix_ui_react_tooltip",
       "radix_ui_react_tooltip"
     ],
-    "88": [
+    "79": [
       "package_dependencies_react_day_picker",
       "react_day_picker"
     ],
-    "89": [
+    "80": [
       "package_dependencies_react_dom",
       "react_dom"
     ],
-    "90": [
+    "81": [
       "package_dependencies_react_helmet_async",
       "react_helmet_async"
     ],
-    "91": [
+    "82": [
       "package_dependencies_react_hook_form",
       "react_hook_form"
     ],
-    "92": [
+    "83": [
       "package_dependencies_react_resizable_panels",
       "react_resizable_panels"
     ],
-    "93": [
+    "84": [
       "package_dependencies_react_router_dom",
       "react_router_dom"
     ],
-    "94": [
+    "85": [
       "package_dependencies_recharts",
       "recharts"
     ],
-    "95": [
+    "86": [
       "package_dependencies_sonner",
       "sonner"
     ],
-    "96": [
+    "87": [
       "package_dependencies_supabase_supabase_js",
       "supabase_supabase_js"
     ],
-    "97": [
+    "88": [
       "package_dependencies_tailwind_merge",
       "tailwind_merge"
     ],
-    "98": [
+    "89": [
       "package_dependencies_tailwindcss_animate",
       "tailwindcss_animate"
     ],
-    "99": [
+    "90": [
       "package_dependencies_tanstack_react_query",
       "tanstack_react_query"
     ],
-    "100": [
+    "91": [
       "package_dependencies_vaul",
       "vaul"
     ],
-    "101": [
+    "92": [
       "package_dependencies_zod",
       "zod"
     ],
-    "102": [
+    "93": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "103": [
+    "94": [
       "package_devdependencies_postcss",
       "postcss"
     ],
-    "104": [
+    "95": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "105": [
+    "96": [
       "package_devdependencies_tailwindcss_typography",
       "tailwindcss_typography"
     ],
-    "106": [
+    "97": [
       "package_devdependencies_testing_library_react",
       "testing_library_react"
     ],
-    "107": [
+    "98": [
       "package_devdependencies_types_leaflet",
       "types_leaflet"
     ],
-    "108": [
+    "99": [
       "package_devdependencies_types_node",
       "types_node"
     ],
-    "109": [
+    "100": [
+      "eslint_plugin_react_hooks",
+      "package_devdependencies_eslint_plugin_react_hooks"
+    ],
+    "101": [
       "package_devdependencies_types_react_dom",
       "types_react_dom"
     ],
-    "110": [
+    "102": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "111": [
+    "103": [
       "package_devdependencies_vite",
       "vite"
     ],
-    "112": [
+    "104": [
       "package_devdependencies_vitejs_plugin_react_swc",
       "vitejs_plugin_react_swc"
     ],
-    "113": [
+    "105": [
+      "supabase_migrations_20260605195202_382c5698_f043_4db6_91fe_6c945af073e5",
+      "supabase_migrations_20260605195202_382c5698_f043_4db6_91fe_6c945af073e5_public_comprobantes_pago"
+    ],
+    "106": [
+      "supabase_migrations_20260614050000_leads_backup",
+      "supabase_migrations_20260614050000_leads_backup_public_leads"
+    ],
+    "107": [
       "eslint_config"
     ],
-    "114": [
+    "108": [
       "playwright_config"
     ],
-    "115": [
+    "109": [
       "playwright_fixture"
     ],
-    "116": [
+    "110": [
       "postcss_config"
     ],
-    "117": [
+    "111": [
       "src_components_ui_aspect_ratio"
     ],
-    "118": [
+    "112": [
       "src_components_ui_collapsible"
     ],
-    "119": [
+    "113": [
       "src_test_example_test"
     ],
-    "120": [
+    "114": [
       "src_test_setup"
     ],
-    "121": [
+    "115": [
       "src_vite_env_d"
     ],
-    "122": [
+    "116": [
+      "supabase_migrations_20260605224014_029758ee_c0d5_4784_9d13_7a7ab8e8dadc"
+    ],
+    "117": [
       "tailwind_config"
     ],
-    "123": [
+    "118": [
       "vite_config"
     ],
-    "124": [
+    "119": [
       "vitest_config"
     ]
   },
   "cohesion": {
-    "0": 0.05779220779220779,
-    "1": 0.07207207207207207,
-    "2": 0.11904761904761904,
-    "3": 0.07692307692307693,
-    "4": 0.07692307692307693,
-    "5": 0.10144927536231885,
-    "6": 0.12554112554112554,
-    "7": 0.17142857142857143,
-    "8": 0.09523809523809523,
-    "9": 0.12857142857142856,
-    "10": 0.21052631578947367,
-    "11": 0.14035087719298245,
-    "12": 0.1111111111111111,
-    "13": 0.13725490196078433,
+    "0": 0.06370543541788427,
+    "1": 0.059506531204644414,
+    "2": 0.07439613526570048,
+    "3": 0.05512820512820513,
+    "4": 0.0773109243697479,
+    "5": 0.07142857142857142,
+    "6": 0.1225071225071225,
+    "7": 0.07692307692307693,
+    "8": 0.09230769230769231,
+    "9": 0.08695652173913043,
+    "10": 0.12554112554112554,
+    "11": 0.12857142857142856,
+    "12": 0.12380952380952381,
+    "13": 0.1111111111111111,
     "14": 0.11764705882352941,
     "15": 0.17647058823529413,
     "16": 0.18095238095238095,
     "17": 0.2,
-    "18": 0.2087912087912088,
+    "18": 0.1978021978021978,
     "19": 0.15384615384615385,
-    "20": 0.15384615384615385,
-    "21": 0.15384615384615385,
-    "22": 0.16666666666666666,
+    "20": 0.18181818181818182,
+    "21": 0.16666666666666666,
+    "22": 0.18181818181818182,
     "23": 0.18181818181818182,
     "24": 0.18181818181818182,
-    "25": 0.21212121212121213,
-    "26": 0.16666666666666666,
-    "27": 0.18181818181818182,
-    "28": 0.18181818181818182,
+    "25": 0.2,
+    "26": 0.2,
+    "27": 0.25,
+    "28": 0.2222222222222222,
     "29": 0.2222222222222222,
-    "30": 0.2,
-    "31": 0.2,
-    "32": 0.2,
-    "33": 0.2222222222222222,
-    "34": 0.2222222222222222,
-    "35": 0.2222222222222222,
-    "36": 0.2222222222222222,
-    "37": 0.25,
-    "38": 0.25,
-    "39": 0.25,
-    "40": 0.25,
-    "41": 0.3333333333333333,
-    "42": 0.4666666666666667,
-    "43": 0.4,
-    "44": 0.4,
-    "45": 0.5,
-    "46": 0.5,
-    "47": 0.5,
-    "48": 0.5,
-    "49": 0.6666666666666666,
-    "50": 0.6666666666666666,
+    "30": 0.25,
+    "31": 0.25,
+    "32": 0.25,
+    "33": 0.38095238095238093,
+    "34": 0.3333333333333333,
+    "35": 0.4,
+    "36": 0.4,
+    "37": 0.4,
+    "38": 0.5,
+    "39": 0.5,
+    "40": 0.5,
+    "41": 0.6666666666666666,
+    "42": 0.6666666666666666,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0,
+    "50": 1.0,
     "51": 1.0,
     "52": 1.0,
     "53": 1.0,
@@ -1218,12 +1213,7 @@
     "116": 1.0,
     "117": 1.0,
     "118": 1.0,
-    "119": 1.0,
-    "120": 1.0,
-    "121": 1.0,
-    "122": 1.0,
-    "123": 1.0,
-    "124": 1.0
+    "119": 1.0
   },
   "gods": [
     {
@@ -1312,17 +1302,6 @@
       "why": "connects across different repos/directories; peripheral node `useFormField()` unexpectedly reaches hub `react`"
     },
     {
-      "source": "useToast()",
-      "target": "react",
-      "source_files": [
-        "src/hooks/use-toast.ts",
-        "package.json"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "connects across different repos/directories; bridges separate communities"
-    },
-    {
       "source": "useSidebar()",
       "target": "react",
       "source_files": [
@@ -1331,44 +1310,55 @@
       ],
       "confidence": "EXTRACTED",
       "relation": "references",
-      "why": "connects across different repos/directories"
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "useIsMobile()",
+      "target": "react",
+      "source_files": [
+        "src/hooks/use-mobile.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
     }
   ],
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `dependencies` connect `Community 23` to `Community 33`, `Community 43`, `Community 51`, `Community 52`, `Community 53`, `Community 54`, `Community 59`, `Community 60`, `Community 62`, `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 75`, `Community 76`, `Community 77`, `Community 78`, `Community 79`, `Community 80`, `Community 81`, `Community 82`, `Community 83`, `Community 84`, `Community 85`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 92`, `Community 93`, `Community 94`, `Community 95`, `Community 96`, `Community 97`, `Community 98`, `Community 99`, `Community 100`, `Community 101`?",
-      "why": "High betweenness centrality (0.287) - this node is a cross-community bridge."
+      "question": "Why does `dependencies` connect `Community 20` to `Community 5`, `Community 35`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 50`, `Community 51`, `Community 53`, `Community 55`, `Community 56`, `Community 57`, `Community 58`, `Community 59`, `Community 60`, `Community 61`, `Community 62`, `Community 63`, `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 75`, `Community 76`, `Community 77`, `Community 78`, `Community 79`, `Community 80`, `Community 81`, `Community 82`, `Community 83`, `Community 84`, `Community 85`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 92`?",
+      "why": "High betweenness centrality (0.283) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `react` connect `Community 33` to `Community 2`, `Community 23`?",
-      "why": "High betweenness centrality (0.260) - this node is a cross-community bridge."
+      "question": "Why does `react` connect `Community 5` to `Community 3`, `Community 20`, `Community 6`?",
+      "why": "High betweenness centrality (0.256) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `cn()` connect `Community 25` to `Community 0`, `Community 2`, `Community 3`, `Community 5`, `Community 8`, `Community 11`, `Community 13`, `Community 15`, `Community 16`, `Community 18`, `Community 19`, `Community 21`, `Community 26`, `Community 29`, `Community 30`, `Community 31`, `Community 32`, `Community 34`, `Community 35`, `Community 36`, `Community 38`, `Community 39`, `Community 40`, `Community 41`, `Community 44`, `Community 45`, `Community 46`?",
-      "why": "High betweenness centrality (0.181) - this node is a cross-community bridge."
+      "question": "Why does `cn()` connect `Community 18` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 8`, `Community 9`, `Community 12`, `Community 15`, `Community 16`, `Community 21`, `Community 22`, `Community 25`, `Community 26`, `Community 27`, `Community 28`, `Community 29`, `Community 31`, `Community 32`, `Community 33`, `Community 34`, `Community 36`, `Community 37`, `Community 38`, `Community 41`?",
+      "why": "High betweenness centrality (0.179) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
       "question": "What connects `$schema`, `style`, `rsc` to the rest of the system?",
-      "why": "440 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "why": "442 weakly-connected nodes found - possible documentation gaps or missing edges."
     },
     {
       "type": "low_cohesion",
       "question": "Should `Community 0` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.05779220779220779 - nodes in this community are weakly interconnected."
+      "why": "Cohesion score 0.06370543541788427 - nodes in this community are weakly interconnected."
     },
     {
       "type": "low_cohesion",
       "question": "Should `Community 1` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.07207207207207207 - nodes in this community are weakly interconnected."
+      "why": "Cohesion score 0.059506531204644414 - nodes in this community are weakly interconnected."
     },
     {
       "type": "low_cohesion",
       "question": "Should `Community 2` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.11904761904761904 - nodes in this community are weakly interconnected."
+      "why": "Cohesion score 0.07439613526570048 - nodes in this community are weakly interconnected."
     }
   ]
 }
