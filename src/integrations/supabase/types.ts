@@ -21,6 +21,7 @@ export type Database = {
           file_path: string
           id: string
           nombre: string
+          origen: string
           plan: string | null
           telefono: string
         }
@@ -30,6 +31,7 @@ export type Database = {
           file_path: string
           id?: string
           nombre: string
+          origen?: string
           plan?: string | null
           telefono: string
         }
@@ -39,6 +41,7 @@ export type Database = {
           file_path?: string
           id?: string
           nombre?: string
+          origen?: string
           plan?: string | null
           telefono?: string
         }

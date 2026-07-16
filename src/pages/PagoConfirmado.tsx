@@ -96,6 +96,7 @@ const PagoConfirmado = () => {
         telefono: telefono.trim(),
         plan: displayPlanLabel || planSlug || null,
         file_path: path,
+        origen,
       });
       if (insErr) throw insErr;
 
