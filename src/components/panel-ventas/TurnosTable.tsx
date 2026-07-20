@@ -11,8 +11,8 @@ const ESTADO_BADGE: Record<Turno["estado"], { label: string; className: string }
   no_pago: { label: "Vino, no pagó", className: "bg-secondary/10 text-secondary border-secondary/30" },
 };
 
-const formatFecha = (iso: string) =>
-  new Date(iso).toLocaleString("es-AR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const formatFecha = (iso: string | null | undefined) =>
+  iso ? new Date(iso).toLocaleString("es-AR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "-";
 
 interface Props {
   turnos: Turno[];
@@ -29,7 +29,7 @@ const TurnosTable = ({ turnos, onConfirmar }: Props) => {
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
-            <TableHead>Fecha</TableHead>
+            <TableHead>Fecha turno</TableHead>
             <TableHead>Nombre</TableHead>
             <TableHead>Contacto</TableHead>
             <TableHead>Plan preguntado</TableHead>
@@ -47,6 +47,7 @@ const TurnosTable = ({ turnos, onConfirmar }: Props) => {
               <TableRow key={t.calendly_event_uuid}>
                 <TableCell className="whitespace-nowrap text-xs">
                   {formatFecha(t.start_time)}
+                  <span className="block text-[10px] text-foreground/50">Agendó: {formatFecha(t.agendado_en)}</span>
                   {t.reprogramado && <span className="block text-[10px] text-foreground/50">reprogramado</span>}
                 </TableCell>
                 <TableCell className="text-sm font-medium">{t.nombre ?? "-"}</TableCell>
@@ -60,6 +61,9 @@ const TurnosTable = ({ turnos, onConfirmar }: Props) => {
                   <Badge variant="outline" className={`rounded-none ${badge.className}`}>{badge.label}</Badge>
                   {t.vendedor && (
                     <span className="block text-[10px] text-foreground/50 mt-1">por {t.vendedor}</span>
+                  )}
+                  {t.confirmado_en && (
+                    <span className="block text-[10px] text-foreground/50">el {formatFecha(t.confirmado_en)}</span>
                   )}
                 </TableCell>
                 <TableCell className="text-xs text-foreground/60">{t.via ?? "-"}</TableCell>

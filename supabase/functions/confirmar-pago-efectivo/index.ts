@@ -38,6 +38,8 @@ const BodySchema = z.object({
   plan_preguntado: z.string().trim().max(120).optional().nullable(),
   plan_pagado: z.string().trim().max(120).optional().nullable(),
   nombre: z.string().trim().max(120).optional().nullable(),
+  nombre_pila: z.string().trim().max(120).optional().nullable(),
+  apellido: z.string().trim().max(120).optional().nullable(),
   email: z.string().trim().email().max(255),
   telefono: z.string().trim().max(40).optional().nullable(),
   dni: z.string().trim().max(40).optional().nullable(),
@@ -100,6 +102,38 @@ async function resolveOrCreateTag(apiKey: string, name: string): Promise<string 
   }
 }
 
+// Busca un custom field por nombre; si no existe, lo crea (tipo texto). Así
+// nombre y apellido llegan a GetResponse en campos separados (no en un solo
+// "name" combinado), sin que el usuario tenga que crearlos a mano.
+async function resolveOrCreateCustomField(apiKey: string, name: string): Promise<string | null> {
+  try {
+    const query = new URLSearchParams({ 'query[name]': name, perPage: '5' })
+    const getRes = await fetch(`https://api.getresponse.com/v3/custom-fields?${query}`, {
+      headers: { 'X-Auth-Token': `api-key ${apiKey}` },
+    })
+    if (getRes.ok) {
+      const found = await getRes.json().catch(() => null)
+      const match = Array.isArray(found) ? found.find((f: any) => f?.name === name) : null
+      if (match?.customFieldId) return match.customFieldId
+    }
+
+    const createRes = await fetch('https://api.getresponse.com/v3/custom-fields', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Auth-Token': `api-key ${apiKey}` },
+      body: JSON.stringify({ name, type: 'text', hidden: false }),
+    })
+    if (createRes.ok) {
+      const created = await createRes.json().catch(() => null)
+      return created?.customFieldId ?? null
+    }
+    console.error('resolveOrCreateCustomField: no se pudo crear el campo', name, await createRes.text())
+    return null
+  } catch (e) {
+    console.error('resolveOrCreateCustomField falló', name, e)
+    return null
+  }
+}
+
 Deno.serve(async (req) => {
   const corsHeaders = buildCors(req.headers.get('origin'))
 
@@ -123,7 +157,7 @@ Deno.serve(async (req) => {
     }
     const {
       calendly_event_uuid, calendly_invitee_uuid, estado, vendedor,
-      plan_preguntado, plan_pagado, nombre, email, telefono, dni, notas,
+      plan_preguntado, plan_pagado, nombre, nombre_pila, apellido, email, telefono, dni, notas,
     } = parsed.data
 
     // --- GetResponse: todo turno confirmado entra a la lista, con etiqueta según el resultado ---
@@ -142,17 +176,30 @@ Deno.serve(async (req) => {
       console.error(grError)
     } else {
       try {
-        const tagId = await resolveOrCreateTag(API_KEY, TAG_NAME[estado])
+        const [tagId, nombreFieldId, apellidoFieldId] = await Promise.all([
+          resolveOrCreateTag(API_KEY, TAG_NAME[estado]),
+          nombre_pila ? resolveOrCreateCustomField(API_KEY, 'Nombre') : Promise.resolve(null),
+          apellido ? resolveOrCreateCustomField(API_KEY, 'Apellido') : Promise.resolve(null),
+        ])
+
+        const customFieldValues = [
+          nombreFieldId && nombre_pila ? { customFieldId: nombreFieldId, value: [nombre_pila] } : null,
+          apellidoFieldId && apellido ? { customFieldId: apellidoFieldId, value: [apellido] } : null,
+        ].filter(Boolean)
 
         const res = await fetch('https://api.getresponse.com/v3/contacts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-Auth-Token': `api-key ${API_KEY}` },
           body: JSON.stringify({
+            // "name" combinado queda solo para que el contacto se identifique
+            // en el listado de GetResponse; nombre y apellido "por separado"
+            // viajan en customFieldValues (custom fields "Nombre"/"Apellido").
             name: nombre || email,
             email,
             note: buildNote(estado, plan_preguntado, plan_pagado, telefono, notas),
             campaign: { campaignId: CAMPAIGN_ID },
             ...(tagId ? { tags: [tagId] } : {}),
+            ...(customFieldValues.length > 0 ? { customFieldValues } : {}),
             dayOfCycle: '0',
           }),
         })

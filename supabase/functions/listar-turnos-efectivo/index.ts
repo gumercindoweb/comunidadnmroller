@@ -96,17 +96,21 @@ Deno.serve(async (req) => {
         cancellation: event.cancellation,
         reprogramado: invitee?.rescheduled ?? false,
         nombre: invitee?.name ?? null,
+        nombre_pila: invitee?.first_name ?? null,
+        apellido: invitee?.last_name ?? null,
         email: invitee?.email ?? null,
         telefono: invitee ? extractAnswer(invitee, 'whatsapp') : null,
         dni: invitee ? extractAnswer(invitee, 'dni') : null,
         plan_preguntado: invitee ? extractAnswer(invitee, 'plan') : null,
         via: invitee ? extractAnswer(invitee, 'agendaste') : null,
         comentario: invitee ? extractAnswer(invitee, 'comparti') : null,
+        agendado_en: invitee?.created_at ?? event.created_at ?? null,
         estado: override?.estado ?? (estadoCalendly === 'cancelado' ? 'cancelado' : 'pendiente'),
         plan_pagado: override?.plan_pagado ?? null,
         notas: override?.notas ?? null,
         vendedor: override?.vendedor ?? null,
         confirmado_por: override?.confirmado_por ?? null,
+        confirmado_en: override?.updated_at ?? null,
       }
     })
 

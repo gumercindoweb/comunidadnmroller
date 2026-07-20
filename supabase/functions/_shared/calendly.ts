@@ -40,6 +40,7 @@ export interface CalendlyEvent {
   status: 'active' | 'canceled'
   start_time: string
   end_time: string
+  created_at: string
   cancellation: { canceled_by: string; reason: string | null; canceler_type: string } | null
 }
 
@@ -76,12 +77,15 @@ export async function listEventsInRange(opts: {
 export interface CalendlyInvitee {
   uri: string
   name: string
+  first_name: string | null
+  last_name: string | null
   email: string
   status: 'active' | 'canceled'
   questions_and_answers: { question: string; answer: string; position: number }[]
   rescheduled: boolean
   new_invitee: string | null
   cancellation: { canceled_by: string; reason: string | null; canceler_type: string } | null
+  created_at: string
 }
 
 export async function listInvitees(eventUuid: string): Promise<CalendlyInvitee[]> {

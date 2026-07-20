@@ -102,6 +102,8 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
         plan_preguntado: turno.plan_preguntado,
         plan_pagado: estado === "pagado" ? plan.trim() : null,
         nombre: turno.nombre,
+        nombre_pila: turno.nombre_pila,
+        apellido: turno.apellido,
         email: turno.email ?? "",
         telefono: turno.telefono,
         dni: turno.dni,

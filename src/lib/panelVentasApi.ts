@@ -11,17 +11,21 @@ export interface Turno {
   cancellation: { canceled_by: string; reason: string | null; canceler_type: string } | null;
   reprogramado: boolean;
   nombre: string | null;
+  nombre_pila: string | null;
+  apellido: string | null;
   email: string | null;
   telefono: string | null;
   dni: string | null;
   plan_preguntado: string | null;
   via: string | null;
   comentario: string | null;
+  agendado_en: string | null;
   estado: EstadoTurno;
   plan_pagado: string | null;
   notas: string | null;
   vendedor: string | null;
   confirmado_por: string | null;
+  confirmado_en: string | null;
 }
 
 export async function listarTurnos(params?: { desde?: string; hasta?: string }): Promise<Turno[]> {
@@ -41,6 +45,8 @@ export interface ConfirmarPagoInput {
   plan_preguntado?: string | null;
   plan_pagado?: string | null;
   nombre?: string | null;
+  nombre_pila?: string | null;
+  apellido?: string | null;
   email: string;
   telefono?: string | null;
   dni?: string | null;
