@@ -2,13 +2,13 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { listarTurnos, type Turno } from "@/lib/panelVentasApi";
+import { listarTurnos, listarPlanesEfectivo, type Turno } from "@/lib/panelVentasApi";
 import ResumenVentas from "@/components/panel-ventas/ResumenVentas";
 import TurnosTable from "@/components/panel-ventas/TurnosTable";
 import ConfirmarPagoDialog from "@/components/panel-ventas/ConfirmarPagoDialog";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, LogOut, RefreshCw } from "lucide-react";
+import { Loader2, LogOut, RefreshCw, Settings } from "lucide-react";
 
 const FILTROS_ESTADO = [
   { value: "todos", label: "Todos" },
@@ -27,6 +27,11 @@ const PanelVentas = () => {
   const { data: turnos = [], isLoading, isError, error, refetch, isFetching } = useQuery({
     queryKey: ["turnos-efectivo"],
     queryFn: () => listarTurnos(),
+  });
+
+  const { data: planes = [] } = useQuery({
+    queryKey: ["planes-efectivo"],
+    queryFn: () => listarPlanesEfectivo(),
   });
 
   const turnosFiltrados = useMemo(() => {
@@ -57,6 +62,11 @@ const PanelVentas = () => {
             <Button variant="outline" size="sm" className="rounded-none" onClick={() => refetch()} disabled={isFetching}>
               <RefreshCw className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
             </Button>
+            <Link to="/panel-ventas/configuracion">
+              <Button variant="outline" size="sm" className="rounded-none">
+                <Settings className="w-4 h-4 mr-1" /> Precios
+              </Button>
+            </Link>
             <Button variant="ghost" size="sm" className="rounded-none" onClick={handleLogout}>
               <LogOut className="w-4 h-4 mr-1" /> Salir
             </Button>
@@ -104,6 +114,7 @@ const PanelVentas = () => {
 
       <ConfirmarPagoDialog
         turno={turnoSeleccionado}
+        planes={planes}
         onClose={() => setTurnoSeleccionado(null)}
         onConfirmed={handleConfirmed}
       />

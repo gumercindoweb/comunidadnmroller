@@ -10,15 +10,35 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
-import { confirmarPago, type ConfirmarPagoInput, type Turno } from "@/lib/panelVentasApi";
+import { confirmarPago, formatPrecioARS, type ConfirmarPagoInput, type PlanEfectivo, type Turno } from "@/lib/panelVentasApi";
 
 interface Props {
   turno: Turno | null;
+  planes: PlanEfectivo[];
   onClose: () => void;
   onConfirmed: () => void;
   // Punto de inyección para el modo demo (datos simulados, sin backend real).
   // En uso normal se omite y se llama a confirmarPago().
   onSubmit?: (input: ConfirmarPagoInput) => Promise<void>;
+}
+
+const CATEGORIA_LABEL: Record<PlanEfectivo["categoria"], string> = {
+  "nm-mensual": "Mensual",
+  "nm-trimestral": "Trimestral",
+  "alquiler": "Alquiler",
+};
+
+function normalizeTexto(s: string) {
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+}
+
+// El plan que el cliente preguntó en Calendly es texto libre ("Basic Fun");
+// se busca el primer plan del catálogo cuyo nombre coincida, para dejarlo
+// precargado. El vendedor lo puede cambiar si al final pagó otra cosa.
+function planIdPorDefecto(planes: PlanEfectivo[], planPreguntado: string | null): string {
+  if (!planPreguntado) return "";
+  const target = normalizeTexto(planPreguntado);
+  return planes.find((p) => normalizeTexto(p.nombre) === target)?.id ?? "";
 }
 
 const ESTADOS = [
@@ -40,7 +60,7 @@ const NOTAS_PLACEHOLDER: Record<"pagado" | "no_show" | "no_pago", string> = {
   no_pago: "¿Qué lo frenó? Ej: le faltaba el dinero, quiere pensarlo, prefiere transferencia, etc.",
 };
 
-const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) => {
+const ConfirmarPagoDialog = ({ turno, planes, onClose, onConfirmed, onSubmit }: Props) => {
   const [estado, setEstado] = useState<"pagado" | "no_show" | "no_pago">("pagado");
   const [vendedorSeleccionado, setVendedorSeleccionado] = useState(() => {
     let stored = "";
@@ -60,7 +80,7 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
       return "";
     }
   });
-  const [plan, setPlan] = useState("");
+  const [planId, setPlanId] = useState("");
   const [notas, setNotas] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -71,10 +91,14 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
           ? turno.estado
           : "pagado",
       );
-      setPlan(turno.plan_pagado ?? turno.plan_preguntado ?? "");
+      // Si ya había un plan confirmado (se está editando), preferirlo sobre
+      // el preguntado. Si no, precargar el que coincida con lo que preguntó
+      // en Calendly — el vendedor lo puede cambiar.
+      const nombreActual = turno.plan_pagado ?? turno.plan_preguntado;
+      setPlanId(planIdPorDefecto(planes, nombreActual));
       setNotas(turno.notas ?? "");
     }
-  }, [turno]);
+  }, [turno, planes]);
 
   if (!turno) return null;
 
@@ -88,8 +112,9 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
       toast.error("Escribí el nombre del vendedor.");
       return;
     }
-    if (estado === "pagado" && !plan.trim()) {
-      toast.error("Indicá qué plan pagó.");
+    const planElegido = planes.find((p) => p.id === planId) ?? null;
+    if (estado === "pagado" && !planElegido) {
+      toast.error("Elegí qué plan pagó.");
       return;
     }
     setLoading(true);
@@ -100,7 +125,7 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
         estado,
         vendedor: vendedorFinal,
         plan_preguntado: turno.plan_preguntado,
-        plan_pagado: estado === "pagado" ? plan.trim() : null,
+        plan_pagado: estado === "pagado" ? planElegido!.nombre : null,
         nombre: turno.nombre,
         nombre_pila: turno.nombre_pila,
         apellido: turno.apellido,
@@ -146,13 +171,18 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
           </Select>
 
           {estado === "pagado" && (
-            <Input
-              placeholder="Plan pagado (podés corregirlo)"
-              value={plan}
-              onChange={(e) => setPlan(e.target.value)}
-              disabled={loading}
-              className="rounded-none"
-            />
+            <Select value={planId} onValueChange={setPlanId} disabled={loading}>
+              <SelectTrigger className="rounded-none">
+                <SelectValue placeholder="¿Qué plan pagó? (podés corregirlo)" />
+              </SelectTrigger>
+              <SelectContent>
+                {planes.map((p) => (
+                  <SelectItem key={p.id} value={p.id}>
+                    {p.nombre} · {CATEGORIA_LABEL[p.categoria]} · {formatPrecioARS(p.precio_efectivo)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           )}
 
           <Select value={vendedorSeleccionado} onValueChange={setVendedorSeleccionado} disabled={loading}>

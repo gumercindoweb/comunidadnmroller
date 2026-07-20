@@ -61,3 +61,35 @@ export async function confirmarPago(input: ConfirmarPagoInput) {
   if (!data?.ok) throw new Error(data?.error ?? "No pudimos guardar la confirmación.");
   return data;
 }
+
+// Mismo formato que usa el sitio ("$55.000"), para que el precio se vea
+// igual en el panel que en la web.
+export function formatPrecioARS(value: number): string {
+  return `$${Math.round(value).toLocaleString("es-AR")}`;
+}
+
+export type CategoriaPlan = "nm-mensual" | "nm-trimestral" | "alquiler";
+
+export interface PlanEfectivo {
+  id: string;
+  categoria: CategoriaPlan;
+  nombre: string;
+  plan_slug: string;
+  precio_efectivo: number;
+  orden: number;
+  activo: boolean;
+}
+
+export async function listarPlanesEfectivo(): Promise<PlanEfectivo[]> {
+  const { data, error } = await supabase.functions.invoke("listar-planes-efectivo", { body: {} });
+  if (error) throw error;
+  if (!data?.ok) throw new Error(data?.error ?? "No pudimos traer el catálogo de planes.");
+  return data.planes as PlanEfectivo[];
+}
+
+export async function actualizarPrecioPlan(input: { id: string; precio_efectivo: number }): Promise<PlanEfectivo> {
+  const { data, error } = await supabase.functions.invoke("actualizar-precio-plan", { body: input });
+  if (error) throw error;
+  if (!data?.ok) throw new Error(data?.error ?? "No pudimos actualizar el precio.");
+  return data.plan as PlanEfectivo;
+}

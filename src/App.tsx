@@ -23,6 +23,7 @@ import PreguntasFrecuentes from "./pages/PreguntasFrecuentes.tsx";
 import RutaDeAprendizaje from "./pages/RutaDeAprendizaje.tsx";
 import PanelVentasLogin from "./pages/PanelVentasLogin.tsx";
 import PanelVentas from "./pages/PanelVentas.tsx";
+import PanelVentasConfiguracion from "./pages/PanelVentasConfiguracion.tsx";
 import RequireAuth from "./components/panel-ventas/RequireAuth.tsx";
 import WhatsappFloat from "./components/WhatsappFloat.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
@@ -61,6 +62,14 @@ const App = () => (
             element={
               <RequireAuth>
                 <PanelVentas />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/panel-ventas/configuracion"
+            element={
+              <RequireAuth>
+                <PanelVentasConfiguracion />
               </RequireAuth>
             }
           />
