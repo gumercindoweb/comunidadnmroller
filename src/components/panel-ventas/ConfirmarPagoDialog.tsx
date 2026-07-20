@@ -29,8 +29,10 @@ const ESTADOS = [
 
 // Todos los vendedores comparten el mismo login del panel, así que este
 // campo es la única forma de saber quién gestionó cada turno. Se recuerda
-// por dispositivo/navegador para no tener que retipearlo cada vez.
+// por dispositivo/navegador para no tener que reelegirlo cada vez.
 const VENDEDOR_STORAGE_KEY = "panel_ventas_vendedor_nombre";
+const VENDEDORES = ["Fruti", "Ana", "Martu", "Rama", "Nico", "Vladi"];
+const OTRO = "otro";
 
 const NOTAS_PLACEHOLDER: Record<"pagado" | "no_show" | "no_pago", string> = {
   pagado: "Notas (opcional)",
@@ -40,9 +42,20 @@ const NOTAS_PLACEHOLDER: Record<"pagado" | "no_show" | "no_pago", string> = {
 
 const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) => {
   const [estado, setEstado] = useState<"pagado" | "no_show" | "no_pago">("pagado");
-  const [vendedor, setVendedor] = useState(() => {
+  const [vendedorSeleccionado, setVendedorSeleccionado] = useState(() => {
+    let stored = "";
     try {
-      return localStorage.getItem(VENDEDOR_STORAGE_KEY) ?? "";
+      stored = localStorage.getItem(VENDEDOR_STORAGE_KEY) ?? "";
+    } catch {
+      stored = "";
+    }
+    if (!stored) return "";
+    return VENDEDORES.includes(stored) ? stored : OTRO;
+  });
+  const [vendedorOtro, setVendedorOtro] = useState(() => {
+    try {
+      const stored = localStorage.getItem(VENDEDOR_STORAGE_KEY) ?? "";
+      return VENDEDORES.includes(stored) ? "" : stored;
     } catch {
       return "";
     }
@@ -66,8 +79,13 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
   if (!turno) return null;
 
   const handleConfirm = async () => {
-    if (!vendedor.trim()) {
-      toast.error("Indicá qué vendedor gestionó este turno.");
+    if (!vendedorSeleccionado) {
+      toast.error("Elegí qué vendedor gestionó este turno.");
+      return;
+    }
+    const vendedorFinal = vendedorSeleccionado === OTRO ? vendedorOtro.trim() : vendedorSeleccionado;
+    if (!vendedorFinal) {
+      toast.error("Escribí el nombre del vendedor.");
       return;
     }
     if (estado === "pagado" && !plan.trim()) {
@@ -80,7 +98,7 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
         calendly_event_uuid: turno.calendly_event_uuid,
         calendly_invitee_uuid: turno.calendly_invitee_uuid,
         estado,
-        vendedor: vendedor.trim(),
+        vendedor: vendedorFinal,
         plan_preguntado: turno.plan_preguntado,
         plan_pagado: estado === "pagado" ? plan.trim() : null,
         nombre: turno.nombre,
@@ -91,7 +109,7 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
       };
       await (onSubmit ? onSubmit(input) : confirmarPago(input));
       try {
-        localStorage.setItem(VENDEDOR_STORAGE_KEY, vendedor.trim());
+        localStorage.setItem(VENDEDOR_STORAGE_KEY, vendedorFinal);
       } catch {
         // localStorage puede fallar en modo privado; no es crítico.
       }
@@ -135,13 +153,27 @@ const ConfirmarPagoDialog = ({ turno, onClose, onConfirmed, onSubmit }: Props) =
             />
           )}
 
-          <Input
-            placeholder="Tu nombre (vendedor que gestiona este turno)"
-            value={vendedor}
-            onChange={(e) => setVendedor(e.target.value)}
-            disabled={loading}
-            className="rounded-none"
-          />
+          <Select value={vendedorSeleccionado} onValueChange={setVendedorSeleccionado} disabled={loading}>
+            <SelectTrigger className="rounded-none">
+              <SelectValue placeholder="¿Quién gestiona este turno?" />
+            </SelectTrigger>
+            <SelectContent>
+              {VENDEDORES.map((v) => (
+                <SelectItem key={v} value={v}>{v}</SelectItem>
+              ))}
+              <SelectItem value={OTRO}>Otro</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {vendedorSeleccionado === OTRO && (
+            <Input
+              placeholder="Nombre del vendedor"
+              value={vendedorOtro}
+              onChange={(e) => setVendedorOtro(e.target.value)}
+              disabled={loading}
+              className="rounded-none"
+            />
+          )}
 
           <Textarea
             placeholder={NOTAS_PLACEHOLDER[estado]}
