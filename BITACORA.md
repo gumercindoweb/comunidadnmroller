@@ -10,3 +10,12 @@
 ## 2026-07-02 — Se suma la bitácora
 
 - Este proyecto ya documentaba decisiones en su CLAUDE.md (ej. error #15); desde hoy las decisiones nuevas y sus porqués van acá, y el CLAUDE.md queda solo para instrucciones de trabajo.
+
+## 2026-07-20 — Panel de ventas: confirmar pagos en efectivo desde turnos Calendly
+
+- **Problema:** los turnos del beneficio "pago en efectivo" (showroom) se agendan por Calendly, pero no había forma de saber con certeza quién pagó al final, con qué plan, ni un registro de esa conversión. Tampoco entraban a ninguna secuencia de GetResponse (a diferencia del flujo de Mercado Pago + comprobante).
+- **Hallazgo clave que simplificó el diseño:** Calendly ya captura el plan elegido como respuesta a una pregunta fija del formulario ("¿Cuál es el plan que querés pagar/comprar?"), además de DNI y WhatsApp — confirmado con una llamada real a la API. No hizo falta inventar un puente de UTM.
+- **Decisión:** los turnos se leen en vivo de la API de Calendly (no se sincroniza un espejo completo); solo se persiste en Supabase (`pagos_efectivo`) la conversión que el vendedor confirma: pagado / no se presentó / vino y no pagó, con el plan editable. Al confirmar "pagado", se da de alta el contacto en una lista EXCLUSIVA de GetResponse (mismo patrón que la lista de socios SportClub).
+- **Login del vendedor:** Supabase Auth (usuarios creados a mano, sin self-signup) — se descartó una contraseña fija en el frontend por ser trivialmente saltable (el código del sitio es público).
+- **Implementado:** migración `pagos_efectivo`, Edge Functions `listar-turnos-efectivo` y `confirmar-pago-efectivo`, ruta `/panel-ventas` (+ `/panel-ventas/login`). Todo commiteado y pusheado a `main`.
+- **Pendiente (pasos manuales, no automatizables desde acá):** crear el Personal Access Token de Calendly, crear la campaign exclusiva en GetResponse, crear el/los usuario(s) de Supabase Auth, aplicar la migración y cargar los secrets en el proyecto de producción `bosutrnpmpjxylcgjmbt`, y deployar ambas Edge Functions **sin** `--no-verify-jwt`. Sin estos pasos el panel no funciona todavía en producción.
