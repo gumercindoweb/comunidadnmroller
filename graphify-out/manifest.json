@@ -515,9 +515,9 @@
     "semantic_hash": "f699d6047d16b2838b95d1a496861f53"
   },
   "src/integrations/supabase/types.ts": {
-    "mtime": 1780806501.635162,
-    "ast_hash": "02032f3703336ede8bd42faa3879bdbf",
-    "semantic_hash": "02032f3703336ede8bd42faa3879bdbf"
+    "mtime": 1784238220.1574147,
+    "ast_hash": "15ea3266347fd01c2aadec87d1bdf642",
+    "semantic_hash": ""
   },
   "src/lib/utils.ts": {
     "mtime": 1780806501.635329,
@@ -580,9 +580,9 @@
     "semantic_hash": "57366f61fa4f66215dacfa11638d04d5"
   },
   "src/pages/PagoConfirmado.tsx": {
-    "mtime": 1781387101.7904046,
-    "ast_hash": "4cbe8cc995f619a24dd6709e5b34f9af",
-    "semantic_hash": "4cbe8cc995f619a24dd6709e5b34f9af"
+    "mtime": 1784238195.6050622,
+    "ast_hash": "e4c512a6c30f9a0a26e985ef9bc8d164",
+    "semantic_hash": ""
   },
   "src/pages/PoliticaPrivacidad.tsx": {
     "mtime": 1781045502.3720632,
@@ -713,5 +713,130 @@
     "mtime": 1780806501.6384482,
     "ast_hash": "9285ab80c07d5cd1a71aa20c1687352a",
     "semantic_hash": "9285ab80c07d5cd1a71aa20c1687352a"
+  },
+  ".agents/skills/code-review-and-quality/SKILL.md": {
+    "mtime": 1783529456.6315556,
+    "ast_hash": "685bba7ae687a33832cc692e5eff4f22",
+    "semantic_hash": ""
+  },
+  ".agents/skills/debugging-and-error-recovery/SKILL.md": {
+    "mtime": 1783529456.6503263,
+    "ast_hash": "12d41c57d8bb597c6f738f5d4ce9ef27",
+    "semantic_hash": ""
+  },
+  ".agents/skills/security-and-hardening/SKILL.md": {
+    "mtime": 1783529456.6683822,
+    "ast_hash": "f9a536fc646f6e75c19ea3a2bd3c1b19",
+    "semantic_hash": ""
+  },
+  ".agents/skills/test-driven-development/SKILL.md": {
+    "mtime": 1783529456.686191,
+    "ast_hash": "451c0d42e3bdef8ecfcba30eb806c93b",
+    "semantic_hash": ""
+  },
+  ".lovable/plan.md": {
+    "mtime": 1782490653.4615674,
+    "ast_hash": "f96cc36e7a35bf48f69e02c37c3ece3c",
+    "semantic_hash": ""
+  },
+  "BITACORA.md": {
+    "mtime": 1783017703.007086,
+    "ast_hash": "9ddf2ea40de02f3958ffb44be9cfd566",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1784135112.369659,
+    "ast_hash": "7cc24d2a2f094e21e45fb41342cb8e87",
+    "semantic_hash": ""
+  },
+  "PROYECTO_RESUMEN.md": {
+    "mtime": 1781570919.8734887,
+    "ast_hash": "fc19ff19883d5f16e243422f6351da1e",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1780806501.6152077,
+    "ast_hash": "940c6b18d1cc8378daa51131ea5d4916",
+    "semantic_hash": ""
+  },
+  "flujo-nmroller.html": {
+    "mtime": 1782854337.1541216,
+    "ast_hash": "7fef9c57878f7c95b6af6037fa71c9ed",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1781484841.111842,
+    "ast_hash": "ed8c66e08f589db3ea043978b7ece4b1",
+    "semantic_hash": ""
+  },
+  "public/robots.txt": {
+    "mtime": 1782155302.0976512,
+    "ast_hash": "9363058c2937d9953c6c023bf608b149",
+    "semantic_hash": ""
+  },
+  "public/og-home.png": {
+    "mtime": 1780954523.0225527,
+    "ast_hash": "e11836090d031972ee7424b167a6180a",
+    "semantic_hash": ""
+  },
+  "public/og-masterclass.png": {
+    "mtime": 1780954523.0188794,
+    "ast_hash": "e11836090d031972ee7424b167a6180a",
+    "semantic_hash": ""
+  },
+  "public/patinadores-comunidad.png": {
+    "mtime": 1780955735.0192058,
+    "ast_hash": "e11836090d031972ee7424b167a6180a",
+    "semantic_hash": ""
+  },
+  "public/placeholder.svg": {
+    "mtime": 1780806501.6185791,
+    "ast_hash": "b501d7dff3280ac829c321fe854d99d0",
+    "semantic_hash": ""
+  },
+  "src/assets/Logo-NM-Rollers.png": {
+    "mtime": 1780806501.6193187,
+    "ast_hash": "26a818617738e0d18aca277c3f3208c1",
+    "semantic_hash": ""
+  },
+  "src/assets/logo-flyfree-urban.webp": {
+    "mtime": 1781232579.6574366,
+    "ast_hash": "077d21396fde4e86fa6a4e427ca47b2c",
+    "semantic_hash": ""
+  },
+  "src/assets/logo-sportclub.webp": {
+    "mtime": 1781232579.66145,
+    "ast_hash": "0c257333fb880875388969633fd35ede",
+    "semantic_hash": ""
+  },
+  "src/assets/newsletter-mockup-original.png": {
+    "mtime": 1780806501.6202426,
+    "ast_hash": "8a8cf710ec2e0f89627f05fb301ca076",
+    "semantic_hash": ""
+  },
+  "src/assets/newsletter-mockup.jpg": {
+    "mtime": 1780806501.6205885,
+    "ast_hash": "5ea29f6f2c2cfa01a977e8368169d82f",
+    "semantic_hash": ""
+  },
+  "src/assets/newsletter-mockup.png": {
+    "mtime": 1780806501.621247,
+    "ast_hash": "3b93556fd3da46285e0909f3fc1fdada",
+    "semantic_hash": ""
+  },
+  "src/assets/patinadores-comunidad.png": {
+    "mtime": 1780806501.6221702,
+    "ast_hash": "e11836090d031972ee7424b167a6180a",
+    "semantic_hash": ""
+  },
+  "src/assets/turnos-web-hand.png": {
+    "mtime": 1780806501.6236393,
+    "ast_hash": "735b3a637a9fa92c4a271e9a0b04f637",
+    "semantic_hash": ""
+  },
+  "src/assets/turnos-web-phones.png": {
+    "mtime": 1780806501.6258976,
+    "ast_hash": "d13f8c058f54ee42bffa3b6a5646c8ed",
+    "semantic_hash": ""
   }
 }

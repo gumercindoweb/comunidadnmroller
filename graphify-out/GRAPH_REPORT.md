@@ -1,15 +1,16 @@
-# Graph Report - .  (2026-07-15)
+# Graph Report - comunidadnmroller  (2026-07-16)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 152 files · ~249,742 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 852 nodes · 1275 edges · 120 communities (52 shown, 68 thin omitted)
+- 852 nodes · 1262 edges · 120 communities (52 shown, 68 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.7)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4f83b332`
+- Built from commit: `4ffd848d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -124,15 +125,15 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 70 edges
-2. `Button` - 20 edges
+2. `Button` - 19 edges
 3. `useScrollAnimation()` - 19 edges
 4. `compilerOptions` - 19 edges
 5. `compilerOptions` - 14 edges
 6. `DialogContent` - 11 edges
 7. `sedes` - 11 edges
 8. `DialogTitle` - 10 edges
-9. `Input` - 10 edges
-10. `getProximaMasterclass()` - 10 edges
+9. `getProximaMasterclass()` - 10 edges
+10. `expandirNivel()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `useCarousel()` --references--> `react`  [EXTRACTED]
@@ -168,8 +169,8 @@ Cohesion: 0.06
 Nodes (36): Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay, SheetTitle (+28 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.08
-Nodes (21): queryClient, Bullets(), LegalLayout(), LegalLayoutProps, Section(), ScrollToTop(), Toaster(), ToasterProps (+13 more)
+Cohesion: 0.07
+Nodes (23): queryClient, Bullets(), LegalLayout(), LegalLayoutProps, Section(), ScrollToTop(), Toaster(), ToasterProps (+15 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.07
@@ -200,8 +201,8 @@ Cohesion: 0.13
 Nodes (17): buildPlanWa(), Plan, PLANES, PlanesSportclub(), PlanesSportclubProps, scrollTo(), UserData, wa() (+9 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.12
-Nodes (15): ClaseDia, DIAS, PERFILES, SelectContent, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton (+7 more)
+Cohesion: 0.16
+Nodes (10): ClaseDia, DIAS, PERFILES, SelectContent, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton (+2 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.11
@@ -229,11 +230,11 @@ Nodes (10): DrawerContent, DrawerDescription, DrawerFooter(), DrawerHeader(), Dr
 
 ### Community 19 - "Community 19"
 Cohesion: 0.15
-Nodes (13): autoprefixer, globals, devDependencies, autoprefixer, globals, @testing-library/jest-dom, @types/react, typescript (+5 more)
+Nodes (13): autoprefixer, globals, devDependencies, autoprefixer, globals, postcss, @testing-library/jest-dom, typescript (+5 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.18
-Nodes (12): cmdk, dependencies, cmdk, @radix-ui/react-alert-dialog, @radix-ui/react-context-menu, @radix-ui/react-progress, @radix-ui/react-tabs, @radix-ui/react-toast (+4 more)
+Nodes (12): input-otp, dependencies, input-otp, @radix-ui/react-alert-dialog, @radix-ui/react-context-menu, @radix-ui/react-progress, @radix-ui/react-tabs, @radix-ui/react-toast (+4 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.17
@@ -284,8 +285,8 @@ Cohesion: 0.25
 Nodes (7): NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport
 
 ### Community 33 - "Community 33"
-Cohesion: 0.38
-Nodes (5): Label, labelVariants, ACCEPTED, PagoConfirmado(), PLAN_LABELS
+Cohesion: 0.25
+Nodes (7): Label, labelVariants, EQUIPO_OPCIONES, FormData, FormSchema, ListaEsperaPage(), MOTIVACIONES
 
 ### Community 34 - "Community 34"
 Cohesion: 0.33
@@ -308,7 +309,7 @@ Cohesion: 0.50
 Nodes (3): Avatar, AvatarFallback, AvatarImage
 
 ## Knowledge Gaps
-- **442 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+437 more)
+- **443 isolated node(s):** `Json`, `DatabaseWithoutInternals`, `DefaultSchema`, `Tables`, `TablesInsert` (+438 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **68 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -318,11 +319,11 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `dependencies` connect `Community 20` to `Community 5`, `Community 35`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 50`, `Community 51`, `Community 53`, `Community 55`, `Community 56`, `Community 57`, `Community 58`, `Community 59`, `Community 60`, `Community 61`, `Community 62`, `Community 63`, `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 75`, `Community 76`, `Community 77`, `Community 78`, `Community 79`, `Community 80`, `Community 81`, `Community 82`, `Community 83`, `Community 84`, `Community 85`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 92`?**
   _High betweenness centrality (0.283) - this node is a cross-community bridge._
 - **Why does `react` connect `Community 5` to `Community 3`, `Community 20`, `Community 6`?**
-  _High betweenness centrality (0.256) - this node is a cross-community bridge._
+  _High betweenness centrality (0.257) - this node is a cross-community bridge._
 - **Why does `cn()` connect `Community 18` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 8`, `Community 9`, `Community 12`, `Community 15`, `Community 16`, `Community 21`, `Community 22`, `Community 25`, `Community 26`, `Community 27`, `Community 28`, `Community 29`, `Community 31`, `Community 32`, `Community 33`, `Community 34`, `Community 36`, `Community 37`, `Community 38`, `Community 41`?**
-  _High betweenness centrality (0.179) - this node is a cross-community bridge._
-- **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _442 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.180) - this node is a cross-community bridge._
+- **What connects `Json`, `DatabaseWithoutInternals`, `DefaultSchema` to the rest of the system?**
+  _443 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06370543541788427 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
