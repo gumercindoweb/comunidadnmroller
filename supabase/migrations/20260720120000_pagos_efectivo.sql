@@ -21,7 +21,10 @@ CREATE TABLE public.pagos_efectivo (
   telefono TEXT,
   dni TEXT,
   notas TEXT,
-  confirmado_por TEXT NOT NULL,     -- email del vendedor autenticado (Supabase Auth)
+  vendedor TEXT NOT NULL,           -- nombre de la persona que gestionó el turno (cargado a mano:
+                                     -- todos los vendedores comparten el mismo usuario de Supabase Auth,
+                                     -- así que confirmado_por no alcanza para distinguirlos)
+  confirmado_por TEXT NOT NULL,     -- email del vendedor autenticado (Supabase Auth) — rastro técnico
 
   getresponse_ok BOOLEAN NOT NULL DEFAULT false,
   getresponse_status INTEGER,

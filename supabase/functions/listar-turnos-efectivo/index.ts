@@ -105,6 +105,7 @@ Deno.serve(async (req) => {
         estado: override?.estado ?? (estadoCalendly === 'cancelado' ? 'cancelado' : 'pendiente'),
         plan_pagado: override?.plan_pagado ?? null,
         notas: override?.notas ?? null,
+        vendedor: override?.vendedor ?? null,
         confirmado_por: override?.confirmado_por ?? null,
       }
     })

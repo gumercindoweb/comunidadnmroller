@@ -20,6 +20,7 @@ export interface Turno {
   estado: EstadoTurno;
   plan_pagado: string | null;
   notas: string | null;
+  vendedor: string | null;
   confirmado_por: string | null;
 }
 
@@ -36,10 +37,11 @@ export interface ConfirmarPagoInput {
   calendly_event_uuid: string;
   calendly_invitee_uuid?: string | null;
   estado: "pagado" | "no_show" | "no_pago";
+  vendedor: string;
   plan_preguntado?: string | null;
   plan_pagado?: string | null;
   nombre?: string | null;
-  email?: string | null;
+  email: string;
   telefono?: string | null;
   dni?: string | null;
   notas?: string | null;

@@ -58,6 +58,9 @@ const TurnosTable = ({ turnos, onConfirmar }: Props) => {
                 <TableCell className="text-sm font-semibold">{t.plan_pagado ?? "-"}</TableCell>
                 <TableCell>
                   <Badge variant="outline" className={`rounded-none ${badge.className}`}>{badge.label}</Badge>
+                  {t.vendedor && (
+                    <span className="block text-[10px] text-foreground/50 mt-1">por {t.vendedor}</span>
+                  )}
                 </TableCell>
                 <TableCell className="text-xs text-foreground/60">{t.via ?? "-"}</TableCell>
                 <TableCell className="text-right">

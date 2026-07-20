@@ -17,6 +17,13 @@ const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
       porPlan.set(plan, (porPlan.get(plan) ?? 0) + 1);
     }
 
+    const confirmados = turnos.filter((t) => t.estado === "pagado" || t.estado === "no_show" || t.estado === "no_pago");
+    const porVendedor = new Map<string, number>();
+    for (const t of confirmados) {
+      const vendedor = t.vendedor || "Sin especificar";
+      porVendedor.set(vendedor, (porVendedor.get(vendedor) ?? 0) + 1);
+    }
+
     return {
       totalActivos: activos.length,
       pagados: pagados.length,
@@ -25,6 +32,7 @@ const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
       pendientes: pendientes.length,
       tasaConversion,
       porPlan: Array.from(porPlan.entries()).sort((a, b) => b[1] - a[1]),
+      porVendedor: Array.from(porVendedor.entries()).sort((a, b) => b[1] - a[1]),
     };
   }, [turnos]);
 
@@ -67,6 +75,18 @@ const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
           </div>
         )}
       </div>
+      {stats.porVendedor.length > 0 && (
+        <div className="flex flex-wrap items-center gap-4 border border-border bg-card/50 p-4">
+          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Por vendedor</p>
+          <div className="flex flex-wrap gap-2">
+            {stats.porVendedor.map(([vendedor, count]) => (
+              <span key={vendedor} className="text-xs border border-border px-2 py-1 uppercase tracking-wide">
+                {vendedor}: <strong>{count}</strong>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
