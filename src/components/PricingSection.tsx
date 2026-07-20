@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Star, CreditCard, Banknote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
+import { guardarIntencionCompra } from "@/lib/intencionCompra";
 
 type Period = "mensual" | "trimestral";
 
@@ -204,7 +205,14 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <a href={plan.mpLink} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={plan.mpLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      guardarIntencionCompra({ plan: plan.planSlug, origen: "nm" })
+                    }
+                  >
                     <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
                       COMPRAR PLAN
                     </Button>
