@@ -21,6 +21,9 @@ import NotFound from "./pages/NotFound.tsx";
 import TutorialesPatinaje from "./pages/TutorialesPatinaje.tsx";
 import PreguntasFrecuentes from "./pages/PreguntasFrecuentes.tsx";
 import RutaDeAprendizaje from "./pages/RutaDeAprendizaje.tsx";
+import PanelVentasLogin from "./pages/PanelVentasLogin.tsx";
+import PanelVentas from "./pages/PanelVentas.tsx";
+import RequireAuth from "./components/panel-ventas/RequireAuth.tsx";
 import WhatsappFloat from "./components/WhatsappFloat.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
@@ -52,6 +55,15 @@ const App = () => (
           <Route path="/tutoriales-de-patinaje" element={<TutorialesPatinaje />} />
           <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
           <Route path="/ruta-de-aprendizaje" element={<RutaDeAprendizaje />} />
+          <Route path="/panel-ventas/login" element={<PanelVentasLogin />} />
+          <Route
+            path="/panel-ventas"
+            element={
+              <RequireAuth>
+                <PanelVentas />
+              </RequireAuth>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

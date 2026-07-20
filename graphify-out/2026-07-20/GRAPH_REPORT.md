@@ -1,11 +1,11 @@
 # Graph Report - comunidadnmroller  (2026-07-20)
 
 ## Corpus Check
-- 166 files · ~254,458 words
+- 154 files · ~250,297 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1085 nodes · 1587 edges · 139 communities (71 shown, 68 thin omitted)
+- 973 nodes · 1349 edges · 139 communities (69 shown, 70 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.7)
 - Token cost: 0 input · 0 output
 
@@ -127,7 +127,6 @@
 - CountdownBanner.tsx
 - PreFiltroEquipo.tsx
 - badge.tsx
-- BannerAlquilerHome.tsx
 - App.tsx
 - select.tsx
 - carousel.tsx
@@ -140,18 +139,19 @@
 - LegalLayout.tsx
 - sedes
 - RutaDeAprendizaje.tsx
+- NewsletterDesdeCero.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 70 edges
-2. `Button` - 24 edges
-3. `useScrollAnimation()` - 19 edges
-4. `compilerOptions` - 19 edges
-5. `Code Review and Quality` - 19 edges
-6. `Security and Hardening` - 16 edges
-7. `🔧 Errores recurrentes y cómo se resolvieron` - 16 edges
+2. `Code Review and Quality` - 19 edges
+3. `compilerOptions` - 19 edges
+4. `Security and Hardening` - 16 edges
+5. `Button` - 15 edges
+6. `useScrollAnimation()` - 15 edges
+7. `Test-Driven Development` - 14 edges
 8. `compilerOptions` - 14 edges
-9. `Test-Driven Development` - 14 edges
-10. `supabase` - 13 edges
+9. `Debugging and Error Recovery` - 12 edges
+10. `getProximaMasterclass()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `useCarousel()` --references--> `react`  [EXTRACTED]
@@ -168,19 +168,19 @@
 ## Import Cycles
 - None detected.
 
-## Communities (139 total, 68 thin omitted)
+## Communities (139 total, 70 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.14
-Nodes (12): EquipoPropioNota(), TooltipContent, BADGE_DESC, BADGE_STYLES, ClaseGratis(), DIAS_SEMANA, EQUIPO_OPCIONES, FormSchema (+4 more)
+Cohesion: 0.15
+Nodes (11): TooltipContent, BADGE_DESC, BADGE_STYLES, ClaseGratis(), DIAS_SEMANA, EQUIPO_OPCIONES, FormSchema, HORARIOS_CLASES (+3 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.08
-Nodes (25): CountdownBanner(), Props, TimeRemaining, ventaHastaTexto(), Footer(), Window, MasterclassFooterBanner(), MasterclassPopup() (+17 more)
+Cohesion: 0.07
+Nodes (34): CountdownBanner(), Props, TimeRemaining, ventaHastaTexto(), Footer(), MasterclassFooterBanner(), MasterclassPopup(), PreFiltroEquipo() (+26 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.05
-Nodes (42): AlquilerPlan, plans, PricingAlquilerSection(), AppSection(), features, ForWhom(), points, stats (+34 more)
+Cohesion: 0.21
+Nodes (10): AppSection(), features, ForWhom(), points, SedesSection(), testimonials, ValueProposition(), REELS (+2 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
@@ -191,8 +191,8 @@ Cohesion: 0.20
 Nodes (12): buildPasos(), buildWaEnviarDatos(), ClaseGratisConfirmada(), despues, FormState, getDeadline(), pad(), Paso (+4 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.18
-Nodes (9): FormControl, FormDescription, FormFieldContext, FormFieldContextValue, FormItem, FormItemContext, FormItemContextValue, FormLabel (+1 more)
+Cohesion: 0.15
+Nodes (11): FormControl, FormDescription, FormFieldContext, FormFieldContextValue, FormItem, FormItemContext, FormItemContextValue, FormLabel (+3 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.12
@@ -203,12 +203,12 @@ Cohesion: 0.08
 Nodes (25): DOM, DOM.Iterable, ES2020, src, vitest/globals, compilerOptions, allowImportingTsExtensions, isolatedModules (+17 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.07
-Nodes (36): AlquilerHorariosGrid(), buildHorarios(), alquilerSedes, AlquilerSedesGrid(), badgeDescriptions, badgeStyles, ClaseCard(), ClaseDayCard() (+28 more)
+Cohesion: 0.11
+Nodes (19): badgeDescriptions, badgeStyles, ClaseEnriquecida, dias, disciplinasDisponibles, disciplinasPorIdentidad(), horarios, HorariosSection() (+11 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.08
-Nodes (15): Checkbox, HoverCardContent, PopoverContent, Progress, RadioGroup, RadioGroupItem, ScrollArea, ScrollBar (+7 more)
+Nodes (15): NavLink, NavLinkCompatProps, Checkbox, HoverCardContent, PopoverContent, Progress, RadioGroup, RadioGroupItem (+7 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.13
@@ -219,8 +219,8 @@ Cohesion: 0.13
 Nodes (17): buildPlanWa(), Plan, PLANES, PlanesSportclub(), PlanesSportclubProps, scrollTo(), UserData, wa() (+9 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.15
-Nodes (15): FlyFreePanel(), Label, labelVariants, IntencionCompra, leerIntencionCompra(), limpiarIntencionCompra(), Origen, EQUIPO_OPCIONES (+7 more)
+Cohesion: 0.11
+Nodes (22): AlquilerPlan, plans, PricingAlquilerSection(), monthlyPlans, Period, Plan, PricingSection(), quarterlyPlans (+14 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.11
@@ -230,29 +230,25 @@ Nodes (17): ES2023, vite.config.ts, compilerOptions, allowImportingTsExtensions,
 Cohesion: 0.12
 Nodes (16): aliases, components, hooks, lib, ui, utils, rsc, $schema (+8 more)
 
-### Community 15 - "Community 15"
-Cohesion: 0.07
-Nodes (26): 10. Screenshots del preview salen en **negro** (glitch), 11. **CDN de Hostinger** rompe el dominio (404 en algunos edges, SSL error, cambia la IP), 12. **H1/H2 demasiado grande en mobile** — la escala de fuentes no es la estándar de Tailwind, 13. **Overflow horizontal en mobile** por `whitespace-nowrap` dentro de un grid, 14. **Hover card del mapa aparece junto al dialog en mobile** (doble popup), 15. Un formulario **manda los datos pero un campo NO llega a Slack/GetResponse** — aunque en la preview de Lovable SÍ funciona, 1. El sitio en producción da **404** en todo (home, rutas internas) tras subir el `dist/`, 2. URLs se redirigen a **minúsculas** (301) → assets de Vite (con mayúsculas en el hash) dan 404 (+18 more)
-
 ### Community 16 - "Community 16"
-Cohesion: 0.16
-Nodes (16): ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis(), PaginationItem (+8 more)
+Cohesion: 0.18
+Nodes (12): ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis(), PaginationItem (+4 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.16
-Nodes (10): DialogContent, DialogDescription, DialogFooter(), DialogHeader(), DialogOverlay, DialogTitle, faq, incluye (+2 more)
+Cohesion: 0.20
+Nodes (14): AlquilerHorariosGrid(), buildHorarios(), ClaseCard(), ClaseDayCard(), Props, makeIcon(), markerSvg(), SedesMapa() (+6 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.25
-Nodes (6): DrawerContent, DrawerDescription, DrawerFooter(), DrawerHeader(), DrawerOverlay, DrawerTitle
+Cohesion: 0.20
+Nodes (10): DrawerContent, DrawerDescription, DrawerFooter(), DrawerHeader(), DrawerOverlay, DrawerTitle, ResizableHandle(), ResizablePanelGroup() (+2 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.15
-Nodes (13): autoprefixer, globals, devDependencies, autoprefixer, globals, @testing-library/jest-dom, @types/react, typescript (+5 more)
+Nodes (13): autoprefixer, globals, devDependencies, autoprefixer, globals, postcss, @testing-library/jest-dom, typescript (+5 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.15
-Nodes (13): cmdk, dependencies, cmdk, @radix-ui/react-avatar, @radix-ui/react-hover-card, @radix-ui/react-progress, @radix-ui/react-tooltip, react-resizable-panels (+5 more)
+Cohesion: 0.18
+Nodes (12): input-otp, dependencies, input-otp, @radix-ui/react-alert-dialog, @radix-ui/react-context-menu, @radix-ui/react-progress, @radix-ui/react-tabs, @radix-ui/react-toast (+4 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.17
@@ -263,8 +259,8 @@ Cohesion: 0.07
 Nodes (29): 1. Correctness, 2. Readability & Simplicity, 3. Architecture, 4. Security, 5. Performance, Change Descriptions, Change Sizing, Code Review and Quality (+21 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.18
-Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
+Cohesion: 0.17
+Nodes (11): supabase, CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json (+3 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.18
@@ -279,16 +275,16 @@ Cohesion: 0.20
 Nodes (9): DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut(), DropdownMenuSubContent (+1 more)
 
 ### Community 27 - "Community 27"
-Cohesion: 0.25
-Nodes (6): DIAS, FRANJAS, Props, schema, Textarea, TextareaProps
+Cohesion: 0.22
+Nodes (7): DIAS, FRANJAS, Props, schema, Input, Textarea, TextareaProps
 
 ### Community 28 - "Community 28"
 Cohesion: 0.22
 Nodes (8): AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter(), AlertDialogHeader(), AlertDialogOverlay, AlertDialogTitle
 
 ### Community 29 - "Community 29"
-Cohesion: 0.24
-Nodes (11): ESTADO_BADGE, formatFecha(), TurnosTable(), Table, TableBody, TableCaption, TableCell, TableFooter (+3 more)
+Cohesion: 0.22
+Nodes (8): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow
 
 ### Community 30 - "Community 30"
 Cohesion: 0.25
@@ -307,8 +303,8 @@ Cohesion: 0.07
 Nodes (29): Always Do (No Exceptions), Ask First (Requires Human Approval), Broken Access Control, Broken Authentication, Common Rationalizations, Cross-Site Scripting (XSS), File Upload Safety, Injection (SQL, NoSQL, OS Command) (+21 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.07
-Nodes (26): 1. **Escala de fuentes personalizada es crítica documentar**, 1. **Overflow horizontal en mobile (HeroSection)**, 2. **CSS Grid min-width:auto es silencioso**, 2. **MasterclassFooterBanner badge consume espacio en mobile**, 3. **Mapa: dos popups simultáneamente en mobile**, 3. **React Router no hace scroll automático**, 4. **Copy de SportClub no comunicaba el precio real**, 4. **Copy strategy ≠ hero placement** (+18 more)
+Cohesion: 0.33
+Nodes (5): ToggleGroup, ToggleGroupContext, ToggleGroupItem, Toggle, toggleVariants
 
 ### Community 35 - "Community 35"
 Cohesion: 0.40
@@ -327,36 +323,16 @@ Cohesion: 0.50
 Nodes (3): Avatar, AvatarFallback, AvatarImage
 
 ### Community 40 - "Community 40"
-Cohesion: 0.40
-Nodes (3): ALLOWED_ORIGINS, BodySchema, UBICACIONES
+Cohesion: 0.50
+Nodes (4): ALLOWED_ORIGINS, BodySchema, buildCors(), UBICACIONES
 
 ### Community 41 - "Community 41"
-Cohesion: 0.14
-Nodes (15): ALLOWED_ORIGINS, BodySchema, ALLOWED_ORIGINS, requireStaffUser(), StaffUser, CalendlyEvent, calendlyFetch(), CalendlyInvitee (+7 more)
+Cohesion: 0.20
+Nodes (5): navLinks, Button, NavState, ATAJOS, NotFound()
 
-### Community 51 - "Community 51"
-Cohesion: 0.23
-Nodes (11): ConfirmarPagoDialog(), ESTADOS, Props, Props, confirmarPago(), ConfirmarPagoInput, EstadoTurno, listarTurnos() (+3 more)
-
-### Community 59 - "Community 59"
-Cohesion: 0.18
-Nodes (9): Command, CommandDialogProps, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator (+1 more)
-
-### Community 64 - "Community 64"
-Cohesion: 0.50
-Nodes (3): 2026-07-02 — Se suma la bitácora, Bitácora — Comunidad NM Roller, Génesis (reconstruida el 02-jul-2026)
-
-### Community 78 - "Community 78"
-Cohesion: 0.83
-Nodes (3): PreFiltroEquipo(), scrollTo(), wa()
-
-### Community 83 - "Community 83"
-Cohesion: 0.50
-Nodes (3): TabsContent, TabsList, TabsTrigger
-
-### Community 94 - "Community 94"
-Cohesion: 0.67
-Nodes (3): pagos_efectivo_set_updated_at, public.pagos_efectivo, public.set_pagos_efectivo_updated_at()
+### Community 120 - "TutorialesPatinaje.tsx"
+Cohesion: 0.20
+Nodes (8): Categoria, CATEGORIA_ACTIVE, CATEGORIA_STYLE, CATEGORIAS, CtaData, CTAS, Tutorial, TUTORIALES
 
 ### Community 122 - "CountdownBanner.tsx"
 Cohesion: 0.07
@@ -366,17 +342,25 @@ Nodes (28): Browser Testing with DevTools, Common Rationalizations, DAMP Over DR
 Cohesion: 0.09
 Nodes (21): Build Failure Triage, Common Rationalizations, Debugging and Error Recovery, Error-Specific Patterns, Instrumentation Guidelines, Overview, Red Flags, Runtime Error Triage (+13 more)
 
+### Community 124 - "badge.tsx"
+Cohesion: 0.67
+Nodes (3): Badge(), BadgeProps, badgeVariants
+
 ### Community 126 - "App.tsx"
-Cohesion: 0.18
-Nodes (7): queryClient, ScrollToTop(), Toaster(), ToasterProps, WhatsappFloat(), NotFound(), PanelVentasLogin()
+Cohesion: 0.19
+Nodes (6): queryClient, ScrollToTop(), Toaster(), ToasterProps, WhatsappFloat(), TerminosCondiciones()
 
 ### Community 127 - "select.tsx"
 Cohesion: 0.19
 Nodes (10): ClaseDia, DIAS, PERFILES, SelectContent, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton (+2 more)
 
+### Community 128 - "carousel.tsx"
+Cohesion: 0.15
+Nodes (12): Carousel, CarouselApi, CarouselContent, CarouselContext, CarouselContextProps, CarouselItem, CarouselNext, CarouselOptions (+4 more)
+
 ### Community 129 - "ExclusivoSociosSportclub.tsx"
-Cohesion: 0.14
-Nodes (14): AccordionContent, AccordionItem, AccordionTrigger, ALQUILER_OPCIONES, BENEFICIOS, FormSchema, PERFILES, PLANES_SPORTCLUB (+6 more)
+Cohesion: 0.18
+Nodes (9): EquipoPropioNota(), ALQUILER_OPCIONES, BENEFICIOS, FormSchema, PERFILES, PLANES_SPORTCLUB, SPORTCLUB_HORARIOS, sportclubSedes (+1 more)
 
 ### Community 130 - "chart.tsx"
 Cohesion: 0.20
@@ -386,37 +370,45 @@ Nodes (7): ChartConfig, ChartContainer, ChartContext, ChartContextProps, ChartLe
 Cohesion: 0.22
 Nodes (8): react, react, useCarousel(), useChart(), useFormField(), SidebarContext, useSidebar(), useIsMobile()
 
+### Community 132 - "PreguntasFrecuentes.tsx"
+Cohesion: 0.31
+Nodes (6): AccordionContent, AccordionItem, AccordionTrigger, FaqItem, FaqSection, SECCIONES
+
 ### Community 133 - "sheet.tsx"
 Cohesion: 0.22
 Nodes (8): SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay, SheetTitle, sheetVariants
 
-### Community 135 - "LegalLayout.tsx"
-Cohesion: 0.39
-Nodes (5): Bullets(), LegalLayout(), LegalLayoutProps, Section(), TerminosCondiciones()
+### Community 134 - "ListaEsperaPage.tsx"
+Cohesion: 0.29
+Nodes (6): FlyFreePanel(), EQUIPO_OPCIONES, FormData, FormSchema, ListaEsperaPage(), MOTIVACIONES
 
-### Community 137 - "RutaDeAprendizaje.tsx"
-Cohesion: 0.16
-Nodes (8): FormSchema, RequireAuth(), Input, supabase, benefits, FormSchema, FormSchema, NIVELES
+### Community 135 - "LegalLayout.tsx"
+Cohesion: 0.46
+Nodes (4): Bullets(), LegalLayout(), LegalLayoutProps, Section()
+
+### Community 136 - "sedes"
+Cohesion: 0.29
+Nodes (4): alquilerSedes, AlquilerSedesGrid(), stats, sedes
 
 ## Knowledge Gaps
-- **593 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+588 more)
+- **536 isolated node(s):** `Overview`, `When to Use`, `1. Correctness`, `2. Readability & Simplicity`, `3. Architecture` (+531 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **68 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **70 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `Community 20` to `carousel.tsx`, `react`, `PreguntasFrecuentes.tsx`, `Community 35`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 50`, `Community 53`, `Community 55`, `Community 56`, `Community 57`, `Community 58`, `Community 60`, `Community 61`, `Community 62`, `Community 63`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 75`, `Community 76`, `Community 77`, `Community 79`, `Community 80`, `Community 81`, `Community 82`, `Community 84`, `Community 85`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 92`, `Masterclass.tsx`, `badge.tsx`, `BannerAlquilerHome.tsx`?**
-  _High betweenness centrality (0.205) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Community 20` to `react`, `Community 35`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 50`, `Community 51`, `Community 53`, `Community 55`, `Community 56`, `Community 57`, `Community 58`, `Community 59`, `Community 60`, `Community 61`, `Community 62`, `Community 63`, `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 75`, `Community 76`, `Community 77`, `Community 78`, `Community 79`, `Community 80`, `Community 81`, `Community 82`, `Community 83`, `Community 84`, `Community 85`, `Community 86`, `Community 87`, `Community 88`, `Community 89`, `Community 90`, `Community 91`, `Community 92`?**
+  _High betweenness centrality (0.220) - this node is a cross-community bridge._
 - **Why does `react` connect `react` to `Community 20`, `Community 6`?**
-  _High betweenness centrality (0.186) - this node is a cross-community bridge._
-- **Why does `cn()` connect `Community 16` to `Community 0`, `ExclusivoSociosSportclub.tsx`, `Community 2`, `chart.tsx`, `Community 3`, `Community 5`, `sheet.tsx`, `Community 6`, `Community 8`, `Community 9`, `RutaDeAprendizaje.tsx`, `Community 12`, `Community 17`, `Community 18`, `Community 21`, `Community 25`, `Community 26`, `Community 27`, `Community 28`, `Community 29`, `Community 31`, `Community 32`, `Community 36`, `Community 37`, `Community 38`, `Community 59`, `Community 83`, `TutorialesPatinaje.tsx`, `select.tsx`?**
-  _High betweenness centrality (0.127) - this node is a cross-community bridge._
-- **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _593 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.13970588235294118 - nodes in this community are weakly interconnected._
+  _High betweenness centrality (0.200) - this node is a cross-community bridge._
+- **Why does `cn()` connect `Community 18` to `carousel.tsx`, `Community 1`, `chart.tsx`, `Community 3`, `PreguntasFrecuentes.tsx`, `Community 5`, `sheet.tsx`, `Community 6`, `Community 8`, `Community 9`, `Community 0`, `Community 16`, `Community 17`, `Community 21`, `Community 25`, `Community 26`, `Community 27`, `Community 28`, `Community 29`, `Community 31`, `Community 32`, `Community 34`, `Community 36`, `Community 37`, `Community 38`, `badge.tsx`, `select.tsx`?**
+  _High betweenness centrality (0.140) - this node is a cross-community bridge._
+- **What connects `Overview`, `When to Use`, `1. Correctness` to the rest of the system?**
+  _536 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.08235294117647059 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.0506558118498417 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06547619047619048 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
+- **Should `Community 6` be split into smaller, more focused modules?**
+  _Cohesion score 0.11904761904761904 - nodes in this community are weakly interconnected._

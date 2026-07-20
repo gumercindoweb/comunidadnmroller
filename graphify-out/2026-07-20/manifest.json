@@ -45,9 +45,9 @@
     "semantic_hash": "dbcf929f1481f37427f127934f658095"
   },
   "src/App.tsx": {
-    "mtime": 1784584157.856869,
-    "ast_hash": "7df10374ef5cec5d89fd1fee14e4dddd",
-    "semantic_hash": ""
+    "mtime": 1781570111.5295844,
+    "ast_hash": "98edd28f09a19464edeffebbe690368e",
+    "semantic_hash": "98edd28f09a19464edeffebbe690368e"
   },
   "src/assets/logo-flyfree-urban.webp.asset.json": {
     "mtime": 1781229150.6038196,
@@ -847,66 +847,6 @@
   "src/lib/intencionCompra.ts": {
     "mtime": 1784564342.5208807,
     "ast_hash": "321fa4521606aa1c533fc5fa2179c15b",
-    "semantic_hash": ""
-  },
-  "src/components/panel-ventas/ConfirmarPagoDialog.tsx": {
-    "mtime": 1784584135.5473099,
-    "ast_hash": "cf6a6ca6639246ee1ae179797a08a68b",
-    "semantic_hash": ""
-  },
-  "src/components/panel-ventas/RequireAuth.tsx": {
-    "mtime": 1784584093.0192883,
-    "ast_hash": "1053993cea8762320a56f9ea84ad2193",
-    "semantic_hash": ""
-  },
-  "src/components/panel-ventas/ResumenVentas.tsx": {
-    "mtime": 1784584111.965527,
-    "ast_hash": "8612f026e02071072d18734b95e2106e",
-    "semantic_hash": ""
-  },
-  "src/components/panel-ventas/TurnosTable.tsx": {
-    "mtime": 1784584123.2266693,
-    "ast_hash": "6c34ad43f48f5e6ceb8f81459bfa7ed3",
-    "semantic_hash": ""
-  },
-  "src/lib/panelVentasApi.ts": {
-    "mtime": 1784584087.0412867,
-    "ast_hash": "2bc50599045376e244393dc2567b2ad1",
-    "semantic_hash": ""
-  },
-  "src/pages/PanelVentas.tsx": {
-    "mtime": 1784584148.732101,
-    "ast_hash": "aaa05781944f57f09bb87bc3cca0c2b3",
-    "semantic_hash": ""
-  },
-  "src/pages/PanelVentasLogin.tsx": {
-    "mtime": 1784584101.5518043,
-    "ast_hash": "d5c6dd894560a48e73ae6657f6a8e146",
-    "semantic_hash": ""
-  },
-  "supabase/functions/_shared/auth.ts": {
-    "mtime": 1784583882.5642295,
-    "ast_hash": "a138d127e83919e76fc7f942b6785fd4",
-    "semantic_hash": ""
-  },
-  "supabase/functions/_shared/calendly.ts": {
-    "mtime": 1784583929.9489796,
-    "ast_hash": "79d67aa25250882dee763665637f6bf8",
-    "semantic_hash": ""
-  },
-  "supabase/functions/confirmar-pago-efectivo/index.ts": {
-    "mtime": 1784584008.8565996,
-    "ast_hash": "aaa02676956b264d83f9626e588f49a2",
-    "semantic_hash": ""
-  },
-  "supabase/functions/listar-turnos-efectivo/index.ts": {
-    "mtime": 1784583976.9210255,
-    "ast_hash": "360d59063ac887b9c07a88cbe6c387f0",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260720120000_pagos_efectivo.sql": {
-    "mtime": 1784583863.9481525,
-    "ast_hash": "d5895a1685215e563a6548c2947c4002",
     "semantic_hash": ""
   }
 }
