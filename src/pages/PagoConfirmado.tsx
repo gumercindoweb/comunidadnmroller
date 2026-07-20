@@ -17,6 +17,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import FlyFreePanel from "@/components/FlyFreePanel";
+import { leerIntencionCompra, limpiarIntencionCompra } from "@/lib/intencionCompra";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 
 const PLAN_LABELS: Record<string, string> = {
@@ -34,9 +35,14 @@ const ACCEPTED = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
 
 const PagoConfirmado = () => {
   const [searchParams] = useSearchParams();
-  const planSlug = searchParams.get("plan") ?? "";
+
+  // Mercado Pago no arrastra el querystring hasta acá, así que la URL casi
+  // siempre viene vacía: caemos a la intención guardada antes de redirigir.
+  const intencion = useMemo(() => leerIntencionCompra(), []);
+  const planSlug = searchParams.get("plan") || intencion?.plan || "";
   const planLabel = PLAN_LABELS[planSlug] ?? "";
-  const origen = (searchParams.get("origen") ?? "nm").trim() || "nm";
+  const origen =
+    (searchParams.get("origen") ?? intencion?.origen ?? "nm").trim() || "nm";
   const isAlquiler = origen === "clases-alquiler";
   const displayPlanLabel = planLabel
     ? (isAlquiler ? `${planLabel} + Alquiler` : planLabel)
@@ -114,6 +120,7 @@ const PagoConfirmado = () => {
         })
         .catch((e) => console.error("notify-comprobante failed", e));
 
+      limpiarIntencionCompra();
       setDone(true);
       toast({
         title: "¡Comprobante recibido!",

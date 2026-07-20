@@ -2,6 +2,7 @@ import { Check, Gift, Star, Banknote, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { guardarIntencionCompra } from "@/lib/intencionCompra";
 
 interface AlquilerPlan {
   name: string;
@@ -17,6 +18,7 @@ interface AlquilerPlan {
   badge?: string;
   ctaLabel: string;
   mpLink: string;
+  planSlug: string;
 }
 
 const plans: AlquilerPlan[] = [
@@ -35,6 +37,7 @@ const plans: AlquilerPlan[] = [
     bonus: "Cupón de $10 mil para tu próximo alquiler o compra de equipo (abonando en efectivo).",
     ctaLabel: "Reservar lugar",
     mpLink: "https://mpago.la/14BiY8N?plan=clase-unica&origen=clases-alquiler",
+    planSlug: "clase-unica",
   },
   {
     name: "Clase 2x1",
@@ -51,6 +54,7 @@ const plans: AlquilerPlan[] = [
     bonus: "Cupón de $5 mil por persona para usar en tu próximo alquiler o compra de equipo (abonando en efectivo).",
     ctaLabel: "Reservar 2x1",
     mpLink: "https://mpago.la/1N8BgeM?plan=clase-2x1&origen=clases-alquiler",
+    planSlug: "clase-2x1",
   },
   {
     name: "Pack 4 Clases",
@@ -71,6 +75,7 @@ const plans: AlquilerPlan[] = [
     badge: "Mejor Opción",
     ctaLabel: "Comprar pack",
     mpLink: "https://mpago.la/2J9ceLQ?plan=pack-4-clases&origen=clases-alquiler",
+    planSlug: "pack-4-clases",
   },
 ];
 
@@ -146,7 +151,17 @@ const PricingAlquilerSection = ({ onReserve }: { onReserve: () => void }) => {
                     )}
                   </div>
                   <Button asChild className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm mt-2">
-                    <a href={plan.mpLink} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={plan.mpLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() =>
+                        guardarIntencionCompra({
+                          plan: plan.planSlug,
+                          origen: "clases-alquiler",
+                        })
+                      }
+                    >
                       COMPRAR PLAN
                     </a>
                   </Button>

@@ -300,7 +300,7 @@ const LeadForm = ({ compact = false }: { compact?: boolean }) => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("subscribe-newsletter", {
-        body: { ...parsed.data, website },
+        body: { ...parsed.data, website, ubicacion: "ruta-aprendizaje" },
       });
       if (error) throw error;
       if (data?.success) {

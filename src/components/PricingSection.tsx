@@ -10,6 +10,8 @@ import { Check, Star, CreditCard, Banknote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import logoNM from "@/assets/Logo-NM-Rollers.png";
 import { sedes } from "@/data/sedes";
+import { guardarIntencionCompra } from "@/lib/intencionCompra";
+import { calendlyUrl } from "@/lib/calendly";
 
 type Period = "mensual" | "trimestral";
 
@@ -205,7 +207,14 @@ const PricingSection = () => {
                       {plan.vigencia}
                     </p>
                   )}
-                  <a href={plan.mpLink} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={plan.mpLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      guardarIntencionCompra({ plan: plan.planSlug, origen: "nm" })
+                    }
+                  >
                     <Button className="w-full font-bold rounded-full py-6 text-sm bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground backdrop-blur-sm">
                       COMPRAR PLAN
                     </Button>
@@ -264,7 +273,7 @@ const PricingSection = () => {
             </div>
           </div>
           <iframe
-            src="https://calendly.com/nmroller/beneficio-pago-efectivo"
+            src={calendlyUrl('planes-home')}
             className="w-full h-[60vh] sm:h-[55vh] border-0"
             title="Agendá tu turno para pago presencial - Calendly"
           />
