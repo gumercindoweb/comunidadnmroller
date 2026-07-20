@@ -28,7 +28,7 @@ const NewsletterBannerHome = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("subscribe-newsletter", {
-        body: { ...parsed.data, website },
+        body: { ...parsed.data, website, ubicacion: "home-banner" },
       });
       if (error) throw error;
       if (data?.success) {

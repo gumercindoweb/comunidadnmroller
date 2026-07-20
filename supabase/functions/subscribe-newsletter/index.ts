@@ -23,9 +23,16 @@ function buildCors(origin: string | null) {
   }
 }
 
+// Tres formularios distintos del sitio llaman a esta función y todos generaban leads
+// con origen 'newsletter', indistinguibles entre sí. `ubicacion` los separa sin cambiar
+// el origen (que sigue siendo el formulario a efectos del dashboard y de GetResponse).
+// Es opcional y con default para que una versión vieja del frontend siga funcionando.
+const UBICACIONES = ['home-banner', 'landing-newsletter', 'ruta-aprendizaje'] as const
+
 const BodySchema = z.object({
   name: z.string().trim().min(1).max(100),
   email: z.string().trim().email().max(255),
+  ubicacion: z.enum(UBICACIONES).optional(),
   // Honeypot: bots fill it, humans don't. Must be empty.
   website: z.string().max(0).optional().or(z.literal('')),
 })
@@ -56,7 +63,7 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       )
     }
-    const { name, email, website } = parsed.data
+    const { name, email, website, ubicacion } = parsed.data
 
     // Honeypot triggered → silently accept without forwarding.
     if (website && website.length > 0) {
@@ -118,7 +125,10 @@ Deno.serve(async (req) => {
       const { error: insErr } = await admin.from('leads').insert({
         origen: 'newsletter',
         name, email, phone: null,
-        payload: {},
+        // 'sin-identificar' = frontend anterior a este cambio, o una versión cacheada.
+        // Se guarda explícito en vez de dejarlo vacío para poder distinguir "no lo mandó"
+        // de "todavía no hubo altas desde esa ubicación".
+        payload: { ubicacion: ubicacion ?? 'sin-identificar' },
         getresponse_ok: grOk,
         getresponse_status: grStatus,
         getresponse_error: grError,
