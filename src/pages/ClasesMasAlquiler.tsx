@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { calendlyUrl } from "@/lib/calendly";
 import {
   ArrowRight,
   Package,
@@ -376,7 +377,7 @@ const ClasesMasAlquiler = () => {
               </div>
             </div>
             <iframe
-              src="https://calendly.com/nmroller/beneficio-pago-efectivo"
+              src={calendlyUrl('clases-alquiler')}
               className="w-full h-[60vh] sm:h-[55vh] border-0"
               title="Agendá tu turno para pago presencial - Calendly"
             />
