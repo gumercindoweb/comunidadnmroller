@@ -37,6 +37,7 @@ const BodySchema = z.object({
   vendedor: z.string().trim().min(1, 'Indicá qué vendedor gestionó este turno').max(100),
   plan_preguntado: z.string().trim().max(120).optional().nullable(),
   plan_pagado: z.string().trim().max(120).optional().nullable(),
+  plan_categoria: z.enum(['nm-mensual', 'nm-trimestral', 'alquiler']).optional().nullable(),
   nombre: z.string().trim().max(120).optional().nullable(),
   nombre_pila: z.string().trim().max(120).optional().nullable(),
   apellido: z.string().trim().max(120).optional().nullable(),
@@ -157,7 +158,7 @@ Deno.serve(async (req) => {
     }
     const {
       calendly_event_uuid, calendly_invitee_uuid, estado, vendedor,
-      plan_preguntado, plan_pagado, nombre, nombre_pila, apellido, email, telefono, dni, notas,
+      plan_preguntado, plan_pagado, plan_categoria, nombre, nombre_pila, apellido, email, telefono, dni, notas,
     } = parsed.data
 
     // --- GetResponse: todo turno confirmado entra a la lista, con etiqueta según el resultado ---
@@ -166,8 +167,15 @@ Deno.serve(async (req) => {
     let grError: string | null = null
 
     const API_KEY = Deno.env.get('GETRESPONSE_API_KEY')
-    // Lista EXCLUSIVA de turnos del beneficio pago en efectivo. Si no está seteada, cae al campaign general.
+    // Lista EXCLUSIVA de turnos del beneficio pago en efectivo, discriminada
+    // por categoría de plan: los de clases+alquiler tienen su propia lista
+    // (GETRESPONSE_CAMPAIGN_ID_PAGO_EFECTIVO_ALQUILER) y el resto va a la
+    // general de pago en efectivo. Cadena de fallbacks: alquiler → pago
+    // efectivo → campaign general del sitio.
     const CAMPAIGN_ID =
+      (plan_categoria === 'alquiler'
+        ? Deno.env.get('GETRESPONSE_CAMPAIGN_ID_PAGO_EFECTIVO_ALQUILER')
+        : undefined) ??
       Deno.env.get('GETRESPONSE_CAMPAIGN_ID_PAGO_EFECTIVO') ??
       Deno.env.get('GETRESPONSE_CAMPAIGN_ID')
 
@@ -234,6 +242,7 @@ Deno.serve(async (req) => {
         vendedor,
         plan_preguntado: plan_preguntado ?? null,
         plan_pagado: estado === 'pagado' ? plan_pagado : null,
+        plan_categoria: estado === 'pagado' ? (plan_categoria ?? null) : null,
         nombre: nombre ?? null,
         email: email ?? null,
         telefono: telefono ?? null,

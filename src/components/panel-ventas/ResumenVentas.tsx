@@ -1,14 +1,43 @@
 import { useMemo } from "react";
 import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { Turno } from "@/lib/panelVentasApi";
+
+// Leyenda de cada variable del resumen, visible al pasar el cursor.
+const TOOLTIPS = {
+  turnos: "Turnos agendados en Calendly dentro del rango elegido. No cuenta los cancelados ni los que reprogramaron (esos siguen su curso en su turno nuevo).",
+  pendientes: "Turnos sin resultado cargado todavía: nadie confirmó si la persona pagó, no vino, o vino y no pagó.",
+  pagados: "Turnos confirmados como pagados en efectivo por un vendedor. Son las conversiones reales.",
+  noShow: "La persona no se presentó al turno y no reprogramó.",
+  noPago: "La persona vino al showroom pero no concretó el pago.",
+  reprogramados: "La persona movió su turno a otra fecha. El turno viejo deja de contar y el nuevo aparece como pendiente.",
+  conversion: "Pagados ÷ turnos del rango (sin cancelados ni reprogramados). Al lado, el desglose de qué plan pagó cada uno.",
+} as const;
+
+const CardConTooltip = ({
+  label, value, tooltip, highlight,
+}: { label: string; value: number; tooltip: string; highlight?: boolean }) => (
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Card className={`p-4 rounded-none cursor-help ${highlight ? "border-primary/40 bg-primary/5" : "bg-card border-border"}`}>
+        <p className={`text-[11px] uppercase tracking-wide font-bold ${highlight ? "text-primary" : "text-foreground/50"}`}>{label}</p>
+        <p className={`text-2xl font-black ${highlight ? "text-primary" : ""}`}>{value}</p>
+      </Card>
+    </TooltipTrigger>
+    <TooltipContent className="max-w-64 text-xs leading-relaxed">{tooltip}</TooltipContent>
+  </Tooltip>
+);
 
 const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
   const stats = useMemo(() => {
-    const activos = turnos.filter((t) => t.estado_calendly !== "cancelado");
+    // Cancelados y reprogramados quedan fuera del embudo: no son turnos que
+    // puedan convertir (el reprogramado convierte —o no— en su turno nuevo).
+    const activos = turnos.filter((t) => t.estado_calendly !== "cancelado" && t.estado !== "reprogramado");
     const pagados = turnos.filter((t) => t.estado === "pagado");
     const noShow = turnos.filter((t) => t.estado === "no_show");
     const noPago = turnos.filter((t) => t.estado === "no_pago");
     const pendientes = turnos.filter((t) => t.estado === "pendiente");
+    const reprogramados = turnos.filter((t) => t.estado === "reprogramado");
     const tasaConversion = activos.length > 0 ? (pagados.length / activos.length) * 100 : 0;
 
     const porPlan = new Map<string, number>();
@@ -30,6 +59,7 @@ const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
       noShow: noShow.length,
       noPago: noPago.length,
       pendientes: pendientes.length,
+      reprogramados: reprogramados.length,
       tasaConversion,
       porPlan: Array.from(porPlan.entries()).sort((a, b) => b[1] - a[1]),
       porVendedor: Array.from(porVendedor.entries()).sort((a, b) => b[1] - a[1]),
@@ -38,33 +68,24 @@ const ResumenVentas = ({ turnos }: { turnos: Turno[] }) => {
 
   return (
     <div className="space-y-4 mb-8">
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <Card className="p-4 rounded-none bg-card border-border">
-          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Turnos</p>
-          <p className="text-2xl font-black">{stats.totalActivos}</p>
-        </Card>
-        <Card className="p-4 rounded-none bg-card border-border">
-          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Pendientes</p>
-          <p className="text-2xl font-black text-foreground/70">{stats.pendientes}</p>
-        </Card>
-        <Card className="p-4 rounded-none border-primary/40 bg-primary/5">
-          <p className="text-[11px] uppercase tracking-wide text-primary font-bold">Pagados</p>
-          <p className="text-2xl font-black text-primary">{stats.pagados}</p>
-        </Card>
-        <Card className="p-4 rounded-none bg-card border-border">
-          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">No se presentó</p>
-          <p className="text-2xl font-black">{stats.noShow}</p>
-        </Card>
-        <Card className="p-4 rounded-none bg-card border-border">
-          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Vino, no pagó</p>
-          <p className="text-2xl font-black">{stats.noPago}</p>
-        </Card>
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+        <CardConTooltip label="Turnos" value={stats.totalActivos} tooltip={TOOLTIPS.turnos} />
+        <CardConTooltip label="Pendientes" value={stats.pendientes} tooltip={TOOLTIPS.pendientes} />
+        <CardConTooltip label="Pagados" value={stats.pagados} tooltip={TOOLTIPS.pagados} highlight />
+        <CardConTooltip label="No se presentó" value={stats.noShow} tooltip={TOOLTIPS.noShow} />
+        <CardConTooltip label="Vino, no pagó" value={stats.noPago} tooltip={TOOLTIPS.noPago} />
+        <CardConTooltip label="Reprogramaron" value={stats.reprogramados} tooltip={TOOLTIPS.reprogramados} />
       </div>
       <div className="flex flex-wrap items-center gap-4 border border-border bg-card/50 p-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Tasa de conversión</p>
-          <p className="text-xl font-black text-primary">{stats.tasaConversion.toFixed(1)}%</p>
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="cursor-help">
+              <p className="text-[11px] uppercase tracking-wide text-foreground/50 font-bold">Tasa de conversión</p>
+              <p className="text-xl font-black text-primary">{stats.tasaConversion.toFixed(1)}%</p>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-64 text-xs leading-relaxed">{TOOLTIPS.conversion}</TooltipContent>
+        </Tooltip>
         {stats.porPlan.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {stats.porPlan.map(([plan, count]) => (

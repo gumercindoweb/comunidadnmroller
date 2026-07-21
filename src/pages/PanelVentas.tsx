@@ -16,17 +16,30 @@ const FILTROS_ESTADO = [
   { value: "pagado", label: "Pagados" },
   { value: "no_show", label: "No se presentó" },
   { value: "no_pago", label: "Vino y no pagó" },
+  { value: "reprogramado", label: "Reprogramaron" },
   { value: "cancelado", label: "Cancelados" },
+] as const;
+
+// Rango hacia atrás; hacia adelante siempre se traen los próximos 14 días.
+const RANGOS_DIAS = [
+  { value: "30", label: "Últimos 30 días" },
+  { value: "60", label: "Últimos 60 días" },
+  { value: "90", label: "Últimos 90 días" },
+  { value: "180", label: "Últimos 180 días" },
 ] as const;
 
 const PanelVentas = () => {
   const queryClient = useQueryClient();
   const [filtroEstado, setFiltroEstado] = useState<(typeof FILTROS_ESTADO)[number]["value"]>("todos");
+  const [rangoDias, setRangoDias] = useState<(typeof RANGOS_DIAS)[number]["value"]>("60");
   const [turnoSeleccionado, setTurnoSeleccionado] = useState<Turno | null>(null);
 
   const { data: turnos = [], isLoading, isError, error, refetch, isFetching } = useQuery({
-    queryKey: ["turnos-efectivo"],
-    queryFn: () => listarTurnos(),
+    queryKey: ["turnos-efectivo", rangoDias],
+    queryFn: () => {
+      const desde = new Date(Date.now() - Number(rangoDias) * 24 * 60 * 60 * 1000).toISOString();
+      return listarTurnos({ desde });
+    },
   });
 
   const { data: planes = [] } = useQuery({
@@ -60,7 +73,8 @@ const PanelVentas = () => {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" className="rounded-none" onClick={() => refetch()} disabled={isFetching}>
-              <RefreshCw className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
+              <RefreshCw className={`w-4 h-4 mr-1 ${isFetching ? "animate-spin" : ""}`} />
+              {isFetching ? "Actualizando..." : "Actualizar"}
             </Button>
             <Link to="/panel-ventas/configuracion">
               <Button variant="outline" size="sm" className="rounded-none">
@@ -85,19 +99,31 @@ const PanelVentas = () => {
           <>
             <ResumenVentas turnos={turnos} />
 
-            <div className="flex items-center justify-between mb-4">
-              <Select value={filtroEstado} onValueChange={(v) => setFiltroEstado(v as typeof filtroEstado)}>
-                <SelectTrigger className="w-56 rounded-none">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {FILTROS_ESTADO.map((f) => (
-                    <SelectItem key={f.value} value={f.value}>{f.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2">
+                <Select value={filtroEstado} onValueChange={(v) => setFiltroEstado(v as typeof filtroEstado)}>
+                  <SelectTrigger className="w-52 rounded-none">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {FILTROS_ESTADO.map((f) => (
+                      <SelectItem key={f.value} value={f.value}>{f.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select value={rangoDias} onValueChange={(v) => setRangoDias(v as typeof rangoDias)}>
+                  <SelectTrigger className="w-48 rounded-none">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RANGOS_DIAS.map((r) => (
+                      <SelectItem key={r.value} value={r.value}>{r.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <p className="text-xs text-foreground/50">
-                Últimos 60 días + próximos 14. Datos en vivo desde Calendly.
+                + próximos 14 días. Datos en vivo desde Calendly.
               </p>
             </div>
 

@@ -87,6 +87,15 @@ Deno.serve(async (req) => {
     const turnos = eventsWithInvitees.map(({ event, eventUuid, invitee }) => {
       const override = overrideByEvent.get(eventUuid) ?? null
       const estadoCalendly = event.status === 'canceled' ? 'cancelado' : 'agendado'
+      const reprogramado = invitee?.rescheduled ?? false
+
+      // Estado dinámico: si el cliente reprogramó, este turno viejo deja de
+      // valer — pisa cualquier estado cargado (pendiente, no_show, no_pago)
+      // salvo 'pagado' (un pago hecho sigue hecho). El turno nuevo que creó
+      // la reprogramación aparece por su cuenta como 'pendiente'.
+      let estado = override?.estado ?? (estadoCalendly === 'cancelado' ? 'cancelado' : 'pendiente')
+      if (reprogramado && estado !== 'pagado') estado = 'reprogramado'
+
       return {
         calendly_event_uuid: eventUuid,
         calendly_invitee_uuid: invitee ? uuidFromUri(invitee.uri) : null,
@@ -94,7 +103,7 @@ Deno.serve(async (req) => {
         end_time: event.end_time,
         estado_calendly: estadoCalendly,
         cancellation: event.cancellation,
-        reprogramado: invitee?.rescheduled ?? false,
+        reprogramado,
         nombre: invitee?.name ?? null,
         nombre_pila: invitee?.first_name ?? null,
         apellido: invitee?.last_name ?? null,
@@ -105,8 +114,9 @@ Deno.serve(async (req) => {
         via: invitee ? extractAnswer(invitee, 'agendaste') : null,
         comentario: invitee ? extractAnswer(invitee, 'comparti') : null,
         agendado_en: invitee?.created_at ?? event.created_at ?? null,
-        estado: override?.estado ?? (estadoCalendly === 'cancelado' ? 'cancelado' : 'pendiente'),
+        estado,
         plan_pagado: override?.plan_pagado ?? null,
+        plan_categoria: override?.plan_categoria ?? null,
         notas: override?.notas ?? null,
         vendedor: override?.vendedor ?? null,
         confirmado_por: override?.confirmado_por ?? null,

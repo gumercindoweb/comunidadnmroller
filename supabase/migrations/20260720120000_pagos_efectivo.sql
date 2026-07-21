@@ -15,6 +15,8 @@ CREATE TABLE public.pagos_efectivo (
   estado TEXT NOT NULL CHECK (estado IN ('pagado', 'no_show', 'no_pago')),
   plan_preguntado TEXT,             -- snapshot de lo que Calendly capturó
   plan_pagado TEXT,                 -- editable por el vendedor; requerido si estado='pagado'
+  plan_categoria TEXT,              -- 'nm-mensual' | 'nm-trimestral' | 'alquiler' (desambigua planes
+                                     -- con el mismo nombre, ej. "Clase Única" mensual vs. alquiler)
 
   nombre TEXT,
   email TEXT,

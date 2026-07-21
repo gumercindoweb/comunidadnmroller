@@ -126,6 +126,7 @@ const ConfirmarPagoDialog = ({ turno, planes, onClose, onConfirmed, onSubmit }: 
         vendedor: vendedorFinal,
         plan_preguntado: turno.plan_preguntado,
         plan_pagado: estado === "pagado" ? planElegido!.nombre : null,
+        plan_categoria: estado === "pagado" ? planElegido!.categoria : null,
         nombre: turno.nombre,
         nombre_pila: turno.nombre_pila,
         apellido: turno.apellido,

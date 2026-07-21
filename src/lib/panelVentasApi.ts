@@ -1,6 +1,9 @@
 import { supabase } from "@/integrations/supabase/client";
 
-export type EstadoTurno = "pendiente" | "cancelado" | "pagado" | "no_show" | "no_pago";
+// "reprogramado" es un estado calculado en vivo (no se guarda): el cliente
+// movió su turno a otra fecha, así que el turno viejo deja de contar y el
+// nuevo aparece por su cuenta como pendiente.
+export type EstadoTurno = "pendiente" | "cancelado" | "pagado" | "no_show" | "no_pago" | "reprogramado";
 
 export interface Turno {
   calendly_event_uuid: string;
@@ -22,6 +25,7 @@ export interface Turno {
   agendado_en: string | null;
   estado: EstadoTurno;
   plan_pagado: string | null;
+  plan_categoria: CategoriaPlan | null;
   notas: string | null;
   vendedor: string | null;
   confirmado_por: string | null;
@@ -44,6 +48,7 @@ export interface ConfirmarPagoInput {
   vendedor: string;
   plan_preguntado?: string | null;
   plan_pagado?: string | null;
+  plan_categoria?: CategoriaPlan | null;
   nombre?: string | null;
   nombre_pila?: string | null;
   apellido?: string | null;

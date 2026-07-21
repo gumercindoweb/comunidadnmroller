@@ -9,6 +9,7 @@ const ESTADO_BADGE: Record<Turno["estado"], { label: string; className: string }
   pagado: { label: "Pagado", className: "bg-primary/10 text-primary border-primary/30" },
   no_show: { label: "No se presentó", className: "bg-muted text-foreground/70 border-border" },
   no_pago: { label: "Vino, no pagó", className: "bg-secondary/10 text-secondary border-secondary/30" },
+  reprogramado: { label: "Reprogramó", className: "bg-[#F5B800]/10 text-[#F5B800] border-[#F5B800]/30" },
 };
 
 const formatFecha = (iso: string | null | undefined) =>
@@ -42,13 +43,17 @@ const TurnosTable = ({ turnos, onConfirmar }: Props) => {
         <TableBody>
           {turnos.map((t) => {
             const badge = ESTADO_BADGE[t.estado];
-            const puedeConfirmar = t.estado_calendly !== "cancelado";
+            // Cancelados y reprogramados no se confirman: el reprogramado ya
+            // no vale (el turno nuevo aparece como pendiente por su cuenta).
+            const puedeConfirmar = t.estado_calendly !== "cancelado" && t.estado !== "reprogramado";
             return (
               <TableRow key={t.calendly_event_uuid}>
                 <TableCell className="whitespace-nowrap text-xs">
                   {formatFecha(t.start_time)}
                   <span className="block text-[10px] text-foreground/50">Agendó: {formatFecha(t.agendado_en)}</span>
-                  {t.reprogramado && <span className="block text-[10px] text-foreground/50">reprogramado</span>}
+                  {t.reprogramado && t.estado !== "reprogramado" && (
+                    <span className="block text-[10px] text-foreground/50">reprogramado</span>
+                  )}
                 </TableCell>
                 <TableCell className="text-sm font-medium">{t.nombre ?? "-"}</TableCell>
                 <TableCell className="text-xs text-foreground/70">
