@@ -33,7 +33,13 @@
 - **Migraciones aplicadas en producción:** `20260721031649_pagos_efectivo`, `20260721031744_planes_efectivo`, `20260721031817_harden_pagos_planes_efectivo_search_path` (hardening de `search_path` sobre las tablas nuevas).
 - **Tablas creadas, con RLS activa:** `pagos_efectivo` (0 filas — todavía sin ninguna confirmación real registrada) y `planes_efectivo` (8 filas — catálogo ya cargado).
 - **Edge Functions deployadas en `bosutr`, las 4 con `verify_jwt: true`** (es decir, deployadas correctamente **sin** `--no-verify-jwt`, como se había pedido): `listar-turnos-efectivo` (v2), `confirmar-pago-efectivo` (v2), `listar-planes-efectivo` (v2), `actualizar-precio-plan` (v2).
-- **No verificable desde acá (secretos/Auth, no se exponen por API) — confirmar a mano:** (1) PAT de Calendly cargado como secret, (2) campaign de GetResponse creada + su(s) secret(s) `GETRESPONSE_CAMPAIGN_ID_PAGO_EFECTIVO*`, (3) usuario(s) de Supabase Auth para el login. Si esos 3 están, el panel está 100% operativo.
+- **Secretos y login — CONFIRMADO por el usuario (21-jul):** ya están cargados los secrets (token de Calendly, campaigns de GetResponse, email autorizado) y creado el usuario de login de Supabase Auth (`escuelanmroller@gmail.com`). **El backend queda 100% operativo.**
 - **Falta probar en fuego:** `pagos_efectivo` está en 0 filas → nadie confirmó todavía un pago real por el panel en vivo. Deployado ≠ probado con un turno real.
 - **Higiene pendiente (menor):** quedaron Edge Functions temporales de debug de GetResponse colgadas en producción (`tmp-check-gr`, `tmp-probe-gr`, `gr-probe`) — basura de pruebas, borrar cuando se pueda.
-- **Sin cerrar (de la entrada del 20-jul):** separar el panel a su propio repo bajo `escuelanmroller` (trabajo aparte, no urgente).
+
+### Pendientes para la próxima conversación (handoff 21-jul)
+
+1. **Separar el panel a su propio repo bajo `escuelanmroller`** (pedido explícito del usuario): es independiente del sitio y **no debe pasar por Lovable**. Se empezó a mapear qué archivos hacen falta (páginas `PanelVentas*`, componentes `panel-ventas/`, libs `panelVentasApi.ts`/`calendly.ts`, config) pero **la extracción todavía NO se hizo** — no existe la carpeta nueva ni el repo nuevo. El Supabase `bosutrnpmpjxylcgjmbt` sigue siendo la base compartida.
+2. **Deploy en el Vercel de NM Roller** (cuenta `escuelanmroller@gmail.com`, **NO** el Vercel personal de Gumercindo — quedó clarísimo; incluso hubo que borrar un proyecto creado por error en la cuenta personal). Se disparó un login del CLI a esa cuenta pero **no se confirmó que se completara**.
+3. **Probar con un turno real de Calendly** (ver punto de "probar en fuego" arriba).
+4. **Limpieza de las 3 Edge Functions de debug** (`tmp-check-gr`, `tmp-probe-gr`, `gr-probe`).
